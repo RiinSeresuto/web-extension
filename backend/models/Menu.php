@@ -102,7 +102,7 @@ class Menu extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLogo/file0()
+    public function getLogofile0()
     {
         return $this->hasOne(CmsFileAttachment::className(), ['id' => 'logo/file']);
     }
