@@ -14,18 +14,18 @@ use Yii;
  * @property int $position_id
  * @property int $status_id
  * @property string $link
- * @property int $logo/file
+ * @property int $logo_file
  * @property int $user_id
  * @property int $user_update_id
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsPosition $position
- * @property CmsStatus $status
- * @property CmsFileAttachment $logo/file0
+ * @property Position $position
+ * @property Status $status
+ * @property FileAttachment $logoFile
  * @property User $user
  * @property User $userUpdate
- * @property CmsPages[] $cmsPages
+ * @property Pages[] $cmsPages
  */
 class Menu extends \yii\db\ActiveRecord
 {
@@ -43,14 +43,14 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'label', 'menu_order', 'position_id', 'status_id', 'link', 'logo/file', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'parent_id', 'menu_order', 'position_id', 'status_id', 'logo/file', 'user_id', 'user_update_id'], 'integer'],
+            [['id', 'parent_id', 'label', 'menu_order', 'position_id', 'status_id', 'link', 'logo_file', 'user_id', 'user_update_id', 'date_updated'], 'required'],
+            [['id', 'parent_id', 'menu_order', 'position_id', 'status_id', 'logo_file', 'user_id', 'user_update_id'], 'integer'],
             [['date_created', 'date_updated'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsPosition::className(), 'targetAttribute' => ['position_id' => 'id']],
-            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
-            [['logo/file'], 'exist', 'skipOnError' => true, 'targetClass' => CmsFileAttachment::className(), 'targetAttribute' => ['logo/file' => 'id']],
+            [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Position::className(), 'targetAttribute' => ['position_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
+            [['logo_file'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['logo_file' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -69,7 +69,7 @@ class Menu extends \yii\db\ActiveRecord
             'position_id' => 'Position ID',
             'status_id' => 'Status ID',
             'link' => 'Link',
-            'logo/file' => 'Logo/file',
+            'logo_file' => 'Logo File',
             'user_id' => 'User ID',
             'user_update_id' => 'User Update ID',
             'date_created' => 'Date Created',
@@ -84,7 +84,7 @@ class Menu extends \yii\db\ActiveRecord
      */
     public function getPosition()
     {
-        return $this->hasOne(CmsPosition::className(), ['id' => 'position_id']);
+        return $this->hasOne(Position::className(), ['id' => 'position_id']);
     }
 
     /**
@@ -94,17 +94,17 @@ class Menu extends \yii\db\ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(CmsStatus::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
     /**
-     * Gets query for [[Logo/file0]].
+     * Gets query for [[LogoFile]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLogofile0()
+    public function getLogoFile()
     {
-        return $this->hasOne(CmsFileAttachment::className(), ['id' => 'logo/file']);
+        return $this->hasOne(FileAttachment::className(), ['id' => 'logo_file']);
     }
 
     /**
@@ -132,8 +132,8 @@ class Menu extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCmsPages()
+    public function getPages()
     {
-        return $this->hasMany(CmsPages::className(), ['menu_id' => 'id']);
+        return $this->hasMany(Pages::className(), ['menu_id' => 'id']);
     }
 }
