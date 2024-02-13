@@ -132,7 +132,7 @@ class Menu extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPages()
+    public function getCmsPages()
     {
         return $this->hasMany(Pages::className(), ['menu_id' => 'id']);
     }

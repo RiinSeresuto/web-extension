@@ -68,7 +68,7 @@ use yii\bootstrap\Nav;
                 <li>
                     <a href="#"><i class="fa fa-gauge"></i><span>Administration</span><i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Menus</a></li>
+                            <li><a href="menu"><i class="fa fa-circle-o"></i> Menus</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Pages</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Settings</a></li>
                         </ul>
