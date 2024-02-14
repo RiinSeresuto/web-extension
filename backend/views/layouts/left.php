@@ -62,25 +62,40 @@ use yii\bootstrap\Nav;
             <li class="treeview">
                 <!--Dashboard-->
                 <li>
-                    <a href="#"><span>Dashboard</span></i></a>
+                    <a href="#"><i class="fa fa-circle-o"></i><span>Dashboard</span></i></a>
                 </li>
                 <!--Administration-->
                 <li>
-                    <a href="#"><i class="fa fa-gauge"></i><span>Administration</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <a href="#"><i class="fa fa-circle-o"></i><span>Administration</span><i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                             <li><a href="menu"><i class="fa fa-circle-o"></i> Menus</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Pages</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Settings</a></li>
+                            <li><a href="pages"><i class="fa fa-circle-o"></i> Pages</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> User Management</a></li>
                         </ul>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-user-cog"></i><span>Post</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <a href="#"><i class="fa fa-circle-o"></i><span>CMS</span><i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Menus</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Pages</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Settings</a></li>
+                            <li><a href="category"><i class="fa fa-circle-o"></i> Category</a></li>
+                            <li><a href="field"><i class="fa fa-circle-o"></i> Field</a></li>
+                            <li><a href="form"><i class="fa fa-circle-o"></i> Form</a></li>
+                            <li><a href="post"><i class="fa fa-circle-o"></i> Post</a></li>
                         </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-circle-o"></i><span>Feedback</span><i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Draft JCs</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Draft MCs</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Programs and Projects</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Public Assistance Center</a></li>
+                        </ul>
+                </li>
+
+                <li>
+                    <a href="agency"><i class="fa fa-circle-o"></i><span>Connected Agencies</span></i></a>
                 </li>
 
                
