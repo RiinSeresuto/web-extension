@@ -10,11 +10,11 @@ use Yii;
  * @property int $id
  * @property string $status_type
  *
- * @property CmsCategory[] $cmsCategories
- * @property CmsConnectedAgencies[] $cmsConnectedAgencies
- * @property CmsForm[] $cmsForms
- * @property CmsMenu[] $cmsMenus
- * @property CmsPages[] $cmsPages
+ * @property Category[] $cmsCategories
+ * @property ConnectedAgencies[] $cmsConnectedAgencies
+ * @property Form[] $cmsForms
+ * @property Menu[] $cmsMenus
+ * @property Pages[] $cmsPages
  */
 class Status extends \yii\db\ActiveRecord
 {
@@ -56,7 +56,7 @@ class Status extends \yii\db\ActiveRecord
      */
     public function getCmsCategories()
     {
-        return $this->hasMany(CmsCategory::className(), ['status_id' => 'id']);
+        return $this->hasMany(Category::className(), ['status_id' => 'id']);
     }
 
     /**
@@ -66,7 +66,7 @@ class Status extends \yii\db\ActiveRecord
      */
     public function getCmsConnectedAgencies()
     {
-        return $this->hasMany(CmsConnectedAgencies::className(), ['status_id' => 'id']);
+        return $this->hasMany(ConnectedAgencies::className(), ['status_id' => 'id']);
     }
 
     /**
@@ -76,7 +76,7 @@ class Status extends \yii\db\ActiveRecord
      */
     public function getCmsForms()
     {
-        return $this->hasMany(CmsForm::className(), ['status_id' => 'id']);
+        return $this->hasMany(Form::className(), ['status_id' => 'id']);
     }
 
     /**
@@ -86,7 +86,7 @@ class Status extends \yii\db\ActiveRecord
      */
     public function getCmsMenus()
     {
-        return $this->hasMany(CmsMenu::className(), ['status_id' => 'id']);
+        return $this->hasMany(Menu::className(), ['status_id' => 'id']);
     }
 
     /**
@@ -96,6 +96,6 @@ class Status extends \yii\db\ActiveRecord
      */
     public function getCmsPages()
     {
-        return $this->hasMany(CmsPages::className(), ['status_id' => 'id']);
+        return $this->hasMany(Pages::className(), ['status_id' => 'id']);
     }
 }

@@ -16,12 +16,12 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsDataType $dataType
- * @property CmsWidgetType $widgetType
+ * @property DataType $dataType
+ * @property WidgetType $widgetType
  * @property User $user
  * @property User $userUpdate
- * @property CmsForm[] $cmsForms
- * @property CmsPost[] $cmsPosts
+ * @property Form[] $cmsForms
+ * @property Post[] $cmsPosts
  */
 class Field extends \yii\db\ActiveRecord
 {
@@ -44,8 +44,8 @@ class Field extends \yii\db\ActiveRecord
             [['date_created', 'date_updated'], 'safe'],
             [['label'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['data_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsDataType::className(), 'targetAttribute' => ['data_type_id' => 'id']],
-            [['widget_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsWidgetType::className(), 'targetAttribute' => ['widget_type_id' => 'id']],
+            [['data_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => DataType::className(), 'targetAttribute' => ['data_type_id' => 'id']],
+            [['widget_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => WidgetType::className(), 'targetAttribute' => ['widget_type_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -75,7 +75,7 @@ class Field extends \yii\db\ActiveRecord
      */
     public function getDataType()
     {
-        return $this->hasOne(CmsDataType::className(), ['id' => 'data_type_id']);
+        return $this->hasOne(DataType::className(), ['id' => 'data_type_id']);
     }
 
     /**
@@ -85,7 +85,7 @@ class Field extends \yii\db\ActiveRecord
      */
     public function getWidgetType()
     {
-        return $this->hasOne(CmsWidgetType::className(), ['id' => 'widget_type_id']);
+        return $this->hasOne(WidgetType::className(), ['id' => 'widget_type_id']);
     }
 
     /**
@@ -115,7 +115,7 @@ class Field extends \yii\db\ActiveRecord
      */
     public function getCmsForms()
     {
-        return $this->hasMany(CmsForm::className(), ['field_id' => 'id']);
+        return $this->hasMany(Form::className(), ['field_id' => 'id']);
     }
 
     /**
@@ -125,6 +125,6 @@ class Field extends \yii\db\ActiveRecord
      */
     public function getCmsPosts()
     {
-        return $this->hasMany(CmsPost::className(), ['field_id' => 'id']);
+        return $this->hasMany(Post::className(), ['field_id' => 'id']);
     }
 }

@@ -18,13 +18,13 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsField $field
- * @property CmsCategory $category
- * @property CmsStatus $status
- * @property CmsYear $year
+ * @property Field $field
+ * @property Category $category
+ * @property Status $status
+ * @property Year $year
  * @property User $user
  * @property User $userUpdate
- * @property CmsPost[] $cmsPosts
+ * @property Post[] $cmsPosts
  */
 class Form extends \yii\db\ActiveRecord
 {
@@ -47,10 +47,10 @@ class Form extends \yii\db\ActiveRecord
             [['date_created', 'date_updated'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsField::className(), 'targetAttribute' => ['field_id' => 'id']],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
-            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
-            [['year_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsYear::className(), 'targetAttribute' => ['year_id' => 'id']],
+            [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
+            [['year_id'], 'exist', 'skipOnError' => true, 'targetClass' => Year::className(), 'targetAttribute' => ['year_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -82,7 +82,7 @@ class Form extends \yii\db\ActiveRecord
      */
     public function getField()
     {
-        return $this->hasOne(CmsField::className(), ['id' => 'field_id']);
+        return $this->hasOne(Field::className(), ['id' => 'field_id']);
     }
 
     /**
@@ -92,7 +92,7 @@ class Form extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(CmsCategory::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -102,7 +102,7 @@ class Form extends \yii\db\ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(CmsStatus::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
     /**
@@ -112,7 +112,7 @@ class Form extends \yii\db\ActiveRecord
      */
     public function getYear()
     {
-        return $this->hasOne(CmsYear::className(), ['id' => 'year_id']);
+        return $this->hasOne(Year::className(), ['id' => 'year_id']);
     }
 
     /**
@@ -142,6 +142,6 @@ class Form extends \yii\db\ActiveRecord
      */
     public function getCmsPosts()
     {
-        return $this->hasMany(CmsPost::className(), ['forms_id' => 'id']);
+        return $this->hasMany(Post::className(), ['forms_id' => 'id']);
     }
 }

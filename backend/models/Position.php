@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $position
  *
- * @property CmsMenu[] $cmsMenus
+ * @property Menu[] $cmsMenus
  */
 class Position extends \yii\db\ActiveRecord
 {
@@ -53,6 +53,6 @@ class Position extends \yii\db\ActiveRecord
      */
     public function getCmsMenus()
     {
-        return $this->hasMany(CmsMenu::className(), ['position_id' => 'id']);
+        return $this->hasMany(Menu::className(), ['position_id' => 'id']);
     }
 }

@@ -43,9 +43,9 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'label', 'menu_order', 'position_id', 'status_id', 'link', 'logo_file', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'parent_id', 'menu_order', 'position_id', 'status_id', 'logo_file', 'user_id', 'user_update_id'], 'integer'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['id', 'parent_id', 'label', 'menu_order', 'position_id', 'status_id', 'user_id', 'user_update_id', 'date_updated'], 'required'],
+            [['id', 'parent_id', 'menu_order', 'position_id', 'status_id',  'user_id', 'user_update_id'], 'integer'],
+            [['link', 'logo_file', 'logo_file', 'date_created', 'date_updated'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Position::className(), 'targetAttribute' => ['position_id' => 'id']],
@@ -66,12 +66,12 @@ class Menu extends \yii\db\ActiveRecord
             'parent_id' => 'Parent ID',
             'label' => 'Label',
             'menu_order' => 'Menu Order',
-            'position_id' => 'Position ID',
-            'status_id' => 'Status ID',
+            'position_id' => 'Position',
+            'status_id' => 'Status',
             'link' => 'Link',
-            'logo_file' => 'Logo File',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'logo_file' => 'Logo/File Upload',
+            'user_id' => 'User',
+            'user_update_id' => 'User Update',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];

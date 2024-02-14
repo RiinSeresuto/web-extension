@@ -22,13 +22,13 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsCategory $category
- * @property CmsForm $form
+ * @property Category $category
+ * @property Form $form
  * @property User $user
  * @property User $userUpdate
- * @property CmsMenu[] $cmsMenus
- * @property CmsPages[] $cmsPages
- * @property CmsPages[] $cmsPages0
+ * @property Menu[] $cmsMenus
+ * @property Pages[] $cmsPages
+ * @property Pages[] $cmsPages0
  */
 class FileAttachment extends \yii\db\ActiveRecord
 {
@@ -51,8 +51,8 @@ class FileAttachment extends \yii\db\ActiveRecord
             [['date_created', 'date_updated'], 'safe'],
             [['file_name', 'file_path', 'file_type', 'file_category', 'file_extension', 'model'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsCategory::className(), 'targetAttribute' => ['category_id' => 'id']],
-            [['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsForm::className(), 'targetAttribute' => ['form_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
+            [['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => Form::className(), 'targetAttribute' => ['form_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -88,7 +88,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(CmsCategory::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -98,7 +98,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getForm()
     {
-        return $this->hasOne(CmsForm::className(), ['id' => 'form_id']);
+        return $this->hasOne(Form::className(), ['id' => 'form_id']);
     }
 
     /**
@@ -128,7 +128,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsMenus()
     {
-        return $this->hasMany(CmsMenu::className(), ['logo/file' => 'id']);
+        return $this->hasMany(Menu::className(), ['logo/file' => 'id']);
     }
 
     /**
@@ -138,7 +138,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsPages()
     {
-        return $this->hasMany(CmsPages::className(), ['slider_photo' => 'id']);
+        return $this->hasMany(Pages::className(), ['slider_photo' => 'id']);
     }
 
     /**
@@ -148,6 +148,6 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsPages0()
     {
-        return $this->hasMany(CmsPages::className(), ['file_attachment' => 'id']);
+        return $this->hasMany(Pages::className(), ['file_attachment' => 'id']);
     }
 }

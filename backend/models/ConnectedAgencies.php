@@ -19,8 +19,8 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsAgencyType $agencyType
- * @property CmsStatus $status
+ * @property AgencyType $agencyType
+ * @property Status $status
  * @property User $user
  * @property User $userUpdate
  */
@@ -45,8 +45,8 @@ class ConnectedAgencies extends \yii\db\ActiveRecord
             [['date_created', 'date_updated'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['agency_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsAgencyType::className(), 'targetAttribute' => ['agency_type_id' => 'id']],
-            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
+            [['agency_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AgencyType::className(), 'targetAttribute' => ['agency_type_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -79,7 +79,7 @@ class ConnectedAgencies extends \yii\db\ActiveRecord
      */
     public function getAgencyType()
     {
-        return $this->hasOne(CmsAgencyType::className(), ['id' => 'agency_type_id']);
+        return $this->hasOne(AgencyType::className(), ['id' => 'agency_type_id']);
     }
 
     /**
@@ -89,7 +89,7 @@ class ConnectedAgencies extends \yii\db\ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(CmsStatus::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
     /**

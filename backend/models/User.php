@@ -20,31 +20,26 @@ use Yii;
  * @property int $updated_at
  * @property int $flags
  *
- * @property Advisory[] $advisories
- * @property Article[] $articles
- * @property CmsCategory[] $cmsCategories
- * @property CmsCategory[] $cmsCategories0
- * @property CmsConnectedAgencies[] $cmsConnectedAgencies
- * @property CmsConnectedAgencies[] $cmsConnectedAgencies0
- * @property CmsField[] $cmsFields
- * @property CmsField[] $cmsFields0
- * @property CmsFileAttachment[] $cmsFileAttachments
- * @property CmsFileAttachment[] $cmsFileAttachments0
- * @property CmsForm[] $cmsForms
- * @property CmsForm[] $cmsForms0
- * @property CmsMenu[] $cmsMenus
- * @property CmsMenu[] $cmsMenus0
- * @property CmsPages[] $cmsPages
- * @property CmsPages[] $cmsPages0
- * @property CmsPost[] $cmsPosts
- * @property CmsPost[] $cmsPosts0
- * @property CmsYear[] $cmsYears
- * @property CmsYear[] $cmsYears0
+ * @property Category[] $cmsCategories
+ * @property Category[] $cmsCategories0
+ * @property ConnectedAgencies[] $cmsConnectedAgencies
+ * @property ConnectedAgencies[] $cmsConnectedAgencies0
+ * @property Field[] $cmsFields
+ * @property Field[] $cmsFields0
+ * @property FileAttachment[] $cmsFileAttachments
+ * @property FileAttachment[] $cmsFileAttachments0
+ * @property Form[] $cmsForms
+ * @property Form[] $cmsForms0
+ * @property Menu[] $cmsMenus
+ * @property Menu[] $cmsMenus0
+ * @property Pages[] $cmsPages
+ * @property Pages[] $cmsPages0
+ * @property Post[] $cmsPosts
+ * @property Post[] $cmsPosts0
+ * @property Year[] $cmsYears
+ * @property Year[] $cmsYears0
  * @property Content[] $contents
- * @property Events[] $events
- * @property News[] $news
  * @property Profile $profile
- * @property ProgramProject[] $programProjects
  * @property SocialAccount[] $socialAccounts
  * @property TbldesignationUserHistory[] $tbldesignationUserHistories
  * @property TbldivisionUserHistory[] $tbldivisionUserHistories

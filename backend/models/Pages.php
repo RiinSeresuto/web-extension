@@ -23,15 +23,15 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsMenu $menu
- * @property CmsUrlType $urlType
- * @property CmsStatus $status
- * @property CmsType $type
- * @property CmsFileAttachment $sliderPhoto
- * @property CmsFileAttachment $fileAttachment
+ * @property Menu $menu
+ * @property UrlType $urlType
+ * @property Status $status
+ * @property Type $type
+ * @property FileAttachment $sliderPhoto
+ * @property FileAttachment $fileAttachment
  * @property User $user
  * @property User $userUpdate
- * @property CmsPost[] $cmsPosts
+ * @property Post[] $cmsPosts
  */
 class Pages extends \yii\db\ActiveRecord
 {
@@ -55,12 +55,12 @@ class Pages extends \yii\db\ActiveRecord
             [['date_created', 'date_updated'], 'safe'],
             [['title', 'caption', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsMenu::className(), 'targetAttribute' => ['menu_id' => 'id']],
-            [['url_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsUrlType::className(), 'targetAttribute' => ['url_type_id' => 'id']],
-            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
-            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsType::className(), 'targetAttribute' => ['type_id' => 'id']],
-            [['slider_photo'], 'exist', 'skipOnError' => true, 'targetClass' => CmsFileAttachment::className(), 'targetAttribute' => ['slider_photo' => 'id']],
-            [['file_attachment'], 'exist', 'skipOnError' => true, 'targetClass' => CmsFileAttachment::className(), 'targetAttribute' => ['file_attachment' => 'id']],
+            [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'id']],
+            [['url_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => UrlType::className(), 'targetAttribute' => ['url_type_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
+            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
+            [['slider_photo'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['slider_photo' => 'id']],
+            [['file_attachment'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['file_attachment' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -97,7 +97,7 @@ class Pages extends \yii\db\ActiveRecord
      */
     public function getMenu()
     {
-        return $this->hasOne(CmsMenu::className(), ['id' => 'menu_id']);
+        return $this->hasOne(Menu::className(), ['id' => 'menu_id']);
     }
 
     /**
@@ -107,7 +107,7 @@ class Pages extends \yii\db\ActiveRecord
      */
     public function getUrlType()
     {
-        return $this->hasOne(CmsUrlType::className(), ['id' => 'url_type_id']);
+        return $this->hasOne(UrlType::className(), ['id' => 'url_type_id']);
     }
 
     /**
@@ -117,7 +117,7 @@ class Pages extends \yii\db\ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(CmsStatus::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
     /**
@@ -127,7 +127,7 @@ class Pages extends \yii\db\ActiveRecord
      */
     public function getType()
     {
-        return $this->hasOne(CmsType::className(), ['id' => 'type_id']);
+        return $this->hasOne(Type::className(), ['id' => 'type_id']);
     }
 
     /**
@@ -137,7 +137,7 @@ class Pages extends \yii\db\ActiveRecord
      */
     public function getSliderPhoto()
     {
-        return $this->hasOne(CmsFileAttachment::className(), ['id' => 'slider_photo']);
+        return $this->hasOne(FileAttachment::className(), ['id' => 'slider_photo']);
     }
 
     /**
@@ -147,7 +147,7 @@ class Pages extends \yii\db\ActiveRecord
      */
     public function getFileAttachment()
     {
-        return $this->hasOne(CmsFileAttachment::className(), ['id' => 'file_attachment']);
+        return $this->hasOne(FileAttachment::className(), ['id' => 'file_attachment']);
     }
 
     /**
@@ -177,6 +177,6 @@ class Pages extends \yii\db\ActiveRecord
      */
     public function getCmsPosts()
     {
-        return $this->hasMany(CmsPost::className(), ['page_id' => 'id']);
+        return $this->hasMany(Post::className(), ['page_id' => 'id']);
     }
 }

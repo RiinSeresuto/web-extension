@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $data_type
  *
- * @property CmsField[] $cmsFields
+ * @property Field[] $cmsFields
  */
 class DataType extends \yii\db\ActiveRecord
 {
@@ -53,6 +53,6 @@ class DataType extends \yii\db\ActiveRecord
      */
     public function getCmsFields()
     {
-        return $this->hasMany(CmsField::className(), ['data_type_id' => 'id']);
+        return $this->hasMany(Field::className(), ['data_type_id' => 'id']);
     }
 }

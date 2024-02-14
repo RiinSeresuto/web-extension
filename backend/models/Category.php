@@ -15,11 +15,11 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsStatus $status
+ * @property Status $status
  * @property User $user
  * @property User $userUpdate
- * @property CmsForm[] $cmsForms
- * @property CmsYear[] $cmsYears
+ * @property Form[] $cmsForms
+ * @property Year[] $cmsYears
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -42,7 +42,7 @@ class Category extends \yii\db\ActiveRecord
             [['date_created', 'date_updated'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -71,7 +71,7 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(CmsStatus::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
     /**
@@ -101,7 +101,7 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getCmsForms()
     {
-        return $this->hasMany(CmsForm::className(), ['category_id' => 'id']);
+        return $this->hasMany(Form::className(), ['category_id' => 'id']);
     }
 
     /**
@@ -111,6 +111,6 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getCmsYears()
     {
-        return $this->hasMany(CmsYear::className(), ['category_id' => 'id']);
+        return $this->hasMany(Year::className(), ['category_id' => 'id']);
     }
 }

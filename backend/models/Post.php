@@ -24,13 +24,13 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsFileAttachment[] $cmsFileAttachments
- * @property CmsForm $forms
- * @property CmsField $field
- * @property CmsPostStatusType $status
- * @property CmsVisibilityType $visibility
- * @property CmsPublishType $publish
- * @property CmsPages $page
+ * @property FileAttachment[] $cmsFileAttachments
+ * @property Form $forms
+ * @property Field $field
+ * @property PostStatusType $status
+ * @property VisibilityType $visibility
+ * @property PublishType $publish
+ * @property Pages $page
  * @property User $user
  * @property User $userUpdate
  */
@@ -55,12 +55,12 @@ class Post extends \yii\db\ActiveRecord
             [['start_date_time', 'end_date_time', 'date_created', 'date_updated'], 'safe'],
             [['tags'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['forms_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsForm::className(), 'targetAttribute' => ['forms_id' => 'id']],
-            [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsField::className(), 'targetAttribute' => ['field_id' => 'id']],
-            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsPostStatusType::className(), 'targetAttribute' => ['status_id' => 'id']],
-            [['visibility_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsVisibilityType::className(), 'targetAttribute' => ['visibility_id' => 'id']],
-            [['publish_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsPublishType::className(), 'targetAttribute' => ['publish_id' => 'id']],
-            [['page_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsPages::className(), 'targetAttribute' => ['page_id' => 'id']],
+            [['forms_id'], 'exist', 'skipOnError' => true, 'targetClass' => Form::className(), 'targetAttribute' => ['forms_id' => 'id']],
+            [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => PostStatusType::className(), 'targetAttribute' => ['status_id' => 'id']],
+            [['visibility_id'], 'exist', 'skipOnError' => true, 'targetClass' => VisibilityType::className(), 'targetAttribute' => ['visibility_id' => 'id']],
+            [['publish_id'], 'exist', 'skipOnError' => true, 'targetClass' => PublishType::className(), 'targetAttribute' => ['publish_id' => 'id']],
+            [['page_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pages::className(), 'targetAttribute' => ['page_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -98,7 +98,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getCmsFileAttachments()
     {
-        return $this->hasMany(CmsFileAttachment::className(), ['record_id' => 'id']);
+        return $this->hasMany(FileAttachment::className(), ['record_id' => 'id']);
     }
 
     /**
@@ -108,7 +108,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getForms()
     {
-        return $this->hasOne(CmsForm::className(), ['id' => 'forms_id']);
+        return $this->hasOne(Form::className(), ['id' => 'forms_id']);
     }
 
     /**
@@ -118,7 +118,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getField()
     {
-        return $this->hasOne(CmsField::className(), ['id' => 'field_id']);
+        return $this->hasOne(Field::className(), ['id' => 'field_id']);
     }
 
     /**
@@ -128,7 +128,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getStatus()
     {
-        return $this->hasOne(CmsPostStatusType::className(), ['id' => 'status_id']);
+        return $this->hasOne(PostStatusType::className(), ['id' => 'status_id']);
     }
 
     /**
@@ -138,7 +138,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getVisibility()
     {
-        return $this->hasOne(CmsVisibilityType::className(), ['id' => 'visibility_id']);
+        return $this->hasOne(VisibilityType::className(), ['id' => 'visibility_id']);
     }
 
     /**
@@ -148,7 +148,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getPublish()
     {
-        return $this->hasOne(CmsPublishType::className(), ['id' => 'publish_id']);
+        return $this->hasOne(PublishType::className(), ['id' => 'publish_id']);
     }
 
     /**
@@ -158,7 +158,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getPage()
     {
-        return $this->hasOne(CmsPages::className(), ['id' => 'page_id']);
+        return $this->hasOne(Pages::className(), ['id' => 'page_id']);
     }
 
     /**
