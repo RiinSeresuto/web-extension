@@ -8,6 +8,7 @@ use backend\models\MenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * MenuController implements the CRUD actions for Menu model.
@@ -73,6 +74,10 @@ class MenuController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+
+        // echo '<pre>';
+        // print_r ($model->file_attachment);
+        // exit;
     }
 
     /**
@@ -123,5 +128,10 @@ class MenuController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionDownload($id)
+    {
+
     }
 }
