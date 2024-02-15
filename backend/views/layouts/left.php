@@ -36,15 +36,42 @@ use yii\bootstrap\Nav;
                 'encodeLabels' => false,
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
-                    //'<li class="header">Menu Yii2</li>',
+                    ['label' => 'Dashboard', 'url' => ['/#']],
+                    [
+                        'label' => 'Administration', 
+                        'items' => [
+                            ['label' => 'Menu', 'url' => ['/menu']],
+                            ['label' => 'Pages', 'url' => ['/pages']],
+                            ['label' => 'User Management', 'url' => ['/#']],
+                        ]
+                    ],
+                    [
+                        'label' => 'CMS',
+                        'items' => [
+                            ['label' => 'Category', 'url' => ['/category']],
+                            ['label' => 'Field', 'url' => ['/field']],
+                            ['label' => 'Form', 'url' => ['/form']],
+                            ['label' => 'Post', 'url' => ['/post']],
+                        ]
+                    ],
+                    [
+                        'label' => 'Feedback',
+                        'items' => [
+                            ['label' => 'Draft JCs', 'url' => ['/#']],
+                            ['label' => 'Draft MCs', 'url' => ['/#']],
+                            ['label' => 'Programs and Projects', 'url' => ['/#']],
+                            ['label' => 'Public Assistance Center', 'url' => ['/#']],
+                        ]
+                    ],
+                    ['label' => 'Connected Agencies', 'url' => ['/agency']],
                     //['label' => '<i class="fa fa-gauge"></i><span> &nbsp;Dashboard</span>', 'url' => ['/#']],
-                    // [
-                    //     'label' => 'Administration',
-                    //     'url' => ['/#'],
-                    //     'items' => [
-                    //         ['label' => 'Menus', 'url' => ['/#']]
-                    //     ]
-                    // ],
+                    //[
+                         //'label' => 'Administration',
+                         //'url' => ['/#'],
+                         //'items' => [
+                             //['label' => 'Menus', 'url' => ['/#']]
+                         //]
+                    //],
                     //['label' => '<i class="fa fa-file-code-o"></i><span>Gii</span>', 'url' => ['/gii']],
                     //['label' => '<i class="fa fa-dashboard"></i><span>Debug</span>', 'url' => ['/debug']],
                     [
