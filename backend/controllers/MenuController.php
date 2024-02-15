@@ -91,7 +91,7 @@ class MenuController extends Controller
     $model = new Menu();
 
     if ($this->request->isPost) {
-        $model->user = Yii::$app->user->identity->id;
+        //$model->user = Yii::$app->user->identity->id;
         $model->load($this->request->post());
         $model->logo_file = UploadedFile::getInstances($model, 'logo_file');
 
