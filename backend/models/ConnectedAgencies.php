@@ -5,36 +5,33 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "cms_menu".
+ * This is the model class for table "cms_connected_agencies".
  *
  * @property int $id
- * @property int $parent_id
+ * @property int $agency_type_id
  * @property string $label
- * @property int $menu_order
- * @property int $position_id
+ * @property int $agency_order
  * @property int $status_id
+ * @property int $logo
  * @property string $link
- * @property int $logo_file
  * @property int $user_id
  * @property int $user_update_id
  * @property string $date_created
  * @property string $date_updated
  *
- * @property Position $position
- * @property Status $status
- * @property FileAttachment $logoFile
+ * @property CmsAgencyType $agencyType
+ * @property CmsStatus $status
  * @property User $user
  * @property User $userUpdate
- * @property Pages[] $cmsPages
  */
-class Menu extends \yii\db\ActiveRecord
+class ConnectedAgencies extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'cms_menu';
+        return 'cms_connected_agencies';
     }
 
     /**
@@ -43,14 +40,13 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'label', 'menu_order', 'position_id', 'status_id', 'link', 'logo_file', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'parent_id', 'menu_order', 'position_id', 'status_id', 'logo_file', 'user_id', 'user_update_id'], 'integer'],
+            [['id', 'agency_type_id', 'label', 'agency_order', 'status_id', 'logo', 'link', 'user_id', 'user_update_id', 'date_updated'], 'required'],
+            [['id', 'agency_type_id', 'agency_order', 'status_id', 'logo', 'user_id', 'user_update_id'], 'integer'],
             [['date_created', 'date_updated'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Position::className(), 'targetAttribute' => ['position_id' => 'id']],
+            [['agency_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AgencyType::className(), 'targetAttribute' => ['agency_type_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
-            [['logo_file'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['logo_file' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -63,13 +59,12 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent ID',
+            'agency_type_id' => 'Agency Type ID',
             'label' => 'Label',
-            'menu_order' => 'Menu Order',
-            'position_id' => 'Position ID',
+            'agency_order' => 'Agency Order',
             'status_id' => 'Status ID',
+            'logo' => 'Logo',
             'link' => 'Link',
-            'logo_file' => 'Logo File',
             'user_id' => 'User ID',
             'user_update_id' => 'User Update ID',
             'date_created' => 'Date Created',
@@ -78,13 +73,13 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Position]].
+     * Gets query for [[AgencyType]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPosition()
+    public function getAgencyType()
     {
-        return $this->hasOne(Position::className(), ['id' => 'position_id']);
+        return $this->hasOne(AgencyType::className(), ['id' => 'agency_type_id']);
     }
 
     /**
@@ -95,16 +90,6 @@ class Menu extends \yii\db\ActiveRecord
     public function getStatus()
     {
         return $this->hasOne(Status::className(), ['id' => 'status_id']);
-    }
-
-    /**
-     * Gets query for [[LogoFile]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getLogoFile()
-    {
-        return $this->hasOne(FileAttachment::className(), ['id' => 'logo_file']);
     }
 
     /**
@@ -125,15 +110,5 @@ class Menu extends \yii\db\ActiveRecord
     public function getUserUpdate()
     {
         return $this->hasOne(User::className(), ['id' => 'user_update_id']);
-    }
-
-    /**
-     * Gets query for [[CmsPages]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCmsPages()
-    {
-        return $this->hasMany(Pages::className(), ['menu_id' => 'id']);
     }
 }

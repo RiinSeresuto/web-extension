@@ -49,7 +49,7 @@ class FileAttachment extends \yii\db\ActiveRecord
             [['id'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
-            [['record_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsPost::className(), 'targetAttribute' => ['record_id' => 'id']],
+            [['record_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['record_id' => 'id']],
         ];
     }
 
@@ -100,7 +100,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getRecord()
     {
-        return $this->hasOne(CmsPost::className(), ['id' => 'record_id']);
+        return $this->hasOne(Post::className(), ['id' => 'record_id']);
     }
 
     /**
@@ -110,7 +110,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsMenus()
     {
-        return $this->hasMany(CmsMenu::className(), ['logo_file' => 'id']);
+        return $this->hasMany(Menu::className(), ['logo_file' => 'id']);
     }
 
     /**
@@ -120,7 +120,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsPages()
     {
-        return $this->hasMany(CmsPages::className(), ['slider_photo' => 'id']);
+        return $this->hasMany(Pages::className(), ['slider_photo' => 'id']);
     }
 
     /**
@@ -130,6 +130,6 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsPages0()
     {
-        return $this->hasMany(CmsPages::className(), ['file_attachment' => 'id']);
+        return $this->hasMany(Pages::className(), ['file_attachment' => 'id']);
     }
 }

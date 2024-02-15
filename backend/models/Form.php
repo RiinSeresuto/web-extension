@@ -5,36 +5,35 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "cms_menu".
+ * This is the model class for table "cms_form".
  *
  * @property int $id
- * @property int $parent_id
- * @property string $label
- * @property int $menu_order
- * @property int $position_id
+ * @property int $category_id
+ * @property string $description
  * @property int $status_id
- * @property string $link
- * @property int $logo_file
+ * @property int $year_id
+ * @property int $field_id
  * @property int $user_id
  * @property int $user_update_id
  * @property string $date_created
  * @property string $date_updated
  *
- * @property Position $position
- * @property Status $status
- * @property FileAttachment $logoFile
+ * @property CmsField $field
+ * @property CmsCategory $category
+ * @property CmsStatus $status
+ * @property CmsYear $year
  * @property User $user
  * @property User $userUpdate
- * @property Pages[] $cmsPages
+ * @property CmsPost[] $cmsPosts
  */
-class Menu extends \yii\db\ActiveRecord
+class Form extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'cms_menu';
+        return 'cms_form';
     }
 
     /**
@@ -43,14 +42,15 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'label', 'menu_order', 'position_id', 'status_id', 'link', 'logo_file', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'parent_id', 'menu_order', 'position_id', 'status_id', 'logo_file', 'user_id', 'user_update_id'], 'integer'],
+            [['id', 'category_id', 'description', 'status_id', 'year_id', 'field_id', 'user_id', 'user_update_id', 'date_updated'], 'required'],
+            [['id', 'category_id', 'status_id', 'year_id', 'field_id', 'user_id', 'user_update_id'], 'integer'],
             [['date_created', 'date_updated'], 'safe'],
-            [['label', 'link'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Position::className(), 'targetAttribute' => ['position_id' => 'id']],
+            [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
-            [['logo_file'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['logo_file' => 'id']],
+            [['year_id'], 'exist', 'skipOnError' => true, 'targetClass' => Year::className(), 'targetAttribute' => ['year_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -63,13 +63,11 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent ID',
-            'label' => 'Label',
-            'menu_order' => 'Menu Order',
-            'position_id' => 'Position ID',
+            'category_id' => 'Category ID',
+            'description' => 'Description',
             'status_id' => 'Status ID',
-            'link' => 'Link',
-            'logo_file' => 'Logo File',
+            'year_id' => 'Year ID',
+            'field_id' => 'Field ID',
             'user_id' => 'User ID',
             'user_update_id' => 'User Update ID',
             'date_created' => 'Date Created',
@@ -78,13 +76,23 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Position]].
+     * Gets query for [[Field]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getPosition()
+    public function getField()
     {
-        return $this->hasOne(Position::className(), ['id' => 'position_id']);
+        return $this->hasOne(Field::className(), ['id' => 'field_id']);
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -98,13 +106,13 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[LogoFile]].
+     * Gets query for [[Year]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLogoFile()
+    public function getYear()
     {
-        return $this->hasOne(FileAttachment::className(), ['id' => 'logo_file']);
+        return $this->hasOne(Year::className(), ['id' => 'year_id']);
     }
 
     /**
@@ -128,12 +136,12 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[CmsPages]].
+     * Gets query for [[CmsPosts]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCmsPages()
+    public function getCmsPosts()
     {
-        return $this->hasMany(Pages::className(), ['menu_id' => 'id']);
+        return $this->hasMany(Post::className(), ['forms_id' => 'id']);
     }
 }

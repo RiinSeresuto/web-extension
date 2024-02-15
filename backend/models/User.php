@@ -97,25 +97,6 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * Gets query for [[Advisories]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAdvisories()
-    {
-        return $this->hasMany(Advisory::className(), ['user' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Articles]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getArticles()
-    {
-        return $this->hasMany(Article::className(), ['user' => 'id']);
-    }
 
     /**
      * Gets query for [[CmsCategories]].
@@ -124,7 +105,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsCategories()
     {
-        return $this->hasMany(CmsCategory::className(), ['user_id' => 'id']);
+        return $this->hasMany(Category::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -134,7 +115,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsCategories0()
     {
-        return $this->hasMany(CmsCategory::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(Category::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -144,7 +125,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsConnectedAgencies()
     {
-        return $this->hasMany(CmsConnectedAgencies::className(), ['user_id' => 'id']);
+        return $this->hasMany(ConnectedAgencies::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -154,7 +135,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsConnectedAgencies0()
     {
-        return $this->hasMany(CmsConnectedAgencies::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(ConnectedAgencies::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -164,7 +145,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsFields()
     {
-        return $this->hasMany(CmsField::className(), ['user_id' => 'id']);
+        return $this->hasMany(Field::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -174,7 +155,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsFields0()
     {
-        return $this->hasMany(CmsField::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(Field::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -184,7 +165,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsFileAttachments()
     {
-        return $this->hasMany(CmsFileAttachment::className(), ['user_id' => 'id']);
+        return $this->hasMany(FileAttachment::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -194,7 +175,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsFileAttachments0()
     {
-        return $this->hasMany(CmsFileAttachment::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(FileAttachment::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -204,7 +185,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsForms()
     {
-        return $this->hasMany(CmsForm::className(), ['user_id' => 'id']);
+        return $this->hasMany(Form::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -214,7 +195,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsForms0()
     {
-        return $this->hasMany(CmsForm::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(Form::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -224,7 +205,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsMenus()
     {
-        return $this->hasMany(CmsMenu::className(), ['user_id' => 'id']);
+        return $this->hasMany(Menu::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -234,7 +215,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsMenus0()
     {
-        return $this->hasMany(CmsMenu::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(Menu::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -244,7 +225,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsPages()
     {
-        return $this->hasMany(CmsPages::className(), ['user_id' => 'id']);
+        return $this->hasMany(Pages::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -254,7 +235,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsPages0()
     {
-        return $this->hasMany(CmsPages::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(Pages::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -264,7 +245,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsPosts()
     {
-        return $this->hasMany(CmsPost::className(), ['user_id' => 'id']);
+        return $this->hasMany(Post::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -274,7 +255,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsPosts0()
     {
-        return $this->hasMany(CmsPost::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(Post::className(), ['user_update_id' => 'id']);
     }
 
     /**
@@ -284,7 +265,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsYears()
     {
-        return $this->hasMany(CmsYear::className(), ['user_id' => 'id']);
+        return $this->hasMany(Year::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -294,38 +275,10 @@ class User extends \yii\db\ActiveRecord
      */
     public function getCmsYears0()
     {
-        return $this->hasMany(CmsYear::className(), ['user_update_id' => 'id']);
+        return $this->hasMany(Year::className(), ['user_update_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Contents]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContents()
-    {
-        return $this->hasMany(Content::className(), ['user' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Events]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEvents()
-    {
-        return $this->hasMany(Events::className(), ['user' => 'id']);
-    }
-
-    /**
-     * Gets query for [[News]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getNews()
-    {
-        return $this->hasMany(News::className(), ['user' => 'id']);
-    }
+    
 
     /**
      * Gets query for [[Profile]].
@@ -337,15 +290,6 @@ class User extends \yii\db\ActiveRecord
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[ProgramProjects]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProgramProjects()
-    {
-        return $this->hasMany(ProgramProject::className(), ['user' => 'id']);
-    }
 
     /**
      * Gets query for [[SocialAccounts]].
