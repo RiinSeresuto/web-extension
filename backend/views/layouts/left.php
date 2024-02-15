@@ -30,7 +30,7 @@ use yii\bootstrap\Nav;
         </form>
         <!-- /.search form -->
 
-        <?=
+        <?php
         Nav::widget(
             [
                 'encodeLabels' => false,
@@ -39,6 +39,7 @@ use yii\bootstrap\Nav;
                     ['label' => 'Dashboard', 'url' => ['/#']],
                     [
                         'label' => 'Administration', 
+                        //'options' => ['class' => "treeview-menu"],
                         'items' => [
                             ['label' => 'Menu', 'url' => ['/menu']],
                             ['label' => 'Pages', 'url' => ['/pages']],

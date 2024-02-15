@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
@@ -8,27 +8,23 @@ use Yii;
  * This is the model class for table "cms_file_attachment".
  *
  * @property int $id
- * @property int $category_id
- * @property int $form_id
+ * @property int $record_id
  * @property string $file_name
  * @property string $file_path
  * @property string $file_type
- * @property string $file_category
  * @property string $file_extension
- * @property int $sort
  * @property string $model
  * @property int $user_id
  * @property int $user_update_id
  * @property string $date_created
  * @property string $date_updated
  *
- * @property Category $category
- * @property Form $form
  * @property User $user
  * @property User $userUpdate
- * @property Menu[] $cmsMenus
- * @property Pages[] $cmsPages
- * @property Pages[] $cmsPages0
+ * @property CmsPost $record
+ * @property CmsMenu[] $cmsMenus
+ * @property CmsPages[] $cmsPages
+ * @property CmsPages[] $cmsPages0
  */
 class FileAttachment extends \yii\db\ActiveRecord
 {
@@ -46,15 +42,14 @@ class FileAttachment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'category_id', 'form_id', 'file_name', 'file_path', 'file_type', 'file_category', 'file_extension', 'sort', 'model', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'category_id', 'form_id', 'sort', 'user_id', 'user_update_id'], 'integer'],
+            [['id', 'record_id', 'file_name', 'file_path', 'file_type', 'file_extension', 'model', 'user_id', 'user_update_id', 'date_updated'], 'required'],
+            [['id', 'record_id', 'user_id', 'user_update_id'], 'integer'],
             [['date_created', 'date_updated'], 'safe'],
-            [['file_name', 'file_path', 'file_type', 'file_category', 'file_extension', 'model'], 'string', 'max' => 255],
+            [['file_name', 'file_path', 'file_type', 'file_extension', 'model'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
-            [['form_id'], 'exist', 'skipOnError' => true, 'targetClass' => Form::className(), 'targetAttribute' => ['form_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
+            [['record_id'], 'exist', 'skipOnError' => true, 'targetClass' => CmsPost::className(), 'targetAttribute' => ['record_id' => 'id']],
         ];
     }
 
@@ -65,40 +60,17 @@ class FileAttachment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
-            'form_id' => 'Form ID',
+            'record_id' => 'Record ID',
             'file_name' => 'File Name',
             'file_path' => 'File Path',
             'file_type' => 'File Type',
-            'file_category' => 'File Category',
             'file_extension' => 'File Extension',
-            'sort' => 'Sort',
             'model' => 'Model',
             'user_id' => 'User ID',
             'user_update_id' => 'User Update ID',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];
-    }
-
-    /**
-     * Gets query for [[Category]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(Category::className(), ['id' => 'category_id']);
-    }
-
-    /**
-     * Gets query for [[Form]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getForm()
-    {
-        return $this->hasOne(Form::className(), ['id' => 'form_id']);
     }
 
     /**
@@ -122,13 +94,23 @@ class FileAttachment extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Record]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecord()
+    {
+        return $this->hasOne(CmsPost::className(), ['id' => 'record_id']);
+    }
+
+    /**
      * Gets query for [[CmsMenus]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getCmsMenus()
     {
-        return $this->hasMany(Menu::className(), ['logo/file' => 'id']);
+        return $this->hasMany(CmsMenu::className(), ['logo_file' => 'id']);
     }
 
     /**
@@ -138,7 +120,7 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsPages()
     {
-        return $this->hasMany(Pages::className(), ['slider_photo' => 'id']);
+        return $this->hasMany(CmsPages::className(), ['slider_photo' => 'id']);
     }
 
     /**
@@ -148,6 +130,6 @@ class FileAttachment extends \yii\db\ActiveRecord
      */
     public function getCmsPages0()
     {
-        return $this->hasMany(Pages::className(), ['file_attachment' => 'id']);
+        return $this->hasMany(CmsPages::className(), ['file_attachment' => 'id']);
     }
 }

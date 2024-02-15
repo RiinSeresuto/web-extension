@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
@@ -53,6 +53,6 @@ class Position extends \yii\db\ActiveRecord
      */
     public function getCmsMenus()
     {
-        return $this->hasMany(Menu::className(), ['position_id' => 'id']);
+        return $this->hasMany(CmsMenu::className(), ['position_id' => 'id']);
     }
 }
