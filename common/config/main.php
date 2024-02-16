@@ -9,6 +9,13 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'assetManager' => [
+            'bundles' => [
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                ],
+            ],
+        ],
     ],
 	'modules' => [
 	    'user' => [
@@ -37,7 +44,7 @@ return [
             'storePath' => '@common/uploads/store',
             'rules' => [
                 'maxFiles' => 2,
-                'maxSize' => 1024 * 1024 * 2 // 2 MB
+                'maxSize' => 1024 * 1024 * 20 // 20 MB
             ],
         ],
 	],
