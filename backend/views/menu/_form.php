@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 use kartik\file\FileInput;
@@ -49,13 +49,17 @@ use backend\models\Status;
 
     <?php // $form->field($model, 'logo_file')->textInput() ?>
 
-    <?= $form->field($model, 'logo_file[]')->widget(FileInput::classname(), [
+    <div class="col-12">
+    <?= $form->field($model, 'file_attach[]')->widget(FileInput::classname(), [
+            'id' => 'file-attach',
             'options' => ['multiple' => true],
             'pluginOptions' => [
                 'showUpload' => false,
                 'initialPreviewAsData' => true,
+                'maxFileCount' => 5,
             ]
         ]); ?>
+    </div>
 
     <?php // $form->field($model, 'user_id')->textInput() ?>
 
