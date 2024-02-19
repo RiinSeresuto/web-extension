@@ -4,13 +4,14 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Menu;
-use backend\models\FileAttachment;
 use backend\models\MenuSearch;
+use backend\models\Position;
+use backend\models\Status;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
-use yii\db\Expression;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 
 /**
  * MenuController implements the CRUD actions for Menu model.
@@ -39,7 +40,10 @@ class MenuController extends Controller
     public function actionIndex()
     {
         $searchModel = new MenuSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Menu::find()->orderBy(['date_created' => SORT_DESC])->all();
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            'allModels' => $query,
+        ]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -53,10 +57,37 @@ class MenuController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // public function actionView($id)
+    // {
+    //     $user =  Yii::$app->user->identity->FIRST_M;
+    //     return $this->render('view', [
+    //         'model' => $this->findModel($id),
+    //         'user' => $user
+    //     ]);
+    // }
     public function actionView($id)
     {
+        $items = [];
+        $path = Yii::getAlias('@common/uploads/store');
+        $files = FileHelper::findFiles($path);
+
+        foreach ($files as $file) {
+          $item = [
+            "url"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+            "src"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+        ];
+          $items[]=$item;
+        }
+
+        //$model =  $this->findModel($id);
+        //echo "<pre>";
+        //print_r($model);
+        //echo "</pre";
+        //exit;
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'items' => $items
         ]);
     }
 
@@ -65,85 +96,25 @@ class MenuController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    // public function actionCreate()
-    // {
-    //     $model = new Menu();
-
-    //     if ($model->load(Yii::$app->request->post())){
-
-    //         $model->logo_file = UploadedFile::getInstance($model, 'logo_file');
-
-    //         $file_name = $model->file_name.rand(1, 4000).'.'.$model->logo_file->getExtension;
-    //         $file_path = 'uploads/menu'.$file_name;
-    //         $model->logo_file->saveAs($file_path);
-    //         $model->logo_file = $file_path;
-
-    //         $model->save();
-    //         return $this->redirect(['view','id' => $model->id]);
-    //     } 
-    //         return $this->render('create', [
-    //             'model' => $model,
-    //         ]);
-    // }
-
     public function actionCreate()
     {
-    $model = new Menu();
+        $model = new Menu();
 
-    if ($this->request->isPost) {
-        //$model->user = Yii::$app->user->identity->id;
-        $model->load($this->request->post());
-        $model->logo_file = UploadedFile::getInstances($model, 'logo_file');
+        $status = Status::find()->all();
+        $position = Position::find()->all();
 
-        if ($model->validate()) {
-           
-            $model->date_created = new Expression('NOW()');
-            $model->user = Yii::$app->user->identity->id;
+        if ($model->load(Yii::$app->request->post())) {
 
-            if ($model->save()) {
-
-                if ($model->logo_file) {
-    
-                    foreach ($model->logo_file as $key => $value) {
-
-                        $fname = explode(".", $value->name);
-
-                        $newfilename = str_replace(" ","",$fname[0]).'-'.date('dmYHis');
-                        $file_attachment = new FileAttachment();
-                        $file_attachment->model = 'Menu'; 
-                        $file_attachment->file_name = $value->name;
-                        $file_attachment->file_type = pathinfo($value->name, PATHINFO_EXTENSION);
-                        $file_attachment->file_extension = $newfilename . '.' . pathinfo($value->name, PATHINFO_EXTENSION);
-                        
-                        if ($file_attachment->save()) {
-                            
-                            $value->saveAs('@web/uploads/menu/' . $newfilename . '.' . pathinfo($value->name, PATHINFO_EXTENSION));
-                        } else {
-                            print_r($file_attachment->getErrors());
-                            exit;
-                        }
-                    }
-                  }
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                print_r($model->getErrors());
-                exit;
-            }
-            } else {
-                print_r($model->getErrors());
-                exit;
-            }
+            if ($model->save())
+            return $this->redirect(['view', 'id' => $model->id]);
         }
-
-        // echo '<pre>';
-        // print_r ($model);
-        // exit;
 
         return $this->render('create', [
             'model' => $model,
+            'status' => $status,
+            'position' => $position
         ]);
     }
-
 
     /**
      * Updates an existing Menu model.
@@ -156,12 +127,17 @@ class MenuController extends Controller
     {
         $model = $this->findModel($id);
 
+        $status = Status::find()->all();
+        $position = Position::find()->all();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'status' => $status,
+            'position' => $position
         ]);
     }
 
@@ -193,10 +169,5 @@ class MenuController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    public function actionDownload($id)
-    {
-
     }
 }
