@@ -29,6 +29,7 @@ use Yii;
  */
 class Menu extends \yii\db\ActiveRecord
 {
+    public $file_attach=[];
     /**
      * {@inheritdoc}
      */
@@ -43,9 +44,9 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'label', 'menu_order', 'position_id', 'status_id', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'parent_id', 'menu_order', 'position_id', 'status_id', 'user_id', 'user_update_id'], 'integer'],
-            [['link', 'date_created', 'date_updated'], 'safe'],
+            [['label', 'menu_order', 'position_id', 'status_id' ], 'required'],
+            [['parent_id', 'menu_order', 'position_id', 'status_id'], 'integer'],
+            [['link', 'date_created', 'date_updated', 'user_update_id', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Position::className(), 'targetAttribute' => ['position_id' => 'id']],
@@ -53,7 +54,7 @@ class Menu extends \yii\db\ActiveRecord
             //[['logo_file'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['logo_file' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
-            [['logo_file'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
+            [['file_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
 
@@ -71,8 +72,9 @@ class Menu extends \yii\db\ActiveRecord
             'status_id' => 'Status',
             'link' => 'Link',
             'logo_file' => 'File Upload',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'file_attach' => 'File Upload',
+            'user_id' => 'User',
+            'user_update_id' => 'User Update',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];
@@ -105,7 +107,7 @@ class Menu extends \yii\db\ActiveRecord
      */
     public function getLogoFile()
     {
-        return $this->hasMany(FileAttachment::className(), ['id' => 'logo_file']);
+        return $this->hasMany(FileAttachment::className(), ['record_id' => 'id'])->where(['model' => 'model']);
     }
 
     /**
@@ -137,4 +139,16 @@ class Menu extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Pages::className(), ['menu_id' => 'id']);
     }
+
+    public function behaviors()
+    {
+        return [
+            
+            'fileBehavior' => [
+                'class' => \file\behaviors\FileBehavior::className()
+            ]
+        
+        ];
+    }
+
 }

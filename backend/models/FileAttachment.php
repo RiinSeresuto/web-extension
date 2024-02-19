@@ -15,9 +15,9 @@ use Yii;
  * @property string $file_extension
  * @property string $model
  * @property int $user_id
- * @property int $user_update_id
+ * @property int|null $user_update_id
  * @property string $date_created
- * @property string $date_updated
+ * @property string|null $date_updated
  *
  * @property User $user
  * @property User $userUpdate
@@ -42,14 +42,13 @@ class FileAttachment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'record_id', 'file_name', 'file_path', 'file_type', 'file_extension', 'model', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'record_id', 'user_id', 'user_update_id'], 'integer'],
+            [['record_id', 'file_name', 'file_path', 'file_type', 'file_extension', 'model', 'user_id'], 'required'],
+            [['record_id', 'user_id', 'user_update_id'], 'integer'],
             [['date_created', 'date_updated'], 'safe'],
             [['file_name', 'file_path', 'file_type', 'file_extension', 'model'], 'string', 'max' => 255],
-            [['id'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
-            [['record_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::className(), 'targetAttribute' => ['record_id' => 'id']],
+            [['record_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['record_id' => 'id']],
         ];
     }
 
