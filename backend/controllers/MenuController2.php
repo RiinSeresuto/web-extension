@@ -4,15 +4,17 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Menu;
+use backend\models\FileAttachment;
 use backend\models\MenuSearch;
 use backend\models\Position;
 use backend\models\Status;
-use backend\models\File;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
+use yii\db\Expression;
 use yii\filters\VerbFilter;
-use yii\helpers\FileHelper;
+
 
 /**
  * MenuController implements the CRUD actions for Menu model.
@@ -49,6 +51,7 @@ class MenuController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            
         ]);
     }
 
@@ -58,66 +61,88 @@ class MenuController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    // public function actionView($id)
-    // {
-    //     $user =  Yii::$app->user->identity->FIRST_M;
-    //     return $this->render('view', [
-    //         'model' => $this->findModel($id),
-    //         'user' => $user
-    //     ]);
-    // }
     public function actionView($id)
     {
-        $items = [];
-        $path = Yii::getAlias('@common/uploads/store');
-        $files = FileHelper::findFiles($path);
-
-        foreach ($files as $file) {
-          $item = [
-            "url"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
-            "src"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
-        ];
-          $items[]=$item;
-        }
-
-        //$model =  $this->findModel($id);
-        //echo "<pre>";
-        //print_r($model);
-        //echo "</pre";
-        //exit;
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'items' => $items
         ]);
     }
 
-    /**
-     * Creates a new Menu model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
-        $model = new Menu();
+    $model = new Menu();
 
-        $status = Status::find()->all();
-        $position = Position::find()->all();
+    $status = Status::find()->all();
+    $position = Position::find()->all();
 
-        if ($model->load(Yii::$app->request->post())) {
+    if ($this->request->isPost) {
+        
+        $info = Yii::$app->user->identity;
+        $model->load($this->request->post());
+        $file = UploadedFile::getInstances($model, 'file_input');
+        
+        
+        $model->date_created = new Expression('NOW()');
+        $model->user_id = Yii::$app->user->identity->id;
+        // echo '<pre>';
+        // print_r ($model->user_id);
+        // exit;
 
-            $model->user_id = Yii::$app->user->identity->id;
+        if ($model->validate()) {
 
-            if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->save()) {
+    
+
+                if ($file) {
+    
+                    foreach ($file as $key => $value) {
+
+                        $fname = explode(".", $value->name);
+
+                        $newfilename = str_replace(" ","",$fname[0]).'-'.date('dmYHis');
+
+                        $file_attachment = new FileAttachment();
+                        $file_attachment->model = 'Menu'; 
+                        $file_attachment->file_name = $value->name;
+                        $file_attachment->file_type = pathinfo($value->name, PATHINFO_EXTENSION);
+                        $file_attachment->file_extension = $newfilename . '.' . pathinfo($value->name, PATHINFO_EXTENSION);
+                        $file_attachment->user_id = $model->user_id;
+                        $file_attachment->record_id = $model->id;
+                        $file_attachment->file_path = '@common/uploads/menu/' . $newfilename . '.' . pathinfo($value->name, PATHINFO_EXTENSION);
+                        
+                        // echo '<pre>';
+                        // echo var_dump($model->id);
+                        // exit;
+                        if ($file_attachment->save()) {
+                            
+                            $value->saveAs('@common/uploads/menu/' . $newfilename . '.' . pathinfo($value->name, PATHINFO_EXTENSION));
+                        } else {
+                            print_r($file_attachment->getErrors());
+                            exit;
+                        }
+                    }
+                  }
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                print_r($model->getErrors());
+                exit;
+            }
+            } 
+            else {
+                print_r($model->getErrors());
+                exit;
+            }
         }
-
         return $this->render('create', [
             'model' => $model,
             'status' => $status,
             'position' => $position
         ]);
+
     }
+
+    public 
+
 
     /**
      * Updates an existing Menu model.
@@ -128,10 +153,11 @@ class MenuController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
 
         $status = Status::find()->all();
         $position = Position::find()->all();
+
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -176,14 +202,6 @@ class MenuController extends Controller
 
     public function actionDownload($id)
     {
-        $file = File::find()->andWhere(['id'=>$id])->one();
-        echo '<pre>';
-        print_r ($file->dbStorePath);
-        exit;
-        // $filePath = Yii::getAlias('@common'). '/../'. $file->file_path;
-        $filePath = $file->dbStorePath;
-        if(file_exists($filePath)){
-            return Yii::$app->response->sendFile($filePath, $file->file_name, ['inline'=>true]);
-        }
+
     }
 }

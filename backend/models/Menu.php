@@ -107,7 +107,7 @@ class Menu extends \yii\db\ActiveRecord
      */
     public function getLogoFile()
     {
-        return $this->hasMany(FileAttachment::className(), ['record_id' => 'id'])->where(['model' => 'model']);
+        return $this->hasMany(File::className(), ['itemId' => 'id']);
     }
 
     /**
