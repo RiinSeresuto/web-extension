@@ -38,8 +38,8 @@ return [
         'wfh' => [
             'class' => 'common\modules\wfh\Module',
         ],	
-        'file' => [
-            'class' => 'file\FileModule',
+        'attachment' => [
+            'class' => 'attachment\Module',
             'webDir' => 'files',
             'tempPath' => '@common/uploads/temp',
             'storePath' => '@common/uploads/store',
