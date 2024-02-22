@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use attachment\components\AttachmentsInput;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Menu */
@@ -12,43 +13,75 @@ use kartik\select2\Select2;
 
 <div class="menu-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+    <div class="form-group">
+        <div class="col-md-12">
+            <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+        
+            <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <?= $form->field($model, 'menu_order')->textInput() ?>
+                </div>
 
-    <?= $form->field($model, 'menu_order')->textInput() ?>
+                <div class="col-md-4">
+                    <?= $form->field($model, 'position_id')->widget(Select2::class, [
+                                        'data' => ArrayHelper::map($position, 'id', 'position'),
+                                        'options' => [
+                                            'placeholder' => 'Select Position',
+                                        ],
+                                    ]) ?>
+                </div>
 
-    <?= $form->field($model, 'position_id')->widget(Select2::class, [
-                        'data' => ArrayHelper::map($position, 'id', 'position'),
-                        'options' => [
-                            'placeholder' => 'Select Position',
+                <div class="col-md-4">
+                    <?= $form->field($model, 'status_id')->widget(Select2::class, [
+                                        'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                                        'options' => [
+                                            'placeholder' => 'Select Status',
+                                        ],
+                                    ]) ?>
+                </div>
+            </div>
+
+                <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+
+                <?= AttachmentsInput::widget([
+                        'model' => $model,
+                        'options' => [ 
+                            'multiple' => true,
+                            'accept' => 'application/pdf',
                         ],
+                        'pluginOptions' => [
+                            'initialPreviewAsData' =>  true,
+                            //'initialPreviewFileType' => 'pdf',
+                            'autoReplace' => false,
+                            'overwriteInitial' => false,
+                            'maxFileCount' => 3,
+                            //'allowedFileExtensions' => ['pdf'],
+                            'showUpload' => false,
+                            'showCancel' => false,
+                            'browseLabel' => '',
+                            'removeLabel' => '',
+                            'mainClass' => 'input-group-lg',
+                            'browseClass' => 'btn btn-info',
+                            'uploadClass' => 'btn btn-info',
+                            'fileActionSettings'=> [
+                                'showDrag' => false,
+                                'showRemove' => true,
+                                'msgRemove' => 'Are you sure you want to delete this file?',
+                            ]
+                        ]
                     ]) ?>
 
-    <?= $form->field($model, 'status_id')->widget(Select2::class, [
-                        'data' => ArrayHelper::map($status, 'id', 'status_type'),
-                        'options' => [
-                            'placeholder' => 'Select Status',
-                        ],
-                    ]) ?>
-
-    <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
-
-    <?= \file\components\AttachmentsInput::widget([
-        'id' => 'file-input', // Optional
-        'model' => $model,
-        'options' => [ // Options of the Kartik's FileInput widget
-            'multiple' => true, // If you want to allow multiple upload, default to false
-        ],
-        'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
-            'maxFileCount' => 10 // Client max files
-        ]
-            ]) ?>
-
-    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', [
-        'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-        'onclick' => "$('#file-input').fileinput('upload');"
-            ]) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : 'Update', [
+                        'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
+                        'onclick' => "$('#file-input').fileinput('upload');"
+                            ]) ?>
+        </div>
+        
+    </div>
+    
 
     <?php ActiveForm::end(); ?>
 

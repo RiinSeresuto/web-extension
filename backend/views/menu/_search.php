@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\MenuSearch */
@@ -15,33 +17,23 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'label') ?>
+        </div>
 
-    <?= $form->field($model, 'parent_id') ?>
-
-    <?= $form->field($model, 'label') ?>
-
-    <?= $form->field($model, 'menu_order') ?>
-
-    <?= $form->field($model, 'position_id') ?>
-
-    <?php // echo $form->field($model, 'status_id') ?>
-
-    <?php // echo $form->field($model, 'link') ?>
-
-    <?php // echo $form->field($model, 'logo_file') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
-
-    <?php // echo $form->field($model, 'user_update_id') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
-
-    <?php // echo $form->field($model, 'date_updated') ?>
-
+        <div class="col-md-6">
+            <?= $form->field($model, 'position_id')->widget(Select2::class, [
+                                'data' => ArrayHelper::map($position, 'id', 'position'),
+                                'options' => [
+                                    'placeholder' => 'Select Position',
+                                ],
+                            ]) ?>
+        </div>
+    </div>
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('<i class="fas fa-search"></i> Search', ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::resetButton('<i class="fas fa-undo-alt"></i> Reset', ['class' => 'btn btn-outline-secondary btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
