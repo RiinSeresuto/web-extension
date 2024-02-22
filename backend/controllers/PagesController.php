@@ -2,9 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
+use backend\models\Status;
+use backend\models\UrlType;
 use backend\models\Pages;
 use backend\models\PagesSearch;
+use backend\models\Type;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,12 +69,19 @@ class PagesController extends Controller
     {
         $model = new Pages();
 
+        $url = UrlType::find()->all();
+        $status = Status::find()->all();
+        $type = Type::find()->all();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'url' => $url,
+            'status' => $status,
+            'type' => $type
         ]);
     }
 
