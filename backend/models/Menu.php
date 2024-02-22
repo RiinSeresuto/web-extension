@@ -51,7 +51,6 @@ class Menu extends \yii\db\ActiveRecord
             [['id'], 'unique'],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Position::className(), 'targetAttribute' => ['position_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
-            //[['logo_file'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['logo_file' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
             [['file_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
@@ -73,7 +72,7 @@ class Menu extends \yii\db\ActiveRecord
             'link' => 'Link',
             'logo_file' => 'File Upload',
             'file_attach' => 'File Upload',
-            'user_id' => 'User',
+            'user_id' => 'Encoded By',
             'user_update_id' => 'User Update',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
@@ -145,7 +144,7 @@ class Menu extends \yii\db\ActiveRecord
         return [
             
             'fileBehavior' => [
-                'class' => \file\behaviors\FileBehavior::className()
+                'class' => \attachment\behaviors\FileBehavior::className()
             ]
         
         ];
