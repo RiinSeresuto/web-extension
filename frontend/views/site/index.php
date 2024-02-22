@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'DILG: Department of the Interior and Local Government';
 ?>
 <div class="site-index">
 	<div class="row"> 
