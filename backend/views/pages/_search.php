@@ -15,35 +15,23 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-3">
+            <?= $form->field($model, 'title') ?>
+        </div>
 
-    <?= $form->field($model, 'menu_id') ?>
+        <div class="col-md-3">
+            <?= $form->field($model, 'url_type_id') ?>
+        </div>
 
-    <?= $form->field($model, 'title') ?>
+        <div class="col-md-3">
+            <?= $form->field($model, 'status_id') ?>
+        </div>
 
-    <?= $form->field($model, 'caption') ?>
-
-    <?= $form->field($model, 'body') ?>
-
-    <?php // echo $form->field($model, 'url_type_id') ?>
-
-    <?php // echo $form->field($model, 'status_id') ?>
-
-    <?php // echo $form->field($model, 'type_id') ?>
-
-    <?php // echo $form->field($model, 'link') ?>
-
-    <?php // echo $form->field($model, 'slider_photo') ?>
-
-    <?php // echo $form->field($model, 'file_attachment') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
-
-    <?php // echo $form->field($model, 'user_update_id') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
-
-    <?php // echo $form->field($model, 'date_updated') ?>
+        <div class="col-md-3">
+            <?= $form->field($model, 'type_id') ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
