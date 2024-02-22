@@ -49,10 +49,10 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'menu_id', 'title', 'caption', 'body', 'url_type_id', 'status_id', 'type_id', 'link', 'slider_photo', 'file_attachment', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'menu_id', 'url_type_id', 'status_id', 'type_id', 'slider_photo', 'file_attachment', 'user_id', 'user_update_id'], 'integer'],
+            [['title', 'caption', 'body', 'url_type_id', 'status_id', 'type_id'], 'required'],
+            [[ 'menu_id', 'url_type_id', 'status_id', 'type_id'], 'integer'],
             [['body'], 'string'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['menu_id', 'date_created', 'date_updated', 'link', 'slider_photo', 'file_attachment',], 'safe'],
             [['title', 'caption', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'id']],
@@ -60,9 +60,10 @@ class Pages extends \yii\db\ActiveRecord
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
             [['slider_photo'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['slider_photo' => 'id']],
-            [['file_attachment'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['file_attachment' => 'id']],
+            //[['file_attachment'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['file_attachment' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
+            [['file_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
 
@@ -73,18 +74,18 @@ class Pages extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'menu_id' => 'Menu ID',
+            'menu_id' => 'Parent Menu',
             'title' => 'Title',
             'caption' => 'Caption',
             'body' => 'Body',
-            'url_type_id' => 'Url Type ID',
-            'status_id' => 'Status ID',
-            'type_id' => 'Type ID',
+            'url_type_id' => 'Url Type',
+            'status_id' => 'Status',
+            'type_id' => 'Type',
             'link' => 'Link',
             'slider_photo' => 'Slider Photo',
             'file_attachment' => 'File Attachment',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'user_id' => 'Encoded By',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];
@@ -135,9 +136,14 @@ class Pages extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
+    // public function getSliderPhoto()
+    // {
+    //     return $this->hasOne(FileAttachment::className(), ['id' => 'slider_photo']);
+    // }
+
     public function getSliderPhoto()
     {
-        return $this->hasOne(FileAttachment::className(), ['id' => 'slider_photo']);
+        return $this->hasMany(File::className(), ['itemId' => 'id']);
     }
 
     /**
@@ -145,9 +151,14 @@ class Pages extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
+    // public function getFileAttachment()
+    // {
+    //     return $this->hasOne(FileAttachment::className(), ['id' => 'file_attachment']);
+    // }
+
     public function getFileAttachment()
     {
-        return $this->hasOne(FileAttachment::className(), ['id' => 'file_attachment']);
+        return $this->hasMany(File::className(), ['itemId' => 'id']);
     }
 
     /**
@@ -178,5 +189,15 @@ class Pages extends \yii\db\ActiveRecord
     public function getCmsPosts()
     {
         return $this->hasMany(Post::className(), ['page_id' => 'id']);
+    }
+    public function behaviors()
+    {
+        return [
+            
+            'fileBehavior' => [
+                'class' => \attachment\behaviors\FileBehavior::className()
+            ]
+        
+        ];
     }
 }
