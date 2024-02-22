@@ -25,30 +25,44 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index', 'logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['index', 'logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+        // return [
+        //     'access' => [
+        //         'class' => AccessControl::className(),
+        //         // // 'only' => ['index', 'logout', 'signup'],
+        //         // 'rules' => [
+        //         //     [
+        //         //         'actions' => ['signup'],
+        //         //         'allow' => true,
+        //         //         'roles' => ['?'],
+        //         //     ],
+        //         //     [
+        //         //         'actions' => ['index', 'logout'],
+        //         //         'allow' => true,
+        //         //         'roles' => ['@'],
+        //         //     ],
+        //         // ],
+        //     ],
+        //     'verbs' => [
+        //         'class' => VerbFilter::className(),
+        //         'actions' => [
+        //             'logout' => ['post'],
+        //         ],
+        //     ],
+        // ];
+            return [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['index'],
+                    'rules' => [
+                        [
+                            'actions' => ['index'],
+                            'allow' => true,
+                            'roles' => ['@', '?'],
+                        ],
                     ],
                 ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
+            ];
+    
     }
 
     /**
