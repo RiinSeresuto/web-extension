@@ -41,14 +41,16 @@ class MenuController extends Controller
     public function actionIndex()
     {
         $searchModel = new MenuSearch();
-        $query = Menu::find()->orderBy(['date_created' => SORT_DESC])->all();
-        $dataProvider = new \yii\data\ArrayDataProvider([
-            'allModels' => $query,
-        ]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        $status = Status::find()->all();
+        $position = Position::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'status' => $status,
+            'position' => $position
         ]);
     }
 
@@ -58,14 +60,6 @@ class MenuController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    // public function actionView($id)
-    // {
-    //     $user =  Yii::$app->user->identity->FIRST_M;
-    //     return $this->render('view', [
-    //         'model' => $this->findModel($id),
-    //         'user' => $user
-    //     ]);
-    // }
     public function actionView($id)
     {
         $items = [];
@@ -79,12 +73,6 @@ class MenuController extends Controller
         ];
           $items[]=$item;
         }
-
-        //$model =  $this->findModel($id);
-        //echo "<pre>";
-        //print_r($model);
-        //echo "</pre";
-        //exit;
 
         return $this->render('view', [
             'model' => $this->findModel($id),
