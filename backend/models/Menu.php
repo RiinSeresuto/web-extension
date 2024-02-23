@@ -73,7 +73,7 @@ class Menu extends \yii\db\ActiveRecord
             'logo_file' => 'File Upload',
             'file_attach' => 'File Upload',
             'user_id' => 'Encoded By',
-            'user_update_id' => 'User Update',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];

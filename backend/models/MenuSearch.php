@@ -70,9 +70,6 @@ class MenuSearch extends Menu
             'date_updated' => $this->date_updated,
         ]);
 
-        // echo '<pre>';
-        //  print_r ($this->position);
-        //  exit;
         $query->andFilterWhere(['like', 'label', $this->label]);
         
             
