@@ -74,7 +74,7 @@ use attachment\components\AttachmentsInput;
                         ]
                     ]) ?>
 
-                    <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : 'Update', [
+                    <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : '<i class="fas fa-edit"></i> Update', [
                         'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
                         'onclick' => "$('#file-input').fileinput('upload');"
                             ]) ?>
