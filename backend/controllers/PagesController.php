@@ -2,15 +2,17 @@
 
 namespace backend\controllers;
 
+use Yii;
 use backend\models\Status;
 use backend\models\UrlType;
 use backend\models\Pages;
 use backend\models\PagesSearch;
 use backend\models\Type;
-use Yii;
+use backend\models\Menu;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
 
 /**
  * PagesController implements the CRUD actions for Pages model.
@@ -55,8 +57,25 @@ class PagesController extends Controller
      */
     public function actionView($id)
     {
+        // return $this->render('view', [
+        //     'model' => $this->findModel($id),
+        // ]);
+
+        $items = [];
+        $path = Yii::getAlias('@common/uploads/store');
+        $files = FileHelper::findFiles($path);
+
+        foreach ($files as $file) {
+          $item = [
+            "url"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+            "src"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+        ];
+          $items[]=$item;
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'items' => $items
         ]);
     }
 
@@ -73,7 +92,11 @@ class PagesController extends Controller
         $status = Status::find()->all();
         $type = Type::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -96,12 +119,19 @@ class PagesController extends Controller
     {
         $model = $this->findModel($id);
 
+        $url = UrlType::find()->all();
+        $status = Status::find()->all();
+        $type = Type::find()->all();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'url' => $url,
+            'status' => $status,
+            'type' => $type
         ]);
     }
 
@@ -134,4 +164,15 @@ class PagesController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function getParentMenus()
+    {
+        return Menu::find()
+            ->select(['id', 'label'])
+            ->where(['parent_id' => null]) // Assuming that null value indicates a root level menu
+            ->orderBy('menu_order')
+            ->asArray()
+            ->all();
+    }
+
 }
