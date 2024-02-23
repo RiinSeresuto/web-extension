@@ -11,6 +11,7 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\helpers\Url;
 use yii\web\View;
+use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 
@@ -30,44 +31,59 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
+<div class="separator-one"></div>
+
+    <div class="separator-two"></div>
     <!--  Top Navigation -->
     <div class="header">
         <div class="container-fluid">
             <div class="row theme header">
                 <div class="col-xs-12 col-lg-12">
                     <marquee behavior="alternate" direction="down" scrollamount="">
-                        <?= Html::img('@web/images/dilg-bp-logo.png', ['class'=>'header-logo']);?>
+                        <?= Html::img('@web/images/logo-dilg-new.png', ['class'=>'header-logo']);?>
                     </marquee>
                 </div>
             </div>
 
         </div>
     </div>
-    <div class="separator"></div>
+    <div class="separator-two"></div>
 
+    <div class="separator-one"></div>
+
+   
     <!-- Main Menu Navigation -->
     <div class="main-menu">
+        
+            <ul class="main-menu-navs">
+                <li><a href="" class="active">gov.ph</a></li>
+                <li><a href="">Home</a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Programs & Projects</a></li>
+                <li><a href="">Local Government Unit</a></li>
+                <li><a href="">Barangay</a></li>
+            </ul>
+        
+        
+            <?php $form = ActiveForm::begin(['options' => ['class' => 'main-menu-search']]); ?>
+                <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control'])?>
+                    <div class="form-group">
+                        <?= Html::submitButton('Search', ['class' => 'btn btn-outline-dark']) ?>
+                    </div>
+            <?php ActiveForm::end(); ?>
         
     </div>
     <?php
     // NavBar::begin([
-    //     'brandLabel' => Html::img('@web/images/logo-dilg-new.png', ['class'=>'img-fluid img-responsive']),
+    //     //'brandLabel' => Html::img('@web/images/logo-dilg-new.png', ['class'=>'img-fluid img-responsive']),
     //     'brandUrl' => Yii::$app->homeUrl,
     //     'options' => [
     //         //'class' => 'navbar-inverse navbar-fixed-top',
     //         //'class' => 'navbar navbar-default navbar-static-top',
     //     ],
     // ]);
-    $menuItems = [];
-    // Menu Items that will be fetched from CMS (backend)
-    $menuItems = [
-        // ['label' => 'gov.ph', 'url' => 'https://www.gov.ph/' ,'linkOptions'=>['style' => 'color: black;'] ],
-        // ['label' => 'Home', 'url' => ['/site/index'],'linkOptions'=>['style' => 'color: black;'] ],
-        // ['label' => 'About Us', 'url' => ['/site/about'],'linkOptions'=>['style' => 'color: black;'] ],
-        // ['label' => 'Publications', 'url' => ['/material'],'linkOptions'=>['style' => 'color: black;'], 'active' => in_array(\Yii::$app->controller->id, ['material','upload-content']) ],
-        // ['label' => 'Authors', 'url' => ['/material-author/index'],'linkOptions'=>['style' => 'color: black;'], 'active' => in_array(\Yii::$app->controller->id, ['material-author']) ],
-    ];
-
+    
     // $menuItems = [
     //     ['label' => 'Attendance Record', 'url' => ['/wfh/record/index']],
     //     ['label' => 'Tasks', 'url' => ['/wfh/task/index']],
@@ -103,7 +119,11 @@ AppAsset::register($this);
 
     <div class="row">
         <div class="col-md-3 seal-ph">
-            <?= Html::img('@web/images/coat-ph.png', ['class'=>'footer-seal']);?>
+            <?php // Html::img('@web/images/coat-ph.png', ['class'=>'footer-seal']);?>
+            <?= Html::a(
+                    Html::img('@web/images/coat-ph.png', ['class'=>'footer-seal']),
+                    'https://www.officialgazette.gov.ph/'
+                ); ?>
                 <h6><strong>Republic of the Philippines</strong></h6>
                     <div class="seal-caption">All content is in the public domain unless otherwise stated.</div>
         </div>
@@ -111,14 +131,28 @@ AppAsset::register($this);
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-6 info-system">
-                    <div>DILG Information Systems
-                        <div>Haha</div>
+                    <div><strong>DILG Information Systems</strong>
+                        <div>ma
+                            <?= Html::img('@web/images/gad.png', ['class'=>'footer-dilg-system-logos']);?>
+                            <?= Html::img('@web/images/gad.png', ['class'=>'footer-dilg-system-logos']);?>
+                        </div>
                     </div>
-                    <div>Attached Agencies
-                        <div>Hehe</div>
+                    <div><strong>Attached Agencies</strong>
+                        <div>
+                            <?= Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']);?>
+                        </div>
                     </div>
                     <div>Partners
-                        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate porro nesciunt maxime recusandae ex consequuntur culpa expedita? Veritatis quibusdam fugiat, ex, autem error deserunt architecto excepturi quidem cumque aut soluta.</div>
+                        <div>
+                            <?= Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']);?>
+                            <?= Html::a(
+                                    Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']),
+                                    'https://www.officialgazette.gov.ph/',
+                                    ['class' => 'footer-links']
+                                ); ?>
+
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -127,29 +161,29 @@ AppAsset::register($this);
                             <strong>About GOVPH</strong>
                             <div class="footer-gov">Learn more about the Philippine government, its structure, how government works and the people behind it.</div>
                             <ul>
-                                <li><a href="" class="footer-links">Official Gazette</a></li>
-                                <li><a href="" class="footer-links">Open Data Portal</a></li>
-                                <li><a href="" class="footer-links">Send us your feedback</a></li>
+                                <li><a href="https://www.officialgazette.gov.ph/" class="footer-links">Official Gazette</a></li>
+                                <li><a href="https://data.gov.ph/" class="footer-links">Open Data Portal</a></li>
+                                <li><a href="https://www.gov.ph/feedback/idulog/" class="footer-links">Send us your feedback</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6"><strong>Government Links</strong>
                             <ul>
-                                <li><a href="" class="footer-links">Office of the President</a></li>
-                                <li><a href="" class="footer-links">Office of the Vice President</a></li>
-                                <li><a href="" class="footer-links">Senate of the Philippines</a></li>
-                                <li><a href="" class="footer-links">House of Representatives</a></li>
-                                <li><a href="" class="footer-links">Supreme Court</a></li>
+                                <li><a href="https://op-proper.gov.ph/" class="footer-links">Office of the President</a></li>
+                                <li><a href="https://www.ovp.gov.ph/" class="footer-links">Office of the Vice President</a></li>
+                                <li><a href="https://legacy.senate.gov.ph/" class="footer-links">Senate of the Philippines</a></li>
+                                <li><a href="https://www.congress.gov.ph/" class="footer-links">House of Representatives</a></li>
+                                <li><a href="https://sc.judiciary.gov.ph/" class="footer-links">Supreme Court</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <div>&nbsp;</div>
                             <ul>
-                                <li><a href="" class="footer-links">Court of Appeals</a></li>
-                                <li><a href="" class="footer-links">Sandiganbayan</a></li>
-                                <li><a href="" class="footer-links">Government Procurement Policy Board</a></li>
-                                <li><a href="" class="footer-links">Philippine Competition Commission</a></li>
+                                <li><a href="https://ca.judiciary.gov.ph/" class="footer-links">Court of Appeals</a></li>
+                                <li><a href="https://sb.judiciary.gov.ph/" class="footer-links">Sandiganbayan</a></li>
+                                <li><a href="https://www.gppb.gov.ph/" class="footer-links">Government Procurement Policy Board</a></li>
+                                <li><a href="https://www.phcc.gov.ph/" class="footer-links">Philippine Competition Commission</a></li>
                             </ul>    
                         </div>
                     </div>
