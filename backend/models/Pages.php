@@ -83,7 +83,7 @@ class Pages extends \yii\db\ActiveRecord
             'type_id' => 'Type',
             'link' => 'Link',
             'slider_photo' => 'Slider Photo',
-            'file_attachment' => 'File Attachment',
+            'file_attachment' => 'File Upload',
             'user_id' => 'Encoded By',
             'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',

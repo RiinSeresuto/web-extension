@@ -71,10 +71,11 @@ class PagesSearch extends Pages
             'date_updated' => $this->date_updated,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'caption', $this->caption])
-            ->andFilterWhere(['like', 'body', $this->body])
-            ->andFilterWhere(['like', 'link', $this->link]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
+
+            if (!empty($this->status)){
+                $query->andFilterWhere(['like', 'status_id', $this->status->id]);
+            }
 
         return $dataProvider;
     }
