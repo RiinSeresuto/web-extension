@@ -17,7 +17,13 @@ use attachment\components\AttachmentsInput;
         <div class="col-md-12">
             <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
-            <?= $form->field($model, 'menu_id')->textInput() ?>
+            <?php // $form->field($model, 'menu_id')->textInput() ?>
+
+            <?= $form->field($model, 'menu_id')->dropDownList(
+                ArrayHelper::map(Menu::getParentMenus(), 'id', 'label'),
+                ['prompt' => 'Select Parent Menu']
+            ) ?>
+
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
