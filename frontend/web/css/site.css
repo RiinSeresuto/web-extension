@@ -12,7 +12,7 @@ body {
 
 .header {
     background-color: white;
-    padding: 8px;
+    padding: 5px;
 }
 
 .header-logo {
@@ -49,13 +49,13 @@ body {
 
 .main-menu-navs li a{
     padding: 8px 16px;
-    color: #121210;
+    color: #121210e6;
     transition: 0.3s ease-in-out;
     border-radius: 2px;
 }
 
 .main-menu-navs li a:hover {
-    background-color: #121210;
+    background-color: #121210e6;
     color: #ddd;
     text-decoration: none;
 }
@@ -67,6 +67,21 @@ body {
 
 .main-menu-search input {
     margin-right: 10px;
+}
+
+.auxiliary-menu-navs {
+    display: flex;
+    list-style-type: none;
+}
+
+.auxiliary-menu-navs li {
+    margin: auto;
+}
+
+.auxiliary-menu-navs li a:hover {
+    background-color: #121210e6;
+    color: #ddd;
+    text-decoration: none;
 }
 
 .btn-outline-dark {

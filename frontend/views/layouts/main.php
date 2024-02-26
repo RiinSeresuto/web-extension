@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+//use Yii;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -15,6 +16,16 @@ use yii\widgets\ActiveForm;
 
 AppAsset::register($this);
 
+?>
+
+<?php 
+
+   // Yii::$app->params['mainMenu'];
+//$mainMenu = $this->params['mainMenu'];
+//$auxiliaryMenu = $this->params['auxiliaryMenu'];
+// echo '<pre>';
+// print_r ($mainMenu);
+// exit;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -55,17 +66,9 @@ AppAsset::register($this);
    
     <!-- Main Menu Navigation -->
     <div class="main-menu">
-        
-            <ul class="main-menu-navs">
-                <li><a href="" class="active">gov.ph</a></li>
-                <li><a href="">Home</a></li>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Programs & Projects</a></li>
-                <li><a href="">Local Government Unit</a></li>
-                <li><a href="">Barangay</a></li>
-            </ul>
-        
-        
+    
+        <?= $this->render('menus') ?>
+
             <?php $form = ActiveForm::begin(['options' => ['class' => 'main-menu-search']]); ?>
                 <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control'])?>
                     <div class="form-group">

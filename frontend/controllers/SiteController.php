@@ -15,6 +15,9 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
+use backend\models\Menu;
+use backend\models\Position;
+
 /**
  * Site controller
  */
@@ -25,30 +28,6 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-        // return [
-        //     'access' => [
-        //         'class' => AccessControl::className(),
-        //         // // 'only' => ['index', 'logout', 'signup'],
-        //         // 'rules' => [
-        //         //     [
-        //         //         'actions' => ['signup'],
-        //         //         'allow' => true,
-        //         //         'roles' => ['?'],
-        //         //     ],
-        //         //     [
-        //         //         'actions' => ['index', 'logout'],
-        //         //         'allow' => true,
-        //         //         'roles' => ['@'],
-        //         //     ],
-        //         // ],
-        //     ],
-        //     'verbs' => [
-        //         'class' => VerbFilter::className(),
-        //         'actions' => [
-        //             'logout' => ['post'],
-        //         ],
-        //     ],
-        // ];
             return [
                 'access' => [
                     'class' => AccessControl::className(),
@@ -88,8 +67,39 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $menu = Menu::find()->all();
+
+        return $this->render('index', [
+            'menu' => $menu
+        ]);
     }
+
+
+    public function actionMenu()
+    {
+        $menus = Menu::find()->all();
+        $mainMenu = [];
+        $auxiliaryMenu = [];
+
+        // Filter menus based on position
+        foreach ($menus as $menu) {
+            if ($menu->position == 'Main') {
+                $mainMenu[] = $menu;
+            } else {
+                $auxiliaryMenu[] = $menu;
+            }
+        }
+
+        $this->view->params['mainMenu'] = $mainMenu;
+
+        // Pass filtered menus to the view
+        return $this->render('index', [
+            'mainMenu' => $mainMenu,
+            'auxiliaryMenu' => $auxiliaryMenu,
+        ]);
+    }
+
+
 
     /**
      * Logs in a user.
