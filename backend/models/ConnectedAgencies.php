@@ -19,8 +19,8 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsAgencyType $agencyType
- * @property CmsStatus $status
+ * @property AgencyType $agencyType
+ * @property Status $status
  * @property User $user
  * @property User $userUpdate
  */
@@ -40,15 +40,16 @@ class ConnectedAgencies extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'agency_type_id', 'label', 'agency_order', 'status_id', 'logo', 'link', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'agency_type_id', 'agency_order', 'status_id', 'logo', 'user_id', 'user_update_id'], 'integer'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['agency_type_id', 'label', 'agency_order', 'status_id', 'link'], 'required'],
+            [['agency_type_id', 'agency_order', 'status_id', 'user_id', 'user_update_id'], 'integer'],
+            [['date_created', 'date_updated', 'user_id', 'user_update_id', 'date_updated'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['agency_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => AgencyType::className(), 'targetAttribute' => ['agency_type_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
+            [['file_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
 
@@ -59,14 +60,14 @@ class ConnectedAgencies extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'agency_type_id' => 'Agency Type ID',
+            'agency_type_id' => 'Agency Type',
             'label' => 'Label',
             'agency_order' => 'Agency Order',
-            'status_id' => 'Status ID',
-            'logo' => 'Logo',
+            'status_id' => 'Status',
+            'logo' => 'Logo Upload',
             'link' => 'Link',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'user_id' => 'Encoded By',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];
@@ -110,5 +111,21 @@ class ConnectedAgencies extends \yii\db\ActiveRecord
     public function getUserUpdate()
     {
         return $this->hasOne(User::className(), ['id' => 'user_update_id']);
+    }
+
+    public function getLogoFile()
+    {
+        return $this->hasMany(File::className(), ['itemId' => 'id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            
+            'fileBehavior' => [
+                'class' => \attachment\behaviors\FileBehavior::className()
+            ]
+        
+        ];
     }
 }
