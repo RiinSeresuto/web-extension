@@ -68,7 +68,7 @@ use yii\helpers\Url;
                             ['label' => 'Public Assistance Center', 'url' => ['/#'], 'iconStyle' => 'far'],
                         ]
                     ],
-                    ['label' => 'Connected Agencies', 'url' => ['/agency'], 'icon' => 'tachometer-alt'],
+                    ['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'icon' => 'tachometer-alt'],
                 ],
             ]);
             ?>
