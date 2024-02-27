@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Pages */
 
-$this->title = 'Create Pages';
+$this->title = 'Pages';
 $this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,7 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'url' => $url,
         'status' => $status,
-        'type' => $type
+        'type' => $type,
+        'menu' => $menu
     ]) ?>
 
 </div>
