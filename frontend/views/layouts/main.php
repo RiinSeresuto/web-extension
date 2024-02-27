@@ -17,16 +17,6 @@ use yii\widgets\ActiveForm;
 AppAsset::register($this);
 
 ?>
-
-<?php 
-
-   // Yii::$app->params['mainMenu'];
-//$mainMenu = $this->params['mainMenu'];
-//$auxiliaryMenu = $this->params['auxiliaryMenu'];
-// echo '<pre>';
-// print_r ($mainMenu);
-// exit;
-?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -44,31 +34,26 @@ AppAsset::register($this);
 <div class="wrap">
 
 <div class="separator-one"></div>
-
     <div class="separator-two"></div>
     <!--  Top Navigation -->
     <div class="header">
         <div class="container-fluid">
             <div class="row theme header">
                 <div class="col-xs-12 col-lg-12">
-                    <marquee behavior="alternate" direction="down" scrollamount="">
+                    <marquee behavior="alternate" direction="down" scrollamount=""> <!-- marquee -->
                         <?= Html::img('@web/images/logo-dilg-new.png', ['class'=>'header-logo']);?>
                     </marquee>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="separator-two"></div>
-
     <div class="separator-one"></div>
 
    
     <!-- Main Menu Navigation -->
     <div class="main-menu">
-    
-        <?= $this->render('menus') ?>
-
+        <?= $this->render('main-menu') ?>
             <?php $form = ActiveForm::begin(['options' => ['class' => 'main-menu-search']]); ?>
                 <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control'])?>
                     <div class="form-group">
@@ -77,44 +62,22 @@ AppAsset::register($this);
             <?php ActiveForm::end(); ?>
         
     </div>
-    <?php
-    // NavBar::begin([
-    //     //'brandLabel' => Html::img('@web/images/logo-dilg-new.png', ['class'=>'img-fluid img-responsive']),
-    //     'brandUrl' => Yii::$app->homeUrl,
-    //     'options' => [
-    //         //'class' => 'navbar-inverse navbar-fixed-top',
-    //         //'class' => 'navbar navbar-default navbar-static-top',
-    //     ],
-    // ]);
+
+    <!-- Slider Photo -->
+    <div class="slider-photo">
+    </div>
+
+    <!-- Auxiliary Menu Navigation -->
+    <div class="auxiliary-menu">
+        <?= $this->render('auxiliary-menu') ?>
+    </div>
+
+    <!-- DILG Information Systems -->
+    <div class="info-systems">
+
+    </div>
     
-    // $menuItems = [
-    //     ['label' => 'Attendance Record', 'url' => ['/wfh/record/index']],
-    //     ['label' => 'Tasks', 'url' => ['/wfh/task/index']],
-    //     ['label' => 'Report', 'url' => ['#'],
-    //     'items' => [
-    //         ['label' => 'Generate Report', 'url' => ['/wfh/report/index']],
-    //         ['label' => 'Report Details', 'url' => ['/wfh/report-details/index']],
-    //     ],
-    // ],
-    // ];
-    
-    // if (Yii::$app->user->isGuest) {
-    // } else {
-    //     $menuItems[] = '<li>'
-    //         . Html::beginForm(['/user/logout'], 'post')
-    //         . Html::submitButton(
-    //             'Logout (' . Yii::$app->user->identity->username . ')',
-    //             ['class' => 'btn btn-link logout']
-    //         )
-    //         . Html::endForm()
-    //         . '</li>';
-    // }
-    // echo Nav::widget([
-    //     'options' => ['class' => 'navbar-nav navbar-right'],
-    //     'items' => $menuItems,
-    // ]);
-    // NavBar::end();
-    // ?>
+
 </div>
     <!-- Footer -->
 <footer class="footer">
