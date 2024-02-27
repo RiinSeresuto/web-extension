@@ -36,6 +36,7 @@ body {
 .main-menu {
     display: flex;
     justify-content: space-between;
+    font-size: 12px;
 }
 
 .main-menu-navs{
@@ -69,6 +70,12 @@ body {
     margin-right: 10px;
 }
 
+.auxiliary-menu {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
 .auxiliary-menu-navs {
     display: flex;
     list-style-type: none;
@@ -77,6 +84,14 @@ body {
 .auxiliary-menu-navs li {
     margin: auto;
 }
+
+.auxiliary-menu-navs li a{
+    padding: 8px 16px;
+    color: #121210e6;
+    transition: 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
 
 .auxiliary-menu-navs li a:hover {
     background-color: #121210e6;
