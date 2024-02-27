@@ -3,11 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\ConnectedAgencies;
-use backend\models\ConnectedAgenciesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\FileHelper;
+
+use backend\models\ConnectedAgencies;
+use backend\models\ConnectedAgenciesSearch;
+use backend\models\AgencyType;
+use backend\models\Status;
+use backend\models\File;
+
 
 /**
  * ConnectedAgenciesController implements the CRUD actions for ConnectedAgencies model.
@@ -38,9 +44,14 @@ class ConnectedAgenciesController extends Controller
         $searchModel = new ConnectedAgenciesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $agency_type = AgencyType::find()->all();
+        $status = Status::find()->all();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'agency_type' => $agency_type,
+            'status' => $status
         ]);
     }
 
@@ -52,8 +63,21 @@ class ConnectedAgenciesController extends Controller
      */
     public function actionView($id)
     {
+        $items = [];
+        $path = Yii::getAlias('@common/uploads/store');
+        $files = FileHelper::findFiles($path);
+
+        foreach ($files as $file) {
+          $item = [
+            "url"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+            "src"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+        ];
+          $items[]=$item;
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'items' => $items
         ]);
     }
 
@@ -66,12 +90,21 @@ class ConnectedAgenciesController extends Controller
     {
         $model = new ConnectedAgencies();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $agency_type = AgencyType::find()->all();
+        $status = Status::find()->all();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'agency_type' => $agency_type,
+            'status' => $status
         ]);
     }
 
