@@ -23,15 +23,15 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsMenu $menu
- * @property CmsUrlType $urlType
- * @property CmsStatus $status
- * @property CmsType $type
- * @property CmsFileAttachment $sliderPhoto
- * @property CmsFileAttachment $fileAttachment
+ * @property Menu $menu
+ * @property UrlType $urlType
+ * @property Status $status
+ * @property Type $type
+ * @property FileAttachment $sliderPhoto
+ * @property FileAttachment $fileAttachment
  * @property User $user
  * @property User $userUpdate
- * @property CmsPost[] $cmsPosts
+ * @property Post[] $cmsPosts
  */
 class Pages extends \yii\db\ActiveRecord
 {
@@ -49,10 +49,10 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'caption', 'body', 'url_type_id', 'status_id', 'type_id'], 'required'],
-            [[ 'menu_id', 'url_type_id', 'status_id', 'type_id'], 'integer'],
+            [['title', 'url_type_id', 'status_id', 'type_id'], 'required'],
+            [['menu_id', 'url_type_id', 'status_id', 'type_id'], 'integer'],
             [['body'], 'string'],
-            [['menu_id', 'date_created', 'date_updated', 'link', 'slider_photo', 'file_attachment',], 'safe'],
+            [['menu_id', 'date_created', 'date_updated', 'link', 'slider_photo', 'file_attachment', 'caption', 'body',], 'safe'],
             [['title', 'caption', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'id']],
