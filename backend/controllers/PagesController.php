@@ -57,9 +57,6 @@ class PagesController extends Controller
      */
     public function actionView($id)
     {
-        // return $this->render('view', [
-        //     'model' => $this->findModel($id),
-        // ]);
 
         $items = [];
         $path = Yii::getAlias('@common/uploads/store');
@@ -87,10 +84,10 @@ class PagesController extends Controller
     public function actionCreate()
     {
         $model = new Pages();
-
         $url = UrlType::find()->all();
         $status = Status::find()->all();
         $type = Type::find()->all();
+        $menu = Menu::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -104,7 +101,8 @@ class PagesController extends Controller
             'model' => $model,
             'url' => $url,
             'status' => $status,
-            'type' => $type
+            'type' => $type,
+            'menu' => $menu
         ]);
     }
 
@@ -169,7 +167,7 @@ class PagesController extends Controller
     {
         return Menu::find()
             ->select(['id', 'label'])
-            ->where(['parent_id' => null]) // Assuming that null value indicates a root level menu
+            ->where(['parent_id' => null])
             ->orderBy('menu_order')
             ->asArray()
             ->all();
