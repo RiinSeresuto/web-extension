@@ -48,7 +48,7 @@ AppAsset::register($this);
         </div>
     </div>
     <div class="separator-two"></div>
-    <div class="separator-one"></div>
+<div class="separator-one"></div>
 
    
     <!-- Main Menu Navigation -->
@@ -57,15 +57,13 @@ AppAsset::register($this);
             <?php $form = ActiveForm::begin(['options' => ['class' => 'main-menu-search']]); ?>
                 <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control'])?>
                     <div class="form-group">
-                        <?= Html::submitButton('Search', ['class' => 'btn btn-outline-dark']) ?>
+                        <?= Html::submitButton('Search', ['class' => 'btn btn-outline-dark btn-sm']) ?>
                     </div>
             <?php ActiveForm::end(); ?>
-        
     </div>
 
-    <!-- Slider Photo -->
-    <div class="slider-photo">
-    </div>
+    <?= $content ?>
+		
 
     <!-- Auxiliary Menu Navigation -->
     <div class="auxiliary-menu">
@@ -175,7 +173,9 @@ AppAsset::register($this);
     </div>
 </footer>
 
+
 <?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
+
