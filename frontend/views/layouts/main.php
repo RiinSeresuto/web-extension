@@ -13,8 +13,10 @@ use common\widgets\Alert;
 use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
+use backend\models\Menu;
 
 AppAsset::register($this);
+$menus = Menu::find()->andWhere(['parent_id'=>null])->all();
 
 ?>
 <?php $this->beginPage() ?>
@@ -53,13 +55,17 @@ AppAsset::register($this);
    
     <!-- Main Menu Navigation -->
     <div class="main-menu">
-        <?= $this->render('main-menu') ?>
-            <?php $form = ActiveForm::begin(['options' => ['class' => 'main-menu-search']]); ?>
-                <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control'])?>
-                    <div class="form-group">
-                        <?= Html::submitButton('Search', ['class' => 'btn btn-outline-dark btn-sm']) ?>
-                    </div>
-            <?php ActiveForm::end(); ?>
+        <?= $this->render('main-menu', [
+            'menus' => $menus
+        ]) 
+        
+        ?>
+        <?php $form = ActiveForm::begin(['options' => ['class' => 'main-menu-search']]); ?>
+            <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control'])?>
+                <div class="form-group">
+                    <?= Html::submitButton('Search', ['class' => 'btn btn-outline-dark btn-sm']) ?>
+                </div>
+        <?php ActiveForm::end(); ?>
     </div>
 
     <?= $content ?>
@@ -67,7 +73,9 @@ AppAsset::register($this);
 
     <!-- Auxiliary Menu Navigation -->
     <div class="auxiliary-menu">
-        <?= $this->render('auxiliary-menu') ?>
+        <?= $this->render('auxiliary-menu', [
+            'menus' => $menus
+        ]) ?>
     </div>
 
     <!-- DILG Information Systems -->
