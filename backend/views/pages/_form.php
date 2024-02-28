@@ -64,11 +64,12 @@ use attachment\components\AttachmentsInput;
 
             <?php // $form->field($model, 'slider_photo')->textInput() ?>
 
-            <?= AttachmentsInput::widget([
+            <?php  AttachmentsInput::widget([
                         'model' => $model,
                         'options' => [ 
                             'multiple' => true,
                             'accept' => 'application/pdf',
+                             'id' => 'photo_attach'
                         ],
                         'pluginOptions' => [
                             'initialPreviewAsData' =>  true,
@@ -88,6 +89,10 @@ use attachment\components\AttachmentsInput;
                                 'showDrag' => false,
                                 'showRemove' => true,
                                 'msgRemove' => 'Are you sure you want to delete this file?',
+                            ],
+                            //'id' => 'photo_attach'
+                            'inputOptions' => [
+                                'id' => 'photo_attach'
                             ]
                         ]
                     ]) ?>
@@ -95,11 +100,12 @@ use attachment\components\AttachmentsInput;
 
             <?php // $form->field($model, 'file_attachment')->textInput() ?>
 
-            <?= AttachmentsInput::widget([
+            <?php  AttachmentsInput::widget([
                         'model' => $model,
                         'options' => [ 
                             'multiple' => true,
                             'accept' => 'application/pdf',
+                             'id' => 'file_attach'
                         ],
                         'pluginOptions' => [
                             'initialPreviewAsData' =>  true,
@@ -119,7 +125,62 @@ use attachment\components\AttachmentsInput;
                                 'showDrag' => false,
                                 'showRemove' => true,
                                 'msgRemove' => 'Are you sure you want to delete this file?',
-                            ]
+                            ],
+                            'id' => 'file_attach'
+                        ]
+                    ]) ?>
+
+                    <!-- dummy -->
+
+                    <?= $form->field($model, 'slider_photo')->widget(AttachmentsInput::classname(), [
+                        'options' => [ 
+                            'multiple' => true,
+                            'accept' => 'application/pdf',
+                            'id' => 'photo_attach'
+                        ],
+                        'pluginOptions' => [
+                            'initialPreviewAsData' =>  true,
+                            'autoReplace' => false,
+                            'overwriteInitial' => false,
+                            'maxFileCount' => 3,
+                            'showUpload' => false,
+                            'showCancel' => false,
+                            'browseLabel' => '',
+                            'removeLabel' => '',
+                            'mainClass' => 'input-group-lg',
+                            'browseClass' => 'btn btn-info',
+                            'uploadClass' => 'btn btn-info',
+                            'fileActionSettings'=> [
+                                'showDrag' => false,
+                                'showRemove' => true,
+                                'msgRemove' => 'Are you sure you want to delete this file?',
+                            ],
+                        ]
+                    ]) ?>
+
+                    <?= $form->field($model, 'file_attachment')->widget(AttachmentsInput::classname(), [
+                        'options' => [ 
+                            'multiple' => true,
+                            'accept' => 'application/pdf',
+                            'id' => 'file_attach'
+                        ],
+                        'pluginOptions' => [
+                            'initialPreviewAsData' =>  true,
+                            'autoReplace' => false,
+                            'overwriteInitial' => false,
+                            'maxFileCount' => 3,
+                            'showUpload' => false,
+                            'showCancel' => false,
+                            'browseLabel' => '',
+                            'removeLabel' => '',
+                            'mainClass' => 'input-group-lg',
+                            'browseClass' => 'btn btn-info',
+                            'uploadClass' => 'btn btn-info',
+                            'fileActionSettings'=> [
+                                'showDrag' => false,
+                                'showRemove' => true,
+                                'msgRemove' => 'Are you sure you want to delete this file?',
+                            ],
                         ]
                     ]) ?>
 
