@@ -16,6 +16,17 @@ use attachment\components\AttachmentsInput;
     <div class="form-group">
         <div class="col-md-12">
             <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+
+            <?= $form->field($model, 'parent_id')->widget(Select2::className(), [
+                'data' => ArrayHelper::map($menu, 'id', 'label'),
+                'options' => [
+                    'placeholder' => 'Select Parent Menu',
+                    
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                 ]
+            ]) ?>
         
             <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
 
