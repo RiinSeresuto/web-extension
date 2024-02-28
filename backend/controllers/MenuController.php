@@ -65,6 +65,7 @@ class MenuController extends Controller
         $items = [];
         $path = Yii::getAlias('@common/uploads/store');
         $files = FileHelper::findFiles($path);
+        //$menu = Menu::find()->all();
 
         foreach ($files as $file) {
           $item = [
@@ -76,7 +77,8 @@ class MenuController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'items' => $items
+            'items' => $items,
+            //'menu' => $menu
         ]);
     }
 
@@ -91,6 +93,7 @@ class MenuController extends Controller
 
         $status = Status::find()->all();
         $position = Position::find()->all();
+        $menu = Menu::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -103,7 +106,8 @@ class MenuController extends Controller
         return $this->render('create', [
             'model' => $model,
             'status' => $status,
-            'position' => $position
+            'position' => $position,
+            'menu' => $menu
         ]);
     }
 
@@ -120,6 +124,9 @@ class MenuController extends Controller
 
         $status = Status::find()->all();
         $position = Position::find()->all();
+        $menu = Menu::find()->all();
+
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -128,7 +135,8 @@ class MenuController extends Controller
         return $this->render('update', [
             'model' => $model,
             'status' => $status,
-            'position' => $position
+            'position' => $position,
+            'menu' => $menu
         ]);
     }
 
