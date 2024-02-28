@@ -3,6 +3,10 @@ body {
     height: 100%;
 }
 
+* {
+    box-sizing: border-box;
+    }    
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -104,6 +108,37 @@ body {
     background-color: transparent;
     background-image: none;
     border-color: #343a40;
+}
+
+.slider {
+width: 75%;
+margin: 5px auto;
+}
+
+.slick-slide {
+margin: 20px 20px;
+}
+
+.slick-slide img {
+width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+color: black;
+}
+
+.slick-slide {
+transition: all ease-in-out 0.3s;
+opacity: 0.2;
+}
+
+.slick-active {
+opacity: 0.5;
+}
+
+.slick-current {
+opacity: 1;
 }
 
 .footer {
