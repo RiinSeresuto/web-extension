@@ -5,7 +5,6 @@
 $this->title = 'DILG: Department of the Interior and Local Government';
 
 ?>
-<div class="site-index">
-	<div class="row"> 
-	</div>
-</div>
+
+<?= $this->render('slider-photo')
+?>
