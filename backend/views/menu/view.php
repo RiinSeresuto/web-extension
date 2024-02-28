@@ -34,6 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            [
+                'attribute' => 'parent_id',
+                'value' => function($model){
+                    if ($model->parentLabel) {
+                        return $model->parentLabel->label;
+                    }
+                }
+            ],
             'label',
             'menu_order',
             [
