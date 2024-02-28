@@ -64,7 +64,7 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent ID',
+            'parent_id' => 'Parent Menu',
             'label' => 'Label',
             'menu_order' => 'Menu Order',
             'position_id' => 'Position',
@@ -137,6 +137,16 @@ class Menu extends \yii\db\ActiveRecord
     public function getCmsPages()
     {
         return $this->hasMany(Pages::className(), ['menu_id' => 'id']);
+    }
+
+    public function getMenuChildren()
+    {
+        return $this->hasMany(Menu::className(), ['parent_id' => 'id']);
+    }
+
+    public function getParentLabel()
+    {
+        return $this->hasOne(Menu::className(), ['id' => 'parent_id']);
     }
 
     public function behaviors()
