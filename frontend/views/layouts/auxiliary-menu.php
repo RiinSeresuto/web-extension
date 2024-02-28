@@ -1,7 +1,7 @@
 <?php 
 use backend\models\Menu;
 
-$menus = Menu::find()->all();
+// $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
 
 $auxiliaryMenu = [];
 
