@@ -28,12 +28,9 @@ use kartik\editors\Summernote;
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
-
             <!-- Summernote Editor -->
-            <?php // $form->field($model, 'body')->widget(Summernote::class, [
-                            //     'useKrajeePresets' => true,
-                            // ]);?>
+            
+            <?= $form->field($model, 'body')->widget(Summernote::class,['container' => ['class' => 'kv-editor-container']]);?>
             
 
             <div class="row">
@@ -138,6 +135,8 @@ use kartik\editors\Summernote;
                         ]) ?>
                     </div>
             </div>
+
+            
 
             
 
