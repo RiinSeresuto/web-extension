@@ -9,6 +9,8 @@ use backend\models\Pages;
 use backend\models\PagesSearch;
 use backend\models\Type;
 use backend\models\Menu;
+use backend\models\File;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -120,6 +122,7 @@ class PagesController extends Controller
         $url = UrlType::find()->all();
         $status = Status::find()->all();
         $type = Type::find()->all();
+        $menu = Menu::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -129,7 +132,8 @@ class PagesController extends Controller
             'model' => $model,
             'url' => $url,
             'status' => $status,
-            'type' => $type
+            'type' => $type,
+            'menu' => $menu
         ]);
     }
 
