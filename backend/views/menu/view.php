@@ -112,11 +112,15 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
     
 
-    <?= DetailView::widget([
+    <div class="row">
+        <div class="col-md-12">
+            <?=  '<label for="photo_attach">File Attachment</label>' ?>
+            <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             [
-                'label' => 'File Attachment', 'format' => 'raw',
+                'label' => 'File Attachment', 
+                'format' => 'raw',
                 'value' => function($model){
                   //return \file\components\AttachmentsTable::widget(['model' => $model]); 
                   return \attachment\components\AttachmentsInput::widget([
@@ -126,6 +130,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'multiple' => true, // If you want to allow multiple upload, default to false
                     ],
                     'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
+                        'initialPreviewShowDelete' => false,
+                        'initialPreviewShowMainClass' => false,
                         'initialPreviewAsData' =>  true,
                         'initialPreviewFileType' => 'pdf',
                         'maxFileCount' => 10, // Client max files
@@ -133,15 +139,20 @@ $this->params['breadcrumbs'][] = $this->title;
                         'showCancel' => false,
                         'showUpload' => false,
                         'showBrowse' => false,
+                        'showCaption' => false,
                         'fileActionSettings' => [
                             'showRemove' => false,
+                            //'showDownload' => true,
                         ],
                         'previewFileType' => 'pdf'
-                    ]
+                    ],
                     ]);
                 },
             ]
         ]
     ])
     ?>
+        </div>
+    </div>
+    
 </div>
