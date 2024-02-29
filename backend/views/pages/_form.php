@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 use attachment\components\AttachmentsInput;
+use kartik\editors\Summernote;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Pages */
@@ -28,6 +29,12 @@ use attachment\components\AttachmentsInput;
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+
+            <!-- Summernote Editor -->
+            <?php // $form->field($model, 'body')->widget(Summernote::class, [
+                            //     'useKrajeePresets' => true,
+                            // ]);?>
+            
 
             <div class="row">
                 <div class="col-md-4">
@@ -64,125 +71,79 @@ use attachment\components\AttachmentsInput;
 
             <?php // $form->field($model, 'slider_photo')->textInput() ?>
 
-            <?php  AttachmentsInput::widget([
-                        'model' => $model,
-                        'options' => [ 
-                            'multiple' => true,
-                            'accept' => 'application/pdf',
-                             'id' => 'photo_attach'
-                        ],
-                        'pluginOptions' => [
-                            'initialPreviewAsData' =>  true,
-                            //'initialPreviewFileType' => 'pdf',
-                            'autoReplace' => false,
-                            'overwriteInitial' => false,
-                            'maxFileCount' => 3,
-                            //'allowedFileExtensions' => ['pdf'],
-                            'showUpload' => false,
-                            'showCancel' => false,
-                            'browseLabel' => '',
-                            'removeLabel' => '',
-                            'mainClass' => 'input-group-lg',
-                            'browseClass' => 'btn btn-info',
-                            'uploadClass' => 'btn btn-info',
-                            'fileActionSettings'=> [
-                                'showDrag' => false,
-                                'showRemove' => true,
-                                'msgRemove' => 'Are you sure you want to delete this file?',
+            <div class="row">
+                <div class="col-md-6">
+                    <?=  '<label for="photo_attach">Slider Photo</label>' ?>
+                    <?=  AttachmentsInput::widget([
+                                'model' => $model,
+                                'id' => 'photo_attach',
+                                'options' => [ 
+                                    'multiple' => true,
+                                    'accept' => 'application/pdf',
+                                    'name' => 'photo_attach'
+                                ],
+                                'pluginOptions' => [
+                                    'initialPreviewAsData' =>  true,
+                                    //'initialPreviewFileType' => 'pdf',
+                                    'autoReplace' => false,
+                                    'overwriteInitial' => false,
+                                    'maxFileCount' => 3,
+                                    //'allowedFileExtensions' => ['pdf'],
+                                    'showUpload' => false,
+                                    'showCancel' => false,
+                                    'browseLabel' => '',
+                                    'removeLabel' => '',
+                                    'mainClass' => 'input-group-lg',
+                                    'browseClass' => 'btn btn-info',
+                                    'uploadClass' => 'btn btn-info',
+                                    'fileActionSettings'=> [
+                                        'showDrag' => false,
+                                        'showRemove' => true,
+                                        'msgRemove' => 'Are you sure you want to delete this file?',
+                                    ]
+                                ]
+                        ]) ?>
+                    </div>
+
+                    <div class="col-md-6">
+                    <?=  '<label for="photo_attach">File Upload</label>' ?>
+                        <?=  AttachmentsInput::widget([
+                            'model' => $model,
+                            'id' => 'file_attach',
+                            'options' => [ 
+                                'multiple' => true,
+                                'accept' => 'application/pdf',
+                                'name' => 'file_attach'
                             ],
-                            //'id' => 'photo_attach'
-                            'inputOptions' => [
-                                'id' => 'photo_attach'
+                            'pluginOptions' => [
+                                'initialPreviewAsData' =>  true,
+                                //'initialPreviewFileType' => 'pdf',
+                                'autoReplace' => false,
+                                'overwriteInitial' => false,
+                                'maxFileCount' => 3,
+                                //'allowedFileExtensions' => ['pdf'],
+                                'showUpload' => false,
+                                'showCancel' => false,
+                                'browseLabel' => '',
+                                'removeLabel' => '',
+                                'mainClass' => 'input-group-lg',
+                                'browseClass' => 'btn btn-info',
+                                'uploadClass' => 'btn btn-info',
+                                'fileActionSettings'=> [
+                                    'showDrag' => false,
+                                    'showRemove' => true,
+                                    'msgRemove' => 'Are you sure you want to delete this file?',
+                                ]
                             ]
-                        ]
-                    ]) ?>
+                        ]) ?>
+                    </div>
+            </div>
 
-
-            <?php // $form->field($model, 'file_attachment')->textInput() ?>
-
-            <?php  AttachmentsInput::widget([
-                        'model' => $model,
-                        'options' => [ 
-                            'multiple' => true,
-                            'accept' => 'application/pdf',
-                             'id' => 'file_attach'
-                        ],
-                        'pluginOptions' => [
-                            'initialPreviewAsData' =>  true,
-                            //'initialPreviewFileType' => 'pdf',
-                            'autoReplace' => false,
-                            'overwriteInitial' => false,
-                            'maxFileCount' => 3,
-                            //'allowedFileExtensions' => ['pdf'],
-                            'showUpload' => false,
-                            'showCancel' => false,
-                            'browseLabel' => '',
-                            'removeLabel' => '',
-                            'mainClass' => 'input-group-lg',
-                            'browseClass' => 'btn btn-info',
-                            'uploadClass' => 'btn btn-info',
-                            'fileActionSettings'=> [
-                                'showDrag' => false,
-                                'showRemove' => true,
-                                'msgRemove' => 'Are you sure you want to delete this file?',
-                            ],
-                            'id' => 'file_attach'
-                        ]
-                    ]) ?>
+            
 
                     <!-- dummy -->
 
-                    <?= $form->field($model, 'slider_photo')->widget(AttachmentsInput::classname(), [
-                        'options' => [ 
-                            'multiple' => true,
-                            'accept' => 'application/pdf',
-                            'id' => 'photo_attach'
-                        ],
-                        'pluginOptions' => [
-                            'initialPreviewAsData' =>  true,
-                            'autoReplace' => false,
-                            'overwriteInitial' => false,
-                            'maxFileCount' => 3,
-                            'showUpload' => false,
-                            'showCancel' => false,
-                            'browseLabel' => '',
-                            'removeLabel' => '',
-                            'mainClass' => 'input-group-lg',
-                            'browseClass' => 'btn btn-info',
-                            'uploadClass' => 'btn btn-info',
-                            'fileActionSettings'=> [
-                                'showDrag' => false,
-                                'showRemove' => true,
-                                'msgRemove' => 'Are you sure you want to delete this file?',
-                            ],
-                        ]
-                    ]) ?>
-
-                    <?= $form->field($model, 'file_attachment')->widget(AttachmentsInput::classname(), [
-                        'options' => [ 
-                            'multiple' => true,
-                            'accept' => 'application/pdf',
-                            'id' => 'file_attach'
-                        ],
-                        'pluginOptions' => [
-                            'initialPreviewAsData' =>  true,
-                            'autoReplace' => false,
-                            'overwriteInitial' => false,
-                            'maxFileCount' => 3,
-                            'showUpload' => false,
-                            'showCancel' => false,
-                            'browseLabel' => '',
-                            'removeLabel' => '',
-                            'mainClass' => 'input-group-lg',
-                            'browseClass' => 'btn btn-info',
-                            'uploadClass' => 'btn btn-info',
-                            'fileActionSettings'=> [
-                                'showDrag' => false,
-                                'showRemove' => true,
-                                'msgRemove' => 'Are you sure you want to delete this file?',
-                            ],
-                        ]
-                    ]) ?>
+                    
 
 
             
