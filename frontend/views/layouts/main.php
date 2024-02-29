@@ -70,6 +70,7 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
 
     <?= $content ?>
 		
+    <!-- DILG Information Systems -->
 
     <!-- Auxiliary Menu Navigation -->
     <div class="auxiliary-menu">
