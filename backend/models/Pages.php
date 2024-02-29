@@ -35,6 +35,8 @@ use Yii;
  */
 class Pages extends \yii\db\ActiveRecord
 {
+    public $file_attach=[];
+    public $photo_attach=[];
     /**
      * {@inheritdoc}
      */
@@ -60,9 +62,9 @@ class Pages extends \yii\db\ActiveRecord
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
             [['slider_photo'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['slider_photo' => 'id']],
-            //[['file_attachment'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['file_attachment' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
+            [['photo_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png'],
             [['file_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
@@ -136,11 +138,6 @@ class Pages extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    // public function getSliderPhoto()
-    // {
-    //     return $this->hasOne(FileAttachment::className(), ['id' => 'slider_photo']);
-    // }
-
     public function getSliderPhoto()
     {
         return $this->hasMany(File::className(), ['itemId' => 'id']);
@@ -151,11 +148,6 @@ class Pages extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    // public function getFileAttachment()
-    // {
-    //     return $this->hasOne(FileAttachment::className(), ['id' => 'file_attachment']);
-    // }
-
     public function getFileAttachment()
     {
         return $this->hasMany(File::className(), ['itemId' => 'id']);
