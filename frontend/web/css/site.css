@@ -141,6 +141,59 @@ opacity: 0.5;
 opacity: 1;
 }
 
+.child-nav {
+    display: none;
+    position: absolute;
+    list-style-type: none;
+}
+
+.parent-nav {
+    position: relative;
+}
+
+.parent-nav:hover>.child-nav {
+    display: block;
+}
+
+.child-item{
+    background-color: rebeccapurple;
+    width: 150px;
+    border: #FFC700 5px dotted;
+
+}
+
+.child-item:hover .child-nav{
+    display: block;
+}
+
+.child-nav>li>.child-nav{
+    left: 79%;
+    margin-top: 0;
+}
+
+/* Hide child ul elements by default */
+/* .child-nav:not(:first-child) {
+display: none;
+position: absolute;
+top: 0;
+left: 100%; 
+width: 200px; 
+}
+
+.parent-nav {
+position: relative;
+}
+
+.parent-nav:hover > .child-nav {
+display: block;
+}
+
+.active {
+font-weight: bold;
+color: #ff0000; 
+} */
+
+
 .footer {
     /* height: 60px; */
     background-color: #121210;
@@ -291,44 +344,3 @@ a.desc:after {
     outline: none;
 }
 
-/* Dropdown Button */
-.dropbtn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #ddd;}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #3e8e41;}
