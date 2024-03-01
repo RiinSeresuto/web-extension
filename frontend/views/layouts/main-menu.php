@@ -10,6 +10,14 @@ $mainMenu = [];
         }
     }
 
+     // Define a custom comparison function
+    function compareMainMenuOrder($a, $b) {
+        return $a->menu_order - $b->menu_order;
+    }
+
+    // Sort the mainMenu array based on menu_order
+    usort($mainMenu, 'compareMainMenuOrder');
+
     function generateNavItem($menuChildren) {
         $start_ul = "<ul class='child-nav'>";
         $end_ul = "</ul>";
@@ -18,27 +26,31 @@ $mainMenu = [];
 
         foreach($menuChildren as $children){
             if(!empty($children->menuChildren)){
-                $return_item = $return_item . '<li class="child-item"><a href="" class="active">' . $children->label . '</a>'; //parent of children
+                $return_item = $return_item . '<li class="child-item"><a href="" class="active" target="_blank">' . $children->label . '</a>'; //parent of children
                 $temp = generateNavItem($children->menuChildren); //children
                 $return_item = $return_item . $temp . '</li>'; 
             } else {
-                $return_item = $return_item . '<li class="child-item"><a href="" class="active">' . $children->label . '</a></li>'; //parent w/o children
+                $return_item = $return_item . '<li class="child-item"><a href="" class="active" target="_blank">' . $children->label . '</a></li>'; //parent w/o children
             }
         }
 
         return $start_ul . $return_item . $end_ul;
     }
+
+   
 ?> 
     
     <ul class="main-menu-navs">
+        
         <?php foreach ($mainMenu as $menu): ?>
+            <?php $target = 'target="_blank"'; ?>
             <?php if(!empty($menu->menuChildren)){ ?>
                 <li class="parent-nav">
-                    <a href="" class="active"><?= $menu->label ?></a>
+                    <a href="<?= $menu->link ?>" class="active" <?= ($menu->is_new_tab == 1) ? $target : "" ?> > <?= $menu->label ?> </a>
                     <?= generateNavItem($menu->menuChildren) ?>
                 </li>
             <?php } else { ?>
-                <li><a href="" class="active"><?= $menu->label ?></a></li>
+                <li><a href="<?= $menu->link ?>" class="active" <?= ($menu->is_new_tab == 1) ? $target : "" ?> > <?= $menu->label ?> </a></li>
             <?php } ?>
         <?php endforeach; ?>
     </ul>
