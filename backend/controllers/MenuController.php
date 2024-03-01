@@ -173,9 +173,6 @@ class MenuController extends Controller
     public function actionDownload($id)
     {
         $file = File::find()->andWhere(['id'=>$id])->one();
-        echo '<pre>';
-        print_r ($file->dbStorePath);
-        exit;
         // $filePath = Yii::getAlias('@common'). '/../'. $file->file_path;
         $filePath = $file->dbStorePath;
         if(file_exists($filePath)){
