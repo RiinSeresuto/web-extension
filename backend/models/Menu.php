@@ -11,6 +11,7 @@ use Yii;
  * @property int $parent_id
  * @property string $label
  * @property int $menu_order
+ * @property int $is_new_tab //new
  * @property int $position_id
  * @property int $status_id
  * @property string $link
@@ -44,8 +45,8 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'menu_order', 'position_id', 'status_id' ], 'required'],
-            [['parent_id', 'menu_order', 'position_id', 'status_id'], 'integer'],
+            [['label', 'menu_order', 'position_id', 'status_id', 'is_new_tab'], 'required'],
+            [['parent_id', 'menu_order', 'position_id', 'status_id', 'is_new_tab'], 'integer'],         // added is_new_tab
             [['link', 'date_created', 'date_updated', 'user_update_id', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -67,6 +68,7 @@ class Menu extends \yii\db\ActiveRecord
             'parent_id' => 'Parent Menu',
             'label' => 'Label',
             'menu_order' => 'Menu Order',
+            'is_new_tab' => 'Open in New Tab?',          // New tab radio button
             'position_id' => 'Position',
             'status_id' => 'Status',
             'link' => 'Link',
