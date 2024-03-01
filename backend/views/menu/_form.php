@@ -55,8 +55,23 @@ use attachment\components\AttachmentsInput;
                 </div>
             </div>
 
-                <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+            <div class="row">
+                <div class="col-md-2">
+                    <?= $form->field($model, 'is_new_tab')->radioList(
+                                        [
+                                            1 => 'Yes',
+                                            0 => 'No'
+                                        ]
+                                    ) ?>
+                </div>
 
+                <div class="col-md-10">
+                    <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
+
+            <div>
+                <?=  '<label for="photo_attach">File Upload</label>' ?>
                 <?= AttachmentsInput::widget([
                         'model' => $model,
                         'options' => [ 
@@ -71,6 +86,7 @@ use attachment\components\AttachmentsInput;
                             'maxFileCount' => 3,
                             //'allowedFileExtensions' => ['pdf'],
                             'showUpload' => false,
+                            //'showBrowse' => false,
                             'showCancel' => false,
                             'browseLabel' => '',
                             'removeLabel' => '',
@@ -80,20 +96,44 @@ use attachment\components\AttachmentsInput;
                             'fileActionSettings'=> [
                                 'showDrag' => false,
                                 'showRemove' => true,
+                                //'showBrowse' => true,
                                 'msgRemove' => 'Are you sure you want to delete this file?',
                             ]
                         ]
                     ]) ?>
-
-                    <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : '<i class="fas fa-edit"></i> Update', [
-                        'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
-                        'onclick' => "$('#file-input').fileinput('upload');"
-                            ]) ?>
+            </div>
+            <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : '<i class="fas fa-edit"></i> Update', [
+                'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
+                'onclick' => "$('#file-input').fileinput('upload');"
+                    ]) ?>
         </div>
-        
     </div>
-    
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php 
+$script = <<<JS
+var radios = $('input:radio[name="Menu[is_new_tab]"]')
+var radioValue, labelValue, transformedValue
+
+radios.change(function(){   //change & on = event listener -> nililisten if may change sa value or key up
+    radioValue = $('input:radio[name="Menu[is_new_tab]"]:checked').val()    // pag nagchange kukunin ung value
+    if(radioValue === 0){
+        $('#menu-link').val(transformedValue)
+    } else {
+        $('#menu-link').val('')
+    }
+})
+var label = $('#menu-label')    //
+label.on('keyup', function(){       //lalabas din ung value pag nagchange din
+    labelValue = label.val()
+
+    transformedValue = '/' + labelValue.toLowerCase().replace(/\s+/g, '-')      //simple concat, ung value change to lower case and replace to -
+
+    $('#menu-link').val(transformedValue)       
+})
+JS;
+$this->registerJs($script)
+?>
