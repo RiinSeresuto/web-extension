@@ -155,10 +155,11 @@ opacity: 1;
     display: block;
 }
 
+/* Child Hover */
 .child-item{
-    background-color: rebeccapurple;
+    background-color: #121210e6;
     width: 150px;
-    border: #FFC700 5px dotted;
+    border: #121210e6 5px;
 
 }
 
