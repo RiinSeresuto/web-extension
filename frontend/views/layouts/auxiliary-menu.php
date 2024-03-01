@@ -12,6 +12,14 @@ $auxiliaryMenu = [];
             $auxiliaryMenu[] = $menu;
         }
     }
+
+    // Define a custom comparison function
+    function compareMenuOrder($a, $b) {
+        return $a->menu_order - $b->menu_order;
+    }
+
+    // Sort the mainMenu array based on menu_order
+    usort($auxiliaryMenu, 'compareMenuOrder');
 ?> 
 
     <ul class="auxiliary-menu-navs">
