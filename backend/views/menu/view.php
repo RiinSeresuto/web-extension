@@ -131,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
                         'initialPreviewShowDelete' => false,
-                        'initialPreviewShowMainClass' => false,
+                        //'initialPreviewShowMainClass' => false,
                         'initialPreviewAsData' =>  true,
                         'initialPreviewFileType' => 'pdf',
                         'maxFileCount' => 10, // Client max files
