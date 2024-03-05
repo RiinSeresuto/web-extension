@@ -15,19 +15,17 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'title') ?>
+        </div>
 
-    <?= $form->field($model, 'title') ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'status_id') ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'status_id') ?>
-
-    <?= $form->field($model, 'user_id') ?>
-
-    <?= $form->field($model, 'user_update_id') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
-
-    <?php // echo $form->field($model, 'date_updated') ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
