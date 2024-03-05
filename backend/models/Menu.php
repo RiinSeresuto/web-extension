@@ -46,8 +46,8 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'menu_order', 'position_id', 'status_id', 'is_new_tab'], 'required'],
-            [['parent_id', 'menu_order', 'position_id', 'status_id', 'is_new_tab', 'url_type'], 'integer'],         // added is_new_tab
+            [['label', 'menu_order', 'position_id', 'status_id'], 'required'],
+            [['parent_id', 'menu_order', 'position_id', 'status_id', 'url_type'], 'integer'],         // added is_new_tab
             [['link', 'date_created', 'date_updated', 'user_update_id', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -69,7 +69,6 @@ class Menu extends \yii\db\ActiveRecord
             'parent_id' => 'Parent Menu',
             'label' => 'Label',
             'menu_order' => 'Menu Order',
-            'is_new_tab' => 'Open in New Tab?',          // New tab radio button
             'url_type' => 'URL Type',
             'position_id' => 'Position',
             'status_id' => 'Status',
