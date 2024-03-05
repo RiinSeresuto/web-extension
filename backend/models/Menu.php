@@ -12,6 +12,7 @@ use Yii;
  * @property string $label
  * @property int $menu_order
  * @property int $is_new_tab //new
+ * @property int $url_type
  * @property int $position_id
  * @property int $status_id
  * @property string $link
@@ -46,7 +47,7 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             [['label', 'menu_order', 'position_id', 'status_id', 'is_new_tab'], 'required'],
-            [['parent_id', 'menu_order', 'position_id', 'status_id', 'is_new_tab'], 'integer'],         // added is_new_tab
+            [['parent_id', 'menu_order', 'position_id', 'status_id', 'is_new_tab', 'url_type'], 'integer'],         // added is_new_tab
             [['link', 'date_created', 'date_updated', 'user_update_id', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -69,6 +70,7 @@ class Menu extends \yii\db\ActiveRecord
             'label' => 'Label',
             'menu_order' => 'Menu Order',
             'is_new_tab' => 'Open in New Tab?',          // New tab radio button
+            'url_type' => 'URL Type',
             'position_id' => 'Position',
             'status_id' => 'Status',
             'link' => 'Link',
