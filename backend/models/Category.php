@@ -15,11 +15,11 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsStatus $status
+ * @property Status $status
  * @property User $user
  * @property User $userUpdate
- * @property CmsForm[] $cmsForms
- * @property CmsYear[] $cmsYears
+ * @property Form[] $cmsForms
+ * @property Year[] $cmsYears
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -37,9 +37,9 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'title', 'status_id', 'user_id', 'user_update_id', 'date_updated'], 'required'],
+            [['title', 'status_id'], 'required'],
             [['id', 'status_id', 'user_id', 'user_update_id'], 'integer'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
@@ -57,8 +57,8 @@ class Category extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'status_id' => 'Status ID',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'user_id' => 'Created By',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];
