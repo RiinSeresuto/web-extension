@@ -69,8 +69,11 @@ class ConnectedAgenciesSearch extends ConnectedAgencies
             'date_updated' => $this->date_updated,
         ]);
 
-        $query->andFilterWhere(['like', 'label', $this->label])
-            ->andFilterWhere(['like', 'link', $this->link]);
+        $query->andFilterWhere(['like', 'label', $this->label]);
+
+        if (!empty($this->agency_type_id)){
+            $query->andFilterWhere(['like', 'agency_type_id', $this->agency_type->id]);
+        }
 
         return $dataProvider;
     }
