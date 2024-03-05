@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ConnectedAgenciesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Connected Agencies', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
     </p>
 
-    <?= $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel, 'agency_type' => $agency_type]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
