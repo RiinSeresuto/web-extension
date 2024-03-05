@@ -82,32 +82,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null; 
                 },
             ],
-            // [
-            //     'label' => 'File Upload', 'format' => 'raw',
-            //     'value' => function($model){
-            //       //return \file\components\AttachmentsTable::widget(['model' => $model]); 
-            //       return \attachment\components\AttachmentsInput::widget([
-            //         'id' => 'file-input', // Optional
-            //         'model' => $model,
-            //         'options' => [ // Options of the Kartik's FileInput widget
-            //             'multiple' => true, // If you want to allow multiple upload, default to false
-            //         ],
-            //         'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
-            //             'initialPreviewAsData' =>  true,
-            //             'initialPreviewFileType' => 'pdf',
-            //             'maxFileCount' => 10, // Client max files
-            //             'showRemove' => false,
-            //             'showCancel' => false,
-            //             'showUpload' => false,
-            //             'showBrowse' => false,
-            //             'fileActionSettings' => [
-            //                 'showRemove' => false,
-            //             ],
-            //             'previewFileType' => 'pdf'
-            //         ]
-            //         ]);
-            //     },
-            // ]
         ],
     ]) ?>
     

@@ -60,34 +60,31 @@ use attachment\components\AttachmentsInput;
 
                 <!-- URL Type -->
                 <div class="col-md-3">
-                    <?= $form->field($model, 'url_type')->widget(SwitchInput::class, [
-                        'pluginOptions' => [
-                            'onText'=>'Internal',
-                            'offText'=>'External'
-                        ]
-                    ]); ?> 
+                    <?= $form->field($model, 'url_type')->widget(Select2::class, [
+                                        'data' => ArrayHelper::map($url_type, 'id', 'url_type'),
+                                        'options' => [
+                                            'placeholder' => 'Select URL Type',
+                                        ],
+                                        'pluginEvents' => [
+                                            'select2:select' => '
+                                                    function(){
+                                                        var url_type = this.value
+                                                        urlFieldState(url_type)
+                                                    }
+                                                '
+                                        ]                        
+                                    ]) ?>
                 </div>
             </div>
 
 
             <div class="row">
-                <!-- New Tab -->
-                <div class="col-md-2">
-                    <?= $form->field($model, 'is_new_tab')->radioList(
-                                        [
-                                            1 => 'Yes',
-                                            0 => 'No'
-                                        ]
-                                    ) ?>
-                </div>
+               
 
                 <!-- Link -->
                 <div class="col-md-10">
-                    <?php // $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
-                </div>
-
-                <div class="col-md-10">
-                    <?= $form->field($model, 'link')->textInput(['maxlength' => true, 'id' => 'menu-link', 'disabled' => $model->url_type == 1]) ?>
+                    <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'link')->hiddenInput(['class' => 'link_hidden'])->label(false) ?>
                 </div>
 
             </div>
@@ -138,47 +135,36 @@ use attachment\components\AttachmentsInput;
 
 <?php 
 $script = <<<JS
-var switchInput = $('#menu-url_type');  //newly added
-var linkField = $('#menu-link');        //newly added
 var radios = $('input:radio[name="Menu[is_new_tab]"]')
 var radioValue, labelValue, transformedValue
 
-
-
-// Function to set link field state based on switch state
-function setLinkFieldState(state) {
-    if (state) { // External
-        linkField.prop('disabled', false);
-    } else { // Internal
-        linkField.prop('disabled', true).val(''); // Clear and disable the field
-    }
-}
-
-// When the URL type switch is changed
-switchInput.on('switchChange.bootstrapSwitch', function(event, state) {
-    setLinkFieldState(state);
-});
-
-// Initially set the state based on the default URL type
-setLinkFieldState({$model->url_type});
-
-
-radios.change(function(){   //change & on = event listener -> nililisten if may change sa value or key up
-    radioValue = $('input:radio[name="Menu[is_new_tab]"]:checked').val()    // pag nagchange kukunin ung value
-    if(radioValue === 0){
-        $('#menu-link').val(transformedValue)
-    } else {
-        $('#menu-link').val('')
-    }
-})
+// radios.change(function(){   //change & on = event listener -> nililisten if may change sa value or key up
+//     radioValue = $('input:radio[name="Menu[is_new_tab]"]:checked').val()    // pag nagchange kukunin ung value
+//     if(radioValue === 0){
+//         $('#menu-link').val(transformedValue)
+//     } else {
+//         $('#menu-link').val('')
+//     }
+// })
 var label = $('#menu-label')    //
 label.on('keyup', function(){       //lalabas din ung value pag nagchange din
     labelValue = label.val()
 
     transformedValue = '/' + labelValue.toLowerCase().replace(/\s+/g, '-')      //simple concat, ung value change to lower case and replace to -
 
-    $('#menu-link').val(transformedValue)       
+    $('#menu-link').val(transformedValue)
+    $('.link_hidden').val(transformedValue)       
 })
+
+function urlFieldState(value){
+    if(value == 1){
+        $('#menu-link').prop('disabled', true)
+        $('.link_hidden').prop('disabled', false)
+    } else {
+        $('#menu-link').prop('disabled', false)
+        $('.link_hidden').prop('disabled', true)
+    }
+}
 JS;
 $this->registerJs($script)
 ?>
