@@ -18,17 +18,36 @@ use kartik\editors\Summernote;
         <div class="col-md-12">
             <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
-            <?= $form->field($model, 'menu_id')->widget(Select2::className(), [
+            <!-- Menu Nav -->
+            <?php // $form->field($model, 'menu_id')->widget(Select2::className(), [
 
-                                        'data' => ArrayHelper::map($menu, 'id', 'label'),
-                                        'options' => [
-                                            'placeholder' => 'Select Parent Menu',
-                                        ],
-                                    ]) ?>
+                                    //     'data' => ArrayHelper::map($menu, 'id', 'label'),
+                                    //     'options' => [
+                                    //         'placeholder' => 'Select Parent Menu',
+                                    //     ],
+                                    // ]) ?>
 
+            <!-- Sample Menu Nav -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <?=
+                         $form->field($model, 'menu_id')->widget(Select2::className(),[
+                            //'name' => 'float_state_01',
+                            'data' => ArrayHelper::map($menu, 'id', 'label'),
+                            'options' => ['placeholder' => 'Select a state...'],
+                            'pluginOptions' => ['allowClear' => true],
+                        ]);
+                        ?>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Title -->
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-            <!-- Summernote Editor -->
+            <!-- Body (Summernote Editor) -->
             
             <?= $form->field($model, 'body')->widget(Summernote::class,['container' => ['class' => 'kv-editor-container']]);?>
             
@@ -136,16 +155,6 @@ use kartik\editors\Summernote;
                     </div>
             </div>
 
-            
-
-            
-
-                    <!-- dummy -->
-
-                    
-
-
-            
             <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : 'Update', [
                                 'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
                                 'onclick' => "$('#file-input').fileinput('upload');"
