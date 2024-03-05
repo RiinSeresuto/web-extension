@@ -68,16 +68,22 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
         <?php ActiveForm::end(); ?>
     </div>
 
-    <?= $content ?>
+    <?= $this->render('slider-photo')?> 
+
+    
 		
     <!-- DILG Information Systems -->
-
+   
     <!-- Auxiliary Menu Navigation -->
     <div class="auxiliary-menu">
         <?= $this->render('auxiliary-menu', [
             'menus' => $menus
         ]) ?>
     </div>
+
+    <?= $this->render('dilg-systems-banner')?>
+
+    <?= $content ?>
 
     <!-- DILG Information Systems -->
     <div class="info-systems">
