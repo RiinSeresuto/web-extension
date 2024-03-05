@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use kartik\switchinput\SwitchInput;
 use attachment\components\AttachmentsInput;
 
 /* @var $this yii\web\View */
@@ -17,26 +18,28 @@ use attachment\components\AttachmentsInput;
         <div class="col-md-12">
             <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
+            <!-- Parent Menu -->
             <?= $form->field($model, 'parent_id')->widget(Select2::className(), [
                 'data' => ArrayHelper::map($menu, 'id', 'label'),
                 'options' => [
                     'placeholder' => 'Select Parent Menu',
-                    
                 ],
                 'pluginOptions' => [
                     'allowClear' => true
                  ]
             ]) ?>
         
+            <!-- Label -->
             <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
 
-            
             <div class="row">
-                <div class="col-md-4">
+                <!-- Menu Order -->
+                <div class="col-md-3">
                     <?= $form->field($model, 'menu_order')->textInput() ?>
                 </div>
 
-                <div class="col-md-4">
+                <!-- Position -->
+                <div class="col-md-3">
                     <?= $form->field($model, 'position_id')->widget(Select2::class, [
                                         'data' => ArrayHelper::map($position, 'id', 'position'),
                                         'options' => [
@@ -44,8 +47,9 @@ use attachment\components\AttachmentsInput;
                                         ],
                                     ]) ?>
                 </div>
-
-                <div class="col-md-4">
+                
+                <!-- Status -->
+                <div class="col-md-3">
                     <?= $form->field($model, 'status_id')->widget(Select2::class, [
                                         'data' => ArrayHelper::map($status, 'id', 'status_type'),
                                         'options' => [
@@ -53,9 +57,21 @@ use attachment\components\AttachmentsInput;
                                         ],
                                     ]) ?>
                 </div>
+
+                <!-- URL Type -->
+                <div class="col-md-3">
+                    <?= $form->field($model, 'url_type')->widget(SwitchInput::class, [
+                        'pluginOptions' => [
+                            'onText'=>'Internal',
+                            'offText'=>'External'
+                        ]
+                    ]); ?> 
+                </div>
             </div>
 
+
             <div class="row">
+                <!-- New Tab -->
                 <div class="col-md-2">
                     <?= $form->field($model, 'is_new_tab')->radioList(
                                         [
@@ -65,11 +81,18 @@ use attachment\components\AttachmentsInput;
                                     ) ?>
                 </div>
 
+                <!-- Link -->
                 <div class="col-md-10">
-                    <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
+                    <?php // $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
                 </div>
+
+                <div class="col-md-10">
+                    <?= $form->field($model, 'link')->textInput(['maxlength' => true, 'id' => 'menu-link', 'disabled' => $model->url_type == 1]) ?>
+                </div>
+
             </div>
 
+            <!-- Attachment -->
             <div>
                 <?=  '<label for="photo_attach">File Upload</label>' ?>
                 <?= AttachmentsInput::widget([
@@ -115,8 +138,30 @@ use attachment\components\AttachmentsInput;
 
 <?php 
 $script = <<<JS
+var switchInput = $('#menu-url_type');  //newly added
+var linkField = $('#menu-link');        //newly added
 var radios = $('input:radio[name="Menu[is_new_tab]"]')
 var radioValue, labelValue, transformedValue
+
+
+
+// Function to set link field state based on switch state
+function setLinkFieldState(state) {
+    if (state) { // External
+        linkField.prop('disabled', false);
+    } else { // Internal
+        linkField.prop('disabled', true).val(''); // Clear and disable the field
+    }
+}
+
+// When the URL type switch is changed
+switchInput.on('switchChange.bootstrapSwitch', function(event, state) {
+    setLinkFieldState(state);
+});
+
+// Initially set the state based on the default URL type
+setLinkFieldState({$model->url_type});
+
 
 radios.change(function(){   //change & on = event listener -> nililisten if may change sa value or key up
     radioValue = $('input:radio[name="Menu[is_new_tab]"]:checked').val()    // pag nagchange kukunin ung value
