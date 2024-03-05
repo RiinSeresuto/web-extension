@@ -8,6 +8,7 @@ use backend\models\MenuSearch;
 use backend\models\Position;
 use backend\models\Status;
 use backend\models\File;
+use backend\models\UrlType;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -94,6 +95,7 @@ class MenuController extends Controller
         $status = Status::find()->all();
         $position = Position::find()->all();
         $menu = Menu::find()->all();
+        $url_type = UrlType::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -107,7 +109,8 @@ class MenuController extends Controller
             'model' => $model,
             'status' => $status,
             'position' => $position,
-            'menu' => $menu
+            'menu' => $menu,
+            'url_type' => $url_type
         ]);
     }
 
