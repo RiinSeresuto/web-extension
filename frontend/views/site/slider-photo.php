@@ -8,7 +8,7 @@ use yii\helpers\Html;
 <div class="slider-photo slider">
         <div>
             <?= Html::a(
-                        Html::img('@web/images/slider/sp1.png')
+                        Html::img('@web/images/slider/sp2.png')
                     ); ?>
         </div>
         <div>
@@ -18,17 +18,17 @@ use yii\helpers\Html;
         </div>
         <div>
             <?= Html::a(
-                        Html::img('@web/images/slider/sp3.png')
+                        Html::img('@web/images/slider/sp2.png')
                     ); ?>
         </div>
         <div>
             <?= Html::a(
-                        Html::img('@web/images/slider/sp4.png')
+                        Html::img('@web/images/slider/sp2.png')
                     ); ?>
         </div>
         <div>
             <?= Html::a(
-                        Html::img('@web/images/slider/sp5.png')
+                        Html::img('@web/images/slider/sp2.png')
                     ); ?>
         </div>
         
