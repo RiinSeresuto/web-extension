@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Category;
 use backend\models\CategorySearch;
+use backend\models\Status;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,11 +37,13 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $searchModel = new CategorySearch();
+        $status = Status::find()->all();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'status' => $status,
         ]);
     }
 
@@ -65,6 +68,7 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $model = new Category();
+        $status = Status::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,6 +76,7 @@ class CategoryController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'status' => $status,
         ]);
     }
 
@@ -85,6 +90,7 @@ class CategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $status = Status::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,6 +98,7 @@ class CategoryController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'status' => $status,
         ]);
     }
 
