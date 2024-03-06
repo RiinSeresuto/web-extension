@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -29,22 +27,132 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'menu_id',
+           
             'title',
             'caption',
-            'body:ntext',
-            'url_type_id:url',
-            'status_id',
-            'type_id',
+            'body:raw',
+            [
+                'attribute' => 'url_type_id',
+                'value' => function($model){
+                    return $model->urlType->url_type;
+                },
+            ],
+            [
+                'attribute' => 'status_id',
+                'value' => function($model){
+                    return $model->status->status_type;
+                },
+            ],
+            [
+                'attribute' => 'type_id',
+                'value' => function($model){
+                    return $model->type->type;
+                },
+            ],
             'link',
             'slider_photo',
-            'file_attachment',
+            //'file_attachment',
             'user_id',
-            'user_update_id',
-            'date_created',
-            'date_updated',
+            [
+                'attribute' => 'user_id',
+                'value' => function($model){
+                    return $model->user->username;
+                },
+            ],
+            //'user_update_id',
+            [
+                'attribute' => 'date_created',
+                'value' => function($model){
+                    return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                },
+            ],
+            //'date_updated',
         ],
     ]) ?>
+
+    <div class="row">
+        <div class="col-md-12">
+            <?=  '<label for="photo_attach">File Attachment</label>' ?>
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    [
+                        'label' => 'File Attachment', 
+                        'format' => 'raw',
+                        'value' => function($model){
+                        //return \file\components\AttachmentsTable::widget(['model' => $model]); 
+                        return \attachment\components\AttachmentsInput::widget([
+                            'id' => 'file-input', // Optional
+                            'model' => $model,
+                            'options' => [ // Options of the Kartik's FileInput widget
+                                'multiple' => true, // If you want to allow multiple upload, default to false
+                            ],
+                            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
+                                'initialPreviewShowDelete' => false,
+                                'initialPreviewAsData' =>  true,
+                                'initialPreviewFileType' => 'pdf',
+                                'maxFileCount' => 10, // Client max files
+                                'showRemove' => false,
+                                'showCancel' => false,
+                                'showUpload' => false,
+                                'showBrowse' => false,
+                                'showCaption' => false,
+                                'fileActionSettings' => [
+                                    'showRemove' => false,
+                                    //'showDownload' => true,
+                                ],
+                                'previewFileType' => 'pdf'
+                            ],
+                            ]);
+                        },
+                    ]
+                ]
+            ])
+            ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <?=  '<label for="photo_attach">Slider Photo</label>' ?>
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    [
+                        'label' => 'File Attachment', 
+                        'format' => 'raw',
+                        'value' => function($model){
+                        //return \file\components\AttachmentsTable::widget(['model' => $model]); 
+                        return \attachment\components\AttachmentsInput::widget([
+                            'id' => 'file-input', // Optional
+                            'model' => $model,
+                            'options' => [ // Options of the Kartik's FileInput widget
+                                'multiple' => true, // If you want to allow multiple upload, default to false
+                            ],
+                            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
+                                'initialPreviewShowDelete' => false,
+                                'initialPreviewAsData' =>  true,
+                                'initialPreviewFileType' => 'pdf',
+                                'maxFileCount' => 10, // Client max files
+                                'showRemove' => false,
+                                'showCancel' => false,
+                                'showUpload' => false,
+                                'showBrowse' => false,
+                                'showCaption' => false,
+                                'fileActionSettings' => [
+                                    'showRemove' => false,
+                                    //'showDownload' => true,
+                                ],
+                                'previewFileType' => 'pdf'
+                            ],
+                            ]);
+                        },
+                    ]
+                ]
+            ])
+            ?>
+        </div>
+    </div>
 
 </div>
