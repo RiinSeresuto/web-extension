@@ -11,6 +11,7 @@ use backend\models\Type;
 use backend\models\Menu;
 use backend\models\File;
 
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -99,12 +100,34 @@ class PagesController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $menus = Menu::find()->where(['position_id' => 1])->orderBy(['menu_order' => SORT_ASC])->all();
+        $children = [];
+        $clean = [];
+        
+        echo "<pre>";
+        foreach($menus as $menu){
+            if(empty($menu->menuChildren)){
+                $children[] = $menu;
+            }
+        }
+        
+        foreach($children as $child){
+            if(!empty($child->parent_id)){
+                $label = $this->getParent($child->parent_id);
+
+                $clean[$child->id] = $label . ' / ' . $child->label;
+            } else {
+                $clean[$child->id] = $child->label;
+            }
+        }
+
         return $this->render('create', [
             'model' => $model,
             'url' => $url,
             'status' => $status,
             'type' => $type,
-            'menu' => $menu
+            'menu' => $menu,
+            'clean' => $clean
         ]);
     }
 
@@ -175,6 +198,54 @@ class PagesController extends Controller
             ->orderBy('menu_order')
             ->asArray()
             ->all();
+    }
+
+    public function actionTestMenu(){
+        $menus = Menu::find()->where(['position_id' => 1])->orderBy(['menu_order' => SORT_ASC])->all();
+        $children = [];
+        $clean = [];
+        
+        echo "<pre>";
+        foreach($menus as $menu){
+            if(empty($menu->menuChildren)){
+                $children[] = $menu;
+            }
+        }
+
+        foreach($children as $child){
+            if(!empty($child->parent_id)){
+                $label = $this->getParent($child->parent_id);
+
+                $clean[$child->id] = $label . ' / ' . $child->label;
+            } else {
+                $clean[$child->id] = $child->label;
+            }
+        }
+
+       // $clean = ArrayHelper::map($children, 'id', 'label');
+
+        
+        print_r($clean);
+        echo "</pre>";
+        exit;
+    }
+
+    private function getParent($parent_id){
+        $parent = Menu::find()->where(['id' => $parent_id])->one();
+
+        $parent_label = $parent->label;
+
+        if(!empty($parent->parent_id)){
+            $grand_parent = $this->getParent($parent->parent_id);
+
+            return $grand_parent . ' / ' . $parent_label;
+        } else {
+            return $parent_label;
+        }
+
+        //print_r($parent_label);
+        
+        //return $string;
     }
 
 }
