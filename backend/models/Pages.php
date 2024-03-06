@@ -192,4 +192,19 @@ class Pages extends \yii\db\ActiveRecord
         
         ];
     }
+
+    public function getParentMenuOptions()
+    {
+        $menus = Menu::find()->where(['parent_id' => null])->all();
+        $options = [];
+        foreach ($menus as $menu) {
+            $childMenus = $menu->menuChildren;
+            $childOptions = [];
+            foreach ($childMenus as $childMenu) {
+                $childOptions[$childMenu->id] = $childMenu->label;
+            }
+            $options[$menu->label] = $childOptions;
+        }
+        return $options;
+    }
 }
