@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -76,12 +77,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
                 },
             ],
-            [
-                'attribute' => 'date_updated',
-                'value' => function($model){
-                    return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null; 
-                },
-            ],
+            // [
+            //     'attribute' => 'date_updated',
+            //     'value' => function($model){
+            //         return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null; 
+            //     },
+            // ],
         ],
     ]) ?>
     
@@ -90,43 +91,43 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-12">
             <?=  '<label for="photo_attach">File Attachment</label>' ?>
             <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            [
-                'label' => 'File Attachment', 
-                'format' => 'raw',
-                'value' => function($model){
-                  //return \file\components\AttachmentsTable::widget(['model' => $model]); 
-                  return \attachment\components\AttachmentsInput::widget([
-                    'id' => 'file-input', // Optional
-                    'model' => $model,
-                    'options' => [ // Options of the Kartik's FileInput widget
-                        'multiple' => true, // If you want to allow multiple upload, default to false
-                    ],
-                    'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
-                        'initialPreviewShowDelete' => false,
-                        //'initialPreviewShowMainClass' => false,
-                        'initialPreviewAsData' =>  true,
-                        'initialPreviewFileType' => 'pdf',
-                        'maxFileCount' => 10, // Client max files
-                        'showRemove' => false,
-                        'showCancel' => false,
-                        'showUpload' => false,
-                        'showBrowse' => false,
-                        'showCaption' => false,
-                        'fileActionSettings' => [
-                            'showRemove' => false,
-                            //'showDownload' => true,
-                        ],
-                        'previewFileType' => 'pdf'
-                    ],
-                    ]);
-                },
-            ]
-        ]
-    ])
-    ?>
+                'model' => $model,
+                'attributes' => [
+                    [
+                        'label' => 'File Attachment', 
+                        'format' => 'raw',
+                        'value' => function($model){
+                        //return \file\components\AttachmentsTable::widget(['model' => $model]); 
+                        return \attachment\components\AttachmentsInput::widget([
+                            'id' => 'file-input', // Optional
+                            'model' => $model,
+                            'options' => [ // Options of the Kartik's FileInput widget
+                                'multiple' => true, // If you want to allow multiple upload, default to false
+                            ],
+                            'pluginOptions' => [ // Plugin options of the Kartik's FileInput widget 
+                                'initialPreviewShowDelete' => false,
+                                'initialPreviewAsData' =>  true,
+                                'initialPreviewFileType' => 'pdf',
+                                'maxFileCount' => 10, // Client max files
+                                'showRemove' => false,
+                                'showCancel' => false,
+                                'showUpload' => false,
+                                'showBrowse' => false,
+                                'showCaption' => false,
+                                'fileActionSettings' => [
+                                    'showRemove' => false,
+                                    //'showDownload' => true,
+                                ],
+                                'previewFileType' => 'pdf'
+                            ],
+                            ]);
+                        },
+                    ]
+                ]
+            ])
+            ?>
         </div>
     </div>
+
     
 </div>
