@@ -34,14 +34,14 @@ use kartik\editors\Summernote;
                         <?=
                          $form->field($model, 'menu_id')->widget(Select2::className(),[
                             //'name' => 'float_state_01',
-                            'data' => ArrayHelper::map($menu, 'id', 'label'),
+                            'data' => $model->getParentMenuOptions(),
+                            //'data' => ArrayHelper::map($menu, 'id', 'label'),
                             'options' => ['placeholder' => 'Select a state...'],
                             'pluginOptions' => ['allowClear' => true],
                         ]);
                         ?>
                     </div>
                 </div>
-                
             </div>
 
             <!-- Title -->
