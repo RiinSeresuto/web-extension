@@ -11,7 +11,7 @@ use Yii;
  * @property int $parent_id
  * @property string $label
  * @property int $menu_order
- * @property int $is_new_tab //new
+ * @property string $content_type //new
  * @property int $url_type
  * @property int $position_id
  * @property int $status_id
@@ -24,10 +24,12 @@ use Yii;
  *
  * @property Position $position
  * @property Status $status
+ * @property Status $urlType
  * @property FileAttachment $logoFile
  * @property User $user
  * @property User $userUpdate
  * @property Pages[] $cmsPages
+ * @property ContentType $contentTypes
  */
 class Menu extends \yii\db\ActiveRecord
 {
@@ -46,8 +48,8 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'menu_order', 'position_id', 'status_id'], 'required'],
-            [['parent_id', 'menu_order', 'position_id', 'status_id', 'url_type'], 'integer'],         // added is_new_tab
+            [['label', 'menu_order', 'position_id', 'status_id', 'url_type', 'content_type'], 'required'],
+            [['parent_id', 'menu_order', 'position_id', 'status_id', 'url_type', 'content_type'], 'integer'],         // added is_new_tab
             [['link', 'date_created', 'date_updated', 'user_update_id', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -72,6 +74,7 @@ class Menu extends \yii\db\ActiveRecord
             'url_type' => 'URL Type',
             'position_id' => 'Position',
             'status_id' => 'Status',
+            'content_type' => 'Content Type',
             'link' => 'Link',
             'logo_file' => 'File Upload',
             'file_attach' => 'File Upload',
@@ -101,6 +104,18 @@ class Menu extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
+
+    /**
+     * Gets query for [[UrlType]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUrlType()
+    {
+        return $this->hasOne(Status::className(), ['id' => 'url_type_id']);
+    }
+
+    
 
     /**
      * Gets query for [[LogoFile]].
