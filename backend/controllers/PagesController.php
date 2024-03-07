@@ -45,10 +45,16 @@ class PagesController extends Controller
     {
         $searchModel = new PagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $url_type = UrlType::find()->all();
+        $status = Status::find()->all();
+        $type = Type::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'url_type' => $url_type,
+            'status' => $status,
+            'type' => $type
         ]);
     }
 
@@ -87,7 +93,7 @@ class PagesController extends Controller
     public function actionCreate()
     {
         $model = new Pages();
-        $url = UrlType::find()->all();
+        $url_type = UrlType::find()->all();
         $status = Status::find()->all();
         $type = Type::find()->all();
         $menu = Menu::find()->all();
@@ -102,9 +108,8 @@ class PagesController extends Controller
 
         $menus = Menu::find()->where(['position_id' => 1])->orderBy(['menu_order' => SORT_ASC])->all();
         $children = [];
-        $clean = [];
-        
-        echo "<pre>";
+        $childrenPath = [];
+
         foreach($menus as $menu){
             if(empty($menu->menuChildren)){
                 $children[] = $menu;
@@ -115,19 +120,19 @@ class PagesController extends Controller
             if(!empty($child->parent_id)){
                 $label = $this->getParent($child->parent_id);
 
-                $clean[$child->id] = $label . ' / ' . $child->label;
+                $childrenPath[$child->id] = $label . ' / ' . $child->label;
             } else {
-                $clean[$child->id] = $child->label;
+                $childrenPath[$child->id] = $child->label;
             }
         }
 
         return $this->render('create', [
             'model' => $model,
-            'url' => $url,
+            'url_type' => $url_type,
             'status' => $status,
             'type' => $type,
             'menu' => $menu,
-            'clean' => $clean
+            'childrenPath' => $childrenPath
         ]);
     }
 
@@ -142,7 +147,7 @@ class PagesController extends Controller
     {
         $model = $this->findModel($id);
 
-        $url = UrlType::find()->all();
+        $url_type = UrlType::find()->all();
         $status = Status::find()->all();
         $type = Type::find()->all();
         $menu = Menu::find()->all();
@@ -153,7 +158,7 @@ class PagesController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'url' => $url,
+            'url_type' => $url_type,
             'status' => $status,
             'type' => $type,
             'menu' => $menu
@@ -200,35 +205,7 @@ class PagesController extends Controller
             ->all();
     }
 
-    public function actionTestMenu(){
-        $menus = Menu::find()->where(['position_id' => 1])->orderBy(['menu_order' => SORT_ASC])->all();
-        $children = [];
-        $clean = [];
-        
-        echo "<pre>";
-        foreach($menus as $menu){
-            if(empty($menu->menuChildren)){
-                $children[] = $menu;
-            }
-        }
-
-        foreach($children as $child){
-            if(!empty($child->parent_id)){
-                $label = $this->getParent($child->parent_id);
-
-                $clean[$child->id] = $label . ' / ' . $child->label;
-            } else {
-                $clean[$child->id] = $child->label;
-            }
-        }
-
-       // $clean = ArrayHelper::map($children, 'id', 'label');
-
-        
-        print_r($clean);
-        echo "</pre>";
-        exit;
-    }
+    
 
     private function getParent($parent_id){
         $parent = Menu::find()->where(['id' => $parent_id])->one();
