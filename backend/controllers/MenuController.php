@@ -9,6 +9,7 @@ use backend\models\Position;
 use backend\models\Status;
 use backend\models\File;
 use backend\models\UrlType;
+use backend\models\ContentType;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -46,12 +47,14 @@ class MenuController extends Controller
         
         $status = Status::find()->all();
         $position = Position::find()->all();
+        $url_type = UrlType::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'status' => $status,
-            'position' => $position
+            'position' => $position,
+            'url_type' => $url_type
         ]);
     }
 
@@ -96,6 +99,7 @@ class MenuController extends Controller
         $position = Position::find()->all();
         $menu = Menu::find()->all();
         $url_type = UrlType::find()->all();
+        $content_type = ContentType::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -110,7 +114,8 @@ class MenuController extends Controller
             'status' => $status,
             'position' => $position,
             'menu' => $menu,
-            'url_type' => $url_type
+            'url_type' => $url_type,
+            'content_type' => $content_type
         ]);
     }
 
@@ -128,18 +133,23 @@ class MenuController extends Controller
         $status = Status::find()->all();
         $position = Position::find()->all();
         $menu = Menu::find()->all();
+        $url_type = UrlType::find()->all();
 
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            
         }
 
         return $this->render('update', [
             'model' => $model,
             'status' => $status,
             'position' => $position,
-            'menu' => $menu
+            'menu' => $menu,
+            'url_type' => $url_type
         ]);
     }
 
