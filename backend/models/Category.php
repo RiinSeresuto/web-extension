@@ -56,7 +56,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'status_id' => 'Status ID',
+            'status_id' => 'Status',
             'user_id' => 'Created By',
             'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
