@@ -78,7 +78,6 @@ class SiteController extends Controller
         $mainMenu = [];
         $auxiliaryMenu = [];
 
-        // Filter menus based on position
         foreach ($menus as $menu) {
             if ($menu->position == 'Main') {
                 $mainMenu[] = $menu;
@@ -89,14 +88,11 @@ class SiteController extends Controller
 
         $this->view->params['mainMenu'] = $mainMenu;
 
-        // Pass filtered menus to the view
         return $this->render('index', [
             'mainMenu' => $mainMenu,
             'auxiliaryMenu' => $auxiliaryMenu,
         ]);
     }
-
-
 
     /**
      * Logs in a user.
