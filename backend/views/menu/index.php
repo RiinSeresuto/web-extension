@@ -37,6 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->status->status_type;
                 },
             ],
+            // [
+            //     'attribute' => 'url_type_id',
+            //     'value' => function($data){
+            //         return $data->url_type->url_type;
+            //     }
+            // ],
+            'link',
             [
                 'attribute' => 'user_id',
                 'value' => function($data){

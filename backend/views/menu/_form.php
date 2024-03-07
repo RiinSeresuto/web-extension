@@ -77,14 +77,29 @@ use attachment\components\AttachmentsInput;
                 </div>
             </div>
 
+            <?= $form->field($model, 'content_type')->widget(Select2::class, [
+                'data' => ArrayHelper::map($content_type, 'id', 'content_label'),
+                'options' => [
+                    'placeholder' => 'Select Content Type',
+                ],
+                'pluginEvents' => [
+                    'select2:select' => '
+                            function(){
+                                var content_type = this.value
+                                contentTypeState(content_type) 
+                            }
+                        '
+                ]
+            ])?>
+
 
             <div class="row">
                
 
                 <!-- Link -->
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
-                    <?= $form->field($model, 'link')->hiddenInput(['class' => 'link_hidden'])->label(false) ?>
+                    <?= $form->field($model, 'link')->hiddenInput(['class' => 'link_hidden', 'disabled' => true])->label(false) ?>
                 </div>
 
             </div>
@@ -108,7 +123,7 @@ use attachment\components\AttachmentsInput;
                             'showUpload' => false,
                             //'showBrowse' => false,
                             'showCancel' => false,
-                            'browseLabel' => '',
+                            'browseLabel' => 'Browse',
                             'removeLabel' => '',
                             'mainClass' => 'input-group-lg',
                             'browseClass' => 'btn btn-info',
@@ -136,21 +151,15 @@ use attachment\components\AttachmentsInput;
 <?php 
 $script = <<<JS
 var radios = $('input:radio[name="Menu[is_new_tab]"]')
-var radioValue, labelValue, transformedValue
+var radioValue, labelValue, transformedValue, typeValue
 
-// radios.change(function(){   //change & on = event listener -> nililisten if may change sa value or key up
-//     radioValue = $('input:radio[name="Menu[is_new_tab]"]:checked').val()    // pag nagchange kukunin ung value
-//     if(radioValue === 0){
-//         $('#menu-link').val(transformedValue)
-//     } else {
-//         $('#menu-link').val('')
-//     }
-// })
 var label = $('#menu-label')    //
 label.on('keyup', function(){       //lalabas din ung value pag nagchange din
     labelValue = label.val()
+    typeValue = $('#menu-content_type').val();
 
-    transformedValue = '/' + labelValue.toLowerCase().replace(/\s+/g, '-')      //simple concat, ung value change to lower case and replace to -
+    //transformedValue = '/' + labelValue.toLowerCase().replace(/\s+/g, '-')      //simple concat, ung value change to lower case and replace to -
+    transformedValue = '/content?type=' + typeValue;
 
     $('#menu-link').val(transformedValue)
     $('.link_hidden').val(transformedValue)       
@@ -164,6 +173,13 @@ function urlFieldState(value){
         $('#menu-link').prop('disabled', false)
         $('.link_hidden').prop('disabled', true)
     }
+}
+
+function contentTypeState(typeValue){
+    transformedValue = '/content?type=' + typeValue;
+
+    $('#menu-link').val(transformedValue)
+    $('.link_hidden').val(transformedValue)
 }
 JS;
 $this->registerJs($script)
