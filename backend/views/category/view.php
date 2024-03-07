@@ -13,12 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
@@ -29,13 +27,31 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'title',
-            'status_id',
-            'user_id',
-            'user_update_id',
-            'date_created',
-            'date_updated',
+            //'status_id',
+            [
+                'attribute' => 'status_id',
+                'value' => function($model){
+                    return $model->status->status_type;
+                },
+            ],
+            //'user_id',
+            //'user_update_id',
+            //'date_created',
+            //'date_updated',
+            [
+                'attribute' => 'user_id',
+                'value' => function($model){
+                    return $model->user->username;
+                },
+            ],
+            [
+                'attribute' => 'date_created',
+                'value' => function($model){
+                    return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                },
+            ],
         ],
     ]) ?>
 
