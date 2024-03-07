@@ -23,14 +23,21 @@ $mainMenu = [];
         $end_ul = "</ul>";
 
         $return_item = "";
+        $target = '';
 
         foreach($menuChildren as $children){
             if(!empty($children->menuChildren)){
-                $return_item = $return_item . '<li class="child-item"><a href="" class="active">' . $children->label . '</a>'; //parent of children
+                if($children->url_type == 2){
+                    $target = 'target="_blank"';
+                }
+                $return_item = $return_item . '<li class="child-item"><a href="'. $children->link .'&menu_id='. $children->id .'" class="active"' . $target  . '>' . $children->label . '</a>'; //parent of children
                 $temp = generateNavItem($children->menuChildren); //children
                 $return_item = $return_item . $temp . '</li>'; 
             } else {
-                $return_item = $return_item . '<li class="child-item"><a href="" class="active">' . $children->label . '</a></li>'; //parent w/o children
+                if($children->url_type == 2){
+                    $target = 'target="_blank"';
+                }
+                $return_item = $return_item . '<li class="child-item"><a href="'. $children->link .'&menu_id='. $children->id .'" class="active" ' . $target . '>' . $children->label . '</a></li>'; //parent w/o children
             }
         }
 
@@ -46,11 +53,11 @@ $mainMenu = [];
             <?php $target = 'target="_blank"'; ?>
             <?php if(!empty($menu->menuChildren)){ ?>
                 <li class="parent-nav">
-                    <a href="<?= $menu->link ?>" class="active" <?= ($menu->url_type == 2) ? $target : "" ?> > <?= $menu->label ?> </a>
+                    <a href="<?= $menu->link ?>&menu_id=<?= $menu->id ?>" class="active" <?= ($menu->url_type == 2) ? $target : "" ?> > <?= $menu->label ?> </a>
                     <?= generateNavItem($menu->menuChildren) ?>
                 </li>
             <?php } else { ?>
-                <li><a href="<?= $menu->link ?>" class="active" <?= ($menu->url_type == 2) ? $target : "" ?> > <?= $menu->label ?> </a></li>
+                <li><a href="<?= $menu->link ?>&menu_id=<?= $menu->id ?> " class="active" <?= ($menu->url_type == 2) ? $target : "" ?> > <?= $menu->label ?> </a></li>
             <?php } ?>
         <?php endforeach; ?>
     </ul>
