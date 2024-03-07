@@ -19,24 +19,15 @@ use kartik\editors\Summernote;
             <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
             <!-- Menu Nav -->
-            <?php // $form->field($model, 'menu_id')->widget(Select2::className(), [
-
-                                    //     'data' => ArrayHelper::map($menu, 'id', 'label'),
-                                    //     'options' => [
-                                    //         'placeholder' => 'Select Parent Menu',
-                                    //     ],
-                                    // ]) ?>
-
-            <!-- Sample Menu Nav -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-floating">
                         <?=
                          $form->field($model, 'menu_id')->widget(Select2::className(),[
                             //'name' => 'float_state_01',
-                            'data' => $model->getParentMenuOptions(),
+                            'data' => $childrenPath,
                             //'data' => ArrayHelper::map($menu, 'id', 'label'),
-                            'options' => ['placeholder' => 'Select a state...'],
+                            'options' => ['placeholder' => 'Select Menu'],
                             'pluginOptions' => ['allowClear' => true],
                         ]);
                         ?>
@@ -55,7 +46,7 @@ use kartik\editors\Summernote;
             <div class="row">
                 <div class="col-md-4">
                     <?= $form->field($model, 'url_type_id')->widget(Select2::class, [
-                                        'data' => ArrayHelper::map($url, 'id', 'url_type'),
+                                        'data' => ArrayHelper::map($url_type, 'id', 'url_type'),
                                         'options' => [
                                             'placeholder' => 'Select URL Type',
                                         ],
@@ -85,8 +76,6 @@ use kartik\editors\Summernote;
 
             <?= $form->field($model, 'caption')->textInput(['maxlength' => true]) ?>
 
-            <?php // $form->field($model, 'slider_photo')->textInput() ?>
-
             <div class="row">
                 <div class="col-md-6">
                     <?=  '<label for="photo_attach">Slider Photo</label>' ?>
@@ -107,7 +96,7 @@ use kartik\editors\Summernote;
                                     //'allowedFileExtensions' => ['pdf'],
                                     'showUpload' => false,
                                     'showCancel' => false,
-                                    'browseLabel' => '',
+                                    'browseLabel' => 'Browse',
                                     'removeLabel' => '',
                                     'mainClass' => 'input-group-lg',
                                     'browseClass' => 'btn btn-info',
@@ -140,7 +129,7 @@ use kartik\editors\Summernote;
                                 //'allowedFileExtensions' => ['pdf'],
                                 'showUpload' => false,
                                 'showCancel' => false,
-                                'browseLabel' => '',
+                                'browseLabel' => 'Browse',
                                 'removeLabel' => '',
                                 'mainClass' => 'input-group-lg',
                                 'browseClass' => 'btn btn-info',

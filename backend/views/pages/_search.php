@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\PagesSearch */
@@ -21,15 +23,30 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'url_type_id') ?>
+            <?= $form->field($model, 'url_type_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($url_type, 'id', 'url_type'),
+                'options' => [
+                    'placeholder' => 'Select URL Type',
+                ],
+            ]) ?>
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'status_id') ?>
+            <?= $form->field($model, 'status_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                'options' => [
+                    'placeholder' => 'Select Status',
+                ],
+            ]) ?>
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'type_id') ?>
+            <?= $form->field($model, 'type_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($type, 'id', 'type'),
+                'options' => [
+                    'placeholder' => 'Select Type',
+                ],
+            ]) ?>
         </div>
     </div>
 

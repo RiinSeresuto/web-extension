@@ -14,8 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="pages-view">
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
+        <?= Html::a('<i class="fas fa-info-circle"></i> Detailed View', ['/', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
+        <?= Html::a('<i class="fas fa-eye"></i> Actual View', ['/', 'id' => $model->id], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-sm',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -26,9 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        // 'columns' => $gridColumns,
+        // 'floatHeader' => true,
+        // 'headerContainer' => ['class'=> 'kv-table-header', 'style'=>'top:50px'],
         'attributes' => [
-            'menu_id',
-           
+            [
+                'attribute' => 'menu_id',
+                'value' => function($model) {
+                    if ($model->menu) {
+                        return $model->menu->label;
+                    }
+                }
+            ],
             'title',
             'caption',
             'body:raw',
@@ -52,22 +64,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'link',
             'slider_photo',
-            //'file_attachment',
-            'user_id',
             [
                 'attribute' => 'user_id',
                 'value' => function($model){
                     return $model->user->username;
                 },
             ],
-            //'user_update_id',
             [
                 'attribute' => 'date_created',
                 'value' => function($model){
                     return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
                 },
             ],
-            //'date_updated',
         ],
     ]) ?>
 
