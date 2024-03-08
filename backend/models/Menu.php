@@ -50,7 +50,7 @@ class Menu extends \yii\db\ActiveRecord
         return [
             [['label', 'menu_order', 'position_id', 'status_id', 'url_type', 'content_type'], 'required'],
             [['parent_id', 'menu_order', 'position_id', 'status_id', 'url_type', 'content_type'], 'integer'],         // added is_new_tab
-            [['link', 'date_created', 'date_updated', 'user_update_id', 'user_id', 'user_update_id'], 'safe'],
+            [['link', 'date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['position_id'], 'exist', 'skipOnError' => true, 'targetClass' => Position::className(), 'targetAttribute' => ['position_id' => 'id']],
