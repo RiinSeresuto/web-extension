@@ -12,6 +12,7 @@ use Yii;
  * @property int $status_id
  * @property int $user_id
  * @property int $user_update_id
+ * @property int $year
  * @property string $date_created
  * @property string $date_updated
  *
@@ -37,8 +38,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'status_id'], 'required'],
-            [['id', 'status_id', 'user_id', 'user_update_id'], 'integer'],
+            [['title', 'status_id', 'year'], 'required'],
+            [['id', 'status_id', 'year'], 'integer'],
             [['date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['id'], 'unique'],

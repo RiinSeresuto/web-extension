@@ -18,13 +18,13 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsField $field
- * @property CmsCategory $category
- * @property CmsStatus $status
- * @property CmsYear $year
+ * @property Field $field
+ * @property Category $category
+ * @property Status $status
+ * @property Year $year
  * @property User $user
  * @property User $userUpdate
- * @property CmsPost[] $cmsPosts
+ * @property Post[] $cmsPosts
  */
 class Form extends \yii\db\ActiveRecord
 {
@@ -42,9 +42,9 @@ class Form extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'category_id', 'description', 'status_id', 'year_id', 'field_id', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'category_id', 'status_id', 'year_id', 'field_id', 'user_id', 'user_update_id'], 'integer'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['category_id', 'status_id', 'year_id', 'field_id',], 'required'],
+            [['id', 'category_id', 'description', 'status_id', 'year_id', 'field_id'], 'integer'],
+            [['user_id', 'user_update_id', 'date_created', 'date_updated'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
@@ -63,13 +63,13 @@ class Form extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
+            'category_id' => 'Category',
             'description' => 'Description',
-            'status_id' => 'Status ID',
-            'year_id' => 'Year ID',
-            'field_id' => 'Field ID',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'status_id' => 'Status',
+            'year_id' => 'Year',
+            'field_id' => 'Field',
+            'user_id' => 'Created By',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];

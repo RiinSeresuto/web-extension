@@ -16,12 +16,12 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsDataType $dataType
- * @property CmsWidgetType $widgetType
+ * @property DataType $dataType
+ * @property WidgetType $widgetType
  * @property User $user
  * @property User $userUpdate
- * @property CmsForm[] $cmsForms
- * @property CmsPost[] $cmsPosts
+ * @property Form[] $cmsForms
+ * @property Post[] $cmsPosts
  */
 class Field extends \yii\db\ActiveRecord
 {
@@ -39,9 +39,9 @@ class Field extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'label', 'data_type_id', 'widget_type_id', 'user_id', 'user_update_id', 'date_updated'], 'required'],
+            [['label', 'data_type_id', 'widget_type_id'], 'required'],
             [['id', 'data_type_id', 'widget_type_id', 'user_id', 'user_update_id'], 'integer'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['user_id', 'user_update_id', 'date_created', 'date_updated'], 'safe'],
             [['label'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['data_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => DataType::className(), 'targetAttribute' => ['data_type_id' => 'id']],
@@ -59,10 +59,10 @@ class Field extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'label' => 'Label',
-            'data_type_id' => 'Data Type ID',
-            'widget_type_id' => 'Widget Type ID',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'data_type_id' => 'Data Type',
+            'widget_type_id' => 'Widget Type',
+            'user_id' => 'Created By',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];
