@@ -6,14 +6,12 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Field */
 
-$this->title = $model->id;
+$this->title = $model->label;
 $this->params['breadcrumbs'][] = ['label' => 'Fields', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="field-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,14 +27,31 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'label',
-            'data_type_id',
-            'widget_type_id',
-            'user_id',
-            'user_update_id',
-            'date_created',
-            'date_updated',
+            //'data_type_id',
+            [
+                'attribute' => 'data_type_id',
+                'value' => $model->dataType->data_type
+            ],
+            [
+                'attribute' => 'widget_type_id',
+                'value' => $model->widgetType->widget_type
+            ],
+            [
+                'attribute' => 'user_id',
+                'value' => $model->user->username
+            ],
+            //'user_id',
+            //'user_update_id',
+            //'date_created',
+            [
+                'attribute' => 'date_created',
+                'value' => function($model){
+                    return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                },
+            ]
+            //'date_updated',
         ],
     ]) ?>
 

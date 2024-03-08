@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\FieldSearch */
@@ -15,21 +17,29 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'label') ?>
+        </div>
 
-    <?= $form->field($model, 'label') ?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'data_type_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($data_type, 'id', 'data_type'),
+                'options' => [
+                    'placeholder' => 'Select Data Type',
+                ]
+            ]) ?>
+        </div>
 
-    <?= $form->field($model, 'data_type_id') ?>
-
-    <?= $form->field($model, 'widget_type_id') ?>
-
-    <?= $form->field($model, 'user_id') ?>
-
-    <?php // echo $form->field($model, 'user_update_id') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
-
-    <?php // echo $form->field($model, 'date_updated') ?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'widget_type_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($widget_type, 'id', 'widget_type'), 
+                'options' => [
+                    'placeholder' => 'Select Widget Type',
+                ]
+            ])?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -11,10 +11,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="field-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
+        'data_type' => $data_type,
+        'widget_type' => $widget_type
     ]) ?>
 
 </div>
