@@ -5,6 +5,9 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Form;
 use backend\models\FormSearch;
+use backend\models\Category;
+use backend\models\Status;
+use backend\models\Field;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +17,7 @@ use yii\filters\VerbFilter;
  */
 class FormController extends Controller
 {
+    
     /**
      * {@inheritdoc}
      */
@@ -65,6 +69,9 @@ class FormController extends Controller
     public function actionCreate()
     {
         $model = new Form();
+        $category = Category::find()->all();
+        $status = Status::find()->all();
+        $field = Field::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,6 +79,9 @@ class FormController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'category' => $category,
+            'status' => $status,
+            'field' => $field
         ]);
     }
 

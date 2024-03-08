@@ -5,6 +5,8 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Field;
 use backend\models\FieldSearch;
+use backend\models\DataType;
+use backend\models\WidgetType;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,11 +38,15 @@ class FieldController extends Controller
     public function actionIndex()
     {
         $searchModel = new FieldSearch();
+        $data_type = DataType::find()->all();
+        $widget_type = WidgetType::find()->all();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'data_type' => $data_type,
+            'widget_type' => $widget_type
         ]);
     }
 
@@ -65,13 +71,21 @@ class FieldController extends Controller
     public function actionCreate()
     {
         $model = new Field();
+        $data_type = DataType::find()->all();
+        $widget_type = WidgetType::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'data_type' => $data_type,
+            'widget_type' => $widget_type
         ]);
     }
 
@@ -85,6 +99,8 @@ class FieldController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data_type = DataType::find()->all();
+        $widget_type = WidgetType::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,6 +108,8 @@ class FieldController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'data_type' => $data_type,
+            'widget_type' => $widget_type
         ]);
     }
 
