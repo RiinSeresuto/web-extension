@@ -142,4 +142,19 @@ class FieldController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionDisplayFiedView()
+    {
+        $model = new Field();
+        if ($model->load(Yii::$app->request->post())) {
+
+            return $this->render('field_view', [
+                'label' => $model->label,
+            ]);
+        } else {
+            return $this->render('_form', [
+                'model' => $model
+            ]);
+        }
+    }
 }
