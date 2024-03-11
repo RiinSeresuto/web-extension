@@ -24,13 +24,13 @@ use Yii;
  * @property string $date_created
  * @property string $date_updated
  *
- * @property CmsFileAttachment[] $cmsFileAttachments
- * @property CmsForm $forms
- * @property CmsField $field
- * @property CmsPostStatusType $status
- * @property CmsVisibilityType $visibility
- * @property CmsPublishType $publish
- * @property CmsPages $page
+ * @property FileAttachment[] $cmsFileAttachments
+ * @property Form $forms
+ * @property Field $field
+ * @property PostStatusType $status
+ * @property VisibilityType $visibility
+ * @property PublishType $publish
+ * @property Pages $page
  * @property User $user
  * @property User $userUpdate
  */
@@ -50,9 +50,9 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'forms_id', 'field_id', 'tags', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer', 'user_id', 'user_update_id', 'date_updated'], 'required'],
-            [['id', 'forms_id', 'field_id', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'min_answer', 'max_answer', 'user_id', 'user_update_id'], 'integer'],
-            [['start_date_time', 'end_date_time', 'date_created', 'date_updated'], 'safe'],
+            [['forms_id', 'field_id', 'tags', 'status_id', 'visibility_id', 'publish_id', 'page_id'], 'required'],
+            [['forms_id', 'field_id', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'min_answer', 'max_answer'], 'integer'],
+            [['start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer'], 'safe'],
             [['tags'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['forms_id'], 'exist', 'skipOnError' => true, 'targetClass' => Form::className(), 'targetAttribute' => ['forms_id' => 'id']],
@@ -73,19 +73,19 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'forms_id' => 'Forms ID',
-            'field_id' => 'Field ID',
+            'forms_id' => 'Forms',
+            'field_id' => 'Field',
             'tags' => 'Tags',
-            'status_id' => 'Status ID',
-            'visibility_id' => 'Visibility ID',
-            'publish_id' => 'Publish ID',
-            'page_id' => 'Page ID',
+            'status_id' => 'Status',
+            'visibility_id' => 'Visibility',
+            'publish_id' => 'Publish',
+            'page_id' => 'Page',
             'start_date_time' => 'Start Date Time',
             'end_date_time' => 'End Date Time',
-            'min_answer' => 'Min Answer',
-            'max_answer' => 'Max Answer',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'min_answer' => 'Minimum Answer',
+            'max_answer' => 'Maximum Answer',
+            'user_id' => 'Created By',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
         ];
