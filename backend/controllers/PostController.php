@@ -5,6 +5,12 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Post;
 use backend\models\PostSearch;
+use backend\models\Form;
+use backend\models\Field;
+use backend\models\Status;
+use backend\models\VisibilityType;
+use backend\models\PublishType;
+use backend\models\Pages;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,6 +71,13 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
+        $forms = Form::find()->all();
+        $field = Field::find()->all();
+        $status = Status::find()->all();
+        $visibility_type = VisibilityType::find()->all();
+        $publish_type = PublishType::find()->all();
+        $page = Pages::find()->all();
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,6 +85,12 @@ class PostController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'forms' => $forms,
+            'field' => $field,
+            'status' => $status,
+            'visibility_type' => $visibility_type,
+            'publish_type' => $publish_type,
+            'page' => $page
         ]);
     }
 
