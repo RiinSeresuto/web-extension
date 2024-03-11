@@ -49,14 +49,52 @@ use kartik\select2\Select2;
                 ]
             ])?>
 
+            <!--  -->
+            <div class="card card-body" id="added-fields">
+
+            </div>
+
+            <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Add Fields
+            </a>
+           
+            </p>
+            <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <?php if(!empty($field)): ?>
+                    <?php foreach ($field as $field):?>
+                        <div class="row">
+                            <!-- <div class="r-button"><span>-</span></div> -->
+                            <div onclick="addField(<?= $field->id?>, this.parentElement)" class="a-button"><span>+</span></div>
+                            <div><span><?= $field->label?></span></div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif;?>
+            </div>
+            </div>
+
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
             </div>
         </div>
     </div>
 
-    
-
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php 
+$script = <<<JS
+ids = []
+
+window.addField = function(id, parent){
+    ids = [...ids, id]
+    console.log(parent)
+    parent.remove()
+
+    $('#added-fields').append(parent)
+}
+JS;
+$this->registerJs($script)
+?>
