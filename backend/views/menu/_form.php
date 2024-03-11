@@ -123,7 +123,7 @@ use attachment\components\AttachmentsInput;
                             'showUpload' => false,
                             //'showBrowse' => false,
                             'showCancel' => false,
-                            'browseLabel' => 'Browse',
+                            'browseLabel' => 'Browse...',
                             'removeLabel' => '',
                             'mainClass' => 'input-group-lg',
                             'browseClass' => 'btn btn-info',
