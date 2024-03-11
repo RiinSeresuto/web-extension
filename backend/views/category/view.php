@@ -30,19 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            //'id',
             'title',
-            //'status_id',
             [
                 'attribute' => 'status_id',
                 'value' => function($model){
                     return $model->status->status_type;
                 },
             ],
-            //'user_id',
-            //'user_update_id',
-            //'date_created',
-            //'date_updated',
+            'year',
             [
                 'attribute' => 'user_id',
                 'value' => function($model){
