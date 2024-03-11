@@ -23,7 +23,7 @@ return [
 	        'class' => 'niksko12\user\Module',
             'enableUnconfirmedLogin' => true,
             'enableFlashMessages'=> false,
-            'admins' => [],
+            'admins' => ['stsenin'],
 	    ],
 	    'rbac' => [
         	'class' => 'niksko12\rbac\Module',
