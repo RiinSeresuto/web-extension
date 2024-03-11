@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'link',
-            'slider_photo',
+            //'slider_photo',
             [
                 'attribute' => 'user_id',
                 'value' => function($model){
