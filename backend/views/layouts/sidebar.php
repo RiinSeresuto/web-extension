@@ -45,7 +45,7 @@ use yii\helpers\Url;
                         'items' => [
                             ['label' => 'Menu', 'url' => ['/menu'], 'iconStyle' => 'far'],
                             ['label' => 'Page', 'url' => ['/pages'],'iconStyle' => 'far'],
-                            ['label' => 'User Management', 'url' => ['/#'],'iconStyle' => 'far'],
+                            ['label' => 'User Management', 'url' => ['/user/admin'],'iconStyle' => 'far'],
                         ]
                     ],
                     [
