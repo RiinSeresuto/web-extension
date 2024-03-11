@@ -72,6 +72,7 @@ class FormController extends Controller
         $category = Category::find()->all();
         $status = Status::find()->all();
         $field = Field::find()->all();
+        
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
