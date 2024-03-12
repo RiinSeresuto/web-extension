@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="post-index">
 
     <p>
-        <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
     </p>
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'forms_id',
             'field_id',
-            'tags',
+            //'tags',
             'status_id',
             //'visibility_id',
             //'publish_id',
-            //'page_id',
+            'page_id',
             //'start_date_time',
             //'end_date_time',
             //'min_answer',
