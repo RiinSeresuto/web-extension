@@ -43,7 +43,7 @@ class Form extends \yii\db\ActiveRecord
     {
         return [
             [['category_id', 'status_id', 'year_id', 'field_id',], 'required'],
-            [['id', 'category_id', 'description', 'status_id', 'year_id', 'field_id'], 'integer'],
+            [['id', 'category_id', 'status_id', 'year_id', 'field_id'], 'integer'],
             [['user_id', 'user_update_id', 'date_created', 'date_updated'], 'safe'],
             [['description'], 'string', 'max' => 255],
             [['id'], 'unique'],
