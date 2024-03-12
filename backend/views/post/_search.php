@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'field_id') ?>
 
-    <?= $form->field($model, 'tags') ?>
+    <?php // $form->field($model, 'tags') ?>
 
     <?= $form->field($model, 'status_id') ?>
 
@@ -29,25 +29,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'page_id') ?>
 
-    <?php // echo $form->field($model, 'start_date_time') ?>
-
-    <?php // echo $form->field($model, 'end_date_time') ?>
-
-    <?php // echo $form->field($model, 'min_answer') ?>
-
-    <?php // echo $form->field($model, 'max_answer') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
-
-    <?php // echo $form->field($model, 'user_update_id') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
-
-    <?php // echo $form->field($model, 'date_updated') ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
