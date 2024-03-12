@@ -1,6 +1,5 @@
 <?php
 
-use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -33,49 +32,29 @@ use kartik\select2\Select2;
                                         ],
                                     ]) ?>
 
-            <?= $form->field($model, 'year_id')->widget(DatePicker::className(), [
-                    'options' => ['placeholder' => "Select Year"],
-                    'pluginOptions' => [
-                        'format' => 'yyyy',
-                        'autoclose' => true,
-                        'minViewMode' => 'years',
-                    ]
-                ]) ?>
-                    
-            <?= $form->field($model, 'field_id')->widget(Select2::class, [
-                'data' => ArrayHelper::map($field, 'id', 'label'),
-                'options' => [
-                    'placeholder' => 'Select Field',
-                ]
-            ])?>
+            <div class="field">
+                <label for="field-label">Field</label>
+                    <p>
+                        <a class="badge badge-primary field-button" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Add Field
+                        </a>
+                    </p>
+            </div>
 
-            <!--  -->
+            <!--  Field Selected -->
             <div class="card card-body" id="added-fields">
-
+                <div>Selected Fields</div>
             </div>
 
-            <p>
-            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                Add Fields
-            </a>
-           
-            </p>
+            <!-- Adding of Fields -->
             <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                <?php if(!empty($field)): ?>
-                    <?php foreach ($field as $field):?>
-                        <div class="row">
-                            <!-- <div class="r-button"><span>-</span></div> -->
-                            <div onclick="addField(<?= $field->id?>, this.parentElement)" class="a-button"><span>+</span></div>
-                            <div><span><?= $field->label?></span></div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php endif;?>
-            </div>
+                <div class="card card-body" id="choices-fields">
+                    
+                </div>
             </div>
 
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']) ?>
             </div>
         </div>
     </div>
@@ -86,15 +65,57 @@ use kartik\select2\Select2;
 
 <?php 
 $script = <<<JS
-ids = []
+// ids = []
 
-window.addField = function(id, parent){
-    ids = [...ids, id]
-    console.log(parent)
-    parent.remove()
+// window.addField = function(id, parent){
+//     checkEmpty()
+//     ids = [...ids, id]
 
-    $('#added-fields').append(parent)
-}
+//     parent.remove()
+
+//     var removeElement = $('<div class="r-button" onclick="removeField(' + id + ', this.parentElement)"><span>-</span></div>')
+
+//     $(parent).find('.a-button').replaceWith(removeElement);
+//     $('#added-fields').append(parent)
+
+//     console.log(ids)
+// }
+
+// window.removeField = function(id, parent){
+//     checkEmpty()
+//     ids = ids.filter(e => e !== id)
+
+//     parent.remove()
+
+//     var removeElement = $('<div class="a-button" onclick="addField(' + id + ', this.parentElement)"><span>+</span></div>')
+
+//     $(parent).find('.r-button').replaceWith(removeElement);
+//     $('#choices-fields').append(parent)
+
+//     console.log(ids)
+// }
+
+// function checkEmpty() {
+//     if (ids.length == 0) {
+//         $('#selected-fields').empty()
+//     }
+// }
+$.ajax({
+        url: "/form/get-field",
+        dataType: 'json',
+       
+        success: data => {
+            // console.log(data)
+            //$('#displayTerms').empty()
+            
+            $.each(data, function(key, value) {
+                var element = $('<div class="row"><div class="a-button" onclick="addField(' + value.id + ', this.parentElement)"><span>+</span></div><div><span>' + value.label + '</span></div></div>')
+                $('#choices-fields').append(element)
+            })
+
+        }
+    })
+
 JS;
 $this->registerJs($script)
 ?>
