@@ -1,0 +1,26 @@
+.r-button {
+    background-color: #fc0703;
+}
+
+.a-button {
+    background-color: #28a644;
+}
+
+.r-button, .a-button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 8px;
+    cursor: pointer;
+    color: white;
+}
+
+
+.field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
