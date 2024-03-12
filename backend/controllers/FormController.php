@@ -11,6 +11,7 @@ use backend\models\Field;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * FormController implements the CRUD actions for Form model.
@@ -134,5 +135,11 @@ class FormController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionGetField()
+    {
+        $data = Field::find()->all();
+        return Json::encode($data);
     }
 }
