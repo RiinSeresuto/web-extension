@@ -11,6 +11,7 @@ use backend\models\Status;
 use backend\models\VisibilityType;
 use backend\models\PublishType;
 use backend\models\Pages;
+use backend\models\Category;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,6 +72,7 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
+        $category = Category::find()->all();
         $forms = Form::find()->all();
         $field = Field::find()->all();
         $status = Status::find()->all();
@@ -85,6 +87,7 @@ class PostController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'category' => $category,
             'forms' => $forms,
             'field' => $field,
             'status' => $status,
