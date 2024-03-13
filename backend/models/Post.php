@@ -8,6 +8,8 @@ use Yii;
  * This is the model class for table "cms_post".
  *
  * @property int $id
+ * @property int $category_id
+ * @property int $year
  * @property int $forms_id
  * @property int $field_id
  * @property string $tags
@@ -25,6 +27,7 @@ use Yii;
  * @property string $date_updated
  *
  * @property FileAttachment[] $cmsFileAttachments
+ * @property Category $category
  * @property Form $forms
  * @property Field $field
  * @property PostStatusType $status
@@ -50,11 +53,12 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['forms_id', 'field_id', 'tags', 'status_id', 'visibility_id', 'publish_id', 'page_id'], 'required'],
-            [['forms_id', 'field_id', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'min_answer', 'max_answer'], 'integer'],
+            [['category_id', 'year', 'forms_id', 'field_id', 'tags', 'status_id', 'visibility_id', 'publish_id', 'page_id'], 'required'],
+            [['forms_id', 'field_id', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'min_answer', 'max_answer', 'category_id', 'year'], 'integer'],
             [['start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer'], 'safe'],
             [['tags'], 'string', 'max' => 255],
             [['id'], 'unique'],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['forms_id'], 'exist', 'skipOnError' => true, 'targetClass' => Form::className(), 'targetAttribute' => ['forms_id' => 'id']],
             [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => PostStatusType::className(), 'targetAttribute' => ['status_id' => 'id']],
@@ -73,6 +77,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'category_id' => 'Category',
             'forms_id' => 'Forms',
             'field_id' => 'Field',
             'tags' => 'Tags',
@@ -179,5 +184,15 @@ class Post extends \yii\db\ActiveRecord
     public function getUserUpdate()
     {
         return $this->hasOne(User::className(), ['id' => 'user_update_id']);
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 }
