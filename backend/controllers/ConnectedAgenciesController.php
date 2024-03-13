@@ -119,12 +119,17 @@ class ConnectedAgenciesController extends Controller
     {
         $model = $this->findModel($id);
 
+        $agency_type = AgencyType::find()->all();
+        $status = Status::find()->all();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'agency_type' => $agency_type,
+            'status' => $status
         ]);
     }
 
