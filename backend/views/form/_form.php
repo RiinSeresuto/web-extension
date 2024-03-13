@@ -48,6 +48,7 @@ use kartik\select2\Select2;
 
             <!-- Adding of Fields -->
             <div class="collapse" id="collapseExample">
+                <input type="text" name="search" id="search-field" class="search">
                 <div class="card card-body" id="choices-fields">
                     
                 </div>
@@ -100,21 +101,86 @@ $script = <<<JS
 //         $('#selected-fields').empty()
 //     }
 // }
+var fields = []
+var ids = []
 $.ajax({
-        url: "/form/get-field",
-        dataType: 'json',
-       
-        success: data => {
-            // console.log(data)
-            //$('#displayTerms').empty()
-            
-            $.each(data, function(key, value) {
-                var element = $('<div class="row"><div class="a-button" onclick="addField(' + value.id + ', this.parentElement)"><span>+</span></div><div><span>' + value.label + '</span></div></div>')
-                $('#choices-fields').append(element)
-            })
+    url: "/form/get-field",
+    dataType: 'json',
+    
+    success: data => {
+        // console.log(data)
+        //$('#displayTerms').empty()
+        fields = data
+        listItem(data)
+        
+        
+    }
+})
 
-        }
+function listItem(data) {
+    var filteredData = data.filter(function(item) {
+        return !ids.includes(item.id);
+    });
+
+    $.each(filteredData, function(key, value) {
+        var element = $('<div class="row"><div class="a-button" onclick="addField(' + value.id + ', this.parentElement)"><span>+</span></div><div><span>' + value.label + '</span></div></div>')
+        $('#choices-fields').append(element)
     })
+
+}
+
+window.addField = function(id, parent){
+    //checkEmpty()
+    ids = [...ids, id]
+
+    parent.remove()
+
+    var removeElement = $('<div class="r-button" onclick="removeField(' + id + ', this.parentElement)"><span>-</span></div>')
+
+    $(parent).find('.a-button').replaceWith(removeElement);
+    $('#added-fields').append(parent)
+
+    console.log(ids)
+}
+
+
+window.removeField = function(id, parent){
+    ids = ids.filter(e => e !== id)
+
+    parent.remove()
+
+    $('#choices-fields').empty()
+
+    listItem(fields)
+
+    console.log(ids)
+}
+
+function sortIdAscending() {
+    jsonData.sort(function(a, b) {
+        return a.id - b.id;
+    });
+}
+
+function searchInBody(keyword) {
+  var searchTerm = keyword.toLowerCase();
+  
+  var filteredData = fields.filter(function(item) {
+    console.log(item)
+    var bodyText = item.label.toLowerCase();
+    return bodyText.includes(searchTerm);
+  });
+
+  return filteredData;
+}
+
+$("#search-field").on("keyup", function(e) {
+    var keyword = $(this).val()
+    var filteredData = searchInBody(keyword)
+
+    $('#choices-fields').empty()
+    listItem(filteredData)
+})
 
 JS;
 $this->registerJs($script)
