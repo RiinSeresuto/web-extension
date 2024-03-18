@@ -26,14 +26,14 @@ use kartik\date\DatePicker;
                         ],
                     ]) ?>
 
-                <?= $form->field($model, 'year')->widget(DatePicker::className(), [
-                                    'options' => ['placeholder' => "Select Year"],
-                                    'pluginOptions' => [
-                                        'format' => 'yyyy',
-                                        'autoclose' => true,
-                                        'minViewMode' => 'years',
-                                    ]
-                                ]) ?>
+                <?php // $form->field($model, 'year')->widget(DatePicker::className(), [
+                                //     'options' => ['placeholder' => "Select Year"],
+                                //     'pluginOptions' => [
+                                //         'format' => 'yyyy',
+                                //         'autoclose' => true,
+                                //         'minViewMode' => 'years',
+                                //     ]
+                                // ]) ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']) ?>
