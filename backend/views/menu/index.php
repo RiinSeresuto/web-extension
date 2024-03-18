@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\MenuSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -13,11 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="menu-index">
 
     <p>
-    <!-- <p class="text-right"> -->
         <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Menu', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
     </p>
 
-    <?= $this->render('_search', ['model' => $searchModel, 'position' => $position]); ?>
+    <?= $this->render('_search', [
+        'model' => $searchModel, 
+        'position' => $position]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -97,6 +99,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
             ],
+        ],
+        // 'pager' => [
+        //     'options' =>  ['class' => 'pagination'],
+        //     'maxButtonCount' => 5,
+
+        // ],
+        'pager' => [
+            'class' => 'yii\bootstrap4\LinkPager',
         ],
     ]); ?>
 

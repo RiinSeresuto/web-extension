@@ -95,6 +95,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
             ],
         ],
+        'pager' => [
+            'options' =>  ['class' => 'pagination'],
+            'maxButtonCount' => 5,
+        ],
     ]); ?>
 
 
