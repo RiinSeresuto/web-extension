@@ -11,7 +11,7 @@ use Yii;
  * @property int $category_id
  * @property string $description
  * @property int $status_id
- * @property int $year_id
+ * @property int $year
  * @property int $field_id
  * @property int $user_id
  * @property int $user_update_id
@@ -42,15 +42,15 @@ class Form extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'status_id', 'year_id', 'field_id',], 'required'],
-            [['id', 'category_id', 'status_id', 'year_id', 'field_id'], 'integer'],
-            [['user_id', 'user_update_id', 'date_created', 'date_updated'], 'safe'],
-            [['description'], 'string', 'max' => 255],
+            [['category_id', 'status_id', 'year'], 'required'],
+            [['id', 'category_id', 'status_id', 'year'], 'integer'],
+            [['user_id', 'user_update_id', 'date_created', 'date_updated', 'field_id'], 'safe'],
+            [['description', 'field_id'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
+           // [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
-            [['year_id'], 'exist', 'skipOnError' => true, 'targetClass' => Year::className(), 'targetAttribute' => ['year_id' => 'id']],
+            //[['year_id'], 'exist', 'skipOnError' => true, 'targetClass' => Year::className(), 'targetAttribute' => ['year_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
