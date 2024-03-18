@@ -7,8 +7,8 @@
 }
 
 .r-button, .a-button {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,3 +24,23 @@
     align-items: center;
     gap: 10px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: left;
+    width: 10px;
+}
+
+.pagination .prev, .pagination .next, .pagination .page {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    text-decoration: none;
+}
+
+.pagination .active {
+    background-color: #337ab7;
+    color: #fff;
+}   
