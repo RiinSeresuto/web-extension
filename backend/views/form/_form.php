@@ -4,6 +4,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Form */
@@ -15,6 +16,7 @@ use kartik\select2\Select2;
     <div class="form-group">
         <div class="col-md-12">
             <?php $form = ActiveForm::begin(); ?>
+            <?= $form->field($model, 'field_id')->textInput(['id' => 'array-field'])->label(false) ?>
 
              <?= $form->field($model, 'category_id')->widget(Select2::class, [
                 'data' => ArrayHelper::map($category, 'id', 'title'),
@@ -31,6 +33,15 @@ use kartik\select2\Select2;
                                             'placeholder' => 'Select Status',
                                         ],
                                     ]) ?>
+
+            <?= $form->field($model, 'year')->widget(DatePicker::className(), [
+                                    'options' => ['placeholder' => "Select Year"],
+                                    'pluginOptions' => [
+                                        'format' => 'yyyy',
+                                        'autoclose' => true,
+                                        'minViewMode' => 'years',
+                                    ]
+                                ]) ?>
 
             <div class="field">
                 <label for="field-label">Field</label>
@@ -55,7 +66,7 @@ use kartik\select2\Select2;
             </div>
 
             <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm', 'id' => 'submit']) ?>
             </div>
         </div>
     </div>
@@ -66,41 +77,6 @@ use kartik\select2\Select2;
 
 <?php 
 $script = <<<JS
-// ids = []
-
-// window.addField = function(id, parent){
-//     checkEmpty()
-//     ids = [...ids, id]
-
-//     parent.remove()
-
-//     var removeElement = $('<div class="r-button" onclick="removeField(' + id + ', this.parentElement)"><span>-</span></div>')
-
-//     $(parent).find('.a-button').replaceWith(removeElement);
-//     $('#added-fields').append(parent)
-
-//     console.log(ids)
-// }
-
-// window.removeField = function(id, parent){
-//     checkEmpty()
-//     ids = ids.filter(e => e !== id)
-
-//     parent.remove()
-
-//     var removeElement = $('<div class="a-button" onclick="addField(' + id + ', this.parentElement)"><span>+</span></div>')
-
-//     $(parent).find('.r-button').replaceWith(removeElement);
-//     $('#choices-fields').append(parent)
-
-//     console.log(ids)
-// }
-
-// function checkEmpty() {
-//     if (ids.length == 0) {
-//         $('#selected-fields').empty()
-//     }
-// }
 var fields = []
 var ids = []
 $.ajax({
@@ -108,12 +84,8 @@ $.ajax({
     dataType: 'json',
     
     success: data => {
-        // console.log(data)
-        //$('#displayTerms').empty()
         fields = data
         listItem(data)
-        
-        
     }
 })
 
@@ -130,7 +102,6 @@ function listItem(data) {
 }
 
 window.addField = function(id, parent){
-    //checkEmpty()
     ids = [...ids, id]
 
     parent.remove()
@@ -141,6 +112,7 @@ window.addField = function(id, parent){
     $('#added-fields').append(parent)
 
     console.log(ids)
+    addValue()
 }
 
 
@@ -154,6 +126,7 @@ window.removeField = function(id, parent){
     listItem(fields)
 
     console.log(ids)
+    addValue()
 }
 
 function sortIdAscending() {
@@ -182,6 +155,20 @@ $("#search-field").on("keyup", function(e) {
     listItem(filteredData)
 })
 
+function addValue(){
+    // $('#array-field').val(JSON.stringify(ids))
+    $('#array-field').val(ids)
+    //console.log(JSON.stringify(ids))
+}
+
+$('#submit').on('click', function(){
+
+    //console.log(typeof JSON.stringify(ids))
+    if(ids.length == 0){
+        alert('Please select at least one field')
+        return 
+    }
+})
 JS;
 $this->registerJs($script)
 ?>

@@ -16,7 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Form', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
     </p>
 
-    <?= $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', [
+        'model' => $searchModel,
+        'category' => $category,
+        'status' => $status,
+        
+        ]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -28,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'category_id',
             'description',
             'status_id',
-            'year_id',
+            'year',
             //'field_id',
             'user_id',
             //'user_update_id',
@@ -76,6 +81,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
             ],
+        ],
+        'pager' => [
+            'options' =>  ['class' => 'pagination'],
+            'maxButtonCount' => 5,
         ],
     ]); ?>
 
