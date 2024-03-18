@@ -17,7 +17,7 @@ class FormSearch extends Form
     public function rules()
     {
         return [
-            [['id', 'category_id', 'status_id', 'year_id', 'field_id', 'user_id', 'user_update_id'], 'integer'],
+            [['id', 'category_id', 'status_id', 'year', 'field_id', 'user_id', 'user_update_id'], 'integer'],
             [['description', 'date_created', 'date_updated'], 'safe'],
         ];
     }
@@ -61,7 +61,7 @@ class FormSearch extends Form
             'id' => $this->id,
             'category_id' => $this->category_id,
             'status_id' => $this->status_id,
-            'year_id' => $this->year_id,
+            'year' => $this->year,
             'field_id' => $this->field_id,
             'user_id' => $this->user_id,
             'user_update_id' => $this->user_update_id,

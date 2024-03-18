@@ -12,7 +12,7 @@ use Yii;
  * @property int $status_id
  * @property int $user_id
  * @property int $user_update_id
- * @property int $year
+ *  // year
  * @property string $date_created
  * @property string $date_updated
  *
@@ -38,8 +38,8 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'status_id', 'year'], 'required'],
-            [['id', 'status_id', 'year'], 'integer'],
+            [['title', 'status_id'], 'required'],   // year
+            [['id', 'status_id'], 'integer'],       //year
             [['date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -59,6 +59,7 @@ class Category extends \yii\db\ActiveRecord
             'title' => 'Title',
             'status_id' => 'Status',
             'user_id' => 'Created By',
+            //'year' => 'Year',
             'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
@@ -105,13 +106,13 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(Form::className(), ['category_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[CmsYears]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCmsYears()
-    {
-        return $this->hasMany(Year::className(), ['category_id' => 'id']);
-    }
+    // /**
+    //  * Gets query for [[CmsYears]].
+    //  *
+    //  * @return \yii\db\ActiveQuery
+    //  */
+    // public function getCmsYears()
+    // {
+    //     return $this->hasMany(Year::className(), ['category_id' => 'id']);
+    // }
 }
