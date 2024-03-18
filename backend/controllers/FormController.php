@@ -43,9 +43,15 @@ class FormController extends Controller
         $searchModel = new FormSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $category = Category::find()->all();
+        $status = Status::find()->all();
+        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'category' => $category,
+            'status' => $status,
         ]);
     }
 
@@ -75,8 +81,26 @@ class FormController extends Controller
         $field = Field::find()->all();
         
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            echo '<pre>';
+            print_r($model->field_id);
+            echo gettype($model->field_id),
+            exit;
+
+
+            
+            if ($model->save()){
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            else{
+                // print_r($model->errors);
+                // exit;
+            }
+            
         }
 
         return $this->render('create', [
@@ -98,12 +122,25 @@ class FormController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $category = Category::find()->all();
+        $status = Status::find()->all();
+        $field = Field::find()->all();
+
+        if ($model->load(Yii::$app->request->post())) {
+            
+            $model->user_update_id = Yii::$app->user->identity->id;
+            
+            if ($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            
         }
 
         return $this->render('update', [
             'model' => $model,
+            'category' => $category,
+            'status' => $status,
+            'field' => $field
         ]);
     }
 
