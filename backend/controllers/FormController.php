@@ -85,10 +85,10 @@ class FormController extends Controller
 
             $model->user_id = Yii::$app->user->identity->id;
 
-            echo '<pre>';
-            print_r($model->field_id);
-            echo gettype($model->field_id),
-            exit;
+            // echo '<pre>';
+            // print_r($model->field_id);
+            // echo gettype($model->field_id),
+            // exit;
 
 
             
