@@ -134,8 +134,7 @@ class MenuController extends Controller
         $position = Position::find()->all();
         $menu = Menu::find()->all();
         $url_type = UrlType::find()->all();
-
-
+        $content_type = ContentType::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()){
@@ -149,7 +148,8 @@ class MenuController extends Controller
             'status' => $status,
             'position' => $position,
             'menu' => $menu,
-            'url_type' => $url_type
+            'url_type' => $url_type,
+            'content_type' => $content_type
         ]);
     }
 
