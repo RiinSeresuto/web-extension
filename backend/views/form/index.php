@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-index">
 
     <p>
-        <?= Html::a('Create Form', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        <?= Html::a('<i class="fas fa-plus"></i> Create Form', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
     </p>
 
     <?= $this->render('_search', [
@@ -29,16 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
             'category_id',
             'description',
             'status_id',
             'year',
-            //'field_id',
             'user_id',
-            //'user_update_id',
             'date_created',
-            //'date_updated',
 
             [
                 'header' => 'Actions',
