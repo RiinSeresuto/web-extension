@@ -151,17 +151,43 @@ class PagesController extends Controller
         $status = Status::find()->all();
         $type = Type::find()->all();
         $menu = Menu::find()->all();
+        
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->user_update_id = Yii::$app->user->identity->id;
+            if ($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        $menus = Menu::find()->where(['position_id' => 1])->orderBy(['menu_order' => SORT_ASC])->all();
+        $children = [];
+        $childrenPath = [];
+
+        foreach($menus as $menu){
+            if(empty($menu->menuChildren)){
+                $children[] = $menu;
+            }
+        }
+        
+        foreach($children as $child){
+            if(!empty($child->parent_id)){
+                $label = $this->getParent($child->parent_id);
+
+                $childrenPath[$child->id] = $label . ' / ' . $child->label;
+            } else {
+                $childrenPath[$child->id] = $child->label;
+            }
+        }
+
 
         return $this->render('update', [
             'model' => $model,
             'url_type' => $url_type,
             'status' => $status,
             'type' => $type,
-            'menu' => $menu
+            'menu' => $menu,
+            'childrenPath' => $childrenPath
         ]);
     }
 
