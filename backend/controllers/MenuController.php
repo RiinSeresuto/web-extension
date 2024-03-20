@@ -69,7 +69,7 @@ class MenuController extends Controller
         $items = [];
         $path = Yii::getAlias('@common/uploads/store');
         $files = FileHelper::findFiles($path);
-        //$menu = Menu::find()->all();
+        $menu = Menu::find()->all();
 
         foreach ($files as $file) {
           $item = [
@@ -82,7 +82,7 @@ class MenuController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
             'items' => $items,
-            //'menu' => $menu
+            'menu' => $menu
         ]);
     }
 
