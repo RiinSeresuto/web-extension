@@ -37,13 +37,23 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $searchModel = new CategorySearch();
-        $status = Status::find()->all();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $status = Status::find()->all();
+        $model = new Category();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'status' => $status,
+            'model' => $model
         ]);
     }
 
@@ -96,11 +106,15 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
         $status = Status::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
             'status' => $status,
         ]);
