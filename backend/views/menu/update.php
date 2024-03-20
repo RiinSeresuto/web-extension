@@ -17,7 +17,8 @@ $this->params['breadcrumbs'][] = 'Update';
         'status' => $status,
         'position' => $position,
         'menu' => $menu,
-        'url_type' => $url_type
+        'url_type' => $url_type,
+        'content_type' => $content_type
     ]) ?>
 
 </div>

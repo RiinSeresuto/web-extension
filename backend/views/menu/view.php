@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card-header">
             Menu Details: <?= $this->title = $model->label; ?>
         </div>
-        <p class="text-right buttons">
+        <div class="text-right buttons">
             <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
             <?= Html::a('<i class="fas fa-info-circle"></i> Detailed View', ['/', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
             <?= Html::a('<i class="fas fa-eye"></i> Actual View', ['/', 'id' => $model->id], ['class' => 'btn btn-success btn-sm']) ?>
@@ -32,12 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post',
                 ],
             ]) ?>
-        </p>
+        </div>
         <div class="card-body">
-            <!-- <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a> -->
-
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
@@ -64,13 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     'link',
-                    // [
-                    //     'label' => 'Uploaded By',
-                    //     'value' => function($model){
-                    //         $user_info = yii::$app->user->identity->userinfo;
-                    //         return $user_info->FIRST_M.' '.$user_info->LAST_M;
-                    //     },
-                    // ],
                     [
                         'attribute' => 'user_id',
                         'value' => function($model){
@@ -83,12 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
                         },
                     ],
-                    // [
-                    //     'attribute' => 'date_updated',
-                    //     'value' => function($model){
-                    //         return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null; 
-                    //     },
-                    // ],
                 ],
             ]) ?>
             
@@ -135,11 +118,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
-    </div>
-
-    
-
-    
-
-    
+    </div> 
 </div>
