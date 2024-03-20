@@ -44,3 +44,12 @@
     background-color: #337ab7;
     color: #fff;
 }   
+
+.buttons {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.view-field{
+    margin-top: 20px;
+}
