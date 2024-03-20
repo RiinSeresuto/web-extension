@@ -14,11 +14,14 @@ use kartik\editors\Summernote;
 
 <div class="pages-form">
 
+    <p class="text-right">
+        <?= Html::a('<i class="fas fa-upload"></i> Upload Slider Photo', ['index', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+    </p>
+
     <div class="form-group">
         <div class="col-md-12">
             <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
-            <!-- Menu Nav -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-floating">
@@ -35,14 +38,10 @@ use kartik\editors\Summernote;
                 </div>
             </div>
 
-            <!-- Title -->
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-            <!-- Body (Summernote Editor) -->
             
             <?= $form->field($model, 'body')->widget(Summernote::class,['container' => ['class' => 'kv-editor-container']]);?>
             
-
             <div class="row">
                 <div class="col-md-4">
                     <?= $form->field($model, 'url_type_id')->widget(Select2::class, [
@@ -144,7 +143,7 @@ use kartik\editors\Summernote;
                     </div>
             </div>
 
-            <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : 'Update', [
+            <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Save' : 'Update', [
                                 'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
                                 'onclick' => "$('#file-input').fileinput('upload');"
                                     ]) ?>
