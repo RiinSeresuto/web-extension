@@ -11,7 +11,7 @@ use Yii;
  * @property int $form_id
  * @property int $field_id
  */
-class FormField extends \yii\db\ActiveRecord
+class FormField extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

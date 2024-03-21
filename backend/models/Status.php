@@ -16,7 +16,7 @@ use Yii;
  * @property CmsMenu[] $cmsMenus
  * @property CmsPages[] $cmsPages
  */
-class Status extends \yii\db\ActiveRecord
+class Status extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

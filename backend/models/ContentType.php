@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $content_label
  */
-class ContentType extends \yii\db\ActiveRecord
+class ContentType extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

@@ -25,7 +25,7 @@ use Yii;
  * @property User $user
  * @property User $userUpdate
  */
-class ConnectedAgencies extends \yii\db\ActiveRecord
+class ConnectedAgencies extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

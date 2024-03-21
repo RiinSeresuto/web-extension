@@ -31,7 +31,7 @@ use Yii;
  * @property Pages[] $cmsPages
  * @property ContentType $contentTypes
  */
-class Menu extends \yii\db\ActiveRecord
+class Menu extends \niksko12\auditlogs\classes\ModelAudit
 {
     public $file_attach=[];
     /**

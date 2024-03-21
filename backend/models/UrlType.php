@@ -12,7 +12,7 @@ use Yii;
  *
  * @property CmsPages[] $cmsPages
  */
-class UrlType extends \yii\db\ActiveRecord
+class UrlType extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

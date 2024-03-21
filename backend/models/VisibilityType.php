@@ -12,7 +12,7 @@ use Yii;
  *
  * @property CmsPost[] $cmsPosts
  */
-class VisibilityType extends \yii\db\ActiveRecord
+class VisibilityType extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

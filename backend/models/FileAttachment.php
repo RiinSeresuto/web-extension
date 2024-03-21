@@ -26,7 +26,7 @@ use Yii;
  * @property CmsPages[] $cmsPages
  * @property CmsPages[] $cmsPages0
  */
-class FileAttachment extends \yii\db\ActiveRecord
+class FileAttachment extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

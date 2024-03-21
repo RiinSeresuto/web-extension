@@ -33,7 +33,7 @@ use Yii;
  * @property User $userUpdate
  * @property Post[] $cmsPosts
  */
-class Pages extends \yii\db\ActiveRecord
+class Pages extends \niksko12\auditlogs\classes\ModelAudit
 {
     public $file_attach=[];
     public $photo_attach=[];

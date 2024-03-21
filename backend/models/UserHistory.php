@@ -18,7 +18,7 @@ use Yii;
  * @property int $created_at
  * @property int $updated_at
  */
-class UserHistory extends \yii\db\ActiveRecord
+class UserHistory extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

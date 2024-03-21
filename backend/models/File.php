@@ -22,7 +22,7 @@ use Yii;
  *
  * @property Content[] $contents
  */
-class File extends \yii\db\ActiveRecord
+class File extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

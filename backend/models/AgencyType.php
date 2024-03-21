@@ -10,9 +10,9 @@ use Yii;
  * @property int $id
  * @property string $agency_type
  *
- * @property CmsConnectedAgencies[] $cmsConnectedAgencies
+ * @property ConnectedAgencies[] $cmsConnectedAgencies
  */
-class AgencyType extends \yii\db\ActiveRecord
+class AgencyType extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

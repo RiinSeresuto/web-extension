@@ -12,7 +12,7 @@ use Yii;
  *
  * @property Menu[] $cmsMenus
  */
-class Position extends \yii\db\ActiveRecord
+class Position extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

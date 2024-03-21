@@ -22,7 +22,7 @@ use Yii;
  * @property Form[] $cmsForms
  * @property Year[] $cmsYears
  */
-class Category extends \yii\db\ActiveRecord
+class Category extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

@@ -49,7 +49,7 @@ use Yii;
  * @property Token[] $tokens
  * @property UserInfo $userInfo
  */
-class User extends \yii\db\ActiveRecord
+class User extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

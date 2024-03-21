@@ -26,7 +26,7 @@ use Yii;
  * @property User $userUpdate
  * @property Post[] $cmsPosts
  */
-class Form extends \yii\db\ActiveRecord
+class Form extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

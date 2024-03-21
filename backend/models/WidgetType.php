@@ -12,7 +12,7 @@ use Yii;
  *
  * @property CmsField[] $cmsFields
  */
-class WidgetType extends \yii\db\ActiveRecord
+class WidgetType extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

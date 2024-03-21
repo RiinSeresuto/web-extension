@@ -12,7 +12,7 @@ use Yii;
  *
  * @property CmsPost[] $cmsPosts
  */
-class PublishType extends \yii\db\ActiveRecord
+class PublishType extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

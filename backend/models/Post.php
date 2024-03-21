@@ -37,7 +37,7 @@ use Yii;
  * @property User $user
  * @property User $userUpdate
  */
-class Post extends \yii\db\ActiveRecord
+class Post extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

@@ -23,7 +23,7 @@ use Yii;
  * @property Form[] $cmsForms
  * @property Post[] $cmsPosts
  */
-class Field extends \yii\db\ActiveRecord
+class Field extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}

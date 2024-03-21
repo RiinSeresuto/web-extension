@@ -36,7 +36,7 @@ use Yii;
  * @property Tbloffice $oFFICEC
  * @property User $user
  */
-class UserInfo extends \yii\db\ActiveRecord
+class UserInfo extends \niksko12\auditlogs\classes\ModelAudit
 {
     /**
      * {@inheritdoc}
