@@ -12,7 +12,7 @@ use Yii;
  * @property string $description
  * @property int $status_id
  * @property int $year
- * @property int $field_id
+ * @property int $field
  * @property int $user_id
  * @property int $user_update_id
  * @property string $date_created
@@ -21,13 +21,13 @@ use Yii;
  * @property Field $field
  * @property Category $category
  * @property Status $status
- * @property Year $year
  * @property User $user
  * @property User $userUpdate
  * @property Post[] $cmsPosts
  */
 class Form extends \niksko12\auditlogs\classes\ModelAudit
 {
+    public $field;
     /**
      * {@inheritdoc}
      */
@@ -44,13 +44,11 @@ class Form extends \niksko12\auditlogs\classes\ModelAudit
         return [
             [['category_id', 'status_id', 'year'], 'required'],
             [['id', 'category_id', 'status_id', 'year'], 'integer'],
-            [['user_id', 'user_update_id', 'date_created', 'date_updated', 'field_id'], 'safe'],
-            [['description', 'field_id'], 'string', 'max' => 255],
+            [['user_id', 'user_update_id', 'date_created', 'date_updated', 'field'], 'safe'],
+            [['description', 'field'], 'string', 'max' => 255],
             [['id'], 'unique'],
-           // [['field_id'], 'exist', 'skipOnError' => true, 'targetClass' => Field::className(), 'targetAttribute' => ['field_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
-            //[['year_id'], 'exist', 'skipOnError' => true, 'targetClass' => Year::className(), 'targetAttribute' => ['year_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
         ];
@@ -67,7 +65,7 @@ class Form extends \niksko12\auditlogs\classes\ModelAudit
             'description' => 'Description',
             'status_id' => 'Status',
             'year_id' => 'Year',
-            'field_id' => 'Field',
+            'field' => 'Field',
             'user_id' => 'Created By',
             'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
@@ -82,7 +80,7 @@ class Form extends \niksko12\auditlogs\classes\ModelAudit
      */
     public function getField()
     {
-        return $this->hasOne(Field::className(), ['id' => 'field_id']);
+        return $this->hasOne(Field::className(), ['id' => 'field']);
     }
 
     /**
@@ -103,16 +101,6 @@ class Form extends \niksko12\auditlogs\classes\ModelAudit
     public function getStatus()
     {
         return $this->hasOne(Status::className(), ['id' => 'status_id']);
-    }
-
-    /**
-     * Gets query for [[Year]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getYear()
-    {
-        return $this->hasOne(Year::className(), ['id' => 'year_id']);
     }
 
     /**
@@ -144,4 +132,27 @@ class Form extends \niksko12\auditlogs\classes\ModelAudit
     {
         return $this->hasMany(Post::className(), ['forms_id' => 'id']);
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $fields = explode(",", $this->field);
+
+        if ($fields) {
+            foreach ($fields as $field) {
+                
+                $model = new FormField();
+                $model->form_id = $this->id;
+                $model->field_id = $field;
+                $model->save();
+            }
+        }
+    }
+
+    public function getFormField()
+    {
+        return $this->hasMany(FormField::className(), ['form_id' => 'id']);
+    }
+
 }
