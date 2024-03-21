@@ -32,9 +32,6 @@
 }
 
 .pagination .prev, .pagination .next, .pagination .page {
-    padding: 5px 10px;
-    margin: 0 2px;
-    border: 1px solid #ccc;
     background-color: #f9f9f9;
     color: #333;
     text-decoration: none;
@@ -55,6 +52,15 @@
 }
 
 .card-button{
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 20px;
 }
+
+#choices-fields, #added-fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+ .items {
+    display: flex;
+    align-items: center;
+ }
