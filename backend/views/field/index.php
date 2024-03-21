@@ -11,96 +11,95 @@ $this->title = 'Fields';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="field-index">
+    <div class="card">
+        <div class="card-button">
+            <?= Html::a('Create Field', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+        </div>
+        <div class="card-body">
+            <?= $this->render('_search', [
+                'model' => $searchModel,
+                'data_type' => $data_type,
+                'widget_type' => $widget_type
+                ]); ?>
 
-    <p>
-        <?= Html::a('Create Field', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
-    </p>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                //'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-    <?= $this->render('_search', [
-        'model' => $searchModel,
-        'data_type' => $data_type,
-        'widget_type' => $widget_type
-        ]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        //'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'label',
-            [
-                'attribute' => 'data_type_id',
-                'value' => function($data){
-                    return $data->dataType->data_type;
-                },
-            ],
-            [
-                'attribute' => 'widget_type_id',
-                'value' => function($data){
-                    return $data->widgetType->widget_type;
-                },
-            ],
-            [
-                'attribute' => 'user_id',
-                'value' => function($data){
-                    return $data->user->username;
-                },
-            ],
-            [
-                'attribute' => 'date_created',
-                'value' => function($data){
-                    return ($data->date_created) ? date('F d, Y h:i A', strtotime($data->date_created)) : null; 
-                },
-            ],
-
-            [
-                'header' => 'Actions',
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete}',
-                'headerOptions' => [
-                    'class' => 'text-center px-2',
-                    'style' => 'color: #0d6efd; width: 8rem;',
-                ],
-                'contentOptions' => ['class' => 'text-center px-2'],
-                'visibleButtons' => [
-                    'update' => true,
-                    'view' => true,
-                    'delete' => true,
-                ],
-                'buttons' =>
+                    'label',
                     [
-                        'view' => function ($url, $model) {
-                            return Html::a('<i class="fas fa-eye fa-xs"></i> View', $url, [
-                                'title' => Yii::t('yii', 'View'),
-                                'class' => 'btn btn-info  btn-sm px-2 py-0',
-                                'style' => 'width: 90px;'
-                            ]);
-                        },
-                        'update' => function ($url, $model) {
-                            return Html::a('<i class="fas fa-pencil-alt fa-xs"></i> Update', $url, [
-                                'title' => Yii::t('yii', 'Update'),
-                                'class' => 'btn btn-success btn-sm px-2 py-0',
-                                'style' => 'width: 90px;'
-                            ]);
-                        },
-                        'delete' => function ($url, $model) {
-                            return Html::a('<i class="fas fa-trash fa-xs"></i> Delete', $url, [
-                                'title' => Yii::t('yii', 'Delete'),
-                                'class' => 'btn btn-danger btn-sm px-2 py-0',
-                                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                                'data-method' => 'post',
-                                'style' => 'width: 90px;'
-                            ]);
+                        'attribute' => 'data_type_id',
+                        'value' => function($data){
+                            return $data->dataType->data_type;
                         },
                     ],
-            ],
-        ],
-        'pager' => [
-            'options' =>  ['class' => 'pagination'],
-            'maxButtonCount' => 5,
-        ],
-    ]); ?>
+                    [
+                        'attribute' => 'widget_type_id',
+                        'value' => function($data){
+                            return $data->widgetType->widget_type;
+                        },
+                    ],
+                    [
+                        'attribute' => 'user_id',
+                        'value' => function($data){
+                            return $data->user->username;
+                        },
+                    ],
+                    [
+                        'attribute' => 'date_created',
+                        'value' => function($data){
+                            return ($data->date_created) ? date('F d, Y h:i A', strtotime($data->date_created)) : null; 
+                        },
+                    ],
 
-
+                    [
+                        'header' => 'Actions',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} {delete}',
+                        'headerOptions' => [
+                            'class' => 'text-center px-2',
+                            'style' => 'color: #0d6efd; width: 8rem;',
+                        ],
+                        'contentOptions' => ['class' => 'text-center px-2'],
+                        'visibleButtons' => [
+                            'update' => true,
+                            'view' => true,
+                            'delete' => true,
+                        ],
+                        'buttons' =>
+                            [
+                                'view' => function ($url, $model) {
+                                    return Html::a('<i class="fas fa-eye fa-xs"></i> View', $url, [
+                                        'title' => Yii::t('yii', 'View'),
+                                        'class' => 'btn btn-info  btn-sm px-2 py-0',
+                                        'style' => 'width: 90px;'
+                                    ]);
+                                },
+                                'update' => function ($url, $model) {
+                                    return Html::a('<i class="fas fa-pencil-alt fa-xs"></i> Update', $url, [
+                                        'title' => Yii::t('yii', 'Update'),
+                                        'class' => 'btn btn-success btn-sm px-2 py-0',
+                                        'style' => 'width: 90px;'
+                                    ]);
+                                },
+                                'delete' => function ($url, $model) {
+                                    return Html::a('<i class="fas fa-trash fa-xs"></i> Delete', $url, [
+                                        'title' => Yii::t('yii', 'Delete'),
+                                        'class' => 'btn btn-danger btn-sm px-2 py-0',
+                                        'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                        'data-method' => 'post',
+                                        'style' => 'width: 90px;'
+                                    ]);
+                                },
+                            ],
+                    ],
+                ],
+                'pager' => [
+                    'class' => 'yii\bootstrap4\LinkPager',
+                 ],
+            ]); ?>
+        </div>
+    </div>
 </div>

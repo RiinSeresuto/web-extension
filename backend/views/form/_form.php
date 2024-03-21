@@ -12,67 +12,79 @@ use kartik\date\DatePicker;
 ?>
 
 <div class="form-form">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <?php $form = ActiveForm::begin(); ?>
 
-    <div class="form-group">
-        <div class="col-md-12">
-            <?php $form = ActiveForm::begin(); ?>
-            <?= $form->field($model, 'field_id')->textInput(['id' => 'array-field'])->label(false) ?>
+                    <?= $form->field($model, 'field')->textInput(['id' => 'array-field'])->label(false) ?>
 
-             <?= $form->field($model, 'category_id')->widget(Select2::class, [
-                'data' => ArrayHelper::map($category, 'id', 'title'),
-                'options' => [
-                    'placeholder' => 'Select Category',
-                ],
-            ])?>
+                    <?= $form->field($model, 'category_id')->widget(Select2::class, [
+                        'data' => ArrayHelper::map($category, 'id', 'title'),
+                        'options' => [
+                            'placeholder' => 'Select Category',
+                        ],
+                        ])?>
 
-            <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-            
-            <?= $form->field($model, 'status_id')->widget(Select2::class, [
-                                        'data' => ArrayHelper::map($status, 'id', 'status_type'),
-                                        'options' => [
-                                            'placeholder' => 'Select Status',
-                                        ],
-                                    ]) ?>
-
-            <?= $form->field($model, 'year')->widget(DatePicker::className(), [
-                                    'options' => ['placeholder' => "Select Year"],
-                                    'pluginOptions' => [
-                                        'format' => 'yyyy',
-                                        'autoclose' => true,
-                                        'minViewMode' => 'years',
-                                    ]
-                                ]) ?>
-
-            <div class="field">
-                <label for="field-label">Field</label>
-                    <p>
-                        <a class="badge badge-primary field-button" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Add Field
-                        </a>
-                    </p>
-            </div>
-
-            <!--  Field Selected -->
-            <div class="card card-body" id="added-fields">
-                <div>Selected Fields</div>
-            </div>
-
-            <!-- Adding of Fields -->
-            <div class="collapse" id="collapseExample">
-                <input type="text" name="search" id="search-field" class="search">
-                <div class="card card-body" id="choices-fields">
+                    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
                     
+                    <?= $form->field($model, 'status_id')->widget(Select2::class, [
+                            'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                            'options' => [
+                                'placeholder' => 'Select Status',
+                            ],
+                        ]) ?>
+
+                    <?= $form->field($model, 'year')->widget(DatePicker::className(), [
+                            'options' => ['placeholder' => "Select Year"],
+                            'pluginOptions' => [
+                                'format' => 'yyyy',
+                                'autoclose' => true,
+                                'minViewMode' => 'years',
+                            ]
+                        ]) ?>
+
+                    <div class="field">
+                        <label for="field-label">Field</label>
+                            <p>
+                                <a class="badge badge-primary field-button" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Add Field
+                                </a>
+                            </p>
+                    </div>
+
+                    <!-- <div class="card card-body" id="added-fields">
+                        <div>Selected Fields</div>
+                    </div> -->
+
+                    <div class="card">
+                        <p class="card-header">Selected Fields:</p>
+                            <div class="card-body" id="added-fields">
+                                
+                            </div>
+                    </div>
+
+                    <div class="collapse" id="collapseExample">
+                         
+                        <p class="card-header">Fields: <input type="text" name="search" id="search-field" class="search"></p>
+                        <div class="card card-body" id="choices-fields">
+                            
+                        </div>
+                    </div>
+
+                    
+
+                    
+
+                    <div class="form-group">
+                        <?= Html::submitButton('<i class="fas fa-save"></i> Save', ['class' => 'btn btn-success btn-sm', 'id' => 'submit']) ?>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm', 'id' => 'submit']) ?>
-            </div>
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>
 
 <?php 
@@ -95,7 +107,7 @@ function listItem(data) {
     });
 
     $.each(filteredData, function(key, value) {
-        var element = $('<div class="row"><div class="a-button" onclick="addField(' + value.id + ', this.parentElement)"><span>+</span></div><div><span>' + value.label + '</span></div></div>')
+        var element = $('<div class="row items"><div class="a-button" onclick="addField(' + value.id + ', this.parentElement)"><span>+</span></div><div><span>' + value.label + '</span></div></div>')
         $('#choices-fields').append(element)
     })
 
