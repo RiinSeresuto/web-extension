@@ -12,23 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="form-view">
-
-    <!-- <p>
-        <?php // Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-        <?php // Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
-        //     'class' => 'btn btn-danger btn-sm',
-        //     'data' => [
-        //         'confirm' => 'Are you sure you want to delete this item?',
-        //         'method' => 'post',
-        //     ],
-        // ]) ?>
-    </p> -->
-
     <div class="card">
         <div class="card-header">
             Form Details: <?= $this->title = $model->category->title; ?>
         </div>
-        <p class="text-right buttons">
+        <div class="text-right buttons">
             <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
             <?= Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
             <?= Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
@@ -38,10 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post',
                 ],
             ]) ?>
-        </p>
+        </div>
         <div class="card-body">
-            <!-- <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
@@ -66,12 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $model->user->username;
                             },
                         ],
-                        // [
-                        //     'attribute' => 'user_update_id',
-                        //     'value' => function($model){
-                        //         return $model->user->username;
-                        //     },
-                        // ],
                         'user_update_id',
                         [
                             'attribute' => 'date_created',
@@ -87,23 +67,22 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ],
                 ]) ?>
-            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             <div class="row view-field">
                 <div class="col-md-12">
                     <?= DetailView::widget([
-                        'model' => $model,
+                        'model' => $model->formField,
                         'attributes' => [
                             'field_id',
                         ]
                     ])            
                     ?>
+                    <?php
+                        // echo '<pre>';
+                        // print_r($model->formField);
+                        // exit;
+                    ?>
                 </div>
             </div>
         </div>
     </div>
-
-    
-
-    
-
 </div>
