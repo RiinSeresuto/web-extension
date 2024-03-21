@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <h5 class="card-header">Category Details: <?= $this->title = $model->title; ?></h5>
             <div class="text-right buttons">
                 <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
-                    <?= Html::a('<i class="fas fa-info-circle"></i> Detailed View', ['/', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
-                    <?= Html::a('<i class="fas fa-eye"></i> Actual View', ['/', 'id' => $model->id], ['class' => 'btn btn-success btn-sm']) ?>
+                    <?php // Html::a('<i class="fas fa-info-circle"></i> Detailed View', ['/', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
+                    <?php // Html::a('<i class="fas fa-eye"></i> Actual View', ['/', 'id' => $model->id], ['class' => 'btn btn-success btn-sm']) ?>
                     <?= Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
                     <?= Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
                         'class' => 'btn btn-danger btn-sm',
@@ -38,7 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $model->status->status_type;
                             },
                         ],
-                        'year',
                         [
                             'attribute' => 'user_id',
                             'value' => function($model){
