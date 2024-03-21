@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="menu-view">
-
     <div class="card">
         <div class="card-header">
             Menu Details: <?= $this->title = $model->label; ?>
@@ -118,5 +117,5 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </div>
