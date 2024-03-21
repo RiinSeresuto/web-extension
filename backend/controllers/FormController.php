@@ -19,6 +19,7 @@ use yii\helpers\Json;
 class FormController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     
+
     /**
      * {@inheritdoc}
      */
@@ -85,20 +86,12 @@ class FormController extends \niksko12\auditlogs\classes\ControllerAudit
 
             $model->user_id = Yii::$app->user->identity->id;
 
-            // echo '<pre>';
-            // print_r($model->field_id);
-            // echo gettype($model->field_id),
-            // exit;
-
-
-            
             if ($model->save()){
 
                 return $this->redirect(['view', 'id' => $model->id]);
             }
             else{
-                // print_r($model->errors);
-                // exit;
+
             }
             
         }
