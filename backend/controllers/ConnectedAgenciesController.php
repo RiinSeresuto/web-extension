@@ -18,7 +18,7 @@ use backend\models\File;
 /**
  * ConnectedAgenciesController implements the CRUD actions for ConnectedAgencies model.
  */
-class ConnectedAgenciesController extends Controller
+class ConnectedAgenciesController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     /**
      * {@inheritdoc}

@@ -16,7 +16,7 @@ use yii\helpers\Json;
 /**
  * FormController implements the CRUD actions for Form model.
  */
-class FormController extends Controller
+class FormController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     
     /**

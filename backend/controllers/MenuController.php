@@ -19,7 +19,7 @@ use yii\helpers\FileHelper;
 /**
  * MenuController implements the CRUD actions for Menu model.
  */
-class MenuController extends Controller
+class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     /**
      * {@inheritdoc}

@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
-class CategoryController extends Controller
+class CategoryController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     /**
      * {@inheritdoc}
@@ -114,7 +114,7 @@ class CategoryController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->renderAjax('update', [
+        return $this->render('update', [
             'model' => $model,
             'status' => $status,
         ]);

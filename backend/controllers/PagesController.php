@@ -20,7 +20,7 @@ use yii\helpers\FileHelper;
 /**
  * PagesController implements the CRUD actions for Pages model.
  */
-class PagesController extends Controller
+class PagesController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     /**
      * {@inheritdoc}

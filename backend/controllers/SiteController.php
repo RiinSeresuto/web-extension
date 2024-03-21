@@ -10,7 +10,7 @@ use common\models\LoginForm;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     /**
      * {@inheritdoc}
