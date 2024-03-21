@@ -17,18 +17,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="card">
         <div class="card-button">
-            <?php // Html::a('<i class="fas fa-plus"></i> Create Category', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus"></i> Create Category', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+            <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
             Add Category
-            </button>
+            </button> -->
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <?php $form = ActiveForm::begin(['action' => ['/category/create']]); ?>
+                    <?php // $form = ActiveForm::begin(['action' => ['/category/create']]); ?>
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -37,24 +37,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 <div class="modal-body">
                 
-                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+                <?php // $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'status_id')->widget(Select2::class, [
-                        'data' => ArrayHelper::map($status, 'id', 'status_type'),
-                        'options' => [
-                            'placeholder' => 'Select Status',
-                        ],
-                    ]) ?>
+                <?php // $form->field($model, 'status_id')->widget(Select2::class, [
+                        // 'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                        // 'options' => [
+                        //     'placeholder' => 'Select Status',
+                        // ],
+                    // ]) ?>
                 </div>
                 <div class="modal-footer">
                     <div class="form-group">
-                        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']) ?>
+                        <?php // Html::submitButton('Save', ['class' => 'btn btn-success btn-sm']) ?>
                     </div>
                 </div>
-                <?php ActiveForm::end(); ?>
+                <?php // ActiveForm::end(); ?>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="card-body">
         <?= $this->render('_search', [
