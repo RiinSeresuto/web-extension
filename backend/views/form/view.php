@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Form */
-
 $this->title = $model->category->title;
 $this->params['breadcrumbs'][] = ['label' => 'Forms', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= DetailView::widget([
                     'model' => $model,
                     'attributes' => [
+
                         [
                             'attribute' => 'category_id',
                             'value' => function($model){
@@ -69,18 +72,47 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
             <div class="row view-field">
                 <div class="col-md-12">
-                    <?= DetailView::widget([
-                        'model' => $model->formField,
-                        'attributes' => [
-                            'field_id',
-                        ]
-                    ])            
-                    ?>
+                    
                     <?php
                         // echo '<pre>';
                         // print_r($model->formField);
                         // exit;
+
+                        
+                        // foreach ($model->formField as $key => $value) {
+                        //     echo '<pre>';
+                        //     print_r($value->widgetType);
+                        //     exit;
+
+
+                        // }
+                    
                     ?>
+
+                    <?php $form = ActiveForm::begin(); ?>
+                        <?php foreach ($model->formField as $key => $value) : ?> <!-- model->function(model)->value -->
+                            <?php if($value->field_id == 1) : ?> <!-- -->
+                                <?= Html::tag('label', $value->field->label, $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
+                                <?= Html::input('area','','', $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
+                            <?php elseif ($value->field_id == 2) : ?>
+                                <?= Html::tag('label', $value->field->label, $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
+                                <?= Html::input('text','','', $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
+                            <?php elseif ($value->field_id == 3) : ?>
+                                <?= Html::tag('label', $value->field->label, $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
+                                <?= Select2::widget([
+                                    'name' => 'state_10',
+                                    'data' => [1 => 'One', 2 => 'Two', 3 => 'Three', 4 => 'Four', 5 => 'Five'],
+                                    'options' => [
+                                        'placeholder' => 'Select provinces ...',
+                                        'multiple' => true
+                                    ],
+                                ]); ?>
+                            <?php elseif ($value->field_id == 4) :?>
+                                
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php ActiveForm::end(); ?>
+                        
                 </div>
             </div>
         </div>
