@@ -2,11 +2,16 @@
 
 namespace backend\controllers;
 
+use kartik\form\ActiveForm;
 use Yii;
 use backend\models\Field;
 use backend\models\FieldSearch;
 use backend\models\DataType;
 use backend\models\WidgetType;
+use backend\models\WidgetSelect2Items;
+use backend\models\Model;
+use yii\helpers\ArrayHelper;
+use yii\web\Response;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -73,20 +78,75 @@ class FieldController extends \niksko12\auditlogs\classes\ControllerAudit
         $model = new Field();
         $data_type = DataType::find()->all();
         $widget_type = WidgetType::find()->all();
+        $modelParent = new Field();
+        $modelsChildren = [new WidgetSelect2Items];
 
-        if ($model->load(Yii::$app->request->post())) {
+        // if ($model->load(Yii::$app->request->post())) {
 
-            $model->user_id = Yii::$app->user->identity->id;
+        //     $model->user_id = Yii::$app->user->identity->id;
 
-            if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+        //     if ($model->save())
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
+
+        if ($modelParent->load(Yii::$app->request->post())) {
+            
+            $modelsChildren = Model::createMultiple(WidgetSelect2Items::classname(), $modelsChildren);
+            Model::loadMultiple($modelsChildren, Yii::$app->request->post());
+           
+            // ajax validation
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ArrayHelper::merge(
+                    ActiveForm::validateMultiple($modelsChildren),
+                    ActiveForm::validate($modelParent)
+                );
+            }
+
+            // validate all models
+            $valid = $modelParent->validate();
+            $valid = !empty($modelsChildren[0]) && $valid;
+            //echo "<pre>"; print_r($valid); exit;
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelParent->save(false)) {
+                        foreach ($modelsChildren as $child) {
+                            $child->form_id = $modelParent->id;
+                            if (! ($flag = $child->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelParent->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+
+            $errors = $modelParent->getErrors();
+            print_r($errors);
         }
+
 
         return $this->render('create', [
             'model' => $model,
             'data_type' => $data_type,
-            'widget_type' => $widget_type
+            'widget_type' => $widget_type,
+            'modelParent' => $modelParent,
+            'modelsChildren' => (empty($modelsChildren)) ? [new WidgetSelect2Items] : $modelsChildren
         ]);
+
+        // return $this->render('create', [
+        //     'model' => $model,
+        //     'data_type' => $data_type,
+        //     'widget_type' => $widget_type
+        // ]);
+
     }
 
     /**
