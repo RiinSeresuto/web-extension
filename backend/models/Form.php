@@ -28,6 +28,7 @@ use Yii;
 class Form extends \niksko12\auditlogs\classes\ModelAudit
 {
     public $field;
+
     /**
      * {@inheritdoc}
      */
@@ -141,7 +142,6 @@ class Form extends \niksko12\auditlogs\classes\ModelAudit
 
         if ($fields) {
             foreach ($fields as $field) {
-                
                 $model = new FormField();
                 $model->form_id = $this->id;
                 $model->field_id = $field;
