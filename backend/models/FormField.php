@@ -43,4 +43,14 @@ class FormField extends \niksko12\auditlogs\classes\ModelAudit
             'field_id' => 'Field ID',
         ];
     }
+
+    public function getField()
+    {
+        return $this->hasOne(Field::className(), ['id' => 'field_id']);
+    }
+
+    public function getWidgetType ()
+    {
+        return $this->hasOne(WidgetType::className(), ['id' => 'field_id']);
+    }
 }
