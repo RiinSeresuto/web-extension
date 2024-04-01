@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Pages */
 
 $this->title = 'Create Page';
-$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Page', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-create">

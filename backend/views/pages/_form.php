@@ -25,9 +25,7 @@ use kartik\editors\Summernote;
                             <div class="form-floating">
                                 <?=
                                 $form->field($model, 'menu_id')->widget(Select2::className(),[
-                                    //'name' => 'float_state_01',
                                     'data' => $childrenPath,
-                                    //'data' => ArrayHelper::map($menu, 'id', 'label'),
                                     'options' => ['placeholder' => 'Select Menu'],
                                     'pluginOptions' => ['allowClear' => true],
                                 ]);
@@ -71,43 +69,43 @@ use kartik\editors\Summernote;
 
                     <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'caption')->textInput(['maxlength' => true]) ?>
+                    <?php // $form->field($model, 'caption')->textInput(['maxlength' => true]) ?>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <?=  '<label for="photo_attach">Slider Photo</label>' ?>
-                            <?=  AttachmentsInput::widget([
-                                        'model' => $model,
-                                        'id' => 'photo_attach',
-                                        'options' => [ 
-                                            'multiple' => true,
-                                            'accept' => 'application/pdf',
-                                            'name' => 'photo_attach'
-                                        ],
-                                        'pluginOptions' => [
-                                            'initialPreviewAsData' =>  true,
-                                            //'initialPreviewFileType' => 'pdf',
-                                            'autoReplace' => false,
-                                            'overwriteInitial' => false,
-                                            'maxFileCount' => 3,
-                                            //'allowedFileExtensions' => ['pdf'],
-                                            'showUpload' => false,
-                                            'showCancel' => false,
-                                            'browseLabel' => 'Browse',
-                                            'removeLabel' => '',
-                                            'mainClass' => 'input-group-lg',
-                                            'browseClass' => 'btn btn-info',
-                                            'uploadClass' => 'btn btn-info',
-                                            'fileActionSettings'=> [
-                                                'showDrag' => false,
-                                                'showRemove' => true,
-                                                'msgRemove' => 'Are you sure you want to delete this file?',
-                                            ]
-                                        ]
-                                ]) ?>
+                            <?php // '<label for="photo_attach">Slider Photo</label>' ?>
+                            <?php //  AttachmentsInput::widget([
+                                //         'model' => $model,
+                                //         'id' => 'photo_attach',
+                                //         'options' => [ 
+                                //             'multiple' => true,
+                                //             'accept' => 'application/pdf',
+                                //             'name' => 'photo_attach'
+                                //         ],
+                                //         'pluginOptions' => [
+                                //             'initialPreviewAsData' =>  true,
+                                //             //'initialPreviewFileType' => 'pdf',
+                                //             'autoReplace' => false,
+                                //             'overwriteInitial' => false,
+                                //             'maxFileCount' => 3,
+                                //             //'allowedFileExtensions' => ['pdf'],
+                                //             'showUpload' => false,
+                                //             'showCancel' => false,
+                                //             'browseLabel' => 'Browse',
+                                //             'removeLabel' => '',
+                                //             'mainClass' => 'input-group-lg',
+                                //             'browseClass' => 'btn btn-info',
+                                //             'uploadClass' => 'btn btn-info',
+                                //             'fileActionSettings'=> [
+                                //                 'showDrag' => false,
+                                //                 'showRemove' => true,
+                                //                 'msgRemove' => 'Are you sure you want to delete this file?',
+                                //             ]
+                                //         ]
+                                // ]) ?>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                             <?=  '<label for="photo_attach">File Upload</label>' ?>
                                 <?=  AttachmentsInput::widget([
                                     'model' => $model,

@@ -7,13 +7,13 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\PagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pages';
+$this->title = 'Page';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pages-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Pages', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Page', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
 
         <div class="card-body">
