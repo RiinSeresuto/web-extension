@@ -1,5 +1,16 @@
 <?php 
 use yii\helpers\Url;
+
+$username = '';
+
+if (yii::$app->user->isGuest) {
+    $user_name = "";
+} else {
+
+    $userInfo = yii::$app->user->identity->userinfo;
+    $username = $userInfo->FIRST_M.' '.$userInfo->LAST_M;
+}
+
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -16,7 +27,8 @@ use yii\helpers\Url;
                 <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <p class="d-block m-0 p-0" style="color: white">
+                <?= $username ?></p>
             </div>
         </div>
 
@@ -45,12 +57,13 @@ use yii\helpers\Url;
                         'items' => [
                             ['label' => 'Menu', 'url' => ['/menu'], 'iconStyle' => 'far'],
                             ['label' => 'Page', 'url' => ['/pages'],'iconStyle' => 'far'],
+                            ['label' => 'Slider and Banner', 'url' => ['/slider-banner'], 'iconStyle' => 'far'],
                             ['label' => 'User Management', 'url' => ['/user/admin'],'iconStyle' => 'far'],
                         ]
                     ],
                     [
                         'label' => 'CMS',
-                        'icon' => 'th',
+                        'icon' => 'fa-solid fa-file',
                         'items' => [
                             ['label' => 'Category', 'url' => ['/category'], 'iconStyle' => 'far'],
                             ['label' => 'Field', 'url' => ['/field'], 'iconStyle' => 'far'],
@@ -60,7 +73,7 @@ use yii\helpers\Url;
                     ],
                     [
                         'label' => 'Feedback',
-                        'icon' => 'th',
+                        'icon' => 'fa-solid fa-comments',
                         'items' => [
                             ['label' => 'Draft JCs', 'url' => ['/#'], 'iconStyle' => 'far'],
                             ['label' => 'Draft MCs', 'url' => ['/#'], 'iconStyle' => 'far'],
@@ -68,7 +81,7 @@ use yii\helpers\Url;
                             ['label' => 'Public Assistance Center', 'url' => ['/#'], 'iconStyle' => 'far'],
                         ]
                     ],
-                    ['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'icon' => 'tachometer-alt'],
+                    ['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'icon' => 'fa-solid fa-globe'],
                 ],
             ]);
             ?>
