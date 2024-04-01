@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /* @var $model backend\models\Menu */
 
 $this->title = $model->label;
-$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Menu', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -21,8 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="text-right buttons">
             <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
-            <?= Html::a('<i class="fas fa-info-circle"></i> Detailed View', ['/', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
-            <?= Html::a('<i class="fas fa-eye"></i> Actual View', ['/', 'id' => $model->id], ['class' => 'btn btn-success btn-sm']) ?>
             <?= Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
             <?= Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger btn-sm',
@@ -71,18 +69,78 @@ $this->params['breadcrumbs'][] = $this->title;
                             return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
                         },
                     ],
+                    [
+                        'attribute' => 'user_update_id',
+                        'value' => function($model){
+                            return $model->user->username;
+                        },
+                    ],
+                    [
+                        'attribute' => 'date_updated',
+                        'value' => function($model){
+                            return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null;
+                        }
+                    ]
                 ],
             ]) ?>
             
 
             <div class="row">
                 <div class="col-md-12">
-                    <?=  '<label for="photo_attach">File Attachment</label>' ?>
+                    <?php //  '<label for="photo_attach">File Attachment</label>' ?>
+                    <?php // DetailView::widget([
+                    //     'model' => $model,
+                    //     'attributes' => [
+                    //         [
+                    //             'label' => 'File Attachment', 
+                    //             'format' => 'raw',
+                    //             'value' => function($model){
+                    //             //return \file\components\AttachmentsTable::widget(['model' => $model]); 
+                    //             return \attachment\components\AttachmentsInput::widget([
+                    //                 'id' => 'file-input', // Optional
+                    //                 'model' => $model,
+                    //                 'options' => [ // Options of the Kartik's FileInput widget
+                    //                     'multiple' => true, // If you want to allow multiple upload, default to false
+                    //                 ],
+                    //                 'pluginOptions' => [ 
+                    //                     'initialPreviewShowDelete' => false,
+                    //                     'initialPreviewAsData' =>  true,
+                    //                     'initialPreviewFileType' => 'pdf',
+                    //                     'maxFileCount' => 10, // Client max files
+                    //                     'showRemove' => false,
+                    //                     'showCancel' => false,
+                    //                     'showUpload' => false,
+                    //                     'showBrowse' => false,
+                    //                     'showCaption' => false,
+                    //                     'fileActionSettings' => [
+                    //                         'showRemove' => false,
+                    //                         //'showDownload' => true,
+                    //                     ],
+                    //                     'previewFileType' => 'pdf'
+                    //                 ],
+                    //                 ]);
+                    //             },
+                    //         ]
+                    //     ]
+                    // ])
+                    // ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <p>File Attachment</p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
                             [
-                                'label' => 'File Attachment', 
+                                'label' => '', 
                                 'format' => 'raw',
                                 'value' => function($model){
                                 //return \file\components\AttachmentsTable::widget(['model' => $model]); 

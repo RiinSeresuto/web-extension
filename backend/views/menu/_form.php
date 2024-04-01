@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
-use kartik\switchinput\SwitchInput;
 use attachment\components\AttachmentsInput;
 
 /* @var $this yii\web\View */
@@ -29,14 +28,18 @@ use attachment\components\AttachmentsInput;
                             'allowClear' => true
                         ]
                     ]) ?>
-                
-                    <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
 
                     <div class="row">
-                        <div class="col-md-3">
-                            <?= $form->field($model, 'menu_order')->textInput() ?>
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'label')->textInput(['maxlength' => true]) ?>
                         </div>
 
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'menu_order')->textInput() ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-3">
                             <?= $form->field($model, 'position_id')->widget(Select2::class, [
                                 'data' => ArrayHelper::map($position, 'id', 'position'),
@@ -70,8 +73,8 @@ use attachment\components\AttachmentsInput;
                                 ]                        
                             ]) ?>
                         </div>
-                    </div>
 
+                        <div class="col-md-3">
                             <?= $form->field($model, 'content_type')->widget(Select2::class, [
                                 'data' => ArrayHelper::map($content_type, 'id', 'content_label'),
                                 'options' => [
@@ -85,7 +88,9 @@ use attachment\components\AttachmentsInput;
                                             }'
                                 ]
                             ])?>
-
+                        </div>
+                    </div>
+  
                     <div class="row">
                         <div class="col-md-12">
                             <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
