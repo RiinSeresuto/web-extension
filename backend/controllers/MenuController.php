@@ -137,6 +137,9 @@ class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
         $content_type = ContentType::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
+            
+            $model->user_update_id = Yii::$app->user->identity->id;
+            
             if ($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }
