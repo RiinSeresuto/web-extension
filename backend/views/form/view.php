@@ -48,14 +48,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         'year',
-                        
                         [
                             'attribute' => 'user_id',
                             'value' => function($model){
                                 return $model->user->username;
                             },
                         ],
-                        'user_update_id',
+                        [
+                            'attribute' => 'user_update_id',
+                            'value' => function($model){
+                                return $model->user->username;
+                            }
+                        ],
                         [
                             'attribute' => 'date_created',
                             'value' => function($model){
@@ -91,12 +95,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?php $form = ActiveForm::begin(); ?>
                         <?php foreach ($model->formField as $key => $value) : ?> <!-- model->function(model)->value -->
-                            <?php if($value->field_id == 1) : ?> <!-- -->
+                            <!-- Text Area -->
+                            <?php if($value->field_id == 1) : ?> 
                                 <?= Html::tag('label', $value->field->label, $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
                                 <?= Html::input('area','','', $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
+                            <!-- Text Feild-->
                             <?php elseif ($value->field_id == 2) : ?>
                                 <?= Html::tag('label', $value->field->label, $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
                                 <?= Html::input('text','','', $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
+                            <!-- Select2-->
                             <?php elseif ($value->field_id == 3) : ?>
                                 <?= Html::tag('label', $value->field->label, $options=['class'=>'form-control','maxlength'=>10, 'style'=>'width:350px']) ?>
                                 <?= Select2::widget([
