@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 
 $username = '';
+$user = Yii::$app->user->identity;
 
 if (yii::$app->user->isGuest) {
     $user_name = "";
@@ -25,6 +26,8 @@ if (yii::$app->user->isGuest) {
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <!-- <img src="https://gravatar.com/avatar/<?php // $user->profile->gravatar_id ?>?s=24" class="img-circle elevation-2 alt="<?php // $user->username ?>" /> -->
+                <!-- class="img-rounded" -->
             </div>
             <div class="info">
                 <p class="d-block m-0 p-0" style="color: white">
