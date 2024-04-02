@@ -49,7 +49,7 @@ class Menu extends \niksko12\auditlogs\classes\ModelAudit
     {
         return [
             [['label', 'menu_order', 'position_id', 'status_id', 'url_type', 'content_type'], 'required'],
-            [['parent_id', 'menu_order', 'position_id', 'status_id', 'url_type', 'content_type'], 'integer'],         // added is_new_tab
+            [['parent_id', 'menu_order', 'position_id', 'status_id', 'url_type', 'content_type'], 'integer'],
             [['link', 'date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -114,8 +114,6 @@ class Menu extends \niksko12\auditlogs\classes\ModelAudit
     {
         return $this->hasOne(Status::className(), ['id' => 'url_type_id']);
     }
-
-    
 
     /**
      * Gets query for [[LogoFile]].
