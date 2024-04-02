@@ -73,6 +73,21 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                                 ],
                                             ]); ?>
 
+                                            <?php //DynamicFormWidget::begin([
+                                                //     'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                                                //     'widgetBody' => '.container-indicator', // required: css class selector
+                                                //     'widgetItem' => '.indicator', // required: css class
+                                                //     'limit' => 999, // the maximum times, an element can be cloned (default 999)
+                                                //     'min' => 1, // 0 or 1 (default 1)
+                                                //     'insertButton' => '.add-indicator', // css class
+                                                //     'deleteButton' => '.remove-indicator', // css class
+                                                //     'model' => $models[0],
+                                                //     'formId' => 'dynamic-form',
+                                                //     'formFields' => [
+                                                //         'title',
+                                                //     ],
+                                                // ]); ?>
+
                                             <div class="container-items"><!-- widgetContainer -->
                                             <?php foreach ($modelsChildren as $i => $child): ?>
                                                 <div class="item panel panel-default"><!-- widgetBody -->
