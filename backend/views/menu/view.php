@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $user yii\web\View */
@@ -71,14 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'user_update_id',
-                        'value' => function($model){
-                            return $model->user->username;
+                        'value' => function ($model) {
+                            return $model->user_update_id == null ? "(not set)" : $model->updateUser->username;
                         },
                     ],
                     [
                         'attribute' => 'date_updated',
-                        'value' => function($model){
-                            return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null;
+                        'value' => function ($model) {
+                            return $model->date_updated == null ? "(not set)" : date('F d, Y h:i A', strtotime($model->date_updated));
                         }
                     ]
                 ],
