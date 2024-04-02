@@ -231,8 +231,6 @@ class PagesController extends \niksko12\auditlogs\classes\ControllerAudit
             ->all();
     }
 
-    
-
     private function getParent($parent_id){
         $parent = Menu::find()->where(['id' => $parent_id])->one();
 
@@ -250,5 +248,25 @@ class PagesController extends \niksko12\auditlogs\classes\ControllerAudit
         
         //return $string;
     }
+
+    // public function getDetailedView()
+    // {
+    //     $items = [];
+    //     $path = Yii::getAlias('@common/uploads/store');
+    //     $files = FileHelper::findFiles($path);
+
+    //     foreach ($files as $file) {
+    //       $item = [
+    //         "url"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+    //         "src"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+    //     ];
+    //       $items[]=$item;
+    //     }
+
+    //     return $this->render('view', [
+    //         'model' => $this->findModel($id),
+    //         'items' => $items
+    //     ]);
+    // }
 
 }
