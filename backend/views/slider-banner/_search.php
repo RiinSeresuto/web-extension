@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\SliderBannerSearch */
@@ -15,27 +17,24 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'title') ?>
+        </div>
 
-    <?= $form->field($model, 'caption') ?>
-
-    <?= $form->field($model, 'file_attachment') ?>
-
-    <?= $form->field($model, 'logo') ?>
-
-    <?= $form->field($model, 'link') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
-
-    <?php // echo $form->field($model, 'user_update_id') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
-
-    <?php // echo $form->field($model, 'date_updated') ?>
-
+        <div class="col-md-6">
+            <?= $form->field($model, 'slider_banner_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($sliderBannerType, 'id', 'slider_banner_type'),
+                'options' => [
+                    'placeholder' => 'Select Type',
+                ],
+            ]) ?>
+        </div>
+    </div>
+    
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

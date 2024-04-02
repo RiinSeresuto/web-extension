@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\SliderBanner */
 
-$this->title = 'Update Slider Banner: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Slider Banners', 'url' => ['index']];
+$this->title = 'Update Slider & Banner: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Slider & Banner', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
