@@ -34,9 +34,9 @@ class DilgInfoSystems extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'order', 'status_id', 'logo', 'link', 'user_id', 'user_update_id'], 'required'],
+            [['label', 'order', 'status_id', 'logo', 'link'], 'required'],
             [['order', 'status_id', 'logo', 'user_id', 'user_update_id'], 'integer'],
-            [['date_created', 'date_updated'], 'safe'],
+            [['date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
         ];
     }
