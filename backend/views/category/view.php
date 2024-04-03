@@ -42,9 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'user_id',
                             'value' => function($model){
                                 return $model->user->username;
-                            }
+                            },
                         ],
-                        'user_update_id',
                         [
                             'attribute' => 'date_created',
                             'value' => function($model){
@@ -52,12 +51,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         [
-                            'attribute' => 'date_updated',
-                            'value' => function($model){
-                                return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null;
-                            }
+                            'attribute' => 'user_update_id',
+                            'value' => function ($model) {
+                                return $model->user_update_id == null ? "(not set)" : $model->userUpdate->username;
+                            },
                         ],
-                        //'date_updated'
+                        [
+                            'attribute' => 'date_updated',
+                            'value' => function ($model) {
+                                return $model->date_updated == null ? "(not set)" : date('F d, Y h:i A', strtotime($model->date_updated));
+                            }
+                        ]
                     ],
                 ]) ?>
             </div>
