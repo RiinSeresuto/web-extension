@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Status;
 use Yii;
 use backend\models\DilgInfoSystems;
 use backend\models\DilgInfoSystemsSearch;
@@ -65,13 +66,19 @@ class DilgInfoSystemsController extends Controller
     public function actionCreate()
     {
         $model = new DilgInfoSystems();
+        $status = Status::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'status' => $status
         ]);
     }
 
