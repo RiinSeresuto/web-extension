@@ -11,7 +11,6 @@ use backend\models\File;
 use backend\models\UrlType;
 use backend\models\ContentType;
 
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
