@@ -15,7 +15,6 @@ use kartik\editors\Summernote;
 <div class="pages-form">
     <div class="card">
         <div class="card-body">
-            <!-- <h5 class="card-title">Special title treatment</h5> -->
             <div class="form-group">
                 <div class="col-md-12">
                     <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -113,7 +112,7 @@ use kartik\editors\Summernote;
                                     'options' => [ 
                                         'multiple' => true,
                                         'accept' => 'application/pdf',
-                                        'name' => 'file_attach'
+                                        // 'name' => 'file_attach'
                                     ],
                                     'pluginOptions' => [
                                         'initialPreviewAsData' =>  true,
@@ -139,10 +138,10 @@ use kartik\editors\Summernote;
                             </div>
                     </div>
 
-                    <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Save' : 'Update', [
-                                        'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
-                                        'onclick' => "$('#file-input').fileinput('upload');"
-                                            ]) ?>
+                    <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : '<i class="fas fa-edit"></i> Update', [
+                        'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
+                        'onclick' => "$('#file-input').fileinput('upload');"
+                            ]) ?>
                 </div>
             </div>
 
