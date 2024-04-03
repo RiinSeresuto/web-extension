@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="card">
         <div class="card-header">
-            <p>File Attachment</p>
+            File Attachment
         </div>
         <div class="card-body">
             <div class="row">
