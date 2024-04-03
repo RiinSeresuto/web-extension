@@ -110,20 +110,20 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-6 info-system">
-                    <div><strong>DILG Information Systems</strong>
-                        <div>ma
+                    <div class="info-systems-gap"><strong>DILG Information Systems</strong>
+                        <div class="info-systems-logo">
                             <?= Html::img('@web/images/gad.png', ['class'=>'footer-dilg-system-logos']);?>
-                            <?= Html::img('@web/images/gad.png', ['class'=>'footer-dilg-system-logos']);?>
+                            <?php // Html::img('@web/images/gad.png', ['class'=>'footer-dilg-system-logos']);?>
                         </div>
                     </div>
-                    <div><strong>Attached Agencies</strong>
-                        <div>
+                    <div class="agencies-gap"><strong>Attached Agencies</strong>
+                        <div class="agencies-logo">
                             <?= Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']);?>
                         </div>
                     </div>
-                    <div>Partners
-                        <div>
-                            <?= Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']);?>
+                    <div class="partners-gap">Partners
+                        <div class="partners-logo">
+                            <?php // Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']);?>
                             <?= Html::a(
                                     Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']),
                                     'https://www.officialgazette.gov.ph/',
