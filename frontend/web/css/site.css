@@ -353,3 +353,11 @@ a.desc:after {
     outline: none;
 }
 
+.info-systems-gap, .agencies-gap, .partners-gap {	
+    margin-bottom: 15px;
+}
+
+/* .info-systems-logo, .agencies-logo, .partners-logo {
+    width: 50px;
+    height: 70px;
+} */
