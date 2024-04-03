@@ -12,7 +12,6 @@ use Yii;
  * @property int $status_id
  * @property int $user_id
  * @property int $user_update_id
- *  // year
  * @property string $date_created
  * @property string $date_updated
  *
@@ -20,7 +19,6 @@ use Yii;
  * @property User $user
  * @property User $userUpdate
  * @property Form[] $cmsForms
- * @property Year[] $cmsYears
  */
 class Category extends \niksko12\auditlogs\classes\ModelAudit
 {
@@ -38,8 +36,8 @@ class Category extends \niksko12\auditlogs\classes\ModelAudit
     public function rules()
     {
         return [
-            [['title', 'status_id'], 'required'],   // year
-            [['id', 'status_id'], 'integer'],       //year
+            [['title', 'status_id'], 'required'], 
+            [['id', 'status_id'], 'integer'],
             [['date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -59,7 +57,6 @@ class Category extends \niksko12\auditlogs\classes\ModelAudit
             'title' => 'Title',
             'status_id' => 'Status',
             'user_id' => 'Created By',
-            //'year' => 'Year',
             'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
