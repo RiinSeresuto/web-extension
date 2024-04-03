@@ -140,6 +140,10 @@ class Form extends \niksko12\auditlogs\classes\ModelAudit
 
         $fields = explode(",", $this->field);
 
+        // echo '<pre>';
+        // print_r ($this->field);
+        // exit;
+
         if ($fields) {
             foreach ($fields as $field) {
                 $model = new FormField();
