@@ -60,7 +60,10 @@ if (yii::$app->user->isGuest) {
                         'items' => [
                             ['label' => 'Menu', 'url' => ['/menu'], 'iconStyle' => 'far'],
                             ['label' => 'Page', 'url' => ['/pages'],'iconStyle' => 'far'],
-                            ['label' => 'Slider and Banner', 'url' => ['/slider-banner'], 'iconStyle' => 'far'],
+                            ['label' => 'DILG Info Systems', 'url' => ['/dilg-info-systems'],'iconStyle' => 'far'],
+                            ['label' => 'Slider Photo', 'url' => ['/slider-photo'], 'iconStyle' => 'far'],
+                            ['label' => 'Banner', 'url' => ['/banner'], 'iconStyle' => 'far'],
+                            ['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'iconStyle' => 'far'],
                             ['label' => 'User Management', 'url' => ['/user/admin'],'iconStyle' => 'far'],
                         ]
                     ],
@@ -84,7 +87,7 @@ if (yii::$app->user->isGuest) {
                             ['label' => 'Public Assistance Center', 'url' => ['/#'], 'iconStyle' => 'far'],
                         ]
                     ],
-                    ['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'icon' => 'fa-solid fa-globe'],
+                    //['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'icon' => 'fa-solid fa-globe'],
                 ],
             ]);
             ?>
