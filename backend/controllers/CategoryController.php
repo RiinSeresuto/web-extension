@@ -108,7 +108,7 @@ class CategoryController extends \niksko12\auditlogs\classes\ControllerAudit
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->user_id = Yii::$app->user->identity->id;
+            $model->user_update_id = Yii::$app->user->identity->id;
 
             if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
