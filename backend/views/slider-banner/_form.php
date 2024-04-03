@@ -17,15 +17,21 @@ use attachment\components\AttachmentsInput;
             <div class="form-group">
                 <div class="col-md-12">
                     <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'slider_banner_id')->widget(Select2::class, [
+                                    'data' => ArrayHelper::map($sliderBannerType, 'id', 'slider_banner_type'),
+                                    'options' => [
+                                        'placeholder' => 'Select Type',
+                                    ],
+                                ]) ?>
+                        </div>
 
-                    <div>
-                        <?= $form->field($model, 'slider_banner_id')->widget(Select2::class, [
-                                'data' => ArrayHelper::map($sliderBannerType, 'id', 'slider_banner_type'),
-                                'options' => [
-                                    'placeholder' => 'Select Status',
-                                ],
-                            ]) ?>
+                        <div class="col-md-6">
+                            
+                        </div>
                     </div>
+                        
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
