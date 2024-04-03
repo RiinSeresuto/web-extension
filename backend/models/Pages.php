@@ -36,7 +36,7 @@ use Yii;
 class Pages extends \niksko12\auditlogs\classes\ModelAudit
 {
     public $file_attach=[];
-    public $photo_attach=[];
+    //public $photo_attach=[];
     /**
      * {@inheritdoc}
      */
@@ -64,8 +64,8 @@ class Pages extends \niksko12\auditlogs\classes\ModelAudit
             [['slider_photo'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['slider_photo' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
-            [['photo_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png'],
-            [['file_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
+            //[['photo_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png'],
+            [['file_attach'], 'file', 'skipOnError' => false, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
 
@@ -85,7 +85,7 @@ class Pages extends \niksko12\auditlogs\classes\ModelAudit
             'type_id' => 'Type',
             'link' => 'Link',
             'slider_photo' => 'Slider Photo',
-            'file_attachment' => 'File Upload',
+            'file_attach' => 'File Upload',
             'user_id' => 'Encoded By',
             'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
@@ -138,10 +138,10 @@ class Pages extends \niksko12\auditlogs\classes\ModelAudit
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getSliderPhoto()
-    {
-        return $this->hasMany(File::className(), ['itemId' => 'id']);
-    }
+    // public function getSliderPhoto()
+    // {
+    //     return $this->hasMany(File::className(), ['itemId' => 'id']);
+    // }
 
     /**
      * Gets query for [[FileAttachment]].
