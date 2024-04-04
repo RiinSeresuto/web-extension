@@ -16,10 +16,15 @@ use Yii;
  * @property int $user_id
  * @property int $user_update_id
  * @property string $date_created
- * @property string|null $date_updated
+ * @property string $date_updated
+ * 
+ * @property Status $status
+ * @property User $user
+ * @property User $userUpdate
  */
-class DilgInfoSystems extends \yii\db\ActiveRecord
+class DilgInfoSystems extends \niksko12\auditlogs\classes\ModelAudit
 {
+    public $logo_attach=[];
     /**
      * {@inheritdoc}
      */
@@ -34,10 +39,14 @@ class DilgInfoSystems extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'order', 'status_id', 'logo', 'link'], 'required'],
-            [['order', 'status_id', 'logo', 'user_id', 'user_update_id'], 'integer'],
+            [['label', 'order', 'status_id', 'link'], 'required'],
+            [['order', 'status_id', 'logo'], 'integer'],
             [['date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
+            [['logo_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
 
@@ -50,13 +59,55 @@ class DilgInfoSystems extends \yii\db\ActiveRecord
             'id' => 'ID',
             'label' => 'Label',
             'order' => 'Order',
-            'status_id' => 'Status ID',
-            'logo' => 'Logo',
-            'link' => 'Link',
-            'user_id' => 'User ID',
-            'user_update_id' => 'User Update ID',
+            'status_id' => 'Status',
+            //'logo' => 'Logo',
+            'logo_attach' => 'Logo',
+            'link' => 'URL',
+            'user_id' => 'Encoded By',
+            'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
+        ];
+    }
+
+    /**
+     * Gets query for [[Status]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus()
+    {
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * Gets query for [[UserUpdate]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserUpdate()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_update_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            
+            'fileBehavior' => [
+                'class' => \attachment\behaviors\FileBehavior::className()
+            ]
+        
         ];
     }
 }

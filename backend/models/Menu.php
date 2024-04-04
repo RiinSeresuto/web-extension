@@ -11,7 +11,7 @@ use Yii;
  * @property int $parent_id
  * @property string $label
  * @property int $menu_order
- * @property string $content_type //new
+ * @property string $content_type
  * @property int $url_type
  * @property int $position_id
  * @property int $status_id
