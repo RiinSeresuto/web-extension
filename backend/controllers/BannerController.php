@@ -2,18 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\Status;
 use Yii;
-use backend\models\DilgInfoSystems;
-use backend\models\DilgInfoSystemsSearch;
+use backend\models\Banner;
+use backend\models\BannerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DilgInfoSystemsController implements the CRUD actions for DilgInfoSystems model.
+ * BannerController implements the CRUD actions for Banner model.
  */
-class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAudit
+class BannerController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,24 +30,22 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Lists all DilgInfoSystems models.
+     * Lists all Banner models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DilgInfoSystemsSearch();
+        $searchModel = new BannerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $status = Status::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'status' => $status
         ]);
     }
 
     /**
-     * Displays a single DilgInfoSystems model.
+     * Displays a single Banner model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,31 +58,25 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Creates a new DilgInfoSystems model.
+     * Creates a new Banner model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DilgInfoSystems();
-        $status = Status::find()->all();
+        $model = new Banner();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $model->user_id = Yii::$app->user->identity->id;
-
-            if ($model->save())
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'status' => $status
         ]);
     }
 
     /**
-     * Updates an existing DilgInfoSystems model.
+     * Updates an existing Banner model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,24 +85,18 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $status = Status::find()->all();
 
-        if ($model->load(Yii::$app->request->post())) {
-
-            $model->user_update_id = Yii::$app->user->identity->id;
-
-            if ($model->save())
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'status' => $status
         ]);
     }
 
     /**
-     * Deletes an existing DilgInfoSystems model.
+     * Deletes an existing Banner model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -125,15 +110,15 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Finds the DilgInfoSystems model based on its primary key value.
+     * Finds the Banner model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DilgInfoSystems the loaded model
+     * @return Banner the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DilgInfoSystems::findOne($id)) !== null) {
+        if (($model = Banner::findOne($id)) !== null) {
             return $model;
         }
 

@@ -2,18 +2,18 @@
 
 namespace backend\controllers;
 
-use backend\models\Status;
 use Yii;
-use backend\models\DilgInfoSystems;
-use backend\models\DilgInfoSystemsSearch;
+use backend\models\SliderPhoto;
+use backend\models\SliderPhotoSearch;
+use backend\models\Status;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DilgInfoSystemsController implements the CRUD actions for DilgInfoSystems model.
+ * SliderPhotoController implements the CRUD actions for SliderPhoto model.
  */
-class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAudit
+class SliderPhotoController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     /**
      * {@inheritdoc}
@@ -31,24 +31,22 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Lists all DilgInfoSystems models.
+     * Lists all SliderPhoto models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DilgInfoSystemsSearch();
+        $searchModel = new SliderPhotoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $status = Status::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'status' => $status
         ]);
     }
 
     /**
-     * Displays a single DilgInfoSystems model.
+     * Displays a single SliderPhoto model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +59,13 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Creates a new DilgInfoSystems model.
+     * Creates a new SliderPhoto model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new DilgInfoSystems();
+        $model = new SliderPhoto();
         $status = Status::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -85,7 +83,7 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Updates an existing DilgInfoSystems model.
+     * Updates an existing SliderPhoto model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +109,7 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Deletes an existing DilgInfoSystems model.
+     * Deletes an existing SliderPhoto model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -125,15 +123,15 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     }
 
     /**
-     * Finds the DilgInfoSystems model based on its primary key value.
+     * Finds the SliderPhoto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return DilgInfoSystems the loaded model
+     * @return SliderPhoto the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DilgInfoSystems::findOne($id)) !== null) {
+        if (($model = SliderPhoto::findOne($id)) !== null) {
             return $model;
         }
 
