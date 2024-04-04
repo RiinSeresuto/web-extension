@@ -14,7 +14,6 @@ use attachment\components\AttachmentsInput;
 <div class="menu-form">
     <div class="card">
         <div class="card-body">
-            <!-- <h5 class="card-title">Special title treatment</h5> -->
             <div class="form-group">
                 <div class="col-md-12">
                     <?php $form = ActiveForm::begin(['id' => 'content_form', 'options' => ['enctype' => 'multipart/form-data']]); ?>

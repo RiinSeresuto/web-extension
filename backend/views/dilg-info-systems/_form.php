@@ -39,9 +39,10 @@ use attachment\components\AttachmentsInput;
                         <?=  '<label for="photo_attach">Logo</label>' ?>
                         <?= AttachmentsInput::widget([
                             'model' => $model,
+                            'id' => 'logo_attach',
                             'options' => [ 
                                 'multiple' => true,
-                                'accept' => 'application/pdf',
+                                'accept' => 'png,jpg,jpeg',
                             ],
                             'pluginOptions' => [
                                 'initialPreviewAsData' =>  true,
@@ -52,14 +53,14 @@ use attachment\components\AttachmentsInput;
                                 //'allowedFileExtensions' => ['pdf'],
                                 'showUpload' => false,
                                 //'showBrowse' => false,
-                                'showCancel' => false,
+                                'showCancel' => true,
                                 'browseLabel' => 'Browse...',
                                 'removeLabel' => '',
                                 'mainClass' => 'input-group-lg',
                                 'browseClass' => 'btn btn-info',
                                 'uploadClass' => 'btn btn-info',
                                 'fileActionSettings'=> [
-                                    'showDrag' => false,
+                                    'showDrag' => true,
                                     'showRemove' => true,
                                     //'showBrowse' => true,
                                     'msgRemove' => 'Are you sure you want to delete this file?',

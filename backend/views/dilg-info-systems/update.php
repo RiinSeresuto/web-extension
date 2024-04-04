@@ -5,17 +5,16 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\DilgInfoSystems */
 
-$this->title = 'Update Dilg Info Systems: ' . $model->id;
+$this->title = 'Update Dilg Info Systems: ' . $model->label;
 $this->params['breadcrumbs'][] = ['label' => 'Dilg Info Systems', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->label, 'url' => ['view', 'id' => $model->label]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="dilg-info-systems-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
+        'status' => $status
     ]) ?>
 
 </div>

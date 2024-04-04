@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\DilgInfoSystemsSearch */
@@ -21,7 +23,12 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="col-md-6">
-            <?= $form->field($model, 'status_id') ?>
+        <?= $form->field($model, 'status_id')->widget(Select2::class, [
+                                'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                                'options' => [
+                                    'placeholder' => 'Select Status',
+                                ],
+                            ]) ?>
         </div>
     </div>
 

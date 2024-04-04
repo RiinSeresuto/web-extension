@@ -17,7 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <div class="card-body">
-            <?= $this->render('_search', ['model' => $searchModel]); ?>
+            <?= $this->render('_search', 
+                [
+                    'model' => $searchModel,
+                    'status' => $status
+                ]); ?>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -25,10 +29,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'label',
-                    'status_id',
-                    'user_id',
-                    'date_created',
-
+                    [
+                        'attribute' => 'status_id',
+                        'value' => function($data){
+                            return $data->status->status_type;
+                        },
+                    ],
+                    [
+                        'attribute' => 'user_id',
+                        'value' => function($data){
+                            return $data->user->username;
+                        },
+                    ],
+                    [
+                        'attribute' => 'date_created',
+                        'value' => function($model){
+                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                        },
+                    ],
                     [
                         'header' => 'Actions',
                         'class' => 'yii\grid\ActionColumn',

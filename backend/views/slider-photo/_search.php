@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\SliderPhotoSearch */
@@ -15,27 +17,24 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'caption') ?>
+        </div>
 
-    <?= $form->field($model, 'caption') ?>
-
-    <?= $form->field($model, 'status_id') ?>
-
-    <?= $form->field($model, 'upload_photo') ?>
-
-    <?= $form->field($model, 'url') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
-
-    <?php // echo $form->field($model, 'user_update_id') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
-
-    <?php // echo $form->field($model, 'date_updated') ?>
+        <div class="col-md-6">
+            <?= $form->field($model, 'status_id')->widget(Select2::class, [
+                    'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                    'options' => [
+                        'placeholder' => 'Select Status',
+                    ],
+                ]) ?>
+        </div>
+    </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
