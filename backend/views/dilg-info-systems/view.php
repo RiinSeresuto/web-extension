@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card-body">
             <?= DetailView::widget([
             'model' => $model,
+            //'tableOptions' => ['class' => 'm-0 p-0'],
             'attributes' => [
                 'label',
                 'order',
-                //'status_id',
                 [
                     'attribute' => 'status_id',
                     'value' => function($model){
