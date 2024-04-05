@@ -18,40 +18,41 @@ use kartik\date\DatePicker;
                 <div class="col-md-12">
                     <?php $form = ActiveForm::begin(); ?>
 
-                    <?= $form->field($model, 'field')->textInput(['id' => 'array-field'])->label(false) ?>
+                    <?= $form->field($model, 'field')->hiddenInput(['id' => 'array-field'])->label(false) ?>
 
                     <?= $form->field($model, 'category_id')->widget(Select2::class, [
                         'data' => ArrayHelper::map($category, 'id', 'title'),
                         'options' => [
                             'placeholder' => 'Select Category',
                         ],
-                        ])?>
+                    ]) ?>
 
                     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-                    
+
                     <?= $form->field($model, 'status_id')->widget(Select2::class, [
-                            'data' => ArrayHelper::map($status, 'id', 'status_type'),
-                            'options' => [
-                                'placeholder' => 'Select Status',
-                            ],
-                        ]) ?>
+                        'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                        'options' => [
+                            'placeholder' => 'Select Status',
+                        ],
+                    ]) ?>
 
                     <?= $form->field($model, 'year')->widget(DatePicker::className(), [
-                            'options' => ['placeholder' => "Select Year"],
-                            'pluginOptions' => [
-                                'format' => 'yyyy',
-                                'autoclose' => true,
-                                'minViewMode' => 'years',
-                            ]
-                        ]) ?>
+                        'options' => ['placeholder' => "Select Year"],
+                        'pluginOptions' => [
+                            'format' => 'yyyy',
+                            'autoclose' => true,
+                            'minViewMode' => 'years',
+                        ]
+                    ]) ?>
 
                     <div class="field">
                         <label for="field-label">Field</label>
-                            <p>
-                                <a class="badge badge-primary field-button" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                    Add Field
-                                </a>
-                            </p>
+                        <p>
+                            <a class="badge badge-primary field-button" data-toggle="collapse" href="#collapseExample"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Add Field
+                            </a>
+                        </p>
                     </div>
 
                     <!-- <div class="card card-body" id="added-fields">
@@ -60,22 +61,23 @@ use kartik\date\DatePicker;
 
                     <div class="card">
                         <p class="card-header">Selected Fields:</p>
-                            <div class="card-body" id="added-fields">
-                                
-                            </div>
-                    </div>
+                        <div class="card-body" id="added-fields">
 
-                    <div class="collapse" id="collapseExample">
-                         
-                        <p class="card-header">Fields: <input type="text" name="search" id="search-field" class="search"></p>
-                        <div class="card card-body" id="choices-fields">
-                            
                         </div>
                     </div>
 
-                    
+                    <div class="collapse" id="collapseExample">
 
-                    
+                        <p class="card-header">Fields: <input type="text" name="search" id="search-field"
+                                class="search"></p>
+                        <div class="card card-body" id="choices-fields">
+
+                        </div>
+                    </div>
+
+
+
+
 
                     <div class="form-group">
                         <?= Html::submitButton('<i class="fas fa-save"></i> Save', ['class' => 'btn btn-success btn-sm', 'id' => 'submit']) ?>
@@ -87,7 +89,7 @@ use kartik\date\DatePicker;
     </div>
 </div>
 
-<?php 
+<?php
 $script = <<<JS
 var fields = []
 var ids = []
@@ -183,4 +185,4 @@ $('#submit').on('click', function(){
 })
 JS;
 $this->registerJs($script)
-?>
+    ?>

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\FormField;
 use Yii;
 use backend\models\Post;
 use backend\models\PostSearch;
@@ -69,7 +70,7 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($form_id = null)
     {
         $model = new Post();
         $category = Category::find()->all();
@@ -80,21 +81,55 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
         $publish_type = PublishType::find()->all();
         $page = Pages::find()->all();
 
+        if ($form_id == null) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->render('create', [
+                'model' => $model,
+                'category' => $category,
+                'forms' => $forms,
+                'field' => $field,
+                'status' => $status,
+                'visibility_type' => $visibility_type,
+                'publish_type' => $publish_type,
+                'page' => $page
+            ]);
+        } else {
+            $form_fields = FormField::find()->where(['form_id' => $form_id])->all();
+
+            if ($model->load(Yii::$app->request->post())) {
+                $data = Yii::$app->request->post();
+
+                unset($data['_csrf-backend']);
+                unset($data['Post']);
+
+                // echo "<pre>";
+                // print_r($data);
+                // exit;
+
+
+                $model->body = json_encode($data);
+
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                    echo '<pre>';
+                    print_r($model->errors);
+                    exit;
+                }
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+                'category' => $category,
+                'forms' => $forms,
+                'field' => $field,
+                'status' => $status,
+                'visibility_type' => $visibility_type,
+                'publish_type' => $publish_type,
+                'page' => $page,
+                'form_fields' => $form_fields
+            ]);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-            'category' => $category,
-            'forms' => $forms,
-            'field' => $field,
-            'status' => $status,
-            'visibility_type' => $visibility_type,
-            'publish_type' => $publish_type,
-            'page' => $page
-        ]);
     }
 
     /**

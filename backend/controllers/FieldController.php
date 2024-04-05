@@ -75,77 +75,43 @@ class FieldController extends \niksko12\auditlogs\classes\ControllerAudit
      */
     public function actionCreate()
     {
-        $model = new Field();
+        $modelField = new Field();
+        $modelWidgetSelect2Items = [];
         $data_type = DataType::find()->all();
         $widget_type = WidgetType::find()->all();
-        $modelParent = new Field();
-        $modelsChildren = [new WidgetSelect2Items];
 
-        // if ($model->load(Yii::$app->request->post())) {
+        if ($modelField->load(Yii::$app->request->post())) {
+            $modelField->user_id = Yii::$app->user->identity->id;
 
-        //     $model->user_id = Yii::$app->user->identity->id;
+            if ($modelField->save()) {
+                if ($modelField->widget_type_id == 3) {
+                    $count = count(Yii::$app->request->post("WidgetSelect2Items", []));
 
-        //     if ($model->save())
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
+                    for ($i = 0; $i < $count; $i++) {
+                        $modelWidgetSelect2Items[$i] = new WidgetSelect2Items();
+                    }
 
-        if ($modelParent->load(Yii::$app->request->post())) {
-            
-            $modelsChildren = Model::createMultiple(WidgetSelect2Items::classname(), $modelsChildren);
-            Model::loadMultiple($modelsChildren, Yii::$app->request->post());
-           
-            // ajax validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(
-                    ActiveForm::validateMultiple($modelsChildren),
-                    ActiveForm::validate($modelParent)
-                );
-            }
+                    if (WidgetSelect2Items::loadMultiple($modelWidgetSelect2Items, Yii::$app->request->post())) {
+                        foreach ($modelWidgetSelect2Items as $model) {
+                            $model->field_id = $modelField->id;
 
-            // validate all models
-            $valid = $modelParent->validate();
-            $valid = !empty($modelsChildren[0]) && $valid;
-            //echo "<pre>"; print_r($valid); exit;
-            if ($valid) {
-                $transaction = \Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $modelParent->save(false)) {
-                        foreach ($modelsChildren as $child) {
-                            $child->form_id = $modelParent->id;
-                            if (! ($flag = $child->save(false))) {
-                                $transaction->rollBack();
-                                break;
-                            }
+                            $model->save(false);
                         }
                     }
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $modelParent->id]);
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
                 }
+                return $this->redirect(['view', 'id' => $modelField->id]);
             }
-
-            $errors = $modelParent->getErrors();
-            print_r($errors);
         }
 
 
+        $modelWidgetSelect2Items = new WidgetSelect2Items();
+
         return $this->render('create', [
-            'model' => $model,
+            'modelField' => $modelField,
             'data_type' => $data_type,
             'widget_type' => $widget_type,
-            'modelParent' => $modelParent,
-            'modelsChildren' => (empty($modelsChildren)) ? [new WidgetSelect2Items] : $modelsChildren
+            'modelWidgetSelect2Items' => $modelWidgetSelect2Items
         ]);
-
-        // return $this->render('create', [
-        //     'model' => $model,
-        //     'data_type' => $data_type,
-        //     'widget_type' => $widget_type
-        // ]);
 
     }
 
@@ -158,18 +124,31 @@ class FieldController extends \niksko12\auditlogs\classes\ControllerAudit
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $modelField = $this->findModel($id);
         $data_type = DataType::find()->all();
         $widget_type = WidgetType::find()->all();
+        $modelWidgetSelect2Items = WidgetSelect2Items::find()->where(['field_id' => $id])->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($modelField->load(Yii::$app->request->post()) && $modelField->save()) {
+            if ($modelField->widget_type_id == 3) {
+
+                if (WidgetSelect2Items::loadMultiple($modelWidgetSelect2Items, Yii::$app->request->post())) {
+                    foreach ($modelWidgetSelect2Items as $model) {
+                        $model->save(false);
+                    }
+                }
+            }
+
+            return $this->redirect(['view', 'id' => $modelField->id]);
         }
 
+
+
         return $this->render('update', [
-            'model' => $model,
+            'modelField' => $modelField,
             'data_type' => $data_type,
-            'widget_type' => $widget_type
+            'widget_type' => $widget_type,
+            'modelWidgetSelect2Items' => $modelWidgetSelect2Items
         ]);
     }
 

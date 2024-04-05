@@ -53,9 +53,10 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     public function rules()
     {
         return [
-            [['category_id', 'year', 'forms_id', 'field_id', 'tags', 'status_id', 'visibility_id', 'publish_id', 'page_id'], 'required'],
+            [['year', 'status_id', 'visibility_id', 'publish_id', 'page_id'], 'required'],
             [['forms_id', 'field_id', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'min_answer', 'max_answer', 'category_id', 'year'], 'integer'],
-            [['start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer'], 'safe'],
+            [['start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer', 'category_id', 'forms_id', 'field_id'], 'safe'],
+            [['body'], 'string'],
             [['tags'], 'string', 'max' => 255],
             [['id'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
@@ -93,6 +94,7 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
             'user_update_id' => 'Updated By',
             'date_created' => 'Date Created',
             'date_updated' => 'Date Updated',
+            'body' => 'Body'
         ];
     }
 

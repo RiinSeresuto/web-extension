@@ -18,8 +18,6 @@ use yii\helpers\Json;
  */
 class FormController extends \niksko12\auditlogs\classes\ControllerAudit
 {
-    
-
     /**
      * {@inheritdoc}
      */
@@ -46,7 +44,7 @@ class FormController extends \niksko12\auditlogs\classes\ControllerAudit
 
         $category = Category::find()->all();
         $status = Status::find()->all();
-        
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -80,20 +78,19 @@ class FormController extends \niksko12\auditlogs\classes\ControllerAudit
         $category = Category::find()->all();
         $status = Status::find()->all();
         $field = Field::find()->all();
-        
+
 
         if ($model->load(Yii::$app->request->post())) {
 
             $model->user_id = Yii::$app->user->identity->id;
 
-            if ($model->save()){
+            if ($model->save()) {
 
                 return $this->redirect(['view', 'id' => $model->id]);
-            }
-            else{
+            } else {
 
             }
-            
+
         }
 
         return $this->render('create', [
@@ -120,13 +117,13 @@ class FormController extends \niksko12\auditlogs\classes\ControllerAudit
         $field = Field::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
-            
+
             $model->user_update_id = Yii::$app->user->identity->id;
-            
-            if ($model->save()){
+
+            if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-            
+
         }
 
         return $this->render('update', [

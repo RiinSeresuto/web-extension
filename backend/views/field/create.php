@@ -12,11 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="field-create">
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'modelField' => $modelField,
         'data_type' => $data_type,
         'widget_type' => $widget_type,
-        'modelParent' => $modelParent,
-        'modelsChildren' => $modelsChildren
+        'modelWidgetSelect2Items' => $modelWidgetSelect2Items
     ]) ?>
 
 </div>

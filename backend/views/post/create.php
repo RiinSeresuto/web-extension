@@ -10,15 +10,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-create">
-
-    <?= $this->render('_form', [
+    <?= $this->render("_create", [
         'model' => $model,
         'category' => $category,
         'forms' => $forms,
         'status' => $status,
         'visibility_type' => $visibility_type,
         'publish_type' => $publish_type,
-        'page' => $page
+        'page' => $page,
+        'form_fields' => isset($form_fields) == null ? null : $form_fields
     ]) ?>
-
 </div>
