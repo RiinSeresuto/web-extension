@@ -43,6 +43,7 @@ class DilgInfoSystems extends \niksko12\auditlogs\classes\ModelAudit
             [['order', 'status_id', 'logo'], 'integer'],
             [['date_created', 'date_updated', 'user_id', 'user_update_id'], 'safe'],
             [['label', 'link'], 'string', 'max' => 255],
+            [['id'], 'unique'],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
