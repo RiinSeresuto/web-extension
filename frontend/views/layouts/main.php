@@ -98,7 +98,7 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
 
     <div class="row">
         <div class="col-md-3 seal-ph">
-            <?php // Html::img('@web/images/coat-ph.png', ['class'=>'footer-seal']);?>
+            
             <?= Html::a(
                     Html::img('@web/images/coat-ph.png', ['class'=>'footer-seal']),
                     'https://www.officialgazette.gov.ph/'
@@ -112,18 +112,20 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
                 <div class="col-md-6 info-system">
                     <div class="info-systems-gap"><strong>DILG Information Systems</strong>
                         <div class="info-systems-logo">
+                            <?php // $this->render('dilg-info-system')?> <!-- render -->
                             <?= Html::img('@web/images/gad.png', ['class'=>'footer-dilg-system-logos']);?>
                             <?php // Html::img('@web/images/gad.png', ['class'=>'footer-dilg-system-logos']);?>
                         </div>
                     </div>
                     <div class="agencies-gap"><strong>Attached Agencies</strong>
                         <div class="agencies-logo">
+                        <?php // $this->render('attached_agencies') ?> <!-- render -->
                             <?= Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']);?>
                         </div>
                     </div>
                     <div class="partners-gap">Partners
                         <div class="partners-logo">
-                            <?php // Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']);?>
+                            <?php // $this->render('partners') ?> <!-- render -->
                             <?= Html::a(
                                     Html::img('@web/images/napolcom.png', ['class'=>'footer-agency-logos']),
                                     'https://www.officialgazette.gov.ph/',
@@ -168,13 +170,13 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div>Connect with us</div>
-                            <div>Be updated about DILG</div>
-                            <div>
+                            <div><strong>Connect with us</strong></div>
+                            <div class="footer-social">Be updated about DILG</div>
+                            <div class="footer-social">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.8 90.7 226.4 209.3 245V327.7h-63V256h63v-54.6c0-62.2 37-96.5 93.7-96.5 27.1 0 55.5 4.8 55.5 4.8v61h-31.3c-30.8 0-40.4 19.1-40.4 38.7V256h68.8l-11 71.7h-57.8V501C413.3 482.4 504 379.8 504 256z"/></svg>
                                 Like us on Facebook
                             </div>
-                            <div>
+                            <div class="footer-social">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="12" width="12" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>    
                                 Follow us on X</div>
                         </div>

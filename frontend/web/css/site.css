@@ -238,7 +238,7 @@ color: #ff0000;
     text-align: center;
 }
 
-.info-system {
+.info-system, .footer-social {
     font-size: 12px;
 }
 
