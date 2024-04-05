@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Status;
 use Yii;
 use backend\models\Banner;
 use backend\models\BannerSearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * BannerController implements the CRUD actions for Banner model.
  */
-class BannerController extends Controller
+class BannerController extends \niksko12\auditlogs\classes\ControllerAudit
 {
     /**
      * {@inheritdoc}
@@ -65,13 +66,19 @@ class BannerController extends Controller
     public function actionCreate()
     {
         $model = new Banner();
+        $status = Status::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'status' => $status
         ]);
     }
 
@@ -85,13 +92,19 @@ class BannerController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $status = Status::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->user_update_id = Yii::$app->user->identity->id;
+
+            if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'status' => $status
         ]);
     }
 
