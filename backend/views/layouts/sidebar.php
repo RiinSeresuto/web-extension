@@ -60,10 +60,21 @@ if (yii::$app->user->isGuest) {
                         'items' => [
                             ['label' => 'Menu', 'url' => ['/menu'], 'iconStyle' => 'far'],
                             ['label' => 'Page', 'url' => ['/pages'],'iconStyle' => 'far'],
-                            ['label' => 'DILG Info Systems', 'url' => ['/dilg-info-systems'],'iconStyle' => 'far'],
-                            ['label' => 'Slider Photo', 'url' => ['/slider-photo'], 'iconStyle' => 'far'],
-                            ['label' => 'Banner', 'url' => ['/banner'], 'iconStyle' => 'far'],
-                            ['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'iconStyle' => 'far'],
+                            [
+                                'label' => 'Visuals',
+                                'iconStyle' => 'far',
+                                'items' => [
+                                    ['label' => 'DILG Info Systems', 'url' => ['/dilg-info-systems'], 'icon' => 'fas fa-circle'],
+                                    ['label' => 'Slider Photo', 'url' => ['/slider-photo'], 'icon' => 'fas fa-circle'],
+                                    ['label' => 'Banner', 'url' => ['/banner'], 'icon' => 'fas fa-circle'],
+                                    ['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'icon' => 'fas fa-circle'],
+                                ]
+
+                                ],
+                            //['label' => 'DILG Info Systems', 'url' => ['/dilg-info-systems'],'iconStyle' => 'far'],
+                            //['label' => 'Slider Photo', 'url' => ['/slider-photo'], 'iconStyle' => 'far'],
+                            //['label' => 'Banner', 'url' => ['/banner'], 'iconStyle' => 'far'],
+                            //['label' => 'Connected Agencies', 'url' => ['/connected-agencies'], 'iconStyle' => 'far'],
                             ['label' => 'User Management', 'url' => ['/user/admin'],'iconStyle' => 'far'],
                         ]
                     ],
