@@ -53,9 +53,9 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     public function rules()
     {
         return [
-            [['year', 'status_id', 'visibility_id', 'publish_id', 'page_id'], 'required'],
+            [['year', 'status_id', 'visibility_id', 'publish_id'], 'required'],
             [['forms_id', 'field_id', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'min_answer', 'max_answer', 'category_id', 'year'], 'integer'],
-            [['start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer', 'category_id', 'forms_id', 'field_id'], 'safe'],
+            [['start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer', 'category_id', 'forms_id', 'field_id', 'page_id'], 'safe'],
             [['body'], 'string'],
             [['tags'], 'string', 'max' => 255],
             [['id'], 'unique'],
