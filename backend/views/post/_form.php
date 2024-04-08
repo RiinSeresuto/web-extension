@@ -72,13 +72,21 @@ use attachment\components\AttachmentsInput;
                     </div>
 
                     <div id="forms-actual">
+                        <?php
+
+                        if (!$model->isNewRecord) {
+                            $body = json_decode($model->body);
+                        }
+
+                        ?>
                         <?php foreach ($form_fields as $form_field): ?>
+                            <?php $key = str_replace(' ', '_', $form_field->field->label); ?>
                             <?php if ($form_field->field->widget_type_id == 1): ?>
                                 <?= Html::tag('label', $form_field->field->label, $options = ['class' => 'form-label']) ?>
-                                <?= Summernote::widget(['name' => $form_field->field->label, 'container' => ['class' => 'kv-editor-container']]); ?>
+                                <?= Summernote::widget(['name' => $form_field->field->label, 'container' => ['class' => 'kv-editor-container'], 'value' => $model->isNewRecord ? '' : $body->$key]); ?>
                             <?php elseif ($form_field->field->widget_type_id == 2): ?>
                                 <?= Html::tag('label', $form_field->field->label, $options = ['class' => 'form-label']) ?>
-                                <?= Html::input('text', $form_field->field->label, '', $options = ['class' => 'form-control']) ?>
+                                <?= Html::input('text', $form_field->field->label, $model->isNewRecord ? '' : $body->$key, $options = ['class' => 'form-control']) ?>
                             <?php elseif ($form_field->field->widget_type_id == 3): ?>
                                 <?= Html::tag('label', $form_field->field->label, $options = ['class' => 'form-label']) ?>
                                 <?= Select2::widget([
@@ -86,18 +94,20 @@ use attachment\components\AttachmentsInput;
                                     'data' => Getter::getOptions($form_field->field->id),
                                     'options' => [
                                         'placeholder' => 'Select provinces ...',
-                                        'id' => 'test-select2'
+                                        'id' => 'test-select2',
+                                        'value' => $model->isNewRecord ? '' : $body->$key
                                         //'multiple' => true
                                     ],
                                 ]); ?>
                             <?php elseif ($form_field->field->widget_type_id == 4): ?>
                                 <?= Html::tag('label', $form_field->field->label, $options = ['class' => 'form-label']) ?>
                                 <?= DatePicker::widget([
-                                    'name' => 'dp_3',
+                                    'name' => $form_field->field->label,
                                     'type' => DatePicker::TYPE_COMPONENT_APPEND,
+                                    'value' => $model->isNewRecord ? '' : $body->$key,
                                     'pluginOptions' => [
                                         'autoclose' => true,
-                                        'format' => 'dd-M-yyyy'
+                                        'format' => 'dd-M-yyyy',
                                     ]
                                 ]); ?>
                             <?php elseif ($form_field->field->widget_type_id == 5): ?>

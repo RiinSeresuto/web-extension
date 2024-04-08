@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'visibility_type' => $visibility_type,
         'publish_type' => $publish_type,
         'page' => $page,
-        'form_fields' => isset($form_fields) == null ? null : $form_fields
+        'form_fields' => isset($form_fields) == null ? null : $form_fields,
+        'form_title' => isset($form_title) == null ? null : $form_title
     ]) ?>
 </div>

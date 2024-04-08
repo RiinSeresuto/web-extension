@@ -15,7 +15,8 @@
                     'visibility_type' => $visibility_type,
                     'publish_type' => $publish_type,
                     'page' => $page,
-                    'form_fields' => $form_fields
+                    'form_fields' => $form_fields,
+                    'form_title' => $form_title
                 ]) ?>
             <?php endif; ?>
         </div>

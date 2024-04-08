@@ -12,10 +12,18 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="post-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <?= $this->render('_form', [
         'model' => $model,
+        'category' => $category,
+        'form_fields' => $form_fields,
+        'status' => $status,
+        'visibility_type' => $visibility_type,
+        'publish_type' => $publish_type,
+        'page' => $page
     ]) ?>
 
 </div>
