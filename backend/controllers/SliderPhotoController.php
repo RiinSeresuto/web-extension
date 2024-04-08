@@ -38,10 +38,12 @@ class SliderPhotoController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new SliderPhotoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $status = Status::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'status' => $status
         ]);
     }
 
