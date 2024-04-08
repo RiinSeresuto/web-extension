@@ -15,22 +15,18 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'forms_id') ?>
-
-    <?= $form->field($model, 'field_id') ?>
-
-    <?php // $form->field($model, 'tags') ?>
-
-    <?= $form->field($model, 'status_id') ?>
-
-    <?php // echo $form->field($model, 'visibility_id') ?>
-
-    <?php // echo $form->field($model, 'publish_id') ?>
-
-    <?php // echo $form->field($model, 'page_id') ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'forms_id') ?>
+        </div>
+        
+        <div class="col-md-6">
+            <?= $form->field($model, 'status_id') ?>
+        </div>
+    </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::submitButton('<i class="fas fa-search"></i> Search', ['class' => 'btn btn-primary btn-sm']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary btn-sm']) ?>
     </div>
 
