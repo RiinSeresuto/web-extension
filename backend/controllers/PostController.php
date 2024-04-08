@@ -96,6 +96,8 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
         } else {
             $form_fields = FormField::find()->where(['form_id' => $form_id])->all();
 
+            $form_title = Form::find()->where(['id' => $form_id])->one();
+
             if ($model->load(Yii::$app->request->post())) {
                 $data = Yii::$app->request->post();
 
@@ -106,7 +108,7 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
                 // print_r($data);
                 // exit;
 
-
+                $model->forms_id = $form_id;
                 $model->body = json_encode($data);
 
                 if ($model->save()) {
@@ -127,7 +129,8 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
                 'visibility_type' => $visibility_type,
                 'publish_type' => $publish_type,
                 'page' => $page,
-                'form_fields' => $form_fields
+                'form_fields' => $form_fields,
+                'form_title' => $form_title
             ]);
         }
     }
@@ -143,12 +146,31 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+
+            unset($data['_csrf-backend']);
+            unset($data['Post']);
+
+            $model->body = json_encode($data);
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        // echo '<pre>';
+        // print_r($model->forms_id);
+        // exit;
 
         return $this->render('update', [
             'model' => $model,
+            'category' => Category::find()->all(),
+            'form_fields' => FormField::find()->where(['form_id' => $model->forms_id])->all(),
+            'status' => Status::find()->all(),
+            'visibility_type' => VisibilityType::find()->all(),
+            'publish_type' => PublishType::find()->all(),
+            'page' => Pages::find()->all()
         ]);
     }
 
