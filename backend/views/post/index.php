@@ -17,7 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <div class="card-body">
-            <?= $this->render('_search', ['model' => $searchModel]); ?>
+            <?= $this->render('_search', 
+                [
+                    'model' => $searchModel,
+                    'category' => $category,
+                    'status' => $status
+                ]); ?>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -25,10 +30,38 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     'forms_id',
+                    // [
+                    //     'attribute' => 'forms_id',
+                    //     'value' => function($data){
+                    //         return $data->form->titl;
+                    //     },
+                    // ],
                     'status_id',
-                    'publish_id',
+                    // [
+                    //     'attribute' => 'status_id',
+                    //     'value' => function($data){
+                    //         return $data->status->status_type;
+                    //     },
+                    // ],
+                    [
+                        'attribute' => 'publish_id',
+                        'value' => function($data){
+                            return $data->publish->publish_type;
+                        }
+                    ],
                     'user_id',
-                    'date_created',
+                    // [
+                    //     'attribute' => 'user_id',
+                    //     'value' => function($data){
+                    //         return $data->user->username;
+                    //     },
+                    // ],
+                    [
+                        'attribute' => 'date_created',
+                        'value' => function($data){
+                            return ($data->date_created) ? date('F d, Y h:i A', strtotime($data->date_created)) : null; 
+                        },
+                    ],
                     [
                         'header' => 'Actions',
                         'class' => 'yii\grid\ActionColumn',

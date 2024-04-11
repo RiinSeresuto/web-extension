@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\PostSearch */
@@ -17,11 +19,22 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'forms_id') ?>
+            <?= $form->field($model, 'forms_id')->widget(Select2::class, [
+                                'data' => ArrayHelper::map($category, 'id', 'title'),
+                                'options' => [
+                                    'placeholder' => 'Select Form',
+                                ],
+                            ]) ?>
         </div>
         
         <div class="col-md-6">
-            <?= $form->field($model, 'status_id') ?>
+            <?php // $form->field($model, 'status_id') ?>
+            <?= $form->field($model, 'status_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($status, 'id', 'title'),
+                'options' => [
+                    'placeholder' => 'Select Form',
+                ],
+            ]) ?>
         </div>
     </div>
 
