@@ -45,10 +45,16 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $category = Category::find()->all();
+        $forms = Form::find()->all();
+        $status = Status::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'category' => $category,
+            'forms' => $forms,
+            'status' => $status
         ]);
     }
 
