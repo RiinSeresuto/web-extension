@@ -17,6 +17,10 @@ use attachment\components\AttachmentsInput;
 
 <div class="post-form">
     <div class="card">
+        <div class="card-header">
+            <?php // Html::encode($this->title) ?>
+            Form
+        </div>
         <div class="card-body">
             <div class="form-group">
                 <div class="col-md-12">
@@ -146,7 +150,7 @@ use attachment\components\AttachmentsInput;
                         <?php endforeach; ?>
                     </div>
 
-                    <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
+                    <?php // $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
 
                     <div class="row">
                         <div class="col-md-3">
