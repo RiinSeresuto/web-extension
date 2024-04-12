@@ -83,42 +83,42 @@ $this->params['breadcrumbs'][] = $this->title;
             Logo
         </div>
         <div class="card-body">
-            <?= DetailView::widget([
-                        'model' => $model,
-                        'attributes' => [
-                            [
-                                'label' => '', 
-                                'format' => 'raw',
-                                'value' => function($model){
-                                //return \file\components\AttachmentsTable::widget(['model' => $model]); 
-                                return \attachment\components\AttachmentsInput::widget([
-                                    'id' => 'file-input', // Optional
-                                    'model' => $model,
-                                    'options' => [ // Options of the Kartik's FileInput widget
-                                        'multiple' => true, // If you want to allow multiple upload, default to false
-                                    ],
-                                    'pluginOptions' => [ 
-                                        'initialPreviewShowDelete' => false,
-                                        'initialPreviewAsData' =>  true,
-                                        'initialPreviewFileType' => 'pdf',
-                                        'maxFileCount' => 10, // Client max files
-                                        'showRemove' => false,
-                                        'showCancel' => false,
-                                        'showUpload' => false,
-                                        'showBrowse' => false,
-                                        'showCaption' => false,
-                                        'fileActionSettings' => [
-                                            'showRemove' => false,
-                                            //'showDownload' => true,
-                                        ],
-                                        'previewFileType' => 'pdf'
-                                    ],
-                                    ]);
-                                },
-                            ]
-                        ]
-                    ])
-                    ?>
+        <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    [
+                        'label' => '', 
+                        'format' => 'raw',
+                        'value' => function($model){
+                        //return \file\components\AttachmentsTable::widget(['model' => $model]); 
+                        return \attachment\components\AttachmentsInput::widget([
+                            'id' => 'file-input', // Optional
+                            'model' => $model,
+                            'options' => [ // Options of the Kartik's FileInput widget
+                                'multiple' => true, // If you want to allow multiple upload, default to false
+                            ],
+                            'pluginOptions' => [ 
+                                'initialPreviewShowDelete' => false,
+                                'initialPreviewAsData' =>  true,
+                                'initialPreviewFileType' => 'pdf',
+                                'maxFileCount' => 10, // Client max files
+                                'showRemove' => false,
+                                'showCancel' => false,
+                                'showUpload' => false,
+                                'showBrowse' => false,
+                                'showCaption' => false,
+                                'fileActionSettings' => [
+                                    'showRemove' => true,
+                                    //'showDownload' => true,
+                                ],
+                                'previewFileType' => 'pdf'
+                            ],
+                            ]);
+                        },
+                    ]
+                ]
+            ])
+            ?>
         </div>
     </div>
 </div>

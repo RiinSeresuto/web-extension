@@ -46,36 +46,37 @@ use attachment\components\AttachmentsInput;
 
                     <div class="row">
                         <div class="col-md-12">
-                            <?=  '<label for="photo_attach">Logo</label>' ?>
-                            <?=  AttachmentsInput::widget([
-                                        'model' => $model,
-                                        'id' => 'photo_attach',
-                                        'options' => [ 
-                                            'multiple' => true,
-                                            'accept' => 'application/pdf',
-                                            'name' => 'photo_attach'
-                                        ],
-                                        'pluginOptions' => [
-                                            'initialPreviewAsData' =>  true,
-                                            //'initialPreviewFileType' => 'pdf',
-                                            'autoReplace' => false,
-                                            'overwriteInitial' => false,
-                                            'maxFileCount' => 3,
-                                            //'allowedFileExtensions' => ['pdf'],
-                                            'showUpload' => false,
-                                            'showCancel' => false,
-                                            'browseLabel' => 'Browse',
-                                            'removeLabel' => '',
-                                            'mainClass' => 'input-group-lg',
-                                            'browseClass' => 'btn btn-info',
-                                            'uploadClass' => 'btn btn-info',
-                                            'fileActionSettings'=> [
-                                                'showDrag' => false,
-                                                'showRemove' => true,
-                                                'msgRemove' => 'Are you sure you want to delete this file?',
-                                            ]
-                                        ]
-                                ]) ?>
+                        <?=  '<label for="photo_attach">Logo</label>' ?>
+                        <?= AttachmentsInput::widget([
+                            'model' => $model,
+                            'id' => 'logo_attach',
+                            'options' => [ 
+                                'multiple' => true,
+                                'accept' => 'png,jpg,jpeg',
+                            ],
+                            'pluginOptions' => [
+                                'initialPreviewAsData' =>  true,
+                                //'initialPreviewFileType' => 'pdf',
+                                'autoReplace' => false,
+                                'overwriteInitial' => false,
+                                'maxFileCount' => 3,
+                                //'allowedFileExtensions' => ['pdf'],
+                                'showUpload' => false,
+                                //'showBrowse' => false,
+                                'showCancel' => true,
+                                'browseLabel' => 'Browse...',
+                                'removeLabel' => '',
+                                'mainClass' => 'input-group-lg',
+                                'browseClass' => 'btn btn-info',
+                                'uploadClass' => 'btn btn-info',
+                                'fileActionSettings'=> [
+                                    'showDrag' => true,
+                                    'showRemove' => true,
+                                    //'showBrowse' => true,
+                                    'msgRemove' => 'Are you sure you want to delete this file?',
+                                ]
+                            ]
+                        ]) ?>
                             </div>
 
                             <!-- <div class="col-md-6">

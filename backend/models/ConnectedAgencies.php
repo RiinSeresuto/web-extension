@@ -27,6 +27,7 @@ use Yii;
  */
 class ConnectedAgencies extends \niksko12\auditlogs\classes\ModelAudit
 {
+    public $logo_attach=[];
     /**
      * {@inheritdoc}
      */
@@ -50,7 +51,7 @@ class ConnectedAgencies extends \niksko12\auditlogs\classes\ModelAudit
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
-            [['file_upload'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
+            [['logo_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png']
         ];
     }
 
@@ -65,7 +66,7 @@ class ConnectedAgencies extends \niksko12\auditlogs\classes\ModelAudit
             'label' => 'Label',
             'agency_order' => 'Agency Order',
             'status_id' => 'Status',
-            'logo' => 'Logo Upload',
+            'logo_attach' => 'Logo Upload',
             'file_upload' => 'File Upload',
             'link' => 'Link',
             'user_id' => 'Encoded By',
@@ -115,10 +116,10 @@ class ConnectedAgencies extends \niksko12\auditlogs\classes\ModelAudit
         return $this->hasOne(User::className(), ['id' => 'user_update_id']);
     }
 
-    public function getLogoFile()
-    {
-        return $this->hasMany(File::className(), ['itemId' => 'id']);
-    }
+    // public function getLogoFile()
+    // {
+    //     return $this->hasMany(File::className(), ['itemId' => 'id']);
+    // }
 
     public function behaviors()
     {
