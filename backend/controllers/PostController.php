@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use backend\models\FormField;
 use Yii;
 use backend\models\Post;
 use backend\models\PostSearch;
@@ -13,6 +12,7 @@ use backend\models\VisibilityType;
 use backend\models\PublishType;
 use backend\models\Pages;
 use backend\models\Category;
+use backend\models\FormField;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
