@@ -62,6 +62,12 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
         <?php ActiveForm::end(); ?>
     </div>
 
+    <div class="main-menu-test">
+        <?= $this->render('main-menu-test', [
+            'menus' => $menus
+        ]); ?>
+    </div>
+
     <?= $this->render('slider-photo')?> 
 
     <!-- DILG Information Systems -->

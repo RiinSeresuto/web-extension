@@ -21,8 +21,8 @@ usort($mainMenu, 'compareMainMenuOrder');
 
 function generateNavItem($menuChildren)
 {
-    $start_ul = "<ul class='child-nav'>";
-    $end_ul = "</ul>";
+    $start_ul = "<div class='dropdown-menu'>";
+    $end_ul = "</div>";
 
     $return_item = "";
     $target = '';
@@ -32,14 +32,14 @@ function generateNavItem($menuChildren)
             if ($children->url_type == 2) {
                 $target = 'target="_blank"';
             }
-            $return_item = $return_item . '<li class="child-item"><a href="' . $children->link . '&menu_id=' . $children->id . '" class="active"' . $target . '>' . $children->label . '</a>'; //parent of children
+            $return_item = $return_item . '<a href="' . $children->link . '&menu_id=' . $children->id . '" class="dropdown-item"' . $target . '>' . $children->label . '</a>'; //parent of children
             $temp = generateNavItem($children->menuChildren); //children
-            $return_item = $return_item . $temp . '</li>';
+            $return_item = $return_item . $temp;
         } else {
             if ($children->url_type == 2) {
                 $target = 'target="_blank"';
             }
-            $return_item = $return_item . '<li class="child-item"><a href="' . $children->link . '&menu_id=' . $children->id . '" class="active" ' . $target . '>' . $children->label . '</a></li>'; //parent w/o children
+            $return_item = $return_item . '<a href="' . $children->link . '&menu_id=' . $children->id . '" class="dropdown-item" ' . $target . '>' . $children->label . '</a>'; //parent w/o children
         }
     }
 
