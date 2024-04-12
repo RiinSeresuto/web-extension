@@ -83,6 +83,8 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
         <?= $this->render('dilg-systems-banner')?>
     </div>
     
+    <?php // $advisory ?>
+
     <?= $content ?>
 
     <!-- DILG Information Systems -->
