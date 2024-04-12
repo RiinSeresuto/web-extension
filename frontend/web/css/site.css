@@ -220,6 +220,12 @@ color: #ff0000;
     width: 60px;
 }
 
+.footer-dilg-attached-agencies-logo {
+    --size:50px;
+    height: var(--size);
+    width: var(--size);
+}
+
 .footer-agency-logos {
     height: 50px;
     width: 50px;
