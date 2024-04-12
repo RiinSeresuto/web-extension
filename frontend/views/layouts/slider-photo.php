@@ -2,36 +2,20 @@
 
 use yii\helpers\Html;
 
+use common\helpers\Carousel;
+
 ?>
 
 <!-- Slider Photo -->
 <div class="slider-photo slider">
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/slider/sp2.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/slider/sp2.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/slider/sp2.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/slider/sp2.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/slider/sp2.png')
-                    ); ?>
-        </div>
-        
+  <?php $carousel_images = Carousel::getPhoto() ?>
+    <?php foreach ($carousel_images as $carousel_image): ?>
+      <div>
+        <?php
+            echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id'=> $carousel_image->id]), ['class'=>'']);
+        ?>
+      </div>
+    <?php endforeach; ?>
     </div>
 
 <?php 
