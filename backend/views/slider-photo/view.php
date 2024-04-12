@@ -8,13 +8,13 @@ use yii\widgets\DetailView;
 
 $this->title = $model->caption;
 $this->params['breadcrumbs'][] = ['label' => 'Slider Photos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->caption;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="slider-photo-view">
     <div class="card">
         <div class="card-header">
-            Slider Photo Details: <?= $this->title = $model->caption; ?>
+            Slider Photo Details
         </div>
         <div class="text-right buttons">
             <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
