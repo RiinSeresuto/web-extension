@@ -14,7 +14,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use backend\models\File;
 use backend\models\Menu;
 use backend\models\Position;
 
@@ -274,4 +274,5 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+    
 }
