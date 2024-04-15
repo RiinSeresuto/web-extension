@@ -4,16 +4,16 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\BannerSearch */
+/* @var $searchModel backend\models\PartnersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Banners';
+$this->title = 'Partners';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="banner-index">
+<div class="partners-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Banner', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Partners', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
 
         <div class="card-body">
@@ -21,21 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
-                //'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    //'id',
                     'label',
                     'order',
                     'status_id',
-                    //'logo',
-                    //'url:url',
                     'user_id',
-                    //'user_update_id',
                     'date_created',
-                    //'date_updated',
-            
+
                     [
                         'header' => 'Actions',
                         'class' => 'yii\grid\ActionColumn',
@@ -81,4 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
         </div>
     </div>
+
+
 </div>
