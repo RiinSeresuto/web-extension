@@ -3,10 +3,10 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\AttachedAgency;
-use backend\models\AttachedAgencySearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\AttachedAgency;
+use backend\models\AttachedAgencySearch;
 use backend\models\Status;
 
 /**
@@ -37,10 +37,12 @@ class AttachedAgencyController extends \niksko12\auditlogs\classes\ControllerAud
     {
         $searchModel = new AttachedAgencySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $status = Status::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'status' => $status
         ]);
     }
 
@@ -74,6 +76,9 @@ class AttachedAgencyController extends \niksko12\auditlogs\classes\ControllerAud
             if ($model->save())
                 return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        //$menus = Menu::find()->where(['position_id' => 1])->orderBy(['menu_order' => SORT_ASC])->all();
+
 
         return $this->render('create', [
             'model' => $model,

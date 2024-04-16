@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="attached-agency-view">
     <div class="card">
         <div class="card-header">
-            Agency Details: <?= $this->title = $model->label; ?>
+            Agency Details
         </div>
 
         <div class="text-right buttons">
@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'showBrowse' => false,
                                     'showCaption' => false,
                                     'fileActionSettings' => [
-                                        'showRemove' => true,
+                                        'showRemove' => false,
                                         //'showDownload' => true,
                                     ],
                                     'previewFileType' => 'pdf'
