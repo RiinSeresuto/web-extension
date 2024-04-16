@@ -34,7 +34,8 @@ class FooterController extends Controller
 
     public static function actionImageAttachedAgencies($id)
     {
-        $modelImg = File::find()->where(['item_id' => $id])->andWhere(['model' => "backend\models\ConnectedAgencies"])->one();
+        //$modelImg = File::find()->where(['item_id' => $id])->andWhere(['model' => "backend\models\ConnectedAgencies"])->one();
+        $modelImg = File::find()->where(['item_id' => $id])->andWhere(['model' => "backend\models\AttachedAgency"])->one();
 
         $folder1 = substr(basename($modelImg->hash), 0, 2) . "/";
         $folder2 = substr(basename($modelImg->hash), 3, 2) . "/";
