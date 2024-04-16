@@ -20,19 +20,18 @@ use yii\helpers\ArrayHelper;
     <div class="row">
         <div class="col-md-6">
             <?= $form->field($model, 'forms_id')->widget(Select2::class, [
-                                'data' => ArrayHelper::map($category, 'id', 'title'),
-                                'options' => [
-                                    'placeholder' => 'Select Form',
-                                ],
-                            ]) ?>
-        </div>
-        
-        <div class="col-md-6">
-            <?php // $form->field($model, 'status_id') ?>
-            <?= $form->field($model, 'status_id')->widget(Select2::class, [
-                'data' => ArrayHelper::map($status, 'id', 'title'),
+                'data' => ArrayHelper::map($category, 'id', 'title'),
                 'options' => [
                     'placeholder' => 'Select Form',
+                ],
+            ]) ?>
+        </div>
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'status_id')->widget(Select2::class, [
+                'data' => ArrayHelper::map($status, 'id', 'status_type'),
+                'options' => [
+                    'placeholder' => 'Select Status',
                 ],
             ]) ?>
         </div>
