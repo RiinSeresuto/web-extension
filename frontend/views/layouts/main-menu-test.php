@@ -8,34 +8,80 @@ foreach ($menus as $menu) {
         $mainMenu[] = $menu;
     }
 }
+
+// Define a custom comparison function
+function sortArray($a, $b)
+{
+    return $a->menu_order - $b->menu_order;
+}
+
+// Sort the mainMenu array based on menu_order
+usort($mainMenu, 'sortArray');
+
+function generateDropdown($children)
+{
+    $start_ul = '<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">';
+    $end_ul = "</ul>";
+
+    $return_item = "";
+    $target = '';
+
+    foreach ($children as $child) {
+        if ($child->url_type == 2) {
+            $target = 'target="_blank"';
+        }
+
+        if (!empty($child->menuChildren)) {
+            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
+        } else {
+            $return_item .= '<li><a class="dropdown-item" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a></li>';
+        }
+    }
+
+    return $start_ul . $return_item . $end_ul;
+}
+
+function generateSubmenu($children)
+{
+    $start_ul = '<ul class="dropdown-menu">';
+    $end_ul = "</ul>";
+
+    $return_item = "";
+    $target = '';
+
+    foreach ($children as $child) {
+        if ($child->url_type == 2) {
+            $target = 'target="_blank"';
+        }
+
+        if (!empty($child->menuChildren)) {
+            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
+        } else {
+            $return_item .= '<li><a class="dropdown-item" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a></li>';
+        }
+    }
+
+    return $start_ul . $return_item . $end_ul;
+}
 ?>
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+            <?php $target = 'target="_blank"'; ?>
             <?php foreach ($mainMenu as $menu): ?>
-                <?php $target = 'target="_blank"'; ?>
-                <?php if (!empty($menu->menuChildren)) { ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown active">
+                    <?php if (!empty($menu->menuChildren)): ?>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             <?= $menu->label ?>
                         </a>
+                        <?= generateDropdown($menu->menuChildren) ?>
 
-                        <?= generateNavItem($menu->menuChildren) ?>
+                        <?php continue; endif; ?>
 
-                    </li>
-                <?php } else { ?>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><?= $menu->label ?></a>
-                    </li>
-                <?php } ?>
-
+                    <a class="nav-link" href="<?= $menu->link ?>&menu_id=<?= $menu->id ?>" <?= ($menu->url_type == 2) ? $target : "" ?>><?= $menu->label ?></a>
+                </li>
             <?php endforeach; ?>
         </ul>
     </div>

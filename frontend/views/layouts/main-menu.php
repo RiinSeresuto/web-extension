@@ -32,7 +32,7 @@ function generateNavItem($menuChildren)
             if ($children->url_type == 2) {
                 $target = 'target="_blank"';
             }
-            $return_item = $return_item . '<a href="' . $children->link . '&menu_id=' . $children->id . '" class="dropdown-item"' . $target . '>' . $children->label . '</a>'; //parent of children
+            $return_item = $return_item . '<a href="' . $children->link . '&menu_id=' . $children->id . '" class="dropdown-item dropdown-toggle"' . $target . '>' . $children->label . '</a>'; //parent of children
             $temp = generateNavItem($children->menuChildren); //children
             $return_item = $return_item . $temp;
         } else {
