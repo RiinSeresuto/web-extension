@@ -106,14 +106,14 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
             if ($model->load(Yii::$app->request->post())) {
                 $data = Yii::$app->request->post();
 
+                $model->user_id = Yii::$app->user->identity->id;
+
                 unset($data['_csrf-backend']);
                 unset($data['Post']);
 
-                // echo "<pre>";
-                // print_r($data);
-                // exit;
 
                 $model->forms_id = $form_id;
+                $model->category_id = $form_title->category_id;
                 $model->body = json_encode($data);
 
                 if ($model->save()) {
@@ -153,6 +153,7 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
 
         if ($model->load(Yii::$app->request->post())) {
             $data = Yii::$app->request->post();
+            $model->user_update_id = Yii::$app->user->identity->id;
 
             unset($data['_csrf-backend']);
             unset($data['Post']);
@@ -163,10 +164,6 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-
-        // echo '<pre>';
-        // print_r($model->forms_id);
-        // exit;
 
         return $this->render('update', [
             'model' => $model,
