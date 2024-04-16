@@ -37,10 +37,12 @@ class BannerController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new BannerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $status = Status::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'status' => $status
         ]);
     }
 
@@ -72,7 +74,7 @@ class BannerController extends \niksko12\auditlogs\classes\ControllerAudit
             $model->user_id = Yii::$app->user->identity->id;
 
             if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -98,7 +100,7 @@ class BannerController extends \niksko12\auditlogs\classes\ControllerAudit
             $model->user_update_id = Yii::$app->user->identity->id;
 
             if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

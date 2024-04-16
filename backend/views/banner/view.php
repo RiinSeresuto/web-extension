@@ -14,19 +14,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="banner-view">
     <div class="card">
         <div class="card-header">
-            Banner Details: <?= $this->title = $model->label; ?>
+            Banner Details
         </div>
-        
+
         <div class="text-right buttons">
             <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
-                <?= Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-                <?= Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger btn-sm',
-                    'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
+            <?= Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger btn-sm',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
         </div>
 
         <div class="card-body">
@@ -37,21 +37,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     'order',
                     [
                         'attribute' => 'status_id',
-                        'value' => function($model){
+                        'value' => function ($model) {
                             return $model->status->status_type;
                         },
                     ],
                     'url:url',
                     [
                         'attribute' => 'user_id',
-                        'value' => function($model){
+                        'value' => function ($model) {
                             return $model->user->username;
                         },
                     ],
                     [
                         'attribute' => 'date_created',
-                        'value' => function($model){
-                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                        'value' => function ($model) {
+                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null;
                         },
                     ],
                     [
@@ -81,38 +81,38 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     [
-                        'label' => '', 
+                        'label' => '',
                         'format' => 'raw',
-                        'value' => function($model){
-                        //return \file\components\AttachmentsTable::widget(['model' => $model]); 
-                        return \attachment\components\AttachmentsInput::widget([
-                            'id' => 'file-input', // Optional
-                            'model' => $model,
-                            'options' => [ // Options of the Kartik's FileInput widget
-                                'multiple' => true, // If you want to allow multiple upload, default to false
-                            ],
-                            'pluginOptions' => [ 
-                                'initialPreviewShowDelete' => false,
-                                'initialPreviewAsData' =>  true,
-                                'initialPreviewFileType' => 'pdf',
-                                'maxFileCount' => 10, // Client max files
-                                'showRemove' => false,
-                                'showCancel' => false,
-                                'showUpload' => false,
-                                'showBrowse' => false,
-                                'showCaption' => false,
-                                'fileActionSettings' => [
-                                    'showRemove' => true,
-                                    //'showDownload' => true,
+                        'value' => function ($model) {
+                            //return \file\components\AttachmentsTable::widget(['model' => $model]); 
+                            return \attachment\components\AttachmentsInput::widget([
+                                'id' => 'file-input', // Optional
+                                'model' => $model,
+                                'options' => [ // Options of the Kartik's FileInput widget
+                                    'multiple' => true, // If you want to allow multiple upload, default to false
                                 ],
-                                'previewFileType' => 'pdf'
-                            ],
+                                'pluginOptions' => [
+                                    'initialPreviewShowDelete' => false,
+                                    'initialPreviewAsData' => true,
+                                    'initialPreviewFileType' => 'pdf',
+                                    'maxFileCount' => 10, // Client max files
+                                    'showRemove' => false,
+                                    'showCancel' => false,
+                                    'showUpload' => false,
+                                    'showBrowse' => false,
+                                    'showCaption' => false,
+                                    'fileActionSettings' => [
+                                        'showRemove' => true,
+                                        //'showDownload' => true,
+                                    ],
+                                    'previewFileType' => 'pdf'
+                                ],
                             ]);
                         },
                     ]
                 ]
             ])
-            ?>
+                ?>
         </div>
     </div>
 </div>
