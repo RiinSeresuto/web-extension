@@ -1,4 +1,6 @@
 <?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 $mainMenu = [];
 
@@ -11,69 +13,90 @@ foreach ($menus as $menu) {
 }
 
 // Define a custom comparison function
-function compareMainMenuOrder($a, $b)
+function sortArray($a, $b)
 {
     return $a->menu_order - $b->menu_order;
 }
 
 // Sort the mainMenu array based on menu_order
-usort($mainMenu, 'compareMainMenuOrder');
+usort($mainMenu, 'sortArray');
 
-function generateNavItem($menuChildren)
+function generateDropdown($children)
 {
-    $start_ul = "<div class='dropdown-menu'>";
-    $end_ul = "</div>";
+    $start_ul = '<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">';
+    $end_ul = "</ul>";
 
     $return_item = "";
     $target = '';
 
-    foreach ($menuChildren as $children) {
-        if (!empty($children->menuChildren)) {
-            if ($children->url_type == 2) {
-                $target = 'target="_blank"';
-            }
-            $return_item = $return_item . '<a href="' . $children->link . '&menu_id=' . $children->id . '" class="dropdown-item dropdown-toggle"' . $target . '>' . $children->label . '</a>'; //parent of children
-            $temp = generateNavItem($children->menuChildren); //children
-            $return_item = $return_item . $temp;
+    foreach ($children as $child) {
+        if ($child->url_type == 2) {
+            $target = 'target="_blank"';
+        }
+
+        if (!empty($child->menuChildren)) {
+            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
         } else {
-            if ($children->url_type == 2) {
-                $target = 'target="_blank"';
-            }
-            $return_item = $return_item . '<a href="' . $children->link . '&menu_id=' . $children->id . '" class="dropdown-item" ' . $target . '>' . $children->label . '</a>'; //parent w/o children
+            $return_item .= '<li><a class="dropdown-item" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a></li>';
         }
     }
 
     return $start_ul . $return_item . $end_ul;
 }
 
+function generateSubmenu($children)
+{
+    $start_ul = '<ul class="dropdown-menu">';
+    $end_ul = "</ul>";
 
+    $return_item = "";
+    $target = '';
+
+    foreach ($children as $child) {
+        if ($child->url_type == 2) {
+            $target = 'target="_blank"';
+        }
+
+        if (!empty($child->menuChildren)) {
+            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
+        } else {
+            $return_item .= '<li><a class="dropdown-item" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a></li>';
+        }
+    }
+
+    return $start_ul . $return_item . $end_ul;
+}
 ?>
 
-<ul class="main-menu-navs">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <?php $target = 'target="_blank"'; ?>
+            <?php foreach ($mainMenu as $menu): ?>
+                <li class="nav-item dropdown active">
+                    <?php if (!empty($menu->menuChildren)): ?>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <?= $menu->label ?>
+                        </a>
+                        <?= generateDropdown($menu->menuChildren) ?>
 
-    <?php foreach ($mainMenu as $menu): ?>
-        <?php $target = 'target="_blank"'; ?>
-        <?php if (!empty($menu->menuChildren)) { ?>
-            <li class="parent-nav">
-                <a href="<?= $menu->link ?>&menu_id=<?= $menu->id ?>" class="active" <?= ($menu->url_type == 2) ? $target : "" ?>>
-                    <?= $menu->label ?>
-                </a>
-                <?= generateNavItem($menu->menuChildren) ?>
-            </li>
-        <?php } else { ?>
-            <?php if ($menu->url_type = 2): ?>
-                <li>
-                    <a href="<?= $menu->link ?>" class="active" <?= ($menu->url_type == 2) ? $target : "" ?>>
-                        <?= $menu->label ?>
-                    </a>
+                        <?php continue; endif; ?>
+
+                    <a class="nav-link" href="<?= $menu->link ?>&menu_id=<?= $menu->id ?>" <?= ($menu->url_type == 2) ? $target : "" ?>><?= $menu->label ?></a>
                 </li>
-            <?php else: ?>
-                <li>
-                    <a href="<?= $menu->link ?>&menu_id=<?= $menu->id ?> " class="active" <?= ($menu->url_type == 2) ? $target : "" ?>>
-                        <?= $menu->label ?>
-                    </a>
-                </li>
-            <?php endif; ?>
-        <?php } ?>
-    <?php endforeach; ?>
-</ul>
+            <?php endforeach; ?>
+        </ul>
+
+        <?php $form = ActiveForm::begin(['options' => ['class' => 'form-inline my-2 my-lg-0']]); ?>
+        <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => 'Search']) ?>
+        <div class="form-group">
+            <?= Html::submitButton('Search', ['class' => 'btn btn-outline-success my-2 my-sm-0']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div>
+</nav>
