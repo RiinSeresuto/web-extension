@@ -1,7 +1,4 @@
 <?php
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-
 $auxiliaryMenu = [];
 
 // Filter menus based on position
