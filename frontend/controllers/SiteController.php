@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use backend\models\Post;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -28,20 +29,20 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-            return [
-                'access' => [
-                    'class' => AccessControl::className(),
-                    'only' => ['index'],
-                    'rules' => [
-                        [
-                            'actions' => ['index'],
-                            'allow' => true,
-                            'roles' => ['@', '?'],
-                        ],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index'],
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@', '?'],
                     ],
                 ],
-            ];
-    
+            ],
+        ];
+
     }
 
     /**
@@ -67,8 +68,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-        return $this->render('index');
+        $central_news = Post::find()->where(['category_id' => 1])->limit(5)->all();
+        echo '<pre>';
+        print_r($central_news);
+        exit;
+        return $this->render('index', [
+            'central_news' => $central_news,
+        ]);
     }
 
 
@@ -274,5 +280,5 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
-    
+
 }

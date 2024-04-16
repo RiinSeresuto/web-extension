@@ -10,12 +10,13 @@ use yii\widgets\ActiveForm;
 use backend\models\Menu;
 
 AppAsset::register($this);
-$menus = Menu::find()->andWhere(['parent_id'=>null])->all();
+$menus = Menu::find()->andWhere(['parent_id' => null])->all();
 
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,80 +25,68 @@ $menus = Menu::find()->andWhere(['parent_id'=>null])->all();
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrap">
+    <div class="wrap">
 
-<div class="separator-one"></div>
-    <div class="separator-two"></div>
-    <!--  Top Navigation -->
-    <div class="header">
-        <div class="container-fluid">
-            <div class="row theme header">
-                <div class="col-xs-12 col-lg-12">
-                    <marquee behavior="alternate" direction="down" scrollamount=""> <!-- marquee -->
-                        <?= Html::img('@web/images/logo-dilg-new.png', ['class'=>'header-logo']);?>
-                    </marquee>
+        <div class="separator-one"></div>
+        <div class="separator-two"></div>
+        <!--  Top Navigation -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row theme header">
+                    <div class="col-xs-12 col-lg-12">
+                        <marquee behavior="alternate" direction="down" scrollamount=""> <!-- marquee -->
+                            <?= Html::img('@web/images/logo-dilg-new.png', ['class' => 'header-logo']); ?>
+                        </marquee>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="separator-two"></div>
-<div class="separator-one"></div>
+        <div class="separator-two"></div>
+        <div class="separator-one"></div>
 
-   
-    <!-- Main Menu Navigation -->
-    <div class="main-menu">
-        <?= $this->render('main-menu', [
-            'menus' => $menus
-        ]) 
-        
-        ?>
-        <?php $form = ActiveForm::begin(['options' => ['class' => 'main-menu-search']]); ?>
-            <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control'])?>
-                <div class="form-group">
-                    <?= Html::submitButton('Search', ['class' => 'btn btn-outline-dark btn-sm']) ?>
-                </div>
-        <?php ActiveForm::end(); ?>
-    </div>
 
-    <div class="main-menu-test">
-        <?= $this->render('main-menu-test', [
-            'menus' => $menus
-        ]); ?>
-    </div>
+        <!-- Main Menu Navigation -->
+        <div class="main-menu">
+            <?= $this->render('main-menu', [
+                'menus' => $menus
+            ]) ?>
 
-    <?= $this->render('slider-photo')?> 
+        </div>
 
-    <!-- DILG Information Systems -->
-   
-    <!-- Auxiliary Menu Navigation -->
-    <div class="auxiliary-menu">
-        <?= $this->render('auxiliary-menu', [
-            'menus' => $menus
-        ]) ?>
-    </div>
+        <?= $this->render('slider-photo') ?>
 
-    <div class="banner">
-        <?= $this->render('dilg-systems-banner')?>
-    </div>
-    
-    <?php // $advisory ?>
+        <!-- DILG Information Systems -->
 
-    <?= $content ?>
+        <!-- Auxiliary Menu Navigation -->
+        <div class="auxiliary-menu">
+            <?= $this->render('auxiliary-menu', [
+                'menus' => $menus
+            ]) ?>
+        </div>
 
-    <!-- DILG Information Systems -->
-    <div class="info-systems">
+        <div class="banner">
+            <?= $this->render('dilg-systems-banner') ?>
+        </div>
+
+        <?php // $advisory ?>
+
+        <?= $content ?>
+
+        <!-- DILG Information Systems -->
+        <div class="info-systems">
+
+        </div>
+
 
     </div>
-    
-
-</div>
     <!-- Footer -->
-<?=  $this->render('footer')?>
-<?php $this->endBody() ?>
+    <?= $this->render('footer') ?>
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>
-
