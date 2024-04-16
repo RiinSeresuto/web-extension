@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $this->title = $model->category->title; ?>
         </div>
         <div class="text-right buttons">
-            <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-info btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
             <?= Html::a('<i class="fas fa-edit"></i> Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
             <?= Html::a('<i class="fas fa-trash-alt"></i> Delete', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger btn-sm',
@@ -54,14 +54,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     'year',
-
                     [
                         'attribute' => 'user_id',
                         'value' => function ($model) {
                             return $model->user->username;
                         },
                     ],
-                    'user_update_id',
                     [
                         'attribute' => 'date_created',
                         'value' => function ($model) {
@@ -69,33 +67,30 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     [
-                        'attribute' => 'date_updated',
+                        'attribute' => 'user_update_id',
                         'value' => function ($model) {
-                            return ($model->date_updated) ? date('F d, Y h:i A', strtotime($model->date_updated)) : null;
+                            return $model->user_update_id == null ? "(not set)" : $model->userUpdate->username;
                         },
                     ],
+                    [
+                        'attribute' => 'date_updated',
+                        'value' => function ($model) {
+                            return $model->date_updated == null ? "(not set)" : date('F d, Y h:i A', strtotime($model->date_updated));
+                        }
+                    ]
                 ],
             ]) ?>
+
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">Form</div>
+        <div class="card-body">
             <div class="row view-field">
                 <div class="col-md-12">
-
-                    <?php
-                    // echo '<pre>';
-                    // print_r($model->formField);
-                    // exit;
-                    
-
-                    // foreach ($model->formField as $key => $value) {
-                    //     echo '<pre>';
-                    //     print_r($value->widgetType);
-                    //     exit;
-                    
-
-                    // }
-                    
-                    ?>
-
                     <?php $form = ActiveForm::begin(); ?>
+
                     <?php foreach ($model->formField as $key => $value): ?> <!-- model->function(model)->value -->
                         <?php if ($value->field->widget_type_id == 1): ?> <!-- -->
                             <?= Html::tag('label', $value->field->label, $options = ['class' => 'form-label']) ?>
@@ -103,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?php elseif ($value->field->widget_type_id == 2): ?>
                             <?= Html::tag('label', $value->field->label, $options = ['class' => 'form-label']) ?>
-                            <?= Html::input('text', '', '', $options = ['class' => 'form-control', 'maxlength' => 10, 'style' => 'width:350px', 'readonly' => 'true']) ?>
+                            <?= Html::input('text', '', '', $options = ['class' => 'form-control', 'maxlength' => 10, 'readonly' => 'true']) ?>
                         <?php elseif ($value->field->widget_type_id == 3): ?>
 
                             <?= Html::tag('label', $value->field->label, $options = ['class' => 'form-label']) ?>
