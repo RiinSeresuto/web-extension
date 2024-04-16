@@ -6,7 +6,6 @@ use Yii;
 use backend\models\SliderPhoto;
 use backend\models\SliderPhotoSearch;
 use backend\models\Status;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

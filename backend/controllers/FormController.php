@@ -8,7 +8,6 @@ use backend\models\FormSearch;
 use backend\models\Category;
 use backend\models\Status;
 use backend\models\Field;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;

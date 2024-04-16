@@ -6,7 +6,6 @@ use backend\models\Status;
 use Yii;
 use backend\models\DilgInfoSystems;
 use backend\models\DilgInfoSystemsSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

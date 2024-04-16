@@ -9,10 +9,7 @@ use backend\models\Pages;
 use backend\models\PagesSearch;
 use backend\models\Type;
 use backend\models\Menu;
-use backend\models\File;
 
-use yii\helpers\ArrayHelper;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;

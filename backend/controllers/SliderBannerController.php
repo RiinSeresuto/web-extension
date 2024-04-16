@@ -6,7 +6,6 @@ use Yii;
 use backend\models\SliderBanner;
 use backend\models\SliderBannerSearch;
 use backend\models\SliderBannerType;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;

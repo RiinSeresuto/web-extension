@@ -13,7 +13,6 @@ use backend\models\PublishType;
 use backend\models\Pages;
 use backend\models\Category;
 use backend\models\FormField;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

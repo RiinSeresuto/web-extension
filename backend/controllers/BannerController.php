@@ -6,7 +6,6 @@ use backend\models\Status;
 use Yii;
 use backend\models\Banner;
 use backend\models\BannerSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

@@ -6,7 +6,6 @@ use Yii;
 use backend\models\Category;
 use backend\models\CategorySearch;
 use backend\models\Status;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

@@ -2,17 +2,12 @@
 
 namespace backend\controllers;
 
-use kartik\form\ActiveForm;
 use Yii;
 use backend\models\Field;
 use backend\models\FieldSearch;
 use backend\models\DataType;
 use backend\models\WidgetType;
 use backend\models\WidgetSelect2Items;
-use backend\models\Model;
-use yii\helpers\ArrayHelper;
-use yii\web\Response;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
