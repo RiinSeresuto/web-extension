@@ -99,16 +99,6 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     }
 
     /**
-     * Gets query for [[CmsFileAttachments]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCmsFileAttachments()
-    {
-        return $this->hasMany(FileAttachment::className(), ['record_id' => 'id']);
-    }
-
-    /**
      * Gets query for [[Forms]].
      *
      * @return \yii\db\ActiveQuery
