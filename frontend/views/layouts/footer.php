@@ -8,7 +8,6 @@ use yii\helpers\FileHelper;
 <!-- Footer -->
 <footer class="footer">
     <div class="container">
-
         <div class="row">
             <div class="col-md-3 seal-ph">
 
@@ -30,7 +29,6 @@ use yii\helpers\FileHelper;
                                     <?php
                                     echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-info-system/', 'id' => $info_system->id]), ['class' => 'footer-dilg-system-logos']);
                                     ?>
-
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -47,18 +45,17 @@ use yii\helpers\FileHelper;
                                 <?php endforeach; ?>
                             </div>
                         </div>
-                        <div class="partners-gap">Partners
+                        <div class="partners-gap"><strong>Partners</strong>
                             <div class="partners-logo">
-                                <?php // $this->render('partners') ?> <!-- render -->
-                                <?= Html::a(
-                                    Html::img('@web/images/napolcom.png', ['class' => 'footer-agency-logos']),
-                                    'https://www.officialgazette.gov.ph/',
-                                    ['class' => 'footer-links']
-                                ); ?>
-
-
+                                <?php $partners = Footer::getPartners() ?>
+                                <?php foreach ($partners as $partner): ?>
+                                    <?php
+                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-partners/', 'id' => $partner->id]), ['class' => 'footer-dilg-system-logos']);
+                                    ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
+
                     </div>
                     <div class="col-md-6">
                         <div class="row">
