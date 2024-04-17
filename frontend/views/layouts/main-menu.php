@@ -79,8 +79,8 @@ function generateSubmenu($children)
             <?php foreach ($mainMenu as $menu): ?>
                 <li class="nav-item dropdown active">
                     <?php if (!empty($menu->menuChildren)): ?>
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle mr-1 ml-1" href="#" id="navbarDropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?= $menu->label ?>
                         </a>
                         <?= generateDropdown($menu->menuChildren) ?>
