@@ -69,9 +69,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $central_news = Post::find()->where(['category_id' => 1])->limit(5)->all();
-        echo '<pre>';
-        print_r($central_news);
-        exit;
+        // echo '<pre>';
+        // print_r($central_news);
+        // exit;
+
         return $this->render('index', [
             'central_news' => $central_news,
         ]);
