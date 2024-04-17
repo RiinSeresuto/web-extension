@@ -9,16 +9,16 @@ use common\helpers\Carousel;
 <!-- Slider Photo -->
 <div class="slider-photo slider">
   <?php $carousel_images = Carousel::getPhoto() ?>
-    <?php foreach ($carousel_images as $carousel_image): ?>
-      <div>
-        <?php
-            echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id'=> $carousel_image->id]), ['class'=>'']);
-        ?>
-      </div>
-    <?php endforeach; ?>
+  <?php foreach ($carousel_images as $carousel_image): ?>
+    <div>
+      <?php
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id' => $carousel_image->id]), ['class' => '']);
+      ?>
     </div>
+  <?php endforeach; ?>
+</div>
 
-<?php 
+<?php
 
 $script = <<<JS
 $(".slider-photo").slick({
