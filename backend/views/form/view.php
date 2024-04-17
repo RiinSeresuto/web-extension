@@ -21,8 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-view">
     <div class="card">
         <div class="card-header">
-            Form Details:
-            <?= $this->title = $model->category->title; ?>
+            Form Details
         </div>
         <div class="text-right buttons">
             <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>

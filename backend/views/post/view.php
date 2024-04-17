@@ -6,13 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Post */
 
-$this->title = $model->id;
+$this->title = $model->forms->category->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="post-view">
-    <div class="card">
+    <div class="card border-primary mb-3">
         <div class="card-header">
             Post Details
         </div>
@@ -42,23 +42,39 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->status->status_type;
                         },
                     ],
-                    'visibility_id',
-                    // [
-                    //     'attribute' => 'visibility_id',
-                    //     'value' => function ($model) {
-                    //         return $model->visibility_type->visibility_type;
-                    //     },
-                    // ],
-                    'publish_id',
-                    // [
-                    //     'attribute' => 'publish_id',
-                    //     'value' => function ($model) {
-                    //         return $model->publish_type->publish_type;
-                    //     },
-                    // ],
+                    [
+                        'attribute' => 'visibility_id',
+                        'value' => function ($model) {
+                            return $model->visibility->visibility_type;
+                        },
+                    ],
+                    [
+                        'attribute' => 'publish_id',
+                        'value' => function ($model) {
+                            return $model->publish->publish_type;
+                        },
+                    ],
                     'page_id',
-                    'start_date_time',
-                    'end_date_time',
+                    // [
+                    //     'attribute' => 'page_id',
+                    //     'value' => function ($model) {
+                    //         return $model->page->;
+                    //     }
+                    // ],
+                    //'start_date_time',
+                    [
+                        'attribute' => 'start_date_time',
+                        'value' => function ($model) {
+                            return $model->start_date_time == null ? "(not set)" : date('F d, Y h:i A', strtotime($model->start_date_time));
+                        }
+                    ],
+                    //'end_date_time',
+                    [
+                        'attribute' => 'end_date_time',
+                        'value' => function ($model) {
+                            return $model->end_date_time == null ? "(not set)" : date('F d, Y h:i A', strtotime($model->end_date_time));
+                        }
+                    ],
                     'min_answer',
                     'max_answer',
                     [
