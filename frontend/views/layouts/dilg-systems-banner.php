@@ -1,5 +1,6 @@
 <?php
 
+use common\helpers\Carousel;
 use yii\helpers\Html;
 
 ?>
@@ -7,84 +8,95 @@ use yii\helpers\Html;
 <!-- DILG Systems Banner-->
 
 <div class="dilg-systems slider">
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
+  <div>
+    <?= Html::a(
+      Html::img('@web/images/dilg-systems/citizens-charter.png')
+    ); ?>
+  </div>
 </div>
 
-<?php 
+<div class="dilg-systems slider">
+  <?php $banners = Carousel::getBanner() ?>
+  <?php foreach ($banners as $banner): ?>
+    <div>
+      <?php
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-banner/', 'item_id' => $banner->id]), ['class' => '']);
+      ?>
+    </div>
+  <?php endforeach; ?>
+</div>
+
+<?php
 
 $script = <<<JS
 $(".dilg-systems").slick({

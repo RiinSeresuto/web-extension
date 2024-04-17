@@ -59,8 +59,6 @@ $menus = Menu::find()->andWhere(['parent_id' => null])->all();
 
         <?= $this->render('slider-photo') ?>
 
-        <!-- DILG Information Systems -->
-
         <!-- Auxiliary Menu Navigation -->
         <div class="auxiliary-menu">
             <?= $this->render('auxiliary-menu', [
@@ -75,13 +73,6 @@ $menus = Menu::find()->andWhere(['parent_id' => null])->all();
         <?php // $advisory ?>
 
         <?= $content ?>
-
-        <!-- DILG Information Systems -->
-        <div class="info-systems">
-
-        </div>
-
-
     </div>
     <!-- Footer -->
     <?= $this->render('footer') ?>
