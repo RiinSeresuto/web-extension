@@ -32,9 +32,9 @@ class CarouselController extends Controller
         }
     }
 
-    public static function actionImageBanner($id)
+    public static function actionImageBanner($item_id)
     {
-        $modelImg = File::find()->where(['item_id' => $id])->andWhere(['model' => "backend\models\Banner"])->one();
+        $modelImg = File::find()->where(['item_id' => $item_id])->andWhere(['model' => "backend\models\Banner"])->one();
 
         $folder1 = substr(basename($modelImg->hash), 0, 2) . "/";
         $folder2 = substr(basename($modelImg->hash), 3, 2) . "/";

@@ -10,13 +10,18 @@ class Carousel
 {
     public static function getPhoto()
     {
-        return SliderPhoto::find()->all();
+        return SliderPhoto::find()->where(['status_id' => 1])->all();
     }
+
+    // public static function getBanner()
+    // {
+    //     $info = Banner::find()->all();
+    //     return $info;
+    // }
 
     public static function getBanner()
     {
-        $info = Banner::find()->all();
-        return $info;
+        return Banner::find()->all();
     }
 }
 ?>
