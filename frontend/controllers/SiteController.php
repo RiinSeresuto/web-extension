@@ -72,6 +72,7 @@ class SiteController extends Controller
         // echo '<pre>';
         // print_r($central_news);
         // exit;
+
         return $this->render('index', [
             'central_news' => $central_news,
         ]);
