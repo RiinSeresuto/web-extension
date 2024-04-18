@@ -10,9 +10,9 @@ use common\helpers\Carousel;
 <div class="slider-photo slider">
   <?php $carousel_images = Carousel::getPhoto() ?>
   <?php foreach ($carousel_images as $carousel_image): ?>
-    <div>
+    <div class="slider-photo-item">
       <?php
-      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id' => $carousel_image->id]), ['class' => '']);
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id' => $carousel_image->id]), ['style' => 'width: 280px; height: 170px;']);
       ?>
     </div>
   <?php endforeach; ?>
