@@ -27,7 +27,7 @@ use yii\helpers\FileHelper;
                                 <?php $info_systems = Footer::getInfoSystem() ?>
                                 <?php foreach ($info_systems as $info_system): ?>
                                     <?php
-                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-info-system/', 'id' => $info_system->id]), ['class' => 'footer-dilg-system-logos']);
+                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-info-system/', 'id' => $info_system->id]), ['class' => 'footer-dilg-system-logos m-1']);
                                     ?>
                                 <?php endforeach; ?>
                             </div>
@@ -50,7 +50,7 @@ use yii\helpers\FileHelper;
                                 <?php $partners = Footer::getPartners() ?>
                                 <?php foreach ($partners as $partner): ?>
                                     <?php
-                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-partners/', 'id' => $partner->id]), ['class' => 'footer-dilg-system-logos']);
+                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-partners/', 'id' => $partner->id]), ['class' => 'footer-partners-logos']);
                                     ?>
                                 <?php endforeach; ?>
                             </div>
