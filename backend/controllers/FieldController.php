@@ -76,6 +76,7 @@ class FieldController extends \niksko12\auditlogs\classes\ControllerAudit
         $widget_type = WidgetType::find()->all();
 
         if ($modelField->load(Yii::$app->request->post())) {
+
             $modelField->user_id = Yii::$app->user->identity->id;
 
             if ($modelField->save()) {
@@ -124,19 +125,23 @@ class FieldController extends \niksko12\auditlogs\classes\ControllerAudit
         $widget_type = WidgetType::find()->all();
         $modelWidgetSelect2Items = WidgetSelect2Items::find()->where(['field_id' => $id])->all();
 
-        if ($modelField->load(Yii::$app->request->post()) && $modelField->save()) {
-            if ($modelField->widget_type_id == 3) {
+        if ($modelField->load(Yii::$app->request->post())) {
 
-                if (WidgetSelect2Items::loadMultiple($modelWidgetSelect2Items, Yii::$app->request->post())) {
-                    foreach ($modelWidgetSelect2Items as $model) {
-                        $model->save(false);
+            $modelField->user_update_id = Yii::$app->user->identity->id;
+
+            if ($modelField->save()) {
+                if ($modelField->widget_type_id == 3) {
+
+                    if (WidgetSelect2Items::loadMultiple($modelWidgetSelect2Items, Yii::$app->request->post())) {
+                        foreach ($modelWidgetSelect2Items as $model) {
+                            $model->save(false);
+                        }
                     }
                 }
+
+                return $this->redirect(['view', 'id' => $modelField->id]);
             }
-
-            return $this->redirect(['view', 'id' => $modelField->id]);
         }
-
 
 
         return $this->render('update', [

@@ -135,7 +135,7 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
      */
     public function getStatus()
     {
-        return $this->hasOne(PostStatusType::className(), ['id' => 'status_id']);
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
     /**

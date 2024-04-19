@@ -17,49 +17,50 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <div class="card-body">
-            <?= $this->render('_search', 
+            <?= $this->render(
+                '_search',
                 [
                     'model' => $searchModel,
                     'category' => $category,
                     'status' => $status
-                ]); ?>
+                ]
+            ); ?>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    'forms_id',
-                    // [
-                    //     'attribute' => 'forms_id',
-                    //     'value' => function($data){
-                    //         return $data->form->titl;
-                    //     },
-                    // ],
-                    'status_id',
-                    // [
-                    //     'attribute' => 'status_id',
-                    //     'value' => function($data){
-                    //         return $data->status->status_type;
-                    //     },
-                    // ],
+                    //'forms_id',
+                    [
+                        'attribute' => 'forms_id',
+                        'value' => function ($data) {
+                            return $data->forms->category->title;
+                        },
+                    ],
+                    //'status_id',
+                    [
+                        'attribute' => 'status_id',
+                        'value' => function ($data) {
+                            return $data->status->status_type;
+                        },
+                    ],
                     [
                         'attribute' => 'publish_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->publish->publish_type;
                         }
                     ],
-                    'user_id',
-                    // [
-                    //     'attribute' => 'user_id',
-                    //     'value' => function($data){
-                    //         return $data->user->username;
-                    //     },
-                    // ],
+                    [
+                        'attribute' => 'user_id',
+                        'value' => function ($data) {
+                            return $data->user->username;
+                        },
+                    ],
                     [
                         'attribute' => 'date_created',
-                        'value' => function($data){
-                            return ($data->date_created) ? date('F d, Y h:i A', strtotime($data->date_created)) : null; 
+                        'value' => function ($data) {
+                            return ($data->date_created) ? date('F d, Y h:i A', strtotime($data->date_created)) : null;
                         },
                     ],
                     [
@@ -105,7 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
                 'pager' => [
-                    'options' =>  ['class' => 'pagination'],
+                    'options' => ['class' => 'pagination'],
                     'maxButtonCount' => 5,
                 ],
             ]); ?>

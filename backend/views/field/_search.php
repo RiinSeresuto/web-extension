@@ -33,17 +33,17 @@ use yii\helpers\ArrayHelper;
 
         <div class="col-md-4">
             <?= $form->field($model, 'widget_type_id')->widget(Select2::class, [
-                'data' => ArrayHelper::map($widget_type, 'id', 'widget_type'), 
+                'data' => ArrayHelper::map($widget_type, 'id', 'widget_type'),
                 'options' => [
                     'placeholder' => 'Select Widget Type',
                 ]
-            ])?>
+            ]) ?>
         </div>
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('<i class="fas fa-search"></i> Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('<i class="fas fa-undo-alt"></i> Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('<i class="fas fa-search"></i> Search', ['class' => 'btn btn-primary btn-sm']) ?>
+        <?= Html::resetButton('<i class="fas fa-undo-alt"></i> Reset', ['class' => 'btn btn-outline-secondary btn-sm']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
