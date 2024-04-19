@@ -68,7 +68,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $central_news = Post::find()->where(['category_id' => 1])->limit(5)->all();
+        $central_news = Post::find()->where(['category_id' => 1])->limit(5)->orderBy(['id' => SORT_DESC])->all();
         // echo '<pre>';
         // print_r($central_news);
         // exit;
