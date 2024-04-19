@@ -22,7 +22,7 @@ use yii\helpers\FileHelper;
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6 info-system">
-                        <div class="info-systems-gap"><strong>DILG Information Systems</strong>
+                        <div class="info-systems-gap">
                             <div class="info-systems-logo">
                                 <?php $info_systems = Footer::getInfoSystem() ?>
                                 <?php foreach ($info_systems as $info_system): ?>
@@ -33,15 +33,16 @@ use yii\helpers\FileHelper;
                             </div>
                         </div>
                         <div class="agencies-gap"><strong>Attached Agencies</strong>
-                            <div class="agencies-logo d-flex" style="width: 100px; height: 100px; ">
+                            <!-- <div class="agencies-logo d-flex" style="width: 100px; height: 100px; "> -->
+                            <div class="agencies-logo d-flex">
                                 <?php $attached_agencies = Footer::getAttachedAgencies() ?>
                                 <?php foreach ($attached_agencies as $attached_agency): ?>
                                     <div class="flex-row footer-dilg-attached-agencies-logo">
                                         <?php
-                                        echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'w-100 h-100']);
+                                        // echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'w-100 h-100 m-1']);
+                                        echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'footer-agency-logos m-1']);
                                         ?>
                                     </div>
-
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -50,7 +51,7 @@ use yii\helpers\FileHelper;
                                 <?php $partners = Footer::getPartners() ?>
                                 <?php foreach ($partners as $partner): ?>
                                     <?php
-                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-partners/', 'id' => $partner->id]), ['class' => 'footer-partners-logos']);
+                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-partners/', 'id' => $partner->id]), ['class' => 'footer-partners-logos m-1']);
                                     ?>
                                 <?php endforeach; ?>
                             </div>

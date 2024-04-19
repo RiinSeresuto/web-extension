@@ -220,14 +220,14 @@ color: #ff0000;
 
 .footer-partners-logos {
   height: 35px;
-  width: 80px;
+  width: 50px;
 }
 
-.footer-dilg-attached-agencies-logo {
+/* .footer-dilg-attached-agencies-logo {
   --size: 50px;
   height: var(--size);
   width: var(--size);
-}
+} */
 
 .footer-agency-logos {
   height: 50px;
