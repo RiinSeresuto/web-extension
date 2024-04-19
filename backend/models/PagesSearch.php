@@ -17,7 +17,7 @@ class PagesSearch extends Pages
     public function rules()
     {
         return [
-            [['id', 'menu_id', 'url_type_id', 'status_id', 'type_id', 'slider_photo', 'file_attachment', 'user_id', 'user_update_id'], 'integer'],
+            [['id', 'menu_id', 'url_type_id', 'status_id', 'type_id', 'slider_photo', 'user_id', 'user_update_id'], 'integer'],
             [['title', 'caption', 'body', 'link', 'date_created', 'date_updated'], 'safe'],
         ];
     }
@@ -73,9 +73,9 @@ class PagesSearch extends Pages
 
         $query->andFilterWhere(['like', 'title', $this->title]);
 
-            if (!empty($this->status)){
-                $query->andFilterWhere(['like', 'status_id', $this->status->id]);
-            }
+        if (!empty($this->status)) {
+            $query->andFilterWhere(['like', 'status_id', $this->status->id]);
+        }
 
         return $dataProvider;
     }
