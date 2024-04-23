@@ -72,14 +72,14 @@ body {
   text-decoration: none;
 }
 
-.main-menu-search {
+/* .main-menu-search {
   display: flex;
   padding: 8px;
 }
 
 .main-menu-search input {
   margin-right: 10px;
-}
+} */
 
 /* .auxiliary-menu {
   display: flex;
@@ -117,7 +117,7 @@ body {
 }
 
 .slider {
-  width: 75%;
+  width: 100%;
   margin: 5px auto;
 }
 
@@ -377,5 +377,5 @@ a.desc:after {
 
 .slider-photo-item,
 .dilg-systems-banner-item {
-  height: 165px;
+  height: 300px;
 }
