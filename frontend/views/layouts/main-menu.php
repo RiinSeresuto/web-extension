@@ -68,7 +68,7 @@ function generateSubmenu($children)
 }
 ?>
 
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -93,9 +93,9 @@ function generateSubmenu($children)
         </ul>
 
         <?php $form = ActiveForm::begin(['options' => ['class' => 'form-inline my-2 my-lg-0']]); ?>
-        <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control mr-sm-2', 'type' => 'search', 'placeholder' => 'Search']) ?>
+        <?= Html::input('text', 'searchKeyword', '', ['class' => 'form-control mr-sm-2 form-control-sm', 'type' => 'search', 'placeholder' => 'Search']) ?>
         <div class="form-group">
-            <?= Html::submitButton('Search', ['class' => 'btn btn-outline-success my-2 my-sm-0']) ?>
+            <?= Html::submitButton('<i class="fas fa-search"></i> Search', ['class' => 'btn btn-dark my-2 my-sm-0 btn-sm']) ?>
         </div>
         <?php ActiveForm::end(); ?>
     </div>
