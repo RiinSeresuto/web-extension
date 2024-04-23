@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus"></i> Create Form', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus"></i> Add', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
         <div class="card-body">
             <?= $this->render('_search', [
