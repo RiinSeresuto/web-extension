@@ -13,3 +13,11 @@ $this->title = 'DILG: Department of the Interior and Local Government';
         'central_news' => $central_news,
     ]); ?>
 </div>
+
+<div class="container">
+    <?php // $this->render('_regional_news_highlight', [
+    //     'regional_news_highlight' => $regional_news[0]->body,
+    //     'regional_news_date' => $regional_news[0]->date_created,
+    //     'regional_news' => $regional_news,
+    // ]); ?>
+</div>
