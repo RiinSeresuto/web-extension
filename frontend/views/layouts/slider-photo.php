@@ -12,7 +12,7 @@ use common\helpers\Carousel;
   <?php foreach ($carousel_images as $carousel_image): ?>
     <div class="slider-photo-item">
       <?php
-      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id' => $carousel_image->id]), ['style' => 'width: 280px; height: 170px;']);
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id' => $carousel_image->id]), ['style' => 'width: 390px; height: 260px;']);
       ?>
     </div>
   <?php endforeach; ?>
@@ -25,8 +25,8 @@ $(".slider-photo").slick({
           centerMode: true,
           autoplay: true,
           autoplaySpeed: 3000,
-          centerPadding: "60px",
-          slidesToShow: 3,
+          centerPadding: "480px",
+          slidesToShow: 1,
           arrows: false,
           responsive: [
             {
@@ -35,7 +35,7 @@ $(".slider-photo").slick({
                 arrows: false,
                 centerMode: true,
                 centerPadding: "40px",
-                slidesToShow: 3,
+                slidesToShow: 1,
               },
             },
             {
