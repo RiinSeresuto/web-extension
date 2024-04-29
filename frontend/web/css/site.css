@@ -375,7 +375,10 @@ a.desc:after {
     height: 70px;
 } */
 
-.slider-photo-item,
 .dilg-systems-banner-item {
-  height: 300px;
+  height: 120px;
+}
+
+.slider-photo-item {
+  height: 200px;
 }
