@@ -21,7 +21,7 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
 <hr>
 <div class="row">
     <div class="col-7">
-        <div><em><?= Yii::$app->formatter->asDate($central_news_date), 'long' ?></em></div>
+        <div><em><?= Yii::$app->formatter->asDate($regional_news_date), 'long' ?></em></div>
         <h1 id="regional-news-title"><?= $regional_news_highlight_title ?></h1>
     </div>
 
@@ -33,7 +33,7 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
     <?php foreach ($regional_news as $key => $news): ?>
         <?php if ($key > 0): ?>
             <?php
-            $news_body = str_replace('\\"', '\\u201d', $news_body);
+            $news_body = str_replace('\\"', '\\u201d', $news->body);
             $news_body = str_replace('\\/p', '</p>', $news_body);
             $news_body = json_decode($news_body, true);
             ?>

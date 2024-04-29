@@ -26,14 +26,14 @@ $central_news_highlight_summary .= "...";
 $central_news_highlight_title = $central_news_highlight['Title'];
 ?>
 
-<h3>Central News</h3>
+<h4>Central News</h4>
 <hr>
 <div class="row">
-    <div class="col-7">
+    <div class="col-5">
         <div><em><?= Yii::$app->formatter->asDate($central_news_date, 'long') ?></em></div>
         <h1 id="central-news-title"><?= $central_news_highlight_title ?></h1>
     </div>
-    <div class="col-5" id="central-news-summary">
+    <div class="col-7" id="central-news-summary">
         <?= $central_news_highlight_summary ?>
     </div>
 </div>
@@ -71,11 +71,11 @@ $central_news_highlight_title = $central_news_highlight['Title'];
 <?php
 $style = <<<CSS
 #central-news-title{
-    font-size: 64px
+    font-size: 50px
 }
 
 #central-news-summary{
-    font-size: 20px;
+    font-size: 15px;
 }
 CSS;
 
