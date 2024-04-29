@@ -12,7 +12,7 @@ use common\helpers\Carousel;
   <?php foreach ($carousel_images as $carousel_image): ?>
     <div class="slider-photo-item">
       <?php
-      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id' => $carousel_image->id]), ['style' => 'width: 390px; height: 260px;']);
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-slider/', 'item_id' => $carousel_image->id]), ['style' => 'width: 380px; height: 250px;']);
       ?>
     </div>
   <?php endforeach; ?>
