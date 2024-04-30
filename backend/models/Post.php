@@ -187,4 +187,15 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
+
+    public function behaviors()
+    {
+        return [
+
+            'fileBehavior' => [
+                'class' => \attachment\behaviors\FileBehavior::className()
+            ]
+
+        ];
+    }
 }
