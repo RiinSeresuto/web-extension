@@ -30,7 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
+                    // [
+                    //     'label' => 'Title',
+                    //     'value' => function ($data) {
+                    //         return $data->
+                    //     }
+                    // ],
                     [
                         'attribute' => 'forms_id',
                         'value' => function ($data) {
