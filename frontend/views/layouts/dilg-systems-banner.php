@@ -11,7 +11,7 @@ use yii\helpers\Html;
   <?php foreach ($banners as $banner): ?>
     <div class="dilg-systems-banner-item">
       <?php
-      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-banner/', 'item_id' => $banner->id]), ['style' => 'width: 250px; height: 120px;']);
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-banner/', 'item_id' => $banner->id]), ['style' => 'width: 115px; height: 50px;']);
       ?>
     </div>
   <?php endforeach; ?>
@@ -52,7 +52,7 @@ $(".dilg-systems").slick({
   dots: false,
   infinite: false,
   speed: 400,
-  slidesToShow: 5,
+  slidesToShow: 10,
   slidesToScroll: 10,
   arrows: false,
   autoplay: true,
