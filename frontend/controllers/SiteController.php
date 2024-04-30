@@ -79,6 +79,7 @@ class SiteController extends Controller
         return $this->render('index', [
             'central_news' => $central_news,
             'regional_news' => $regional_news,
+            'advisory' => $advisory,
         ]);
     }
 
