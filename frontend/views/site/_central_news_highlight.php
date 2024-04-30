@@ -16,8 +16,6 @@ $central_news_highlight = json_decode($central_news_highlight, true);
 $summary_length = 550;
 $central_news_highlight_summary = $central_news_highlight['Content'];
 
-
-
 if (mb_strlen($central_news_highlight_summary) > $summary_length) {
     $central_news_highlight_summary = mb_substr($central_news_highlight_summary, 0, $summary_length);
 }
@@ -29,11 +27,11 @@ $central_news_highlight_title = $central_news_highlight['Title'];
 <h4>Central News</h4>
 <hr>
 <div class="row">
-    <div class="col-5">
+    <div class="col-7" id="central-news-date">
         <div><em><?= Yii::$app->formatter->asDate($central_news_date, 'long') ?></em></div>
         <h1 id="central-news-title"><?= $central_news_highlight_title ?></h1>
     </div>
-    <div class="col-7" id="central-news-summary">
+    <div class="col-5" id="central-news-summary">
         <?= $central_news_highlight_summary ?>
     </div>
 </div>
@@ -49,7 +47,8 @@ $central_news_highlight_title = $central_news_highlight['Title'];
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em></div>
+                        <div id="central-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
+                        </div>
                         <h6><?= $news_body["Title"] ?></h6>
                     </div>
                 </div>
@@ -64,18 +63,24 @@ $central_news_highlight_title = $central_news_highlight['Title'];
 
 <br>
 <br>
-<br>
-<br>
-<br>
 
 <?php
 $style = <<<CSS
+
+#central-news-date{
+    font-size: 12px
+}
+
 #central-news-title{
-    font-size: 50px
+    font-size: 40px
 }
 
 #central-news-summary{
-    font-size: 15px;
+    font-size: 15px 
+}
+
+#central-news-list {
+    font-size: 10px
 }
 CSS;
 

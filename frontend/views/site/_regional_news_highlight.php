@@ -17,15 +17,15 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
 
 ?>
 
-<h3>Regional News</h3>
+<h4>Regional News</h4>
 <hr>
 <div class="row">
-    <div class="col-7">
+    <div class="col-7" id="regional-news-date">
         <div><em><?= Yii::$app->formatter->asDate($regional_news_date), 'long' ?></em></div>
         <h1 id="regional-news-title"><?= $regional_news_highlight_title ?></h1>
     </div>
 
-    <div class="col-5" id="central-news-summary">
+    <div class="col-5" id="regional-news-summary">
         <?= $regional_news_highlight_summary ?>
     </div>
 </div>
@@ -40,7 +40,8 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em></div>
+                        <div id="regional-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
+                        </div>
                         <h6><?= $news_body['Title'] ?></h6>
                     </div>
                 </div>
@@ -54,18 +55,25 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
 
 <br>
 <br>
-<br>
-<br>
-<br>
+
 
 <?php
 $style = <<<CSS
-#regional-news-title{
-    font-size: 64px
+
+#regional-news-date {
+    font-size: 12px
 }
 
-#central-news-summary{
-    font-size: 20px;
+#regional-news-title{
+    font-size: 40px
+}
+
+#regional-news-summary{
+    font-size: 15px;
+}
+
+#regional-news-list {
+    font-size: 10px
 }
 
 CSS;
