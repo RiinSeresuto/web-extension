@@ -376,9 +376,15 @@ a.desc:after {
 } */
 
 .dilg-systems-banner-item {
-  height: 120px;
+  height: 35px;
 }
 
 .slider-photo-item {
   height: 200px;
+}
+
+.central-news-container,
+.regional-news-container {
+  width: 75%;
+  margin-inline: auto;
 }
