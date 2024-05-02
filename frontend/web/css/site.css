@@ -388,3 +388,19 @@ a.desc:after {
   width: 75%;
   margin-inline: auto;
 }
+
+.main-hover,
+.auxiliary-hover {
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.main-hover:hover,
+.auxiliary-hover:hover {
+  background-color: #121210;
+}
+
+.main-hover:hover .main-dropdown-hover,
+.auxiliary-hover:hover a {
+  color: #ddd !important;
+}
