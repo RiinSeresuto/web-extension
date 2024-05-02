@@ -404,3 +404,9 @@ a.desc:after {
 .auxiliary-hover:hover a {
   color: #ddd !important;
 }
+
+.category-title {
+  font-size: 24px;
+  text-shadow: 2px 2px 5px #999;
+  font-weight: bold;
+}
