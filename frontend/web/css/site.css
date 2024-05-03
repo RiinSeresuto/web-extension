@@ -410,3 +410,7 @@ a.desc:after {
   text-shadow: 2px 2px 5px #999;
   font-weight: bold;
 }
+
+.search-form {
+  width: 100px;
+}
