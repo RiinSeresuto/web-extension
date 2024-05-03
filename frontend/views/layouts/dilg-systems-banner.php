@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 ?>
 
-<!-- DILG Systems Banner-->
+<!-- Banner-->
 <div class="dilg-systems slider">
   <?php $banners = Carousel::getBanner() ?>
   <?php foreach ($banners as $banner): ?>
@@ -55,7 +55,7 @@ $(".dilg-systems").slick({
   slidesToShow: 10,
   slidesToScroll: 10,
   arrows: false,
-  autoplay: true,
+  autoplay: false,
   autoplaySpeed: 3000,
   responsive: [
     {
