@@ -69,4 +69,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
     </div>
+
+    <div class="card">
+        <div class="card-header">
+            <?= $this->title = $model->label; ?> Items
+        </div>
+        <div class="card-body">
+                
+        </div>
+    </div>
 </div>
