@@ -70,6 +70,10 @@ $menus = Menu::find()->andWhere(['parent_id' => null])->all();
             <?= $this->render('dilg-systems-banner') ?>
         </div>
 
+        <div class="info-system">
+            <?= $this->render('dilg-info-system') ?>
+        </div>
+
         <?php // $advisory ?>
 
         <?= $content ?>
