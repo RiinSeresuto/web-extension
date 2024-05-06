@@ -68,6 +68,10 @@ class CategorySearch extends Category
 
         $query->andFilterWhere(['like', 'title', $this->title]);
 
+            if (!empty($this->status)) {
+                $query->andFilterWhere(['like', 'status_id', $this->status->id]);
+            }
+
         return $dataProvider;
     }
 }

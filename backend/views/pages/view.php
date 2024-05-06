@@ -120,6 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'showUpload' => false,
                                         'showBrowse' => false,
                                         'showCaption' => false,
+                                        'showClose' => false,
                                         'fileActionSettings' => [
                                             'showRemove' => false,
                                             //'showDownload' => true,

@@ -8,7 +8,6 @@ use yii\helpers\FileHelper;
 <!-- Footer -->
 <footer class="footer">
     <div class="container">
-
         <div class="row">
             <div class="col-md-3 seal-ph">
 
@@ -23,42 +22,41 @@ use yii\helpers\FileHelper;
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6 info-system">
-                        <div class="info-systems-gap"><strong>DILG Information Systems</strong>
+                        <div class="info-systems-gap">
                             <div class="info-systems-logo">
                                 <?php $info_systems = Footer::getInfoSystem() ?>
                                 <?php foreach ($info_systems as $info_system): ?>
                                     <?php
-                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-info-system/', 'id' => $info_system->id]), ['class' => 'footer-dilg-system-logos']);
+                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-info-system/', 'id' => $info_system->id]), ['class' => 'footer-dilg-system-logos m-1']);
                                     ?>
-
                                 <?php endforeach; ?>
                             </div>
                         </div>
                         <div class="agencies-gap"><strong>Attached Agencies</strong>
-                            <div class="agencies-logo d-flex" style="width: 100px; height: 100px; ">
+                            <!-- <div class="agencies-logo d-flex" style="width: 100px; height: 100px; "> -->
+                            <div class="agencies-logo d-flex">
                                 <?php $attached_agencies = Footer::getAttachedAgencies() ?>
                                 <?php foreach ($attached_agencies as $attached_agency): ?>
                                     <div class="flex-row footer-dilg-attached-agencies-logo">
                                         <?php
-                                        echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'w-100 h-100']);
+                                        // echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'w-100 h-100 m-1']);
+                                        echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'footer-agency-logos m-1']);
                                         ?>
                                     </div>
-
                                 <?php endforeach; ?>
                             </div>
                         </div>
-                        <div class="partners-gap">Partners
+                        <div class="partners-gap"><strong>Partners</strong>
                             <div class="partners-logo">
-                                <?php // $this->render('partners') ?> <!-- render -->
-                                <?= Html::a(
-                                    Html::img('@web/images/napolcom.png', ['class' => 'footer-agency-logos']),
-                                    'https://www.officialgazette.gov.ph/',
-                                    ['class' => 'footer-links']
-                                ); ?>
-
-
+                                <?php $partners = Footer::getPartners() ?>
+                                <?php foreach ($partners as $partner): ?>
+                                    <?php
+                                    echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-partners/', 'id' => $partner->id]), ['class' => 'footer-partners-logos m-1']);
+                                    ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
+
                     </div>
                     <div class="col-md-6">
                         <div class="row">

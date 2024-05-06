@@ -99,16 +99,6 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     }
 
     /**
-     * Gets query for [[CmsFileAttachments]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCmsFileAttachments()
-    {
-        return $this->hasMany(FileAttachment::className(), ['record_id' => 'id']);
-    }
-
-    /**
      * Gets query for [[Forms]].
      *
      * @return \yii\db\ActiveQuery
@@ -196,5 +186,16 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+
+            'fileBehavior' => [
+                'class' => \attachment\behaviors\FileBehavior::className()
+            ]
+
+        ];
     }
 }

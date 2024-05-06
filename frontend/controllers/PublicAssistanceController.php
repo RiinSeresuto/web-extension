@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use backend\models\Banner;
-use backend\models\BannerSearch;
+use frontend\models\PublicAssistance;
+use frontend\models\PublicAssistanceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BannerController implements the CRUD actions for Banner model.
+ * PublicAssistanceController implements the CRUD actions for PublicAssistance model.
  */
-class BannerController extends Controller
+class PublicAssistanceController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class BannerController extends Controller
     }
 
     /**
-     * Lists all Banner models.
+     * Lists all PublicAssistance models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BannerSearch();
+        $searchModel = new PublicAssistanceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class BannerController extends Controller
     }
 
     /**
-     * Displays a single Banner model.
+     * Displays a single PublicAssistance model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class BannerController extends Controller
     }
 
     /**
-     * Creates a new Banner model.
+     * Creates a new PublicAssistance model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Banner();
+        $model = new PublicAssistance();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class BannerController extends Controller
     }
 
     /**
-     * Updates an existing Banner model.
+     * Updates an existing PublicAssistance model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class BannerController extends Controller
     }
 
     /**
-     * Deletes an existing Banner model.
+     * Deletes an existing PublicAssistance model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class BannerController extends Controller
     }
 
     /**
-     * Finds the Banner model based on its primary key value.
+     * Finds the PublicAssistance model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Banner the loaded model
+     * @return PublicAssistance the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Banner::findOne($id)) !== null) {
+        if (($model = PublicAssistance::findOne($id)) !== null) {
             return $model;
         }
 

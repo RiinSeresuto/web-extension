@@ -13,15 +13,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="dilg-info-systems-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Info Systems', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Add', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
 
         <div class="card-body">
-            <?= $this->render('_search', 
+            <?= $this->render(
+                '_search',
                 [
                     'model' => $searchModel,
                     'status' => $status
-                ]); ?>
+                ]
+            ); ?>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -31,20 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label',
                     [
                         'attribute' => 'status_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->status->status_type;
                         },
                     ],
                     [
                         'attribute' => 'user_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->user->username;
                         },
                     ],
                     [
                         'attribute' => 'date_created',
-                        'value' => function($model){
-                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                        'value' => function ($model) {
+                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null;
                         },
                     ],
                     [

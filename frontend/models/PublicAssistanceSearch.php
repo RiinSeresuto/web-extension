@@ -1,15 +1,15 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Pages;
+use frontend\models\PublicAssistance;
 
 /**
- * PagesSearch represents the model behind the search form of `backend\models\Pages`.
+ * PublicAssistanceSearch represents the model behind the search form of `frontend\models\PublicAssistance`.
  */
-class PagesSearch extends Pages
+class PublicAssistanceSearch extends PublicAssistance
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class PagesSearch extends Pages
     public function rules()
     {
         return [
-            [['id', 'menu_id', 'url_type_id', 'status_id', 'type_id', 'slider_photo', 'user_id', 'user_update_id'], 'integer'],
-            [['title', 'caption', 'body', 'link', 'date_created', 'date_updated'], 'safe'],
+            [['id', 'contact_num', 'group', 'file_attachment'], 'integer'],
+            [['name', 'email', 'subject', 'message', 'date_posted'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class PagesSearch extends Pages
      */
     public function search($params)
     {
-        $query = Pages::find();
+        $query = PublicAssistance::find();
 
         // add conditions that should always apply here
 
@@ -59,23 +59,16 @@ class PagesSearch extends Pages
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'menu_id' => $this->menu_id,
-            'url_type_id' => $this->url_type_id,
-            'status_id' => $this->status_id,
-            'type_id' => $this->type_id,
-            'slider_photo' => $this->slider_photo,
+            'contact_num' => $this->contact_num,
+            'group' => $this->group,
             'file_attachment' => $this->file_attachment,
-            'user_id' => $this->user_id,
-            'user_update_id' => $this->user_update_id,
-            'date_created' => $this->date_created,
-            'date_updated' => $this->date_updated,
+            'date_posted' => $this->date_posted,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
-
-        if (!empty($this->status)) {
-            $query->andFilterWhere(['like', 'status_id', $this->status->id]);
-        }
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'subject', $this->subject])
+            ->andFilterWhere(['like', 'message', $this->message]);
 
         return $dataProvider;
     }
