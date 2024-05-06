@@ -45,7 +45,7 @@ $central_news_highlight_title = $central_news_highlight['Title'];
             $news_body = json_decode($news_body, true);
             ?>
             <div class="col-md-3">
-                <div class="card">
+                <div class="card container-card">
                     <div class="card-body">
                         <div id="central-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
                         </div>
