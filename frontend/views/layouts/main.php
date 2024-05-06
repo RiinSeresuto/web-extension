@@ -39,7 +39,9 @@ $menus = Menu::find()->andWhere(['parent_id' => null])->all();
                 <div class="row theme header">
                     <div class="col-xs-12 col-lg-12">
                         <marquee behavior="alternate" direction="down" scrollamount=""> <!-- marquee -->
-                            <?= Html::img('@web/images/logo-dilg-new.png', ['class' => 'header-logo']); ?>
+                            <a href="http://d-web-extension.dilg.gov.ph/">
+                                <?= Html::img('@web/images/logo-dilg-new.png', ['class' => 'header-logo']); ?>
+                            </a>
                         </marquee>
                     </div>
                 </div>
@@ -73,8 +75,6 @@ $menus = Menu::find()->andWhere(['parent_id' => null])->all();
         <div class="info-system">
             <?= $this->render('dilg-info-system') ?>
         </div>
-
-        <?php // $advisory ?>
 
         <?= $content ?>
     </div>
