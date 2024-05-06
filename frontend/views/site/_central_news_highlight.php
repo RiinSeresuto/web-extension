@@ -29,7 +29,9 @@ $central_news_highlight_title = $central_news_highlight['Title'];
 <div class="row">
     <div class="col-7" id="central-news-date">
         <div><em><?= Yii::$app->formatter->asDate($central_news_date, 'long') ?></em></div>
-        <h1 id="central-news-title"><?= $central_news_highlight_title ?></h1>
+        <a href="/article?id=<?= $central_news_id ?>">
+            <h1 id="central-news-title"><?= $central_news_highlight_title ?></h1>
+        </a>
     </div>
     <div class="col-5" id="central-news-summary">
         <?= $central_news_highlight_summary ?>
@@ -49,7 +51,9 @@ $central_news_highlight_title = $central_news_highlight['Title'];
                     <div class="card-body">
                         <div id="central-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
                         </div>
-                        <h6><?= $news_body["Title"] ?></h6>
+                        <a href="/article?id=<?= $news->id ?>">
+                            <h6><?= $news_body["Title"] ?></h6>
+                        </a>
                     </div>
                 </div>
             </div>
