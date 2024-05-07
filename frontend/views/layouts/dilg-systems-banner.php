@@ -11,7 +11,7 @@ use yii\helpers\Html;
   <?php foreach ($banners as $banner): ?>
     <div class="dilg-systems-banner-item">
       <?php
-      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-banner/', 'item_id' => $banner->id]), ['style' => 'width: 130px; height: 65px;']);
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-banner/', 'item_id' => $banner->id]), ['style' => 'width: 150px; height: 75px;']);
       ?>
     </div>
   <?php endforeach; ?>
@@ -23,9 +23,9 @@ $script = <<<JS
 $(".dilg-systems").slick({
   dots: false,
   infinite: false,
-  speed: 400,
+  // speed: 400,
   slidesToShow: 7,
-  slidesToScroll: 2,
+  // slidesToScroll: 1,
   arrows: false,
   autoplay: true,
   autoplaySpeed: 3000,
@@ -53,13 +53,8 @@ $(".dilg-systems").slick({
         slidesToScroll: 1
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
-  ]
-});
+  ]});
 
-        //});
 JS;
 
 $this->registerJs($script);
