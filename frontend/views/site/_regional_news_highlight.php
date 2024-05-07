@@ -22,7 +22,7 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
 <div class="row">
     <div class="col-7" id="regional-news-date">
         <div><em><?= Yii::$app->formatter->asDate($regional_news_date), 'long' ?></em></div>
-        <h1 id="regional-news-title"><?= $regional_news_highlight_title ?></h1>
+        <h1><?= $regional_news_highlight_title ?></h1>
     </div>
 
     <div class="col-5" id="regional-news-summary">
@@ -42,7 +42,9 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
                     <div class="card-body">
                         <div id="regional-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
                         </div>
-                        <h6><?= $news_body['Title'] ?></h6>
+                        <a href="/article?id=<?= $news->id ?>">
+                            <h6 class="news-list-title"><?= $news_body['Title'] ?></h6>
+                        </a>
                     </div>
                 </div>
             </div>
