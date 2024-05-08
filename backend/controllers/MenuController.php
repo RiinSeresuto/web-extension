@@ -43,7 +43,7 @@ class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+
         $status = Status::find()->all();
         $position = Position::find()->all();
         $url_type = UrlType::find()->all();
@@ -71,11 +71,11 @@ class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
         $menu = Menu::find()->all();
 
         foreach ($files as $file) {
-          $item = [
-            "url"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
-            "src"=>Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
-        ];
-          $items[]=$item;
+            $item = [
+                "url" => Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+                "src" => Yii::$app->urlManager->baseUrl . 'uploads/store/' . substr(basename($file), 0, 2) . '/' . substr(basename($file), 3, 2) . '/' . substr(basename($file), 6, 2) . '/' . basename($file),
+            ];
+            $items[] = $item;
         }
 
         return $this->render('view', [
@@ -105,7 +105,7 @@ class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
             $model->user_id = Yii::$app->user->identity->id;
 
             if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -136,13 +136,13 @@ class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
         $content_type = ContentType::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
-            
+
             $model->user_update_id = Yii::$app->user->identity->id;
-            
-            if ($model->save()){
+
+            if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-            
+
         }
 
         return $this->render('update', [
@@ -187,11 +187,11 @@ class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
 
     public function actionDownload($id)
     {
-        $file = File::find()->andWhere(['id'=>$id])->one();
+        $file = File::find()->andWhere(['id' => $id])->one();
         // $filePath = Yii::getAlias('@common'). '/../'. $file->file_path;
         $filePath = $file->dbStorePath;
-        if(file_exists($filePath)){
-            return Yii::$app->response->sendFile($filePath, $file->file_name, ['inline'=>true]);
+        if (file_exists($filePath)) {
+            return Yii::$app->response->sendFile($filePath, $file->file_name, ['inline' => true]);
         }
     }
 }
