@@ -1,5 +1,6 @@
 <?php
 
+//use backend\models\Position;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
@@ -24,11 +25,18 @@ use kartik\select2\Select2;
 
         <div class="col-md-6">
             <?= $form->field($model, 'position_id')->widget(Select2::class, [
-                                'data' => ArrayHelper::map($position, 'id', 'position'),
-                                'options' => [
-                                    'placeholder' => 'Select Position',
-                                ],
-                            ]) ?>
+                'data' => ArrayHelper::map($position, 'id', 'position'),
+                'options' => [
+                    'placeholder' => 'Select Position',
+                ],
+            ]) ?>
+
+            <?php // echo $form->field($model, 'position_id')->widget(Select2::class, [
+            //     'data' => Position::getPositionDropdown(),
+            //     'options' => [
+            //         'placeholder' => 'Select Position',
+            //     ]
+            // ]) ?>
         </div>
     </div>
     <div class="form-group">

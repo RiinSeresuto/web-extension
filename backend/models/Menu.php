@@ -33,7 +33,7 @@ use Yii;
  */
 class Menu extends \niksko12\auditlogs\classes\ModelAudit
 {
-    public $file_attach=[];
+    public $file_attach = [];
     /**
      * {@inheritdoc}
      */
@@ -168,12 +168,18 @@ class Menu extends \niksko12\auditlogs\classes\ModelAudit
     public function behaviors()
     {
         return [
-            
+
             'fileBehavior' => [
                 'class' => \attachment\behaviors\FileBehavior::className()
             ]
-        
+
         ];
+    }
+
+    public static function getPositionDropdown()
+    {
+        //return self::find()->(['position as name', 'id as id'])->indexBy('id')->column();
+        return self::find()->select(['position as name', 'id as id'])->indexBy('id')->column();
     }
 
 }

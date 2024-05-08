@@ -46,8 +46,15 @@ use attachment\components\AttachmentsInput;
                                     'placeholder' => 'Select Position',
                                 ],
                             ]) ?>
+
+                            <?php // echo $form->field($model, 'position_id')->widget(Select2::class, [
+                            //     'data' => Position::getPositionDropdown(),
+                            //     'options' => [
+                            //         'placeholder' => 'Select Position',
+                            //     ]
+                            // ]) ?>
                         </div>
-                        
+
                         <div class="col-md-3">
                             <?= $form->field($model, 'status_id')->widget(Select2::class, [
                                 'data' => ArrayHelper::map($status, 'id', 'status_type'),
@@ -69,7 +76,7 @@ use attachment\components\AttachmentsInput;
                                                 var url_type = this.value
                                                 urlFieldState(url_type)
                                             }'
-                                ]                        
+                                ]
                             ]) ?>
                         </div>
 
@@ -86,10 +93,10 @@ use attachment\components\AttachmentsInput;
                                                 contentTypeState(content_type) 
                                             }'
                                 ]
-                            ])?>
+                            ]) ?>
                         </div>
                     </div>
-  
+
                     <div class="row">
                         <div class="col-md-12">
                             <?= $form->field($model, 'link')->textInput(['maxlength' => true]) ?>
@@ -98,15 +105,15 @@ use attachment\components\AttachmentsInput;
                     </div>
 
                     <div>
-                        <?=  '<label for="photo_attach">File Upload</label>' ?>
+                        <?= '<label for="photo_attach">File Upload</label>' ?>
                         <?= AttachmentsInput::widget([
                             'model' => $model,
-                            'options' => [ 
+                            'options' => [
                                 'multiple' => true,
                                 'accept' => 'application/pdf',
                             ],
                             'pluginOptions' => [
-                                'initialPreviewAsData' =>  true,
+                                'initialPreviewAsData' => true,
                                 //'initialPreviewFileType' => 'pdf',
                                 'autoReplace' => false,
                                 'overwriteInitial' => false,
@@ -120,7 +127,7 @@ use attachment\components\AttachmentsInput;
                                 'mainClass' => 'input-group-lg',
                                 'browseClass' => 'btn btn-info',
                                 'uploadClass' => 'btn btn-info',
-                                'fileActionSettings'=> [
+                                'fileActionSettings' => [
                                     'showDrag' => false,
                                     'showRemove' => true,
                                     //'showBrowse' => true,
@@ -129,11 +136,11 @@ use attachment\components\AttachmentsInput;
                             ]
                         ]) ?>
                     </div>
-                    
+
                     <?= Html::submitButton($model->isNewRecord ? '<i class="fas fa-save"></i> Create' : '<i class="fas fa-edit"></i> Update', [
                         'class' => $model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm',
                         'onclick' => "$('#file-input').fileinput('upload');"
-                            ]) ?>
+                    ]) ?>
                 </div>
             </div>
 
@@ -142,7 +149,7 @@ use attachment\components\AttachmentsInput;
     </div>
 </div>
 
-<?php 
+<?php
 $script = <<<JS
 var radios = $('input:radio[name="Menu[is_new_tab]"]')
 var radioValue, labelValue, transformedValue, typeValue
@@ -177,4 +184,4 @@ function contentTypeState(typeValue){
 }
 JS;
 $this->registerJs($script)
-?>
+    ?>
