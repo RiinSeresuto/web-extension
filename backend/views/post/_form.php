@@ -84,6 +84,7 @@ use attachment\components\AttachmentsInput;
 
                         ?>
                         <?php foreach ($form_fields as $form_field): ?>
+
                             <?php $key = str_replace(' ', '_', $form_field->field->label); ?>
                             <?php if ($form_field->field->widget_type_id == 1): ?>
                                 <?= Html::tag('label', $form_field->field->label, $options = ['class' => 'form-label']) ?>

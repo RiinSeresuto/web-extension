@@ -16,7 +16,6 @@ $central_news_highlight_summary .= "...";
 $central_news_highlight_title = $central_news_highlight['Title'];
 
 ?>
-
 <h4>Central News</h4>
 <hr>
 <div class="row">

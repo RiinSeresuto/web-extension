@@ -1,5 +1,4 @@
 <?php
-// $post = str_replace("\\\"", "\"", $post);
 $post = str_replace('\\"', '\\u201d', $post);
 $post = str_replace("<\\/p>", "</p>", $post);
 
