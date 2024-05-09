@@ -37,6 +37,11 @@ $central_news_highlight_title = $central_news_highlight['Title'];
             $news_body = str_replace('\\"', '\\u201d', $news->body);
             $news_body = str_replace("<\\/p>", "</p>", $news_body);
             $news_body = json_decode($news_body, true);
+            // echo '<pre>';
+            // print_r($news_body);
+            // //var_dump($advisory_body);
+            // echo '</pre>';
+            // exit;
             ?>
             <div class="col-md-3">
                 <div class="card container-card">

@@ -6,11 +6,12 @@ $this->title = 'DILG: Department of the Interior and Local Government';
 ?>
 
 <div class="advisory-container">
-    <?php //$this->render('_advisory_highlight', [
-    //     'advisory_highlight' => $advisory[0]->body,
-    //     'advisory_date' => $advisory[0]->date_created,
-    //     'advisory' => $advisory,
-    // ]); ?>
+    <?= $this->render('_advisory_highlight', [
+        'advisory_highlight' => $advisory[0]->body,
+        'advisory_date' => $advisory[0]->date_created,
+        'advisory_id' => $advisory[0]->id,
+        'advisories' => $advisory,
+    ]); ?>
 </div>
 
 <div class="row">

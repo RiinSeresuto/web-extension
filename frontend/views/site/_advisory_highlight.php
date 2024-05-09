@@ -30,7 +30,7 @@ $advisory_highlight_title = $advisory_highlight['Title'];
 <div class="row">
     <?php foreach ($advisories as $key => $advisory): ?>
         <?php if ($key > 0): ?>
-            <?php 
+            <?php
             $advisory_body = str_replace('\\"', '\\201d', $advisory->body);
             $advisory_body = str_replace("<\\/p>", "<p>", $advisory_body);
             $advisory_body = json_decode($advisory_body, true);
@@ -38,15 +38,18 @@ $advisory_highlight_title = $advisory_highlight['Title'];
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div id="advisory-list"><em><?= Yii::$app->formatter->asDate($advisory->date_created, 'long') ?></em></div>
+                        <div id="advisory-list"><em><?= Yii::$app->formatter->asDate($advisory->date_created, 'long') ?></em>
+                        </div>
+                        <!-- <a href="/article?id=<?php // $advisory->id ?>"> -->
                         <h6><?= $advisory_body['Title'] ?></h6>
+                        <!-- </a> -->
                     </div>
                 </div>
             </div>
         <?php endif; ?>
     <?php endforeach; ?>
     <div class="col-md-3 d-flex justify-content-center align-items-center">
-        <span>more...</span>    
+        <span>more...</span>
     </div>
 </div>
 
