@@ -41,7 +41,11 @@ $advisory_highlight_title = $advisory_highlight['Title'];
                         <div id="advisory-list"><em><?= Yii::$app->formatter->asDate($advisory->date_created, 'long') ?></em>
                         </div>
                         <!-- <a href="/article?id=<?php // $advisory->id ?>"> -->
-                        <h6><?= $advisory_body['Title'] ?></h6>
+                        <!-- <h6><?php // $advisory_body['Title'] ?></h6> -->
+                        <?php if (!empty($advisory_body) && isset($advisory_body['Title'])): ?>
+                            <h6><?= $advisory_body['Title'] ?></h6>
+                        <?php endif; ?>
+
                         <!-- </a> -->
                     </div>
                 </div>
