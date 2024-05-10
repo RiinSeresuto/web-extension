@@ -37,6 +37,8 @@ class BannerController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new BannerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
+
         $status = Status::find()->all();
 
         return $this->render('index', [

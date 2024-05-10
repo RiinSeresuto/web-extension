@@ -43,6 +43,7 @@ class MenuController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
 
         $status = Status::find()->all();
         $position = Position::find()->all();

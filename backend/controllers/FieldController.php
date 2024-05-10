@@ -38,9 +38,11 @@ class FieldController extends \niksko12\auditlogs\classes\ControllerAudit
     public function actionIndex()
     {
         $searchModel = new FieldSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
+        
         $data_type = DataType::find()->all();
         $widget_type = WidgetType::find()->all();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

@@ -42,6 +42,8 @@ class PagesController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new PagesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
+
         $url_type = UrlType::find()->all();
         $status = Status::find()->all();
         $type = Type::find()->all();
