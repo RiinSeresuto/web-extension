@@ -347,7 +347,8 @@ a.desc:after {
 }
 
 .central-news-container,
-.regional-news-container {
+.regional-news-container,
+.advisory-container {
   width: 75%;
   margin-inline: auto;
 }
