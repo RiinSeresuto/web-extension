@@ -10,7 +10,7 @@ class ContentController extends \yii\web\Controller
     {
         if ($type == 1) {
             $page = Pages::find()->where(['menu_id' => $menu_id])->one();
-            
+
             return $this->render('index', ['page' => $page]);
 
         }

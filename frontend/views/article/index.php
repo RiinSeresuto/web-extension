@@ -30,14 +30,17 @@ $this->title = $post_title;
                             <em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
                         </div>
                         <a href="/article?id=<?= $news->id ?>" class="news-title-list-link">
-                            <h6><?= $news_body["Title"] ?></h6>
+                            <div class="more-news">
+                                <h6><?= $news_body["Title"] ?></h6>
+                            </div>
+
                         </a>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
         <div class="col-md-3 d-flex justify-content-center align-items-center">
-            <span>more...</span>
+            <a href="/article/lists?category_id=1"><span>more ...</span></a>
         </div>
     </div>
 </div>

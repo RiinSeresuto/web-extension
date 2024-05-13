@@ -35,7 +35,7 @@ function generateDropdown($children)
         }
 
         if (!empty($child->menuChildren)) {
-            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
+            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . "&menu_id=" . $child->id . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
         } else {
             $return_item .= '<li><a class="dropdown-item" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a></li>';
         }
@@ -58,9 +58,9 @@ function generateSubmenu($children)
         }
 
         if (!empty($child->menuChildren)) {
-            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
+            $return_item .= '<li><a class="dropdown-item dropdown-toggle" href="' . $child->link . "&menu_id=" . $child->id . '" ' . $target . '>' . $child->label . '</a>' . generateSubmenu($child->menuChildren) . '</li>';
         } else {
-            $return_item .= '<li><a class="dropdown-item" href="' . $child->link . '" ' . $target . '>' . $child->label . '</a></li>';
+            $return_item .= '<li><a class="dropdown-item" href="' . $child->link . "&menu_id=" . $child->id . '" ' . $target . '>' . $child->label . '</a></li>';
         }
     }
 

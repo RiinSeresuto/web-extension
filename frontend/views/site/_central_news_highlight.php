@@ -29,7 +29,6 @@ $central_news_highlight_title = $central_news_highlight['Title'];
         <?= $central_news_highlight_summary ?>
     </div>
 </div>
-<hr>
 <div class="row">
     <?php foreach ($central_news as $key => $news): ?>
         <?php if ($key > 0): ?>
@@ -49,7 +48,9 @@ $central_news_highlight_title = $central_news_highlight['Title'];
                         <div id="central-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
                         </div>
                         <a href="/article?id=<?= $news->id ?>">
-                            <h6 class="news-list-title"><?= $news_body["Title"] ?></h6>
+                            <div class="more-news">
+                                <h6 class="news-list-title"><?= $news_body["Title"] ?></h6>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -58,7 +59,7 @@ $central_news_highlight_title = $central_news_highlight['Title'];
         <?php endif; ?>
     <?php endforeach; ?>
     <div class="col-md-3 d-flex justify-content-center align-items-center">
-        <span>more ...</span>
+        <a href="/article/lists?category_id=1"><span>more ...</span></a>
     </div>
 </div>
 
