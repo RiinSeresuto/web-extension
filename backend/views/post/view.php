@@ -33,27 +33,24 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    //'forms_id',
-                    //'field_id',
-                    //'tags',
                     [
                         'attribute' => 'status_id',
                         'value' => function ($model) {
                             return $model->status->status_type;
                         },
                     ],
-                    [
-                        'attribute' => 'visibility_id',
-                        'value' => function ($model) {
-                            return $model->visibility->visibility_type;
-                        },
-                    ],
-                    [
-                        'attribute' => 'publish_id',
-                        'value' => function ($model) {
-                            return $model->publish->publish_type;
-                        },
-                    ],
+                    // [
+                    //     'attribute' => 'visibility_id',
+                    //     'value' => function ($model) {
+                    //         return $model->visibility->visibility_type;
+                    //     },
+                    // ],
+                    // [
+                    //     'attribute' => 'publish_id',
+                    //     'value' => function ($model) {
+                    //         return $model->publish->publish_type;
+                    //     },
+                    // ],
                     'page_id',
                     // [
                     //     'attribute' => 'page_id',
@@ -141,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
         </div>
-    </div>  
+    </div>
 
     <div class="card">
         <div class="card-header">

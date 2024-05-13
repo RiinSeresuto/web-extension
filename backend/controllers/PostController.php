@@ -96,8 +96,8 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
                 'forms' => $forms,
                 'field' => $field,
                 'status' => $status,
-                'visibility_type' => $visibility_type,
-                'publish_type' => $publish_type,
+                //'visibility_type' => $visibility_type,
+                //'publish_type' => $publish_type,
                 'page' => $page
             ]);
         } else {
