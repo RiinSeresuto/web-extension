@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'user_update_id',
                         'value' => function ($model) {
-                            return $model->user_update_id == null ? "(not set)" : $model->updateUser->username;
+                            return $model->user_update_id == null ? "(not set)" : $model->userUpdate->username;
                         },
                     ],
                     [
