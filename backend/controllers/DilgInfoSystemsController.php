@@ -37,6 +37,8 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
     {
         $searchModel = new DilgInfoSystemsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
+
         $status = Status::find()->all();
 
         return $this->render('index', [
@@ -74,7 +76,7 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
             $model->user_id = Yii::$app->user->identity->id;
 
             if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -100,7 +102,7 @@ class DilgInfoSystemsController extends \niksko12\auditlogs\classes\ControllerAu
             $model->user_update_id = Yii::$app->user->identity->id;
 
             if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [

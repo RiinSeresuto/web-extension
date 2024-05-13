@@ -1,17 +1,9 @@
 <?php
-// $central_news_highlight = str_replace("\\\"", "\"", $central_news_highlight);
+
 $central_news_highlight = str_replace('\\"', '\\u201d', $central_news_highlight);
 $central_news_highlight = str_replace("<\\/p>", "</p>", $central_news_highlight);
 
 $central_news_highlight = json_decode($central_news_highlight, true);
-
-// if ($central_news_highlight === null && json_last_error() !== JSON_ERROR_NONE) {
-//     echo "JSON decoding error: " . json_last_error_msg();
-//     exit;
-// }
-
-// print_r($central_news_highlight);
-// exit;
 
 $summary_length = 550;
 $central_news_highlight_summary = $central_news_highlight['Content'];
@@ -22,37 +14,42 @@ if (mb_strlen($central_news_highlight_summary) > $summary_length) {
 
 $central_news_highlight_summary .= "...";
 $central_news_highlight_title = $central_news_highlight['Title'];
-?>
 
+?>
 <h4>Central News</h4>
 <hr>
 <div class="row">
     <div class="col-7" id="central-news-date">
         <div><em><?= Yii::$app->formatter->asDate($central_news_date, 'long') ?></em></div>
-        <a href="/article?id=<?= $central_news_id ?>">
-            <h1 id="central-news-title"><?= $central_news_highlight_title ?></h1>
+        <a href="/article?id=<?= $central_news_id ?>" class="central-news-title-link">
+            <h1><?= $central_news_highlight_title ?></h1>
         </a>
     </div>
     <div class="col-5" id="central-news-summary">
         <?= $central_news_highlight_summary ?>
     </div>
 </div>
+<hr>
 <div class="row">
     <?php foreach ($central_news as $key => $news): ?>
         <?php if ($key > 0): ?>
             <?php
-            // $news_body = str_replace("\\\"", "\"", $news->body);
             $news_body = str_replace('\\"', '\\u201d', $news->body);
             $news_body = str_replace("<\\/p>", "</p>", $news_body);
             $news_body = json_decode($news_body, true);
+            // echo '<pre>';
+            // print_r($news_body);
+            // //var_dump($advisory_body);
+            // echo '</pre>';
+            // exit;
             ?>
             <div class="col-md-3">
-                <div class="card">
+                <div class="card container-card">
                     <div class="card-body">
                         <div id="central-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
                         </div>
                         <a href="/article?id=<?= $news->id ?>">
-                            <h6><?= $news_body["Title"] ?></h6>
+                            <h6 class="news-list-title"><?= $news_body["Title"] ?></h6>
                         </a>
                     </div>
                 </div>

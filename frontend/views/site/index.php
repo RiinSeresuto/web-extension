@@ -6,11 +6,12 @@ $this->title = 'DILG: Department of the Interior and Local Government';
 ?>
 
 <div class="advisory-container">
-    <?php //$this->render('_advisory_highlight', [
-    //     'advisory_highlight' => $advisory[0]->body,
-    //     'advisory_date' => $advisory[0]->date_created,
-    //     'advisory' => $advisory,
-    // ]); ?>
+    <?= $this->render('_advisory_highlight', [
+        'advisory_highlight' => $advisory[0]->body,
+        'advisory_date' => $advisory[0]->date_created,
+        'advisory_id' => $advisory[0]->id,
+        'advisories' => $advisory,
+    ]); ?>
 </div>
 
 <div class="row">
@@ -35,6 +36,7 @@ $this->title = 'DILG: Department of the Interior and Local Government';
     <?= $this->render('_regional_news_highlight', [
         'regional_news_highlight' => $regional_news[0]->body,
         'regional_news_date' => $regional_news[0]->date_created,
+        'regional_news_id' => $regional_news[0]->id,
         'regional_news' => $regional_news,
     ]); ?>
 </div>

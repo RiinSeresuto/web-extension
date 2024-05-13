@@ -6,49 +6,22 @@ use yii\helpers\Html;
 ?>
 
 <!-- DILG Systems Banner-->
-<div class="dilg-systems slider">
+<div class="dilg-info-systems slider">
   <?php $systems = Carousel::getInfoSystem() ?>
   <?php foreach ($systems as $system): ?>
-    <div class="dilg-systems-banner-item">
+    <div class="dilg-systems-item">
       <?php
-      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-dilg-system/', 'item_id' => $system->id]), ['style' => 'width: 115px; height: 50px;']);
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-dilg-system/', 'item_id' => $system->id]), ['style' => 'width: 110px; height: 45px;']);
       ?>
     </div>
   <?php endforeach; ?>
 </div>
 
+<br>
 <?php
 
 $script = <<<JS
-$(".dilg-systems").slick({
-          // centerMode: true,
-          // autoplay: true,
-          // autoplaySpeed: 3000,
-          // centerPadding: "60px",
-          // slidesToShow: 3,
-          // arrows: false,
-          // responsive: [
-          //   {
-          //     breakpoint: 768,
-          //     settings: {
-          //       arrows: false,
-          //       centerMode: true,
-          //       centerPadding: "40px",
-          //       slidesToShow: 3,
-          //     },
-          //   },
-          //   {
-          //     breakpoint: 480,
-          //     settings: {
-          //       arrows: false,
-          //       centerMode: true,
-          //       centerPadding: "40px",
-          //       slidesToShow: 1,
-          //     },
-          //   },
-          // ],
-
-          // $('.responsive').slick({
+$(".dilg-info-systems").slick({
   dots: false,
   infinite: false,
   speed: 400,
@@ -81,13 +54,8 @@ $(".dilg-systems").slick({
         slidesToScroll: 1
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
   ]
 });
-
-        //});
 JS;
 
 $this->registerJs($script);

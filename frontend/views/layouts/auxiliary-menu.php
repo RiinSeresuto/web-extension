@@ -76,7 +76,7 @@ function generateAuxiliarySubmenu($children)
             <?php foreach ($auxiliaryMenu as $menu): ?>
                 <li class="nav-item dropdown active auxiliary-hover">
                     <?php if (!empty($menu->menuChildren)): ?>
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle auxiliary-dropdown-hover" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <?= $menu->label ?>
                         </a>

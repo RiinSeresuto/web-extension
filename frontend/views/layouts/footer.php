@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use common\helpers\Footer;
-use yii\helpers\FileHelper;
 
 ?>
 <!-- Footer -->
@@ -33,13 +32,11 @@ use yii\helpers\FileHelper;
                             </div>
                         </div>
                         <div class="agencies-gap"><strong>Attached Agencies</strong>
-                            <!-- <div class="agencies-logo d-flex" style="width: 100px; height: 100px; "> -->
                             <div class="agencies-logo d-flex">
                                 <?php $attached_agencies = Footer::getAttachedAgencies() ?>
                                 <?php foreach ($attached_agencies as $attached_agency): ?>
                                     <div class="flex-row footer-dilg-attached-agencies-logo">
                                         <?php
-                                        // echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'w-100 h-100 m-1']);
                                         echo Html::img(Yii::$app->urlManager->createUrl(['footer/image-attached-agencies/', 'id' => $attached_agency->id]), ['class' => 'footer-agency-logos m-1']);
                                         ?>
                                     </div>

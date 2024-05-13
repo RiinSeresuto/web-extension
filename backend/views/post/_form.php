@@ -64,14 +64,14 @@ use attachment\components\AttachmentsInput;
                         </div>
 
                         <div class="col-md-12">
-                            <?= $form->field($model, 'year')->widget(DatePicker::className(), [
-                                'options' => ['placeholder' => "Select Year"],
-                                'pluginOptions' => [
-                                    'format' => 'yyyy',
-                                    'autoclose' => true,
-                                    'minViewMode' => 'years',
-                                ]
-                            ]) ?>
+                            <?php // $form->field($model, 'year')->widget(DatePicker::className(), [
+                            //     'options' => ['placeholder' => "Select Year"],
+                            //     'pluginOptions' => [
+                            //         'format' => 'yyyy',
+                            //         'autoclose' => true,
+                            //         'minViewMode' => 'years',
+                            //     ]
+                            // ]) ?>
                         </div>
                     </div>
 
@@ -84,6 +84,7 @@ use attachment\components\AttachmentsInput;
 
                         ?>
                         <?php foreach ($form_fields as $form_field): ?>
+
                             <?php $key = str_replace(' ', '_', $form_field->field->label); ?>
                             <?php if ($form_field->field->widget_type_id == 1): ?>
                                 <?= Html::tag('label', $form_field->field->label, $options = ['class' => 'form-label']) ?>

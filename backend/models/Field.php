@@ -127,4 +127,11 @@ class Field extends \niksko12\auditlogs\classes\ModelAudit
     {
         return $this->hasMany(Post::className(), ['field_id' => 'id']);
     }
+
+    // Add this method to your Field model
+    public function getWidgetSelect2Items()
+    {
+        return $this->hasMany(WidgetSelect2Items::className(), ['field_id' => 'id']);
+    }
+
 }

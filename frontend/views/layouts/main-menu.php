@@ -23,7 +23,7 @@ usort($mainMenu, 'sortArray');
 
 function generateDropdown($children)
 {
-    $start_ul = '<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">';
+    $start_ul = '<ul class="dropdown-menu dropdown-menu-hover" aria-labelledby="navbarDropdownMenuLink">';
     $end_ul = "</ul>";
 
     $return_item = "";

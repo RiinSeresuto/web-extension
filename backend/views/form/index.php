@@ -28,23 +28,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
                     [
                         'attribute' => 'category_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->category->title;
                         },
                     ],
                     [
                         'attribute' => 'status_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->status->status_type;
                         }
                     ],
                     'year',
                     [
                         'attribute' => 'user_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->user->username;
                         },
                     ],
+                    //'date_created', 
                     [
                         'attribute' => 'date_created',
                         'value' => function($data){
@@ -108,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'pager' => [
                     'class' => 'yii\bootstrap4\LinkPager',
-                 ],
+                ],
             ]); ?>
         </div>
     </div>
