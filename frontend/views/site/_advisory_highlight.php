@@ -20,7 +20,7 @@ $advisory_highlight_title = $advisory_highlight['Title'];
 <hr>
 <div class="row">
     <div class="col-7" id="advisory-date">
-        <div><em><?= Yii::$app->formatter->asDate($advisory_date), 'long' ?></em></div>
+        <div><em><?= Yii::$app->formatter->asDate($advisory_date, 'long') ?></em></div>
         <h1 id="advisory-title"><?= $advisory_highlight_title ?></h1>
     </div>
     <div class="col-5" id="advisory-summary">

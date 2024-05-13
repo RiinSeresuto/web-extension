@@ -21,7 +21,7 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
 <hr>
 <div class="row">
     <div class="col-7" id="regional-news-date">
-        <div><em><?= Yii::$app->formatter->asDate($regional_news_date), 'long' ?></em></div>
+        <div><em><?= Yii::$app->formatter->asDate($regional_news_date, 'long') ?></em></div>
         <h1><?= $regional_news_highlight_title ?></h1>
     </div>
 
