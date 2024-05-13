@@ -33,11 +33,12 @@ class PublicAssistance extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'contact_num', 'subject', 'message', 'group', 'file_attachment'], 'required'],
+            [['name', 'email', 'contact_num', 'subject', 'message', 'group'], 'required'],
             [['contact_num', 'group', 'file_attachment'], 'integer'],
             [['message'], 'string'],
-            [['date_posted'], 'safe'],
+            [['date_posted', 'file_attachment'], 'safe'],
             [['name', 'email', 'subject'], 'string', 'max' => 255],
+            [['file_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
 
@@ -54,8 +55,24 @@ class PublicAssistance extends \yii\db\ActiveRecord
             'subject' => 'Subject',
             'message' => 'Message',
             'group' => 'Group',
-            'file_attachment' => 'File Attachment',
+            'file_attach' => 'File Attachment',
             'date_posted' => 'Date Posted',
+        ];
+    }
+
+    public function getGroup()
+    {
+        return $this->hasOne(PublicAssistanceGroup::className(), ['id' => 'group']);
+    }
+
+    public function behaviors()
+    {
+        return [
+
+            'fileBehavior' => [
+                'class' => \attachment\behaviors\FileBehavior::className()
+            ]
+
         ];
     }
 }

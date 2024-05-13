@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\PublicAssistance;
+use frontend\models\PublicAssistanceGroup;
 use frontend\models\PublicAssistanceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,6 +66,7 @@ class PublicAssistanceController extends Controller
     public function actionCreate()
     {
         $model = new PublicAssistance();
+        $group = PublicAssistanceGroup::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,6 +74,7 @@ class PublicAssistanceController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'group' => $group
         ]);
     }
 
