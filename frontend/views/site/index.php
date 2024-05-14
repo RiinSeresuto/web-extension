@@ -5,14 +5,6 @@
 $this->title = 'DILG: Department of the Interior and Local Government';
 ?>
 
-<<<<<<< HEAD
-<div class="container">
-    <?= $this->render('_central_news_highlight', [
-        'central_news_highlight' => $central_news[0]->body,
-        'central_news_date' => $central_news[0]->date_created,
-        'central_news' => $central_news,
-    ]); ?>
-=======
 <div class="advisory-container">
     <?= $this->render('_advisory_highlight', [
         'advisory_highlight' => $advisory[0]->body,
@@ -47,5 +39,4 @@ $this->title = 'DILG: Department of the Interior and Local Government';
         'regional_news_id' => $regional_news[0]->id,
         'regional_news' => $regional_news,
     ]); ?>
->>>>>>> e572d34d6c39efefc98f259c1668f2d52d1b7d16
 </div>
