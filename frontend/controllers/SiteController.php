@@ -27,6 +27,11 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
+    public function init()
+    {
+        parent::init();
+    }
+
     public function behaviors()
     {
         return [
