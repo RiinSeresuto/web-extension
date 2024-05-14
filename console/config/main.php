@@ -13,16 +13,19 @@ return [
     'controllerNamespace' => 'console\controllers',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'controllerMap' => [
         'fixture' => [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
-          ],
-          'file' => [
+        ],
+        'file' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@file/migrations'
+        ],
+        'migration' => [
+            'class' => 'bizley\migration\controllers\MigrationController',
         ],
 
     ],
