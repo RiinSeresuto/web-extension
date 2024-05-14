@@ -43,7 +43,9 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
                         <div id="regional-news-list"><em><?= Yii::$app->formatter->asDate($news->date_created, 'long') ?></em>
                         </div>
                         <a href="/article?id=<?= $news->id ?>">
-                            <h6 class="news-list-title"><?= $news_body['Title'] ?></h6>
+                            <div class="more-news">
+                                <h6 class="news-list-title"><?= $news_body['Title'] ?></h6>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -51,7 +53,7 @@ $regional_news_highlight_title = $regional_news_highlight['Title'];
         <?php endif; ?>
     <?php endforeach; ?>
     <div class="col-md-3 d-flex justify-content-center align-items-center">
-        <span>more...</span>
+        <a href="/article/lists?category_id=2"><span>more ...</span></a>
     </div>
 </div>
 

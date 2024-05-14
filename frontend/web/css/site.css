@@ -413,3 +413,14 @@ a.desc:after {
 .container-card {
   filter: drop-shadow(2px 4px 4px #999);
 }
+
+.more-news{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2; 
+}
+
+.more-news h6{
+    margin: 0;
+}
