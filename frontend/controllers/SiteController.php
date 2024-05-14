@@ -68,11 +68,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-<<<<<<< HEAD
-        $central_news = Post::find()->where(['category_id' => 1])->limit(5)->orderBy(['id' => SORT_DESC])->all();
-        // echo '<pre>';
-        // print_r($central_news);
-=======
         $central_news = Post::find()->where(['category_id' => 1])->limit(4)->orderBy(['id' => SORT_DESC])->all();
         $regional_news = Post::find()->where(['category_id' => 2])->limit(4)->orderBy(['id' => SORT_DESC])->all();
         $bids_and_awards = Post::find()->where(['category_id' => 3])->limit(4)->orderBy(['id' => SORT_DESC])->all();
@@ -80,7 +75,6 @@ class SiteController extends Controller
 
         // echo '<pre>';
         // print_r($advisory);
->>>>>>> e572d34d6c39efefc98f259c1668f2d52d1b7d16
         // exit;
 
         return $this->render('index', [
