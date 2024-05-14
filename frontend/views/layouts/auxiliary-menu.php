@@ -65,18 +65,18 @@ function generateAuxiliarySubmenu($children)
 }
 ?>
 
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <?php $target = 'target="_blank"'; ?>
             <?php foreach ($auxiliaryMenu as $menu): ?>
-                <li class="nav-item dropdown active">
+                <li class="nav-item dropdown active auxiliary-hover">
                     <?php if (!empty($menu->menuChildren)): ?>
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle auxiliary-dropdown-hover" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <?= $menu->label ?>
                         </a>

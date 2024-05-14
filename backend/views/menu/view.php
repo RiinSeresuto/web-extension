@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     [
                         'attribute' => 'parent_id',
-                        'value' => function($model){
+                        'value' => function ($model) {
                             if ($model->parentLabel) {
                                 return $model->parentLabel->label;
                             }
@@ -45,33 +45,33 @@ $this->params['breadcrumbs'][] = $this->title;
                     'menu_order',
                     [
                         'attribute' => 'position_id',
-                        'value' => function($model){
+                        'value' => function ($model) {
                             return $model->position->position;
                         },
                     ],
                     [
                         'attribute' => 'status_id',
-                        'value' => function($model){
+                        'value' => function ($model) {
                             return $model->status->status_type;
                         },
                     ],
                     'link',
                     [
                         'attribute' => 'user_id',
-                        'value' => function($model){
+                        'value' => function ($model) {
                             return $model->user->username;
                         },
                     ],
                     [
                         'attribute' => 'date_created',
-                        'value' => function($model){
-                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                        'value' => function ($model) {
+                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null;
                         },
                     ],
                     [
                         'attribute' => 'user_update_id',
                         'value' => function ($model) {
-                            return $model->user_update_id == null ? "(not set)" : $model->updateUser->username;
+                            return $model->user_update_id == null ? "(not set)" : $model->userUpdate->username;
                         },
                     ],
                     [
@@ -82,49 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 ],
             ]) ?>
-            
 
-            <div class="row">
-                <div class="col-md-12">
-                    <?php //  '<label for="photo_attach">File Attachment</label>' ?>
-                    <?php // DetailView::widget([
-                    //     'model' => $model,
-                    //     'attributes' => [
-                    //         [
-                    //             'label' => 'File Attachment', 
-                    //             'format' => 'raw',
-                    //             'value' => function($model){
-                    //             //return \file\components\AttachmentsTable::widget(['model' => $model]); 
-                    //             return \attachment\components\AttachmentsInput::widget([
-                    //                 'id' => 'file-input', // Optional
-                    //                 'model' => $model,
-                    //                 'options' => [ // Options of the Kartik's FileInput widget
-                    //                     'multiple' => true, // If you want to allow multiple upload, default to false
-                    //                 ],
-                    //                 'pluginOptions' => [ 
-                    //                     'initialPreviewShowDelete' => false,
-                    //                     'initialPreviewAsData' =>  true,
-                    //                     'initialPreviewFileType' => 'pdf',
-                    //                     'maxFileCount' => 10, // Client max files
-                    //                     'showRemove' => false,
-                    //                     'showCancel' => false,
-                    //                     'showUpload' => false,
-                    //                     'showBrowse' => false,
-                    //                     'showCaption' => false,
-                    //                     'fileActionSettings' => [
-                    //                         'showRemove' => false,
-                    //                         //'showDownload' => true,
-                    //                     ],
-                    //                     'previewFileType' => 'pdf'
-                    //                 ],
-                    //                 ]);
-                    //             },
-                    //         ]
-                    //     ]
-                    // ])
-                    // ?>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -139,38 +97,40 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $model,
                         'attributes' => [
                             [
-                                'label' => '', 
+                                'label' => '',
                                 'format' => 'raw',
-                                'value' => function($model){
-                                //return \file\components\AttachmentsTable::widget(['model' => $model]); 
-                                return \attachment\components\AttachmentsInput::widget([
-                                    'id' => 'file-input', // Optional
-                                    'model' => $model,
-                                    'options' => [ // Options of the Kartik's FileInput widget
-                                        'multiple' => true, // If you want to allow multiple upload, default to false
-                                    ],
-                                    'pluginOptions' => [ 
-                                        'initialPreviewShowDelete' => false,
-                                        'initialPreviewAsData' =>  true,
-                                        'initialPreviewFileType' => 'pdf',
-                                        'maxFileCount' => 10, // Client max files
-                                        'showRemove' => false,
-                                        'showCancel' => false,
-                                        'showUpload' => false,
-                                        'showBrowse' => false,
-                                        'showCaption' => false,
-                                        'fileActionSettings' => [
-                                            'showRemove' => false,
-                                            //'showDownload' => true,
-                                        ],
-                                        'previewFileType' => 'pdf'
-                                    ],
-                                    ]);
-                                },
+                                'value' => function ($model) {
+                                            //return \file\components\AttachmentsTable::widget(['model' => $model]); 
+                                            return \attachment\components\AttachmentsInput::widget([
+                                                'id' => 'file-input', // Optional
+                                                'model' => $model,
+                                                'options' => [ // Options of the Kartik's FileInput widget
+                                                    'multiple' => true, // If you want to allow multiple upload, default to false
+                                                    //'disabled' => true,
+                                                ],
+                                                'pluginOptions' => [
+                                                    'initialPreviewShowDelete' => false,
+                                                    'initialPreviewAsData' => true,
+                                                    'initialPreviewFileType' => 'pdf',
+                                                    'maxFileCount' => 10, // Client max files
+                                                    'showRemove' => false,
+                                                    'showCancel' => false,
+                                                    'showUpload' => false,
+                                                    'showBrowse' => false,
+                                                    'showCaption' => false,
+                                                    'showClose' => false,
+                                                    'fileActionSettings' => [
+                                                        'showRemove' => false,
+                                                        //'showDownload' => true,
+                                                    ],
+                                                    'previewFileType' => 'pdf'
+                                                ],
+                                            ]);
+                                        },
                             ]
                         ]
                     ])
-                    ?>
+                        ?>
                 </div>
             </div>
         </div>

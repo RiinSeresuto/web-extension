@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus"></i> Create Form', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus"></i> Add', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
         <div class="card-body">
             <?= $this->render('_search', [
@@ -28,23 +28,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
                     [
                         'attribute' => 'category_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->category->title;
                         },
                     ],
                     [
                         'attribute' => 'status_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->status->status_type;
                         }
                     ],
                     'year',
                     [
                         'attribute' => 'user_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->user->username;
                         },
                     ],
+                    //'date_created', 
                     [
                         'attribute' => 'date_created',
                         'value' => function($data){
@@ -108,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'pager' => [
                     'class' => 'yii\bootstrap4\LinkPager',
-                 ],
+                ],
             ]); ?>
         </div>
     </div>

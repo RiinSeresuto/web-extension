@@ -55,4 +55,9 @@ class Position extends \niksko12\auditlogs\classes\ModelAudit
     {
         return $this->hasMany(CmsMenu::className(), ['position_id' => 'id']);
     }
+
+    public static function getPositionDropdown()
+    {
+        return self::find()->select(['position as name', 'id as id'])->indexBy('id')->column();
+    }
 }

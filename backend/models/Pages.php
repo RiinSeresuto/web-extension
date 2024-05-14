@@ -35,7 +35,7 @@ use Yii;
  */
 class Pages extends \niksko12\auditlogs\classes\ModelAudit
 {
-    public $file_attach=[];
+    public $file_attach = [];
     //public $photo_attach=[];
     /**
      * {@inheritdoc}
@@ -61,10 +61,9 @@ class Pages extends \niksko12\auditlogs\classes\ModelAudit
             [['url_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => UrlType::className(), 'targetAttribute' => ['url_type_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
-            [['slider_photo'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['slider_photo' => 'id']],
+            //[['slider_photo'], 'exist', 'skipOnError' => true, 'targetClass' => FileAttachment::className(), 'targetAttribute' => ['slider_photo' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['user_update_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_update_id' => 'id']],
-            //[['photo_attach'], 'file', 'skipOnError' => true, 'extensions' => 'jpg, jpeg, png'],
             [['file_attach'], 'file', 'skipOnError' => false, 'extensions' => 'jpg, jpeg, png, pdf']
         ];
     }
@@ -84,7 +83,7 @@ class Pages extends \niksko12\auditlogs\classes\ModelAudit
             'status_id' => 'Status',
             'type_id' => 'Type',
             'link' => 'Link',
-            'slider_photo' => 'Slider Photo',
+            //'slider_photo' => 'Slider Photo',
             'file_attach' => 'File Upload',
             'user_id' => 'Encoded By',
             'user_update_id' => 'Updated By',
@@ -134,24 +133,14 @@ class Pages extends \niksko12\auditlogs\classes\ModelAudit
     }
 
     /**
-     * Gets query for [[SliderPhoto]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    // public function getSliderPhoto()
-    // {
-    //     return $this->hasMany(File::className(), ['itemId' => 'id']);
-    // }
-
-    /**
      * Gets query for [[FileAttachment]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFileAttachment()
-    {
-        return $this->hasMany(File::className(), ['itemId' => 'id']);
-    }
+    // public function getFileAttachment()
+    // {
+    //     return $this->hasMany(File::className(), ['itemId' => 'id']);
+    // }
 
     /**
      * Gets query for [[User]].
@@ -182,14 +171,15 @@ class Pages extends \niksko12\auditlogs\classes\ModelAudit
     {
         return $this->hasMany(Post::className(), ['page_id' => 'id']);
     }
+
     public function behaviors()
     {
         return [
-            
+
             'fileBehavior' => [
                 'class' => \attachment\behaviors\FileBehavior::className()
             ]
-        
+
         ];
     }
 }

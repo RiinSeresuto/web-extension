@@ -21,8 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="form-view">
     <div class="card">
         <div class="card-header">
-            Form Details:
-            <?= $this->title = $model->category->title; ?>
+            Form Details
         </div>
         <div class="text-right buttons">
             <?= Html::a('<i class="fas fa-arrow-circle-left"></i> Back', ['index', 'id' => $model->id], ['class' => 'btn btn-secondary btn-sm']) ?>
@@ -80,12 +79,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 ],
             ]) ?>
-
-
         </div>
     </div>
     <div class="card">
-        <div class="card-header">Form</div>
+        <div class="card-header">
+            <?php echo $this->title = $model->category->title; ?> Form
+        </div>
         <div class="card-body">
             <div class="row view-field">
                 <div class="col-md-12">
@@ -106,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'name' => 'state_10',
                                 'data' => Getter::getOptions($value->field->id),
                                 'options' => [
-                                    'placeholder' => 'Select provinces ...',
+                                    'placeholder' => 'Select...',
                                     'id' => 'test-select2'
                                     //'multiple' => true
                                 ],

@@ -44,6 +44,8 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
+
         $category = Category::find()->all();
         $forms = Form::find()->all();
         $status = Status::find()->all();
@@ -94,8 +96,8 @@ class PostController extends \niksko12\auditlogs\classes\ControllerAudit
                 'forms' => $forms,
                 'field' => $field,
                 'status' => $status,
-                'visibility_type' => $visibility_type,
-                'publish_type' => $publish_type,
+                //'visibility_type' => $visibility_type,
+                //'publish_type' => $publish_type,
                 'page' => $page
             ]);
         } else {

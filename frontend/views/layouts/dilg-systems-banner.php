@@ -1,129 +1,34 @@
 <?php
 
+use common\helpers\Carousel;
 use yii\helpers\Html;
 
 ?>
 
-<!-- DILG Systems Banner-->
-
+<!-- Banner-->
 <div class="dilg-systems slider">
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
-        <div>
-            <?= Html::a(
-                        Html::img('@web/images/dilg-systems/citizens-charter.png')
-                    ); ?>
-        </div>
+  <?php $banners = Carousel::getBanner() ?>
+  <?php foreach ($banners as $banner): ?>
+    <div class="dilg-systems-banner-item">
+      <?php
+      echo Html::img(Yii::$app->urlManager->createUrl(['carousel/image-banner/', 'item_id' => $banner->id]), ['style' => 'width: 150px; height: 75px;']);
+      ?>
+    </div>
+  <?php endforeach; ?>
 </div>
 
-<?php 
+<?php
 
 $script = <<<JS
 $(".dilg-systems").slick({
-          // centerMode: true,
-          // autoplay: true,
-          // autoplaySpeed: 3000,
-          // centerPadding: "60px",
-          // slidesToShow: 3,
-          // arrows: false,
-          // responsive: [
-          //   {
-          //     breakpoint: 768,
-          //     settings: {
-          //       arrows: false,
-          //       centerMode: true,
-          //       centerPadding: "40px",
-          //       slidesToShow: 3,
-          //     },
-          //   },
-          //   {
-          //     breakpoint: 480,
-          //     settings: {
-          //       arrows: false,
-          //       centerMode: true,
-          //       centerPadding: "40px",
-          //       slidesToShow: 1,
-          //     },
-          //   },
-          // ],
-
-          // $('.responsive').slick({
   dots: false,
   infinite: false,
-  speed: 300,
-  slidesToShow: 10,
-  slidesToScroll: 10,
+  // speed: 400,
+  slidesToShow: 7,
+  // slidesToScroll: 1,
   arrows: false,
   autoplay: true,
-  autoplaySpeed: 2000,
+  autoplaySpeed: 3000,
   responsive: [
     {
       breakpoint: 1024,
@@ -148,13 +53,8 @@ $(".dilg-systems").slick({
         slidesToScroll: 1
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
-  ]
-});
+  ]});
 
-        //});
 JS;
 
 $this->registerJs($script);

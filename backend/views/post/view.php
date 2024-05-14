@@ -6,13 +6,13 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Post */
 
-$this->title = $model->id;
+$this->title = $model->forms->category->title;
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="post-view">
-    <div class="card">
+    <div class="card border-primary mb-3">
         <div class="card-header">
             Post Details
         </div>
@@ -33,34 +33,45 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    //'forms_id',
-                    //'field_id',
-                    //'tags',
                     [
                         'attribute' => 'status_id',
                         'value' => function ($model) {
                             return $model->status->status_type;
                         },
                     ],
-                    'visibility_id',
                     // [
                     //     'attribute' => 'visibility_id',
                     //     'value' => function ($model) {
-                    //         return $model->visibility_type->visibility_type;
+                    //         return $model->visibility->visibility_type;
                     //     },
                     // ],
-                    'publish_id',
                     // [
                     //     'attribute' => 'publish_id',
                     //     'value' => function ($model) {
-                    //         return $model->publish_type->publish_type;
+                    //         return $model->publish->publish_type;
                     //     },
                     // ],
                     'page_id',
-                    'start_date_time',
-                    'end_date_time',
-                    'min_answer',
-                    'max_answer',
+                    // [
+                    //     'attribute' => 'page_id',
+                    //     'value' => function ($model) {
+                    //         return $model->page->;
+                    //     }
+                    // ],
+                    [
+                        'attribute' => 'start_date_time',
+                        'value' => function ($model) {
+                            return $model->start_date_time == null ? "(not set)" : date('F d, Y h:i A', strtotime($model->start_date_time));
+                        }
+                    ],
+                    [
+                        'attribute' => 'end_date_time',
+                        'value' => function ($model) {
+                            return $model->end_date_time == null ? "(not set)" : date('F d, Y h:i A', strtotime($model->end_date_time));
+                        }
+                    ],
+                    // 'min_answer',
+                    // 'max_answer',
                     [
                         'attribute' => 'user_id',
                         'value' => function ($model) {
@@ -94,12 +105,36 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card-header">
             Post Content
         </div>
-
         <div class="card-body">
+            <?php // DetailView::widget([
+            //     'model' => $model,
+            //     'attributes' => [
+            //         'body'
+            //     ],
+            // ]) ?>
+
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'body'
+                    [
+                        'attribute' => 'body',
+                        'value' => function ($model) {
+                            $decodedBody = json_decode($model->body, true);
+                            // Check if decoding was successful
+                            if ($decodedBody !== null) {
+                                // Format the decoded body for display
+                                $formattedBody = '<ul>';
+                                foreach ($decodedBody as $key => $value) {
+                                    $formattedBody .= "<li><strong>$key</strong>: $value</li>";
+                                }
+                                $formattedBody .= '</ul>';
+                                return $formattedBody;
+                            } else {
+                                return "Unable to decode body JSON";
+                            }
+                        },
+                        'format' => 'raw', // Use 'raw' format to render HTML content
+                    ],
                 ],
             ]) ?>
         </div>
@@ -109,14 +144,26 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card-header">
             Post Attachment
         </div>
-
         <div class="card-body">
-            <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => [
-                    'body'
-                ],
-            ]) ?>
+            <?php if (!empty($model->attachment)): ?>
+                <?= DetailView::widget([
+                    'model' => $model,
+                    'attributes' => [
+                        [
+                            'attribute' => 'attachment',
+                            'value' => function ($model) {
+                                    // You can format the display of the attachment data here
+                                    // For example, if attachment is a file path, you can create a download link
+                                    return Html::a('Download Attachment', $model->attachment);
+                                },
+                            'format' => 'raw', // Use 'raw' format to render HTML content
+                        ],
+                    ],
+                ]) ?>
+            <?php else: ?>
+                No attachment available.
+            <?php endif; ?>
         </div>
     </div>
+
 </div>

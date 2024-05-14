@@ -53,9 +53,9 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     public function rules()
     {
         return [
-            [['year', 'status_id', 'visibility_id', 'publish_id'], 'required'],
+            [['status_id'], 'required'],
             [['forms_id', 'field_id', 'status_id', 'visibility_id', 'publish_id', 'page_id', 'min_answer', 'max_answer', 'category_id', 'year'], 'integer'],
-            [['start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer', 'category_id', 'forms_id', 'field_id', 'page_id'], 'safe'],
+            [['year', 'start_date_time', 'end_date_time', 'date_created', 'date_updated', 'user_id', 'user_update_id', 'start_date_time', 'end_date_time', 'min_answer', 'max_answer', 'category_id', 'forms_id', 'field_id', 'page_id', 'publish_id', 'visibility_id'], 'safe'],
             [['body'], 'string'],
             [['tags'], 'string', 'max' => 255],
             [['id'], 'unique'],
@@ -96,16 +96,6 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
             'date_updated' => 'Date Updated',
             'body' => 'Body'
         ];
-    }
-
-    /**
-     * Gets query for [[CmsFileAttachments]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCmsFileAttachments()
-    {
-        return $this->hasMany(FileAttachment::className(), ['record_id' => 'id']);
     }
 
     /**
@@ -196,5 +186,16 @@ class Post extends \niksko12\auditlogs\classes\ModelAudit
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+
+            'fileBehavior' => [
+                'class' => \attachment\behaviors\FileBehavior::className()
+            ]
+
+        ];
     }
 }

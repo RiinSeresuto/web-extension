@@ -40,6 +40,7 @@ class FormController extends \niksko12\auditlogs\classes\ControllerAudit
     {
         $searchModel = new FormSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
 
         $category = Category::find()->all();
         $status = Status::find()->all();

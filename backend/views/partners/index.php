@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="partners-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Partners', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Add', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
 
         <div class="card-body">
@@ -92,6 +92,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 },
                             ],
                     ],
+                ],
+                'pager' => [
+                    'class' => 'yii\bootstrap4\LinkPager',
                 ],
             ]); ?>
         </div>

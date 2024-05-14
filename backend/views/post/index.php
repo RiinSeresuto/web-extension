@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="post-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Post', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Add', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
 
         <div class="card-body">
@@ -30,15 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
-                    //'forms_id',
+                    [
+                        'label' => 'Title',
+                        // 'value' => function ($data) {
+                        //     return $data->
+                        // }
+                    ],
                     [
                         'attribute' => 'forms_id',
                         'value' => function ($data) {
                             return $data->forms->category->title;
                         },
                     ],
-                    //'status_id',
                     [
                         'attribute' => 'status_id',
                         'value' => function ($data) {

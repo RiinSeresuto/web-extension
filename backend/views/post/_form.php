@@ -18,7 +18,6 @@ use attachment\components\AttachmentsInput;
 <div class="post-form">
     <div class="card">
         <div class="card-header">
-            <?php // Html::encode($this->title) ?>
             Form
         </div>
         <div class="card-body">
@@ -62,17 +61,6 @@ use attachment\components\AttachmentsInput;
                                 ]
                             ]) ?>
                         </div>
-
-                        <div class="col-md-12">
-                            <?= $form->field($model, 'year')->widget(DatePicker::className(), [
-                                'options' => ['placeholder' => "Select Year"],
-                                'pluginOptions' => [
-                                    'format' => 'yyyy',
-                                    'autoclose' => true,
-                                    'minViewMode' => 'years',
-                                ]
-                            ]) ?>
-                        </div>
                     </div>
 
                     <div id="forms-actual">
@@ -84,6 +72,7 @@ use attachment\components\AttachmentsInput;
 
                         ?>
                         <?php foreach ($form_fields as $form_field): ?>
+
                             <?php $key = str_replace(' ', '_', $form_field->field->label); ?>
                             <?php if ($form_field->field->widget_type_id == 1): ?>
                                 <?= Html::tag('label', $form_field->field->label, $options = ['class' => 'form-label']) ?>
@@ -153,7 +142,7 @@ use attachment\components\AttachmentsInput;
                     <?php // $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-12">
                             <?= $form->field($model, 'status_id')->widget(Select2::class, [
                                 'data' => ArrayHelper::map($status, 'id', 'status_type'),
                                 'options' => [
@@ -162,33 +151,33 @@ use attachment\components\AttachmentsInput;
                             ]) ?>
                         </div>
 
-                        <div class="col-md-3">
-                            <?= $form->field($model, 'visibility_id')->widget(Select2::class, [
-                                'data' => ArrayHelper::map($visibility_type, 'id', 'visibility_type'),
-                                'options' => [
-                                    'placeholder' => 'Select Visibility',
-                                ],
-                            ]) ?>
+                        <div class="col-md-4">
+                            <?php // $form->field($model, 'visibility_id')->widget(Select2::class, [
+                            //     'data' => ArrayHelper::map($visibility_type, 'id', 'visibility_type'),
+                            //     'options' => [
+                            //         'placeholder' => 'Select Visibility',
+                            //     ],
+                            // ]) ?>
                         </div>
 
-                        <div class="col-md-3">
-                            <?= $form->field($model, 'publish_id')->widget(Select2::class, [
-                                'data' => ArrayHelper::map($publish_type, 'id', 'publish_type'),
-                                'options' => [
-                                    'placeholder' => 'Select Publish',
-                                ],
-                                'pluginEvents' => [
-                                    'select2:select' => '
-                                        function(){
-                                            var publishID = this.value
-                                            showDateRange(publishID)
-                                        }
-                                    '
-                                ]
-                            ]) ?>
-                        </div>
+                        <!-- <div class="col-md-3">
+                            <?php // $form->field($model, 'publish_id')->widget(Select2::class, [
+                            //     'data' => ArrayHelper::map($publish_type, 'id', 'publish_type'),
+                            //     'options' => [
+                            //         'placeholder' => 'Select Publish',
+                            //     ],
+                            //     'pluginEvents' => [
+                            //         'select2:select' => '
+                            //             function(){
+                            //                 var publishID = this.value
+                            //                 showDateRange(publishID)
+                            //             }
+                            //         '
+                            //     ]
+                            // ]) ?>
+                        </div> -->
 
-                        <div class="col-md-3">
+                        <div class="col-md-12">
                             <?= $form->field($model, 'page_id')->widget(Select2::class, [
                                 'data' => ArrayHelper::map($page, 'id', 'title'),
                                 'options' => [

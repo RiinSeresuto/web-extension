@@ -69,6 +69,10 @@ class FieldSearch extends Field
 
         $query->andFilterWhere(['like', 'label', $this->label]);
 
+        // if (!empty($this->data_type_id)) {
+        //     $query->andFilterWhere(['like', 'data_type_id', $this->data_type_id->id]);
+        // }
+
         return $dataProvider;
     }
 }

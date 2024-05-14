@@ -37,6 +37,8 @@ class AttachedAgencyController extends \niksko12\auditlogs\classes\ControllerAud
     {
         $searchModel = new AttachedAgencySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['date_created' => SORT_DESC];
+
         $status = Status::find()->all();
 
         return $this->render('index', [

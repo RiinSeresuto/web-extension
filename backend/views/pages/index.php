@@ -13,17 +13,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="pages-index">
     <div class="card">
         <div class="card-button">
-            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Create Page', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="fas fa-plus fa-sm"></i> Add', ['create'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
 
         <div class="card-body">
             <!-- <h5 class="card-title">Special title treatment</h5> -->
             <?= $this->render('_search', [
-                'model' => $searchModel, 
-                'url_type' => $url_type, 
-                'type' => $type, 
+                'model' => $searchModel,
+                'url_type' => $url_type,
+                'type' => $type,
                 'status' => $status
-                ]); ?>
+            ]); ?>
 
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -33,32 +33,32 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',
                     [
                         'attribute' => 'url_type_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->urlType->url_type;
                         }
                     ],
                     [
                         'attribute' => 'status_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->status->status_type;
                         },
                     ],
                     [
                         'attribute' => 'type_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->type->type;
                         }
                     ],
                     [
                         'attribute' => 'user_id',
-                        'value' => function($data){
+                        'value' => function ($data) {
                             return $data->user->username;
                         },
                     ],
                     [
                         'attribute' => 'date_created',
-                        'value' => function($model){
-                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null; 
+                        'value' => function ($model) {
+                            return ($model->date_created) ? date('F d, Y h:i A', strtotime($model->date_created)) : null;
                         },
                     ],
                     [
@@ -106,7 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'pager' => [
                     'class' => 'yii\bootstrap4\LinkPager',
                 ],
-                ]); ?>
+            ]); ?>
         </div>
     </div>
 </div>

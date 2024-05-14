@@ -34,6 +34,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'label',
                     [
+                        'label' => 'Items', 
+                        'value' => function ($model) {
+                            $items = '<ul>';
+                            foreach ($model->widgetSelect2Items as $item) {
+                                $items .= '<li>' . Html::encode($item->label) . '</li>';
+                            }
+                            $items .= '</ul>'; 
+                            return $items;
+                        },
+                        'format' => 'raw',
+                    ],
+                    [
                         'attribute' => 'data_type_id',
                         'value' => $model->dataType->data_type
                     ],
