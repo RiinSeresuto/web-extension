@@ -32,9 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
                     [
                         'label' => 'Title',
-                        // 'value' => function ($data) {
-                        //     return $data->
-                        // }
+                        'value' => function ($data) {
+                            $body = json_decode($data->body, true);
+
+
+                            return $body['Title'];
+                        }
                     ],
                     [
                         'attribute' => 'forms_id',
