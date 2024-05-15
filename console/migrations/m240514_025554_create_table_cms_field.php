@@ -29,7 +29,7 @@ class m240514_025554_create_table_cms_field extends Migration
         $this->createIndex('widget_type_id', '{{%cms_field}}', ['widget_type_id']);
         $this->createIndex('data_type_id', '{{%cms_field}}', ['data_type_id']);
         $this->createIndex('user_update_id', '{{%cms_field}}', ['user_update_id']);
-        $this->createIndex('user_id', '{{%cms_field}}', ['user_id']);
+        //$this->createIndex('user_id', '{{%cms_field}}', ['user_id']);
 
         $this->addForeignKey(
             'cms_field_ibfk_1',

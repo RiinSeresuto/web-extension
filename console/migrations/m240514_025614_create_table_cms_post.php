@@ -38,9 +38,9 @@ class m240514_025614_create_table_cms_post extends Migration
         );
 
         $this->createIndex('field_id', '{{%cms_post}}', ['field_id']);
-        $this->createIndex('user_update_id', '{{%cms_post}}', ['user_update_id']);
+        //$this->createIndex('user_update_id', '{{%cms_post}}', ['user_update_id']);
         $this->createIndex('forms_id', '{{%cms_post}}', ['forms_id']);
-        $this->createIndex('user_id', '{{%cms_post}}', ['user_id']);
+        //$this->createIndex('user_id', '{{%cms_post}}', ['user_id']);
         $this->createIndex('page_id', '{{%cms_post}}', ['page_id']);
         $this->createIndex('publish_id', '{{%cms_post}}', ['publish_id']);
         $this->createIndex('visibility_id', '{{%cms_post}}', ['visibility_id']);

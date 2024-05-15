@@ -35,7 +35,7 @@ class m240514_025612_create_table_cms_menu extends Migration
         $this->createIndex('position_id', '{{%cms_menu}}', ['position_id']);
         $this->createIndex('parent_id', '{{%cms_menu}}', ['parent_id']);
         $this->createIndex('user_update_id', '{{%cms_menu}}', ['user_update_id']);
-        $this->createIndex('user_id', '{{%cms_menu}}', ['user_id']);
+        //$this->createIndex('user_id', '{{%cms_menu}}', ['user_id']);
         $this->createIndex('logo/file', '{{%cms_menu}}', ['logo_file']);
         $this->createIndex('status_id', '{{%cms_menu}}', ['status_id']);
 

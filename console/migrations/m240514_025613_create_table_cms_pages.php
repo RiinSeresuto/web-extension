@@ -36,7 +36,7 @@ class m240514_025613_create_table_cms_pages extends Migration
         $this->createIndex('url_type_id', '{{%cms_pages}}', ['url_type_id']);
         $this->createIndex('user_update_id', '{{%cms_pages}}', ['user_update_id']);
         $this->createIndex('menu_id', '{{%cms_pages}}', ['menu_id']);
-        $this->createIndex('user_id', '{{%cms_pages}}', ['user_id']);
+        //$this->createIndex('user_id', '{{%cms_pages}}', ['user_id']);
         $this->createIndex('file_attachment', '{{%cms_pages}}', ['file_attachment']);
         $this->createIndex('slider_photo', '{{%cms_pages}}', ['slider_photo']);
         $this->createIndex('type_id', '{{%cms_pages}}', ['type_id']);

@@ -12,7 +12,14 @@ class m240514_062251_insert_cms_data extends Migration
      */
     public function safeUp()
     {
-        echo ("directory =====>" . __DIR__);
+        $sqlFile = Yii::getAlias('@app/../database/cms_data.sql');
+
+        if (file_exists($sqlFile)) {
+            $sql = file_get_contents($sqlFile);
+            $this->execute($sql);
+        } else {
+            echo "SQL file not found: $sqlFile";
+        }
     }
 
     /**

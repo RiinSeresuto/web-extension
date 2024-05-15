@@ -30,7 +30,7 @@ class m240514_025611_create_table_cms_form extends Migration
         $this->createIndex('status_id', '{{%cms_form}}', ['status_id']);
         $this->createIndex('category_id', '{{%cms_form}}', ['category_id']);
         $this->createIndex('user_update_id', '{{%cms_form}}', ['user_update_id']);
-        $this->createIndex('user_id', '{{%cms_form}}', ['user_id']);
+        //$this->createIndex('user_id', '{{%cms_form}}', ['user_id']);
 
         $this->addForeignKey(
             'cms_form_ibfk_3',

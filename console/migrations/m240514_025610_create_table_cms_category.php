@@ -25,7 +25,7 @@ class m240514_025610_create_table_cms_category extends Migration
             $tableOptions
         );
 
-        $this->createIndex('user_id', '{{%cms_category}}', ['user_id']);
+        //$this->createIndex('user_id', '{{%cms_category}}', ['user_id']);
         $this->createIndex('status_id', '{{%cms_category}}', ['status_id']);
         $this->createIndex('user_update_id', '{{%cms_category}}', ['user_update_id']);
 
